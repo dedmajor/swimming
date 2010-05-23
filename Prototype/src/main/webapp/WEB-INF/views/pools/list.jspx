@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl:org.olympic.swimming.domain.Pool" items="${pools}" z="5j4ppNXhCjmHkwtRtcniXHuqKeQ=">
+        <table:table data="${pools}" id="l:org.olympic.swimming.domain.Pool" path="/pools" z="5lVT145kW4c1Cn00iTImYW6+Wzc=">
+            <table:column id="c:org.olympic.swimming.domain.Pool.location" property="location" z="kMjivwIOFG4daN9Bt1e6PuEXExE="/>
+            <table:column id="c:org.olympic.swimming.domain.Pool.length" property="length" z="+6udwwDp3yZgwpa5npGxQFDV6gc="/>
+            <table:column id="c:org.olympic.swimming.domain.Pool.lanesCount" property="lanesCount" z="hJ7b/QefEsONp6sebb25M0UKUD8="/>
+        </table:table>
+    </page:list>
+</div>

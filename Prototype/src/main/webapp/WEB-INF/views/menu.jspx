@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+	<jsp:output omit-xml-declaration="yes"/>
+
+<menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
+        <menu:category id="c:swimmers" name="Swimmers" z="YPwoY1Ys1m4qt8zjcs3OOvH54xs=">
+            <menu:item id="i:swimmers_swimmer" messageCode="global.menu.new" name="Swimmer" url="/swimmers?form" z="UiPyzT2WoFGlFKOdpWZF7PRx6qs="/>
+        <menu:item id="i:swimmers_swimmers" messageCode="global.menu.list" name="Swimmers" url="/swimmers?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="L80oghR9vcb0ZPbtaWMBQbg0q4Y="/>
+        </menu:category>
+    <menu:category id="c:events" name="Events" z="G1VFiTyNc48StHFcUjKwDUXvUgI=">
+            <menu:item id="i:events_event" messageCode="global.menu.new" name="Event" url="/events?form" z="zaKfdzXEAfhrUdMVy5r2e0um6Q8="/>
+        <menu:item id="i:events_events" messageCode="global.menu.list" name="Events" url="/events?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="DLeG8yeVveal322LvcHygRhGZJo="/>
+        </menu:category>
+    <menu:category id="c:applications" name="Applications" z="KISmVxebpPmfeEc4I4u2Oai3DI8=">
+            <menu:item id="i:applications_application" messageCode="global.menu.new" name="Application" url="/applications?form" z="PUn0j7kMjRoLnvjEt7avSuwTQkY="/>
+        <menu:item id="i:applications_applications" messageCode="global.menu.list" name="Applications" url="/applications?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="iTa/wbGxe4h11WGoRYCjf0Pqsjk="/>
+        </menu:category>
+    <menu:category id="c:pools" name="Pools" z="juEDmpTer7E0HAlh8XmrAwLVCzE=">
+            <menu:item id="i:pools_pool" messageCode="global.menu.new" name="Pool" url="/pools?form" z="S7UpY4q578XPfZC8HsCUFXcuVZw="/>
+        <menu:item id="i:pools_pools" messageCode="global.menu.list" name="Pools" url="/pools?page=${empty param.page ? 1 : param.page}&amp;size=${empty param.size ? 10 : param.size}" z="tiWZp03Wpy3Wra4M+gcgHmeOFHs="/>
+        </menu:category>
+    </menu:menu>
+</div>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps:org.olympic.swimming.domain.Application" object="${application}" z="2wRHWt546HhwMOKXgDZJMMozixI=">
+        <field:display field="event" id="s:org.olympic.swimming.domain.Application.event" object="${application}" z="KXNo0pVlQ9PAGpLSWedpnm1um+U="/>
+        <field:display field="contestant" id="s:org.olympic.swimming.domain.Application.contestant" object="${application}" z="T/rroSfU6afCy09FXhePOsC1EOw="/>
+        <field:display field="declaredTime" id="s:org.olympic.swimming.domain.Application.declaredTime" object="${application}" z="TIgjQO7oXGHB52g6Su+9xivg2ig="/>
+    </page:show>
+</div>
