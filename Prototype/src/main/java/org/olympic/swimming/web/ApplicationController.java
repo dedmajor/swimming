@@ -1,4 +1,4 @@
-package org.olympic.swimming.domain;
+package org.olympic.swimming.web;
 
 import org.springframework.roo.addon.web.mvc.controller.RooWebScaffold;
 import org.olympic.swimming.domain.Application;

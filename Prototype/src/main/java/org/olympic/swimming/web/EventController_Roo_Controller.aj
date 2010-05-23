@@ -1,4 +1,4 @@
-package org.olympic.swimming.domain;
+package org.olympic.swimming.web;
 
 import java.lang.Long;
 import java.lang.String;
