@@ -114,7 +114,7 @@ privileged aspect ApplicationController_Roo_Controller {
     Converter<Event, String> ApplicationController.getEventConverter() {
         return new Converter<Event, String>() {
             public String convert(Event event) {
-                return new StringBuilder().append(event.getHoldingDate()).toString();
+                return new StringBuilder().append(event.getName()).append(" ").append(event.getHoldingDate()).toString();
             }
         };
     }
@@ -122,7 +122,7 @@ privileged aspect ApplicationController_Roo_Controller {
     Converter<Swimmer, String> ApplicationController.getSwimmerConverter() {
         return new Converter<Swimmer, String>() {
             public String convert(Swimmer swimmer) {
-                return new StringBuilder().append(swimmer.getName()).append(" ").append(swimmer.getBirthDate()).toString();
+                return new StringBuilder().append(swimmer.getName()).append(" ").append(swimmer.getBirthYear()).toString();
             }
         };
     }

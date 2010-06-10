@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl:org.olympic.swimming.domain.Swimmer" items="${swimmers}" z="tlm8WvgUkTdmWPlBp5aKBwqMN/g=">
         <table:table data="${swimmers}" id="l:org.olympic.swimming.domain.Swimmer" path="/swimmers" z="8iJtVz4mE6CMbVvrl5J/xp/Rzm0=">
             <table:column id="c:org.olympic.swimming.domain.Swimmer.name" property="name" z="kgfhqajLeWfQ0EZtNMixD1Zlw50="/>
-            <table:column id="c:org.olympic.swimming.domain.Swimmer.birthDate" property="birthDate" z="sB+OJBRTQmoD1v0YaO/pY3JkarI="/>
+            
+        <table:column id="c:org.olympic.swimming.domain.Swimmer.birthYear" property="birthYear" z="4xBcyJdUQoI7jV5Smv/PIwvB2bg="/>
         </table:table>
     </page:list>
 </div>

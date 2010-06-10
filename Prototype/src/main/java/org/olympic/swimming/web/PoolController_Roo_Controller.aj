@@ -82,7 +82,7 @@ privileged aspect PoolController_Roo_Controller {
     Converter<Pool, String> PoolController.getPoolConverter() {
         return new Converter<Pool, String>() {
             public String convert(Pool pool) {
-                return new StringBuilder().append(pool.getLocation()).append(" ").append(pool.getLength()).append(" ").append(pool.getLanesCount()).toString();
+                return new StringBuilder().append(pool.getName()).append(" ").append(pool.getLocation()).append(" ").append(pool.getLength()).toString();
             }
         };
     }

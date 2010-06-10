@@ -5,6 +5,14 @@ import java.lang.String;
 
 privileged aspect Pool_Roo_JavaBean {
     
+    public String Pool.getName() {
+        return this.name;
+    }
+    
+    public void Pool.setName(String name) {
+        this.name = name;
+    }
+    
     public String Pool.getLocation() {
         return this.location;
     }

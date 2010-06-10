@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps:org.olympic.swimming.domain.Swimmer" object="${swimmer}" z="nfZg7E30UKeOcNHm+CaD3EO2e2g=">
         <field:display field="name" id="s:org.olympic.swimming.domain.Swimmer.name" object="${swimmer}" z="EQvFJXojHrZkkSBOqY0bJioQ+8o="/>
-        <field:display date="true" dateTimePattern="${swimmer_birthdate_date_format}" field="birthDate" id="s:org.olympic.swimming.domain.Swimmer.birthDate" object="${swimmer}" z="WD4ILzTdo3rWPcgeNW2yAKA+NVU="/>
+        
+    <field:display field="birthYear" id="s:org.olympic.swimming.domain.Swimmer.birthYear" object="${swimmer}" z="n77vZYxCMociAJusPjVsorKZ0Ss="/>
     </page:show>
 </div>

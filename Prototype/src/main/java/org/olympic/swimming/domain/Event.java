@@ -20,6 +20,9 @@ import javax.persistence.JoinColumn;
 public class Event {
 
     @NotNull
+    private String name;
+
+    @NotNull
     @ManyToOne(targetEntity = Pool.class)
     @JoinColumn
     private Pool pool;

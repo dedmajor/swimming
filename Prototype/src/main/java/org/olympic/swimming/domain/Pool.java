@@ -15,6 +15,9 @@ import javax.validation.constraints.Min;
 public class Pool {
 
     @NotNull
+    private String name;
+
+    @NotNull
     private String location;
 
     @NotNull

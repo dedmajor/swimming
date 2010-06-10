@@ -3,9 +3,7 @@ package org.olympic.swimming.web;
 import java.lang.Long;
 import java.lang.String;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
 import org.olympic.swimming.domain.Swimmer;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.ui.ModelMap;
@@ -24,7 +22,6 @@ privileged aspect SwimmerController_Roo_Controller {
         if (swimmer == null) throw new IllegalArgumentException("A swimmer is required");
         if (result.hasErrors()) {
             modelMap.addAttribute("swimmer", swimmer);
-            addDateTimeFormatPatterns(modelMap);
             return "swimmers/create";
         }
         swimmer.persist();
@@ -34,14 +31,12 @@ privileged aspect SwimmerController_Roo_Controller {
     @RequestMapping(params = "form", method = RequestMethod.GET)
     public String SwimmerController.createForm(ModelMap modelMap) {
         modelMap.addAttribute("swimmer", new Swimmer());
-        addDateTimeFormatPatterns(modelMap);
         return "swimmers/create";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String SwimmerController.show(@PathVariable("id") Long id, ModelMap modelMap) {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
-        addDateTimeFormatPatterns(modelMap);
         modelMap.addAttribute("swimmer", Swimmer.findSwimmer(id));
         return "swimmers/show";
     }
@@ -56,7 +51,6 @@ privileged aspect SwimmerController_Roo_Controller {
         } else {
             modelMap.addAttribute("swimmers", Swimmer.findAllSwimmers());
         }
-        addDateTimeFormatPatterns(modelMap);
         return "swimmers/list";
     }
     
@@ -65,7 +59,6 @@ privileged aspect SwimmerController_Roo_Controller {
         if (swimmer == null) throw new IllegalArgumentException("A swimmer is required");
         if (result.hasErrors()) {
             modelMap.addAttribute("swimmer", swimmer);
-            addDateTimeFormatPatterns(modelMap);
             return "swimmers/update";
         }
         swimmer.merge();
@@ -76,7 +69,6 @@ privileged aspect SwimmerController_Roo_Controller {
     public String SwimmerController.updateForm(@PathVariable("id") Long id, ModelMap modelMap) {
         if (id == null) throw new IllegalArgumentException("An Identifier is required");
         modelMap.addAttribute("swimmer", Swimmer.findSwimmer(id));
-        addDateTimeFormatPatterns(modelMap);
         return "swimmers/update";
     }
     
@@ -90,7 +82,7 @@ privileged aspect SwimmerController_Roo_Controller {
     Converter<Swimmer, String> SwimmerController.getSwimmerConverter() {
         return new Converter<Swimmer, String>() {
             public String convert(Swimmer swimmer) {
-                return new StringBuilder().append(swimmer.getName()).append(" ").append(swimmer.getBirthDate()).toString();
+                return new StringBuilder().append(swimmer.getName()).append(" ").append(swimmer.getBirthYear()).toString();
             }
         };
     }
@@ -101,10 +93,6 @@ privileged aspect SwimmerController_Roo_Controller {
             GenericConversionService conversionService = (GenericConversionService) binder.getConversionService();
             conversionService.addConverter(getSwimmerConverter());
         }
-    }
-    
-    void SwimmerController.addDateTimeFormatPatterns(ModelMap modelMap) {
-        modelMap.addAttribute("swimmer_birthdate_date_format", DateTimeFormat.patternForStyle("S-", LocaleContextHolder.getLocale()));
     }
     
 }

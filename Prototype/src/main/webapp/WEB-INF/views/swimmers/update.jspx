@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu:org.olympic.swimming.domain.Swimmer" modelAttribute="swimmer" path="/swimmers" z="LRGgkh8gBkQFjzuek7gsfNhVsPg=">
         <field:input field="name" id="c:org.olympic.swimming.domain.Swimmer.name" required="true" z="lznxoj4eLbyAzAt5KFGZPQQpHEo="/>
-        <field:datetime dateTimePattern="${swimmer_birthdate_date_format}" field="birthDate" id="c:org.olympic.swimming.domain.Swimmer.birthDate" required="true" z="3yrhb/eDx7+f9ppMqcdo90q3H2Q="/>
+        
+    <field:input field="birthYear" id="c:org.olympic.swimming.domain.Swimmer.birthYear" required="true" validationMessageCode="field.invalid.integer" z="m7jTxcSplvGnjd+FLzUDNSSXZTk="/>
     </form:update>
 </div>

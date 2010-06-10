@@ -9,7 +9,7 @@ privileged aspect Swimmer_Roo_ToString {
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("Version: ").append(getVersion()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
-        sb.append("BirthDate: ").append(getBirthDate());
+        sb.append("BirthYear: ").append(getBirthYear());
         return sb.toString();
     }
     

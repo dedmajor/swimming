@@ -1,7 +1,7 @@
 package org.olympic.swimming.domain;
 
+import java.lang.Short;
 import java.lang.String;
-import java.util.Date;
 
 privileged aspect Swimmer_Roo_JavaBean {
     
@@ -13,12 +13,12 @@ privileged aspect Swimmer_Roo_JavaBean {
         this.name = name;
     }
     
-    public Date Swimmer.getBirthDate() {
-        return this.birthDate;
+    public Short Swimmer.getBirthYear() {
+        return this.birthYear;
     }
     
-    public void Swimmer.setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void Swimmer.setBirthYear(Short birthYear) {
+        this.birthYear = birthYear;
     }
     
 }
