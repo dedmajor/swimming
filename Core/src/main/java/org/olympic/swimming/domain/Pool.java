@@ -17,6 +17,9 @@ public class Pool {
     private Integer id;
 
     @NotNull
+    private String name;
+
+    @NotNull
     private String location;
 
     @NotNull
@@ -29,6 +32,10 @@ public class Pool {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getLocation() {
@@ -48,6 +55,7 @@ public class Pool {
     public String toString() {
         return new ToStringBuilder(this).
                 append("id", id).
+                append("name", name).
                 append("location", location).
                 append("length", length).
                 append("lanesCount", lanesCount).

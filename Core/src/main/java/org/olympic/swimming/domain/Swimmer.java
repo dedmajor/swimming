@@ -1,8 +1,6 @@
 package org.olympic.swimming.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,16 +19,15 @@ public class Swimmer {
     private String name;
 
     @NotNull
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
-    private LocalDate birthDate;
+    private Short birthYear;
 
 
     public String getName() {
         return name;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public Short getBirthYear() {
+        return birthYear;
     }
 
 
@@ -39,7 +36,7 @@ public class Swimmer {
         return new ToStringBuilder(this).
                 append("id", id).
                 append("name", name).
-                append("birthDate", birthDate).
+                append("birthYear", birthYear).
                 toString();
     }
 }

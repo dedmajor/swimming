@@ -18,6 +18,9 @@ public class Event {
     private Integer id;
 
     @NotNull
+    private String name;
+
+    @NotNull
     @ManyToOne(targetEntity = Pool.class)
     //@JoinColumn
     private Pool pool;
@@ -34,6 +37,10 @@ public class Event {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Pool getPool() {
@@ -53,6 +60,7 @@ public class Event {
     public String toString() {
         return new ToStringBuilder(this).
                 append("id", id).
+                append("name", name).
                 append("pool", pool).
                 append("holdingDate", holdingDate).
                 toString();
