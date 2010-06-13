@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  */
 // TODO: unique event and contestant
 @Entity
-public class Application {
+public class Application implements Comparable<Application> {
     @Id
     private Integer id;
 
@@ -49,14 +49,22 @@ public class Application {
         return declaredTime;
     }
 
+    public AgeGroup getAgeGroup() {
+        return AgeGroup.forAge(contestant.getAge(event.getHoldingDate().getYear()));
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).
                 append("id", id).
-                append("event", event).
+                append("event.id", event.getId()).
                 append("contestant", contestant).
                 append("declaredTime", declaredTime).
                 toString();
+    }
+
+    public int compareTo(Application application) {
+        // TODO: FIXME: if time is equal, then order by name?
+        return declaredTime.compareTo(application.getDeclaredTime());
     }
 }

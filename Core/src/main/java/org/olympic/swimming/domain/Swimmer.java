@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
+ * TODO: rename to Athlete?
+ *
  * User: dedmajor
  * Date: Jun 2, 2010
  */
@@ -28,6 +30,10 @@ public class Swimmer {
 
     public Short getBirthYear() {
         return birthYear;
+    }
+
+    public int getAge(int year) {
+        return year - birthYear;
     }
 
 

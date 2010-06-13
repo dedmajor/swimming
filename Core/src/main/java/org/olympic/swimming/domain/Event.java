@@ -6,7 +6,7 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: dedmajor
@@ -54,7 +54,27 @@ public class Event {
     public List<Application> getApplications() {
         return applications;
     }
-    
+
+    /**
+     * TODO: add test for ordering check
+     *
+     * @return age queues ordered by their age group
+     */
+    public Collection<AgeQueue> makeAgeQueues() {
+        Map<AgeGroup, AgeQueue> result = new EnumMap<AgeGroup, AgeQueue>(AgeGroup.class);
+
+        for (Application application : applications) {
+            AgeQueue queue = result.get(application.getAgeGroup());
+            if (queue == null) {
+                queue = new AgeQueue(application.getAgeGroup());
+                result.put(application.getAgeGroup(), queue);
+            }
+
+            queue.putApplication(application);
+        }
+
+        return result.values();
+    }
 
     @Override
     public String toString() {

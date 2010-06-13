@@ -1,5 +1,7 @@
 package org.olympic.swimming;
 
+import org.olympic.swimming.domain.AgeQueue;
+import org.olympic.swimming.domain.Application;
 import org.olympic.swimming.domain.Event;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +26,13 @@ public class HeatBuilderApp {
 
         for (Event event : events) {
             System.out.println("EVENT: " + event);
-            System.out.println("APPLICATIONS: " + event.getApplications());
+            for (AgeQueue queue : event.makeAgeQueues()) {
+                System.out.println("AGE QUEUE: " + queue);
+                while (queue.hasMoreApplications()) {
+                    Application application = queue.nextApplication();
+                    System.out.println(application);
+                }
+            }
         }
     }
 }
