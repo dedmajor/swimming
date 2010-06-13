@@ -31,7 +31,16 @@ public class Application implements Comparable<Application> {
     @NotNull
     @Digits(integer = 5, fraction = 2)
     private Float declaredTime;
+    
 
+    private Application() {
+        // hibernate should pass
+    }
+
+    public Application(Event event, Swimmer contestant) {
+        this.event = event;
+        this.contestant = contestant;
+    }
 
     public Integer getId() {
         return id;
@@ -49,6 +58,11 @@ public class Application implements Comparable<Application> {
         return declaredTime;
     }
 
+    public Application setDeclaredTime(Float declaredTime) {
+        this.declaredTime = declaredTime;
+        return this;
+    }
+
     public AgeGroup getAgeGroup() {
         return AgeGroup.forAge(contestant.getAge(event.getHoldingDate().getYear()));
     }
@@ -64,7 +78,7 @@ public class Application implements Comparable<Application> {
     }
 
     public int compareTo(Application application) {
-        // TODO: FIXME: if time is equal, then order by name?
+        // TODO: FIXME: if time is equal, then order by age / name?
         return declaredTime.compareTo(application.getDeclaredTime());
     }
 }

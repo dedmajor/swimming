@@ -1,13 +1,13 @@
 package org.olympic.swimming;
 
-import org.olympic.swimming.domain.AgeQueue;
-import org.olympic.swimming.domain.Application;
 import org.olympic.swimming.domain.Event;
+import org.olympic.swimming.domain.Heat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 
 import javax.persistence.EntityManager;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -21,17 +21,17 @@ public class HeatBuilderApp {
                 (EntityManagerFactoryInfo) context.getBean("entityManagerFactory");
         EntityManager em = entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 
-        // TODO: FIXME: unchecked cast
-        List<Event> events = (List<Event>) em.createQuery("from Event").getResultList();
+        @SuppressWarnings({"unchecked"}) // JPA
+        List<Event> events = (List<Event>) Collections.checkedList(
+                em.createQuery("from Event").getResultList(), Event.class);
 
         for (Event event : events) {
             System.out.println("EVENT: " + event);
-            for (AgeQueue queue : event.makeAgeQueues()) {
-                System.out.println("AGE QUEUE: " + queue);
-                while (queue.hasMoreApplications()) {
-                    Application application = queue.nextApplication();
-                    System.out.println(application);
-                }
+
+            int heatNumber = 0;
+            for (Heat heat : event.buildHeats(3)) {
+                heatNumber++;
+                System.out.println("HEAT #" + heatNumber + ": " + heat);
             }
         }
     }

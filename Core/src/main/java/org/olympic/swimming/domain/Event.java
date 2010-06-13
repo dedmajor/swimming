@@ -32,7 +32,7 @@ public class Event {
     private LocalDate holdingDate;
 
     @OneToMany(mappedBy = "event")
-    private List<Application> applications;
+    private List<Application> applications = new ArrayList<Application>();
 
 
     public Integer getId() {
@@ -47,20 +47,69 @@ public class Event {
         return pool;
     }
 
+    public Event setPool(Pool pool) {
+        this.pool = pool;
+        return this;
+    }
+
     public LocalDate getHoldingDate() {
         return holdingDate;
     }
 
+    public Event setHoldingDate(LocalDate holdingDate) {
+        this.holdingDate = holdingDate;
+        return this;
+    }
+
+    public Event addApplication(Application application) {
+        if (!application.getEvent().equals(this)) {
+            throw new IllegalArgumentException("cannot accept application from another event: " + application);
+        }
+        applications.add(application);
+        return this;
+    }
+
     public List<Application> getApplications() {
-        return applications;
+        return Collections.unmodifiableList(applications);
     }
 
     /**
-     * TODO: add test for ordering check
+     * TODO: add link to the organization and/or rename package?
      *
-     * @return age queues ordered by their age group
+     * @param leadsInAgeGroup how many leads in each age group must start in one heat
+     * @return minimal possible list of heats with respect to the leads rule
      */
-    public Collection<AgeQueue> makeAgeQueues() {
+    public List<Heat> buildHeats(int leadsInAgeGroup) {
+        List<Heat> result = new ArrayList<Heat>();
+        Heat currentHeat = null;
+        
+        for (AgeQueue queue : buildAgeQueues()) {
+            boolean leadsAreOut = false;
+
+            while (queue.hasMoreApplications()) {
+                int requiredSpace = leadsAreOut
+                        ? 1
+                        : Math.min(queue.getRemainingApplicationsCount(), leadsInAgeGroup);
+
+                if (currentHeat == null || !currentHeat.hasMoreSpace(requiredSpace)) {
+                    currentHeat = new Heat(pool);
+                    result.add(currentHeat);
+                }
+
+                for (int i = 0; i < requiredSpace; i++) {
+                    currentHeat.addSwimmer(queue.nextApplication().getContestant());
+                }
+
+                leadsAreOut = true;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * @return age queues ordered by their age group, from oldest to youngest
+     */
+    private Collection<AgeQueue> buildAgeQueues() {
         Map<AgeGroup, AgeQueue> result = new EnumMap<AgeGroup, AgeQueue>(AgeGroup.class);
 
         for (Application application : applications) {
@@ -73,7 +122,12 @@ public class Event {
             queue.putApplication(application);
         }
 
-        return result.values();
+        List<AgeQueue> sortedResult = new ArrayList<AgeQueue>();
+        sortedResult.addAll(result.values());
+
+        Collections.reverse(sortedResult);
+
+        return sortedResult;
     }
 
     @Override

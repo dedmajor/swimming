@@ -49,7 +49,11 @@ public class Pool {
     public Byte getLanesCount() {
         return lanesCount;
     }
-    
+
+    public Pool setLanesCount(Byte lanesCount) {
+        this.lanesCount = lanesCount;
+        return this;
+    }
 
     @Override
     public String toString() {

@@ -6,6 +6,10 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
+ * Ordered queue of applications of the same age group.
+ *
+ * @see Application#compareTo(Application) for ordering rules.
+ *
  * @author dedmajor
  * @since 13.06.2010
  */
@@ -36,6 +40,10 @@ public class AgeQueue {
 
     public Application nextApplication() {
         return applications.remove();
+    }
+
+    public int getRemainingApplicationsCount() {
+        return applications.size();
     }
 
     @Override

@@ -4,6 +4,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,15 +23,20 @@ public class Swimmer {
     private String name;
 
     @NotNull
-    private Short birthYear;
+    private Integer birthYear;
 
 
     public String getName() {
         return name;
     }
 
-    public Short getBirthYear() {
+    public Integer getBirthYear() {
         return birthYear;
+    }
+
+    public Swimmer setBirthYear(int birthYear) {
+        this.birthYear = birthYear;
+        return this;
     }
 
     public int getAge(int year) {
