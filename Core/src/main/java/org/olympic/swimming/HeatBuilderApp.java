@@ -1,5 +1,6 @@
 package org.olympic.swimming;
 
+import org.olympic.swimming.domain.Application;
 import org.olympic.swimming.domain.Event;
 import org.olympic.swimming.domain.Heat;
 import org.springframework.context.ApplicationContext;
@@ -31,7 +32,10 @@ public class HeatBuilderApp {
             int heatNumber = 0;
             for (Heat heat : event.buildHeats(3)) {
                 heatNumber++;
-                System.out.println("HEAT #" + heatNumber + ": " + heat);
+                System.out.println(String.format("HEAT #%d (size=%d):", heatNumber, heat.getApplications().size()));
+                for (Application application : heat.getApplications()) {
+                    System.out.println(application);
+                }
             }
         }
     }

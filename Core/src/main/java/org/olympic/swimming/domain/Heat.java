@@ -11,12 +11,12 @@ import java.util.List;
  * @since 13.06.2010
  */
 public class Heat {
-    private final Pool pool;
-    private List<Swimmer> swimmers; // TODO: FIXME: not a swimmers, but applications?
+    private final Event event;
+    private List<Application> applications;
 
-    public Heat(Pool pool) {
-        this.pool = pool;
-        swimmers = new ArrayList<Swimmer>(pool.getLanesCount());
+    public Heat(Event event) {
+        this.event = event;
+        applications = new ArrayList<Application>(event.getPool().getLanesCount());
     }
 
     public boolean hasMoreSpace() {
@@ -24,26 +24,37 @@ public class Heat {
     }
 
     public boolean hasMoreSpace(int swimmersCount) {
-        return swimmers.size() + swimmersCount <= pool.getLanesCount();
+        return applications.size() + swimmersCount <= event.getPool().getLanesCount();
     }
 
-    public void addSwimmer(Swimmer swimmer) {
+    public void addApplication(Application application) {
+        if (!application.getEvent().equals(event)) {
+            throw new IllegalArgumentException("cannot add application from another event: " + application);
+        }
         if (!hasMoreSpace()) {
             throw new IllegalStateException("no more space for swimmers");
         }
-        swimmers.add(swimmer);
+        applications.add(application);
+    }
+
+    public List<Application> getApplications() {
+        return Collections.unmodifiableList(applications);
     }
 
     public List<Swimmer> getSwimmers() {
-        return Collections.unmodifiableList(swimmers);
+        List<Swimmer> result = new ArrayList<Swimmer>(applications.size());
+        for (Application application : applications) {
+            result.add(application.getContestant());
+        }
+        return result;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).
-                append("swimmers.size", swimmers.size()).
-                append("pool.id", pool.getId()).
-                append("swimmers", swimmers).
+                append("event.id", event.getId()).
+                append("applications.size", applications.size()).
+                append("applications", applications).
                 toString();
     }
 }

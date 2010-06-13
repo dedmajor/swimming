@@ -74,6 +74,7 @@ public class Application implements Comparable<Application> {
                 append("event.id", event.getId()).
                 append("contestant", contestant).
                 append("declaredTime", declaredTime).
+                append("ageGroup", getAgeGroup()).
                 toString();
     }
 

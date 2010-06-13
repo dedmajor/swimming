@@ -92,12 +92,12 @@ public class Event {
                         : Math.min(queue.getRemainingApplicationsCount(), leadsInAgeGroup);
 
                 if (currentHeat == null || !currentHeat.hasMoreSpace(requiredSpace)) {
-                    currentHeat = new Heat(pool);
+                    currentHeat = new Heat(this);
                     result.add(currentHeat);
                 }
 
                 for (int i = 0; i < requiredSpace; i++) {
-                    currentHeat.addSwimmer(queue.nextApplication().getContestant());
+                    currentHeat.addApplication(queue.nextApplication());
                 }
 
                 leadsAreOut = true;

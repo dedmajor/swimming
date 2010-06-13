@@ -41,12 +41,14 @@ public class HeatBuilderTest {
         assertThat(heats.get(0).getSwimmers().size(), equalTo(3));
         assertThat(heats.get(1).getSwimmers().size(), equalTo(3));
 
-        assertThat(AgeGroup.forAge(heats.get(0).getSwimmers().get(0).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(heats.get(0).getSwimmers().get(1).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(heats.get(0).getSwimmers().get(2).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        List<Swimmer> firstHeatSwimmers = heats.get(0).getSwimmers();
+        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(0).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(1).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(2).getAge(2010)), equalTo(AgeGroup.OVER_30));
 
-        assertThat(AgeGroup.forAge(heats.get(1).getSwimmers().get(0).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(heats.get(1).getSwimmers().get(1).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(heats.get(1).getSwimmers().get(2).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        List<Swimmer> secondHeatSwimmers = heats.get(1).getSwimmers();
+        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(0).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(1).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(2).getAge(2010)), equalTo(AgeGroup.OVER_25));
     }
 }
