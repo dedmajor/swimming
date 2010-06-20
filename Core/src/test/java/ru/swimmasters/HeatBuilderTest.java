@@ -16,8 +16,7 @@ import static org.junit.Assert.assertThat;
 public class HeatBuilderTest {
     @Test
     public void testLeads() {
-        Event event = new Event()
-                .setPool(new Pool().setLanesCount(4))
+        Event event = new Event(new Meet().setPool(new Pool().setLanesCount(4)), new Discipline())
                 .setHoldingDate(new LocalDate(2010, 04, 25));
 
         event

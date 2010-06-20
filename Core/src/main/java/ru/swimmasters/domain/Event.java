@@ -23,11 +23,12 @@ public class Event {
     private Integer version;
 
     @NotNull
-    private String name;
+    @ManyToOne(targetEntity = Meet.class)
+    private Meet meet;
 
     @NotNull
-    @ManyToOne(targetEntity = Pool.class)
-    private Pool pool;
+    @ManyToOne(targetEntity = Discipline.class)
+    private Discipline discipline;
 
     @NotNull
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
@@ -37,26 +38,25 @@ public class Event {
     private List<Application> applications = new ArrayList<Application>();
 
 
+    public Event(Meet meet, Discipline discipline) {
+        this.meet = meet;
+        this.discipline = discipline;
+    }
+
+    private Event() {
+        // hibernate should pass
+    }
+
     public Integer getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public Meet getMeet() {
+        return meet;
     }
 
-    public Event setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public Pool getPool() {
-        return pool;
-    }
-
-    public Event setPool(Pool pool) {
-        this.pool = pool;
-        return this;
+    public Discipline getDiscipline() {
+        return discipline;
     }
 
     public LocalDate getHoldingDate() {
@@ -66,6 +66,10 @@ public class Event {
     public Event setHoldingDate(LocalDate holdingDate) {
         this.holdingDate = holdingDate;
         return this;
+    }
+
+    public Pool getPool() {
+        return meet.getPool();
     }
 
     public Event addApplication(Application application) {
@@ -139,8 +143,8 @@ public class Event {
     public String toString() {
         return new ToStringBuilder(this).
                 append("id", id).
-                append("name", name).
-                append("pool", pool).
+                append("meet", meet).
+                append("discipline", discipline).
                 append("holdingDate", holdingDate).
                 toString();
     }
