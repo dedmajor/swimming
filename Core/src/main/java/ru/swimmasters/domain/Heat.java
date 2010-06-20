@@ -23,8 +23,8 @@ public class Heat {
         return hasMoreSpace(1);
     }
 
-    public boolean hasMoreSpace(int swimmersCount) {
-        return applications.size() + swimmersCount <= event.getPool().getLanesCount();
+    public boolean hasMoreSpace(int athletesCount) {
+        return applications.size() + athletesCount <= event.getPool().getLanesCount();
     }
 
     public void addApplication(Application application) {
@@ -32,7 +32,7 @@ public class Heat {
             throw new IllegalArgumentException("cannot add application from another event: " + application);
         }
         if (!hasMoreSpace()) {
-            throw new IllegalStateException("no more space for swimmers");
+            throw new IllegalStateException("no more space for athletes");
         }
         applications.add(application);
     }
@@ -41,8 +41,8 @@ public class Heat {
         return Collections.unmodifiableList(applications);
     }
 
-    public List<Swimmer> getSwimmers() {
-        List<Swimmer> result = new ArrayList<Swimmer>(applications.size());
+    public List<Athlete> getAthletes() {
+        List<Athlete> result = new ArrayList<Athlete>(applications.size());
         for (Application application : applications) {
             result.add(application.getContestant());
         }

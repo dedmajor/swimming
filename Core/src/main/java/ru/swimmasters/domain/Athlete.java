@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * Date: Jun 2, 2010
  */
 @Entity
-public class Swimmer {
+public class Athlete {
     @Id
     private Integer id;
 
@@ -34,7 +34,7 @@ public class Swimmer {
         return birthYear;
     }
 
-    public Swimmer setBirthYear(int birthYear) {
+    public Athlete setBirthYear(int birthYear) {
         this.birthYear = birthYear;
         return this;
     }

@@ -24,9 +24,9 @@ public class Application implements Comparable<Application> {
     private Event event;
 
     @NotNull
-    @ManyToOne(targetEntity = Swimmer.class)
+    @ManyToOne(targetEntity = Athlete.class)
     //@JoinColumn
-    private Swimmer contestant; // TODO: rename, participant?
+    private Athlete contestant; // TODO: rename, participant?
 
     @NotNull
     @Digits(integer = 5, fraction = 2)
@@ -37,7 +37,7 @@ public class Application implements Comparable<Application> {
         // hibernate should pass
     }
 
-    public Application(Event event, Swimmer contestant) {
+    public Application(Event event, Athlete contestant) {
         this.event = event;
         this.contestant = contestant;
     }
@@ -50,7 +50,7 @@ public class Application implements Comparable<Application> {
         return event;
     }
 
-    public Swimmer getContestant() {
+    public Athlete getContestant() {
         return contestant;
     }
 

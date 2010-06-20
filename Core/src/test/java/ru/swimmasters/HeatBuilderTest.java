@@ -21,34 +21,34 @@ public class HeatBuilderTest {
                 .setHoldingDate(new LocalDate(2010, 04, 25));
 
         event
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1980))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1980))
                         .setDeclaredTime(25.0f))
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1980))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1980))
                         .setDeclaredTime(27.0f))
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1979))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1979))
                         .setDeclaredTime(24.0f))
 
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1985))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1985))
                         .setDeclaredTime(25.5f))
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1984))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1984))
                         .setDeclaredTime(24.5f))
-                .addApplication(new Application(event, new Swimmer().setBirthYear(1984))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1984))
                         .setDeclaredTime(28.0f));
 
         List<Heat> heats = event.buildHeats(2);
 
         assertThat(heats.size(), equalTo(2));
-        assertThat(heats.get(0).getSwimmers().size(), equalTo(3));
-        assertThat(heats.get(1).getSwimmers().size(), equalTo(3));
+        assertThat(heats.get(0).getAthletes().size(), equalTo(3));
+        assertThat(heats.get(1).getAthletes().size(), equalTo(3));
 
-        List<Swimmer> firstHeatSwimmers = heats.get(0).getSwimmers();
-        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(0).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(1).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(firstHeatSwimmers.get(2).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        List<Athlete> firstHeatAthletes = heats.get(0).getAthletes();
+        assertThat(AgeGroup.forAge(firstHeatAthletes.get(0).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        assertThat(AgeGroup.forAge(firstHeatAthletes.get(1).getAge(2010)), equalTo(AgeGroup.OVER_30));
+        assertThat(AgeGroup.forAge(firstHeatAthletes.get(2).getAge(2010)), equalTo(AgeGroup.OVER_30));
 
-        List<Swimmer> secondHeatSwimmers = heats.get(1).getSwimmers();
-        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(0).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(1).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(secondHeatSwimmers.get(2).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        List<Athlete> secondHeatAthletes = heats.get(1).getAthletes();
+        assertThat(AgeGroup.forAge(secondHeatAthletes.get(0).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        assertThat(AgeGroup.forAge(secondHeatAthletes.get(1).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        assertThat(AgeGroup.forAge(secondHeatAthletes.get(2).getAge(2010)), equalTo(AgeGroup.OVER_25));
     }
 }
