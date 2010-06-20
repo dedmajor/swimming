@@ -21,10 +21,7 @@ public class Pool {
     private String location;
 
     @NotNull
-    private Byte length;
-
-    @NotNull
     @Min(2L)
-    private Byte lanesCount;
+    private Integer lanesCount;
 
 }

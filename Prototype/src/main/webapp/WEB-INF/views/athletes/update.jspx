@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu:ru.swimmasters.domain.Athlete" modelAttribute="athlete" path="/athletes" z="user-managed">
-        <field:input field="name" id="c:ru.swimmasters.domain.Athlete.name" required="true" z="user-managed"/>
-        
-    <field:input field="birthYear" id="c:ru.swimmasters.domain.Athlete.birthYear" required="true" validationMessageCode="field.invalid.integer" z="user-managed"/>
+    <form:update id="fu:ru.swimmasters.domain.Athlete" modelAttribute="athlete" path="/athletes" z="41KFGChNG+0Oh0BZMVBx9uVMO/Q=">
+        <field:input field="name" id="c:ru.swimmasters.domain.Athlete.name" required="true" z="qmDS7GDoqEbDLNwTnN08yvMtYus="/>
+        <field:input field="birthYear" id="c:ru.swimmasters.domain.Athlete.birthYear" required="true" validationMessageCode="field.invalid.integer" z="DdVARwiHBB0MN/CYXsZdQOuMF4g="/>
     </form:update>
 </div>

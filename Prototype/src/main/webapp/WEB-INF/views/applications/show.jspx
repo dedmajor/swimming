@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps:ru.swimmasters.domain.Application" object="${application}" z="user-managed">
-        <field:display field="event" id="s:ru.swimmasters.domain.Application.event" object="${application}" z="user-managed"/>
-        <field:display field="participant" id="s:ru.swimmasters.domain.Application.participant" object="${application}" z="user-managed"/>
-        <field:display field="declaredTime" id="s:ru.swimmasters.domain.Application.declaredTime" object="${application}" z="user-managed"/>
+    <page:show id="ps:ru.swimmasters.domain.Application" object="${application}" z="gfNgqQFwwMfZjkLzOwx2ybGpx5o=">
+        <field:display field="event" id="s:ru.swimmasters.domain.Application.event" object="${application}" z="NbM+K3gtkW8svk6qdL7gxB84O8U="/>
+        <field:display field="participant" id="s:ru.swimmasters.domain.Application.participant" object="${application}" z="+W3/NvIw/A02/SffXxAjvduwfXU="/>
+        <field:display field="declaredTime" id="s:ru.swimmasters.domain.Application.declaredTime" object="${application}" z="czveQC3OGhQKodxF4dsnciKiUcA="/>
     </page:show>
 </div>

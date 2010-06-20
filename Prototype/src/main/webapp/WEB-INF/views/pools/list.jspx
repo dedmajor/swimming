@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl:ru.swimmasters.domain.Pool" items="${pools}" z="user-managed">
-        <table:table data="${pools}" id="l:ru.swimmasters.domain.Pool" path="/pools" z="user-managed">
-            <table:column id="c:ru.swimmasters.domain.Pool.location" property="location" z="user-managed"/>
-            <table:column id="c:ru.swimmasters.domain.Pool.length" property="length" z="user-managed"/>
-            <table:column id="c:ru.swimmasters.domain.Pool.lanesCount" property="lanesCount" z="user-managed"/>
-        <table:column id="c:ru.swimmasters.domain.Pool.name" property="name" z="user-managed"/>
+    <page:list id="pl:ru.swimmasters.domain.Pool" items="${pools}" z="8wR8HQwGDifx3Cg6fnhs9sFUCds=">
+        <table:table data="${pools}" id="l:ru.swimmasters.domain.Pool" path="/pools" z="GPhsbvctWg+2aJXdrxZeGzd7jsk=">
+            <table:column id="c:ru.swimmasters.domain.Pool.name" property="name" z="gnuS/teuaKnqqQfyN5Ztxingcas="/>
+            <table:column id="c:ru.swimmasters.domain.Pool.location" property="location" z="+Tg+fNdTiT21rUkw+DMWnFl30n4="/>
+            <table:column id="c:ru.swimmasters.domain.Pool.lanesCount" property="lanesCount" z="eNU/RmQWp41dIz9VyBcnfNkUmE8="/>
         </table:table>
     </page:list>
 </div>

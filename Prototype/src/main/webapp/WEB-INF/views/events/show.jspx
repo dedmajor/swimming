@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps:ru.swimmasters.domain.Event" object="${event}" z="user-managed">
-        <field:display field="pool" id="s:ru.swimmasters.domain.Event.pool" object="${event}" z="user-managed"/>
-        <field:display date="true" dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="s:ru.swimmasters.domain.Event.holdingDate" object="${event}" z="user-managed"/>
-    <field:display field="name" id="s:ru.swimmasters.domain.Event.name" object="${event}" z="user-managed"/>
+    <page:show id="ps:ru.swimmasters.domain.Event" object="${event}" z="go9DeC1JegkrnpKXE+ON2C6w/0Y=">
+        <field:display field="name" id="s:ru.swimmasters.domain.Event.name" object="${event}" z="xKtUa6lH8NbfRuvDWjtcChM/xzs="/>
+        <field:display field="pool" id="s:ru.swimmasters.domain.Event.pool" object="${event}" z="mj36hZNbluMyjZ5WUQaihvttbzg="/>
+        <field:display date="true" dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="s:ru.swimmasters.domain.Event.holdingDate" object="${event}" z="TGW9MBlxweaN9Jk2Qtg5ulNDL+g="/>
     </page:show>
 </div>

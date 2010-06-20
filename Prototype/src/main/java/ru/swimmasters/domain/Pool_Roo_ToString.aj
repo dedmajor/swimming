@@ -10,7 +10,6 @@ privileged aspect Pool_Roo_ToString {
         sb.append("Version: ").append(getVersion()).append(", ");
         sb.append("Name: ").append(getName()).append(", ");
         sb.append("Location: ").append(getLocation()).append(", ");
-        sb.append("Length: ").append(getLength()).append(", ");
         sb.append("LanesCount: ").append(getLanesCount());
         return sb.toString();
     }

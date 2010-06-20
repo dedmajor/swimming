@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc:ru.swimmasters.domain.Event" modelAttribute="event" path="/events" render="${empty dependencies}" z="user-managed">
-        <field:select field="pool" id="c:ru.swimmasters.domain.Event.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="user-managed"/>
-        <field:datetime dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="c:ru.swimmasters.domain.Event.holdingDate" required="true" z="user-managed"/>
-    <field:input field="name" id="c:ru.swimmasters.domain.Event.name" required="true" z="user-managed"/>
+    <form:create id="fc:ru.swimmasters.domain.Event" modelAttribute="event" path="/events" render="${empty dependencies}" z="Pf/Z1AbL6iC1+vFK8e46U84rIOg=">
+        <field:input field="name" id="c:ru.swimmasters.domain.Event.name" required="true" z="jm5KO77vEAmlYtQb1VHqWbgJwLs="/>
+        <field:select field="pool" id="c:ru.swimmasters.domain.Event.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="Vz3ZbV5X0wQRN2ySj+FHuWQsQyE="/>
+        <field:datetime dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="c:ru.swimmasters.domain.Event.holdingDate" required="true" z="Es11tQwkrJUR4or/2LeKceHj/CA="/>
     </form:create>
-    <form:page id="fs:ru.swimmasters.domain.Event" render="${not empty dependencies}" title="Event" z="user-managed">
+    <form:page id="fs:ru.swimmasters.domain.Event" render="${not empty dependencies}" title="Event" z="iETqM8PMg7GB5G3iQIWCnvFK0+M=">
         <spring:message code="entity.dependency.required"/>
         <c:forEach items="${dependencies}" var="dependency">
             <p>
-                <field:reference field="${dependency[0]}" id="s:ru.swimmasters.domain.Event.${dependency[0]}" path="/${dependency[1]}" z="user-managed"/>
+                <field:reference field="${dependency[0]}" id="s:ru.swimmasters.domain.Event.${dependency[0]}" path="/${dependency[1]}" z="BlAIOsfbzKdtZCkSsB9DXSVszXA="/>
             </p>
         </c:forEach>
     </form:page>

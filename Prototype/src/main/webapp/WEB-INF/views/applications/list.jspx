@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl:ru.swimmasters.domain.Application" items="${applications}" z="user-managed">
-        <table:table data="${applications}" id="l:ru.swimmasters.domain.Application" path="/applications" z="user-managed">
-            <table:column id="c:ru.swimmasters.domain.Application.event" property="event" z="user-managed"/>
-            <table:column id="c:ru.swimmasters.domain.Application.participant" property="participant" z="user-managed"/>
-            <table:column id="c:ru.swimmasters.domain.Application.declaredTime" property="declaredTime" z="user-managed"/>
+    <page:list id="pl:ru.swimmasters.domain.Application" items="${applications}" z="OGjGRN4T3G8WJCGAI0XRUjYCZk0=">
+        <table:table data="${applications}" id="l:ru.swimmasters.domain.Application" path="/applications" z="DfoD6nLP1FZViKnFnWMGonK4ec4=">
+            <table:column id="c:ru.swimmasters.domain.Application.event" property="event" z="fwIFLphGHWAKkjZS3xowQj1Ioyc="/>
+            <table:column id="c:ru.swimmasters.domain.Application.participant" property="participant" z="qIWtettV+Z+qI0qDE/JxZEIWJOo="/>
+            <table:column id="c:ru.swimmasters.domain.Application.declaredTime" property="declaredTime" z="2QJOdH0u0gCviyg3FKoAop7h3+I="/>
         </table:table>
     </page:list>
 </div>

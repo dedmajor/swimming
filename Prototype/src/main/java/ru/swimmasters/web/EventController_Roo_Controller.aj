@@ -113,7 +113,7 @@ privileged aspect EventController_Roo_Controller {
     Converter<Pool, String> EventController.getPoolConverter() {
         return new Converter<Pool, String>() {
             public String convert(Pool pool) {
-                return new StringBuilder().append(pool.getName()).append(" ").append(pool.getLocation()).append(" ").append(pool.getLength()).toString();
+                return new StringBuilder().append(pool.getName()).append(" ").append(pool.getLocation()).append(" ").append(pool.getLanesCount()).toString();
             }
         };
     }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc:ru.swimmasters.domain.Application" modelAttribute="application" path="/applications" render="${empty dependencies}" z="user-managed">
-        <field:select field="event" id="c:ru.swimmasters.domain.Application.event" itemValue="id" items="${events}" path="/events" required="true" z="user-managed"/>
-        <field:select field="participant" id="c:ru.swimmasters.domain.Application.participant" itemValue="id" items="${athletes}" path="/athletes" required="true" z="user-managed"/>
-        <field:input field="declaredTime" id="c:ru.swimmasters.domain.Application.declaredTime" required="true" validationMessageCode="field.invalid.number" z="user-managed"/>
+    <form:create id="fc:ru.swimmasters.domain.Application" modelAttribute="application" path="/applications" render="${empty dependencies}" z="nPelpI/7WG92s/ZYcoWjYy6AFP8=">
+        <field:select field="event" id="c:ru.swimmasters.domain.Application.event" itemValue="id" items="${events}" path="/events" required="true" z="3CxFNHOKA2DsdmtcKuREjIXayi4="/>
+        <field:select field="participant" id="c:ru.swimmasters.domain.Application.participant" itemValue="id" items="${athletes}" path="/athletes" required="true" z="twRbYKHjY2EzPUX5BRChTSTgk+8="/>
+        <field:input field="declaredTime" id="c:ru.swimmasters.domain.Application.declaredTime" required="true" validationMessageCode="field.invalid.number" z="gfdKFCvMOEOqcR0sbwPbkFvFYB0="/>
     </form:create>
-    <form:page id="fs:ru.swimmasters.domain.Application" render="${not empty dependencies}" title="Application" z="user-managed">
+    <form:page id="fs:ru.swimmasters.domain.Application" render="${not empty dependencies}" title="Application" z="xK3u8XlKZH3qAqKp04AZ+wn/0c8=">
         <spring:message code="entity.dependency.required"/>
         <c:forEach items="${dependencies}" var="dependency">
             <p>
-                <field:reference field="${dependency[0]}" id="s:ru.swimmasters.domain.Application.${dependency[0]}" path="/${dependency[1]}" z="user-managed"/>
+                <field:reference field="${dependency[0]}" id="s:ru.swimmasters.domain.Application.${dependency[0]}" path="/${dependency[1]}" z="gdoXF8WTPe6xwHdhcL+RqZXeNmw="/>
             </p>
         </c:forEach>
     </form:page>

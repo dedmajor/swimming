@@ -1,6 +1,6 @@
 package ru.swimmasters.domain;
 
-import java.lang.Byte;
+import java.lang.Integer;
 import java.lang.String;
 
 privileged aspect Pool_Roo_JavaBean {
@@ -21,19 +21,11 @@ privileged aspect Pool_Roo_JavaBean {
         this.location = location;
     }
     
-    public Byte Pool.getLength() {
-        return this.length;
-    }
-    
-    public void Pool.setLength(Byte length) {
-        this.length = length;
-    }
-    
-    public Byte Pool.getLanesCount() {
+    public Integer Pool.getLanesCount() {
         return this.lanesCount;
     }
     
-    public void Pool.setLanesCount(Byte lanesCount) {
+    public void Pool.setLanesCount(Integer lanesCount) {
         this.lanesCount = lanesCount;
     }
     
