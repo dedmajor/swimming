@@ -2,8 +2,8 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu:ru.swimmasters.domain.Event" modelAttribute="event" path="/events" z="fDUSAz/Z3tzhj6d6JwXUiMfAFoU=">
-        <field:input field="name" id="c:ru.swimmasters.domain.Event.name" required="true" z="jm5KO77vEAmlYtQb1VHqWbgJwLs="/>
-        <field:select field="pool" id="c:ru.swimmasters.domain.Event.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="Vz3ZbV5X0wQRN2ySj+FHuWQsQyE="/>
+        <field:select field="meet" id="c:ru.swimmasters.domain.Event.meet" itemValue="id" items="${meets}" path="/meets" required="true" z="RUG78GyargUeXQla2VMuGU7FRWI="/>
+        <field:select field="discipline" id="c:ru.swimmasters.domain.Event.discipline" itemValue="id" items="${disciplines}" path="/disciplines" required="true" z="FbLT9HdSGqZ9V8ecb4YpRYJ10LY="/>
         <field:datetime dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="c:ru.swimmasters.domain.Event.holdingDate" required="true" z="Es11tQwkrJUR4or/2LeKceHj/CA="/>
     </form:update>
 </div>

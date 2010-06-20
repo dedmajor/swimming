@@ -74,7 +74,17 @@
     
     <!-- Handles Spring requests -->
     <servlet>
-        <servlet-name>swimmasters</servlet-name>
+        <servlet-name>Resource Servlet</servlet-name>
+        <servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Resource Servlet</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>swimmasters-prototype</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -82,24 +92,10 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-    
-    
-    <servlet>
-        <servlet-name>Resource Servlet</servlet-name>
-        <servlet-class>org.springframework.js.resource.ResourceServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    
     <servlet-mapping>
-        <servlet-name>Resource Servlet</servlet-name>
-        <url-pattern>/resources/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>swimmasters</servlet-name>
+        <servlet-name>swimmasters-prototype</servlet-name>
         <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
-    
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>

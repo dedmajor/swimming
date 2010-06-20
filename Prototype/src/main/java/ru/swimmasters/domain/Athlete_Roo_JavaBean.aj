@@ -1,6 +1,6 @@
 package ru.swimmasters.domain;
 
-import java.lang.Short;
+import java.lang.Integer;
 import java.lang.String;
 
 privileged aspect Athlete_Roo_JavaBean {
@@ -13,11 +13,11 @@ privileged aspect Athlete_Roo_JavaBean {
         this.name = name;
     }
     
-    public Short Athlete.getBirthYear() {
+    public Integer Athlete.getBirthYear() {
         return this.birthYear;
     }
     
-    public void Athlete.setBirthYear(Short birthYear) {
+    public void Athlete.setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
     }
     

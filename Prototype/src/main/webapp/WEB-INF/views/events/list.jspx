@@ -3,8 +3,8 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl:ru.swimmasters.domain.Event" items="${events}" z="Jqjlhcoj+O2UgrzOv6NaNNeEACk=">
         <table:table data="${events}" id="l:ru.swimmasters.domain.Event" path="/events" z="87syqK0GIQEY9nlUmFv5Kqxaymc=">
-            <table:column id="c:ru.swimmasters.domain.Event.name" property="name" z="HAzqN9yON1MWidD72bzKVKWuQGc="/>
-            <table:column id="c:ru.swimmasters.domain.Event.pool" property="pool" z="HqPEudPq/l3EoOZ6KaWEs9fq4so="/>
+            <table:column id="c:ru.swimmasters.domain.Event.meet" property="meet" z="rK/DBb/3CkfB+UWinkim2ay0jpE="/>
+            <table:column id="c:ru.swimmasters.domain.Event.discipline" property="discipline" z="cUeYfVhiOVbfYeOskixqWhpExeU="/>
             <table:column id="c:ru.swimmasters.domain.Event.holdingDate" property="holdingDate" z="c8OEqUaaQu9VUEBhN/jL5NUr3B0="/>
         </table:table>
     </page:list>

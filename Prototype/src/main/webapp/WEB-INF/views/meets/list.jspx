@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl:ru.swimmasters.domain.Meet" items="${meets}" z="6xW0b4wWB5ii+kP4ehyclHMiros=">
+        <table:table data="${meets}" id="l:ru.swimmasters.domain.Meet" path="/meets" z="meUMbQAbJSDY8kFlooJp7Qhwy7Q=">
+            <table:column id="c:ru.swimmasters.domain.Meet.name" property="name" z="kk+nScI77RMos6RpM4InjyLOmFI="/>
+            <table:column id="c:ru.swimmasters.domain.Meet.pool" property="pool" z="Hd0proSQXAGsTS721x3emyPOGFw="/>
+            <table:column id="c:ru.swimmasters.domain.Meet.startDate" property="startDate" z="sDvsxSNpyE7hwVPcjWHXwT0alVw="/>
+        </table:table>
+    </page:list>
+</div>

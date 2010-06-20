@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.swimmasters.domain.Discipline;
 import ru.swimmasters.domain.Event;
-import ru.swimmasters.domain.Pool;
+import ru.swimmasters.domain.Meet;
 
 privileged aspect EventController_Roo_Controller {
     
@@ -41,8 +42,11 @@ privileged aspect EventController_Roo_Controller {
         modelMap.addAttribute("event", new Event());
         addDateTimeFormatPatterns(modelMap);
         List dependencies = new ArrayList();
-        if (Pool.countPools() == 0) {
-            dependencies.add(new String[]{"pool", "pools"});
+        if (Discipline.countDisciplines() == 0) {
+            dependencies.add(new String[]{"discipline", "disciplines"});
+        }
+        if (Meet.countMeets() == 0) {
+            dependencies.add(new String[]{"meet", "meets"});
         }
         modelMap.addAttribute("dependencies", dependencies);
         return "events/create";
@@ -97,23 +101,36 @@ privileged aspect EventController_Roo_Controller {
         return "redirect:/events?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
     }
     
-    @ModelAttribute("pools")
-    public Collection<Pool> EventController.populatePools() {
-        return Pool.findAllPools();
+    @ModelAttribute("disciplines")
+    public Collection<Discipline> EventController.populateDisciplines() {
+        return Discipline.findAllDisciplines();
+    }
+    
+    @ModelAttribute("meets")
+    public Collection<Meet> EventController.populateMeets() {
+        return Meet.findAllMeets();
+    }
+    
+    Converter<Discipline, String> EventController.getDisciplineConverter() {
+        return new Converter<Discipline, String>() {
+            public String convert(Discipline discipline) {
+                return new StringBuilder().append(discipline.getName()).append(" ").append(discipline.getDistance()).toString();
+            }
+        };
     }
     
     Converter<Event, String> EventController.getEventConverter() {
         return new Converter<Event, String>() {
             public String convert(Event event) {
-                return new StringBuilder().append(event.getName()).append(" ").append(event.getHoldingDate()).toString();
+                return new StringBuilder().append(event.getHoldingDate()).toString();
             }
         };
     }
     
-    Converter<Pool, String> EventController.getPoolConverter() {
-        return new Converter<Pool, String>() {
-            public String convert(Pool pool) {
-                return new StringBuilder().append(pool.getName()).append(" ").append(pool.getLocation()).append(" ").append(pool.getLanesCount()).toString();
+    Converter<Meet, String> EventController.getMeetConverter() {
+        return new Converter<Meet, String>() {
+            public String convert(Meet meet) {
+                return new StringBuilder().append(meet.getName()).append(" ").append(meet.getStartDate()).toString();
             }
         };
     }
@@ -122,8 +139,9 @@ privileged aspect EventController_Roo_Controller {
     void EventController.registerConverters(WebDataBinder binder) {
         if (binder.getConversionService() instanceof GenericConversionService) {
             GenericConversionService conversionService = (GenericConversionService) binder.getConversionService();
+            conversionService.addConverter(getDisciplineConverter());
             conversionService.addConverter(getEventConverter());
-            conversionService.addConverter(getPoolConverter());
+            conversionService.addConverter(getMeetConverter());
         }
     }
     

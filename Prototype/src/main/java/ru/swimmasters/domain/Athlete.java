@@ -16,5 +16,5 @@ public class Athlete {
     private String name;
 
     @NotNull
-    private Short birthYear;
+    private Integer birthYear;
 }

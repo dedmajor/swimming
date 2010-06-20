@@ -1,25 +1,25 @@
 package ru.swimmasters.domain;
 
-import java.lang.String;
 import java.util.Date;
-import ru.swimmasters.domain.Pool;
+import ru.swimmasters.domain.Discipline;
+import ru.swimmasters.domain.Meet;
 
 privileged aspect Event_Roo_JavaBean {
     
-    public String Event.getName() {
-        return this.name;
+    public Meet Event.getMeet() {
+        return this.meet;
     }
     
-    public void Event.setName(String name) {
-        this.name = name;
+    public void Event.setMeet(Meet meet) {
+        this.meet = meet;
     }
     
-    public Pool Event.getPool() {
-        return this.pool;
+    public Discipline Event.getDiscipline() {
+        return this.discipline;
     }
     
-    public void Event.setPool(Pool pool) {
-        this.pool = pool;
+    public void Event.setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
     }
     
     public Date Event.getHoldingDate() {

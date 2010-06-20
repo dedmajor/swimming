@@ -122,7 +122,7 @@ privileged aspect ApplicationController_Roo_Controller {
     Converter<Event, String> ApplicationController.getEventConverter() {
         return new Converter<Event, String>() {
             public String convert(Event event) {
-                return new StringBuilder().append(event.getName()).append(" ").append(event.getHoldingDate()).toString();
+                return new StringBuilder().append(event.getHoldingDate()).toString();
             }
         };
     }

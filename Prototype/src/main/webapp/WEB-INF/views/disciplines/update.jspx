@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu:ru.swimmasters.domain.Discipline" modelAttribute="discipline" path="/disciplines" z="a3vJo8ITg+XhxGXK+vrtKREJklI=">
+        <field:select field="gender" id="c:ru.swimmasters.domain.Discipline.gender" items="${genders}" path="genders" required="true" z="kV58joZLUN1Wu6tVyRlJwtXC6Ng="/>
+        <field:input field="name" id="c:ru.swimmasters.domain.Discipline.name" required="true" z="bEPSc1nFst4tXqENqh8B5JdInXc="/>
+        <field:input field="distance" id="c:ru.swimmasters.domain.Discipline.distance" required="true" validationMessageCode="field.invalid.integer" z="ujHXsRYgFw5iBQcSP2MjuRx1GQk="/>
+    </form:update>
+</div>

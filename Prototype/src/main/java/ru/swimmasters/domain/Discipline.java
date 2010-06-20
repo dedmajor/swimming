@@ -4,22 +4,23 @@ import javax.persistence.Entity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.roo.addon.entity.RooEntity;
+import ru.swimmasters.domain.Gender;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Min;
+import javax.persistence.Enumerated;
 
 @Entity
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Pool {
+public class Discipline {
+
+    @NotNull
+    @Enumerated
+    private Gender gender;
 
     @NotNull
     private String name;
 
     @NotNull
-    private String location;
-
-    @NotNull
-    @Min(2L)
-    private Integer lanesCount;
+    private Integer distance;
 }

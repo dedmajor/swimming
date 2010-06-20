@@ -2,15 +2,15 @@ package ru.swimmasters.domain;
 
 import java.lang.String;
 
-privileged aspect Event_Roo_ToString {
+privileged aspect Discipline_Roo_ToString {
     
-    public String Event.toString() {
+    public String Discipline.toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("Version: ").append(getVersion()).append(", ");
-        sb.append("Meet: ").append(getMeet()).append(", ");
-        sb.append("Discipline: ").append(getDiscipline()).append(", ");
-        sb.append("HoldingDate: ").append(getHoldingDate());
+        sb.append("Gender: ").append(getGender()).append(", ");
+        sb.append("Name: ").append(getName()).append(", ");
+        sb.append("Distance: ").append(getDistance());
         return sb.toString();
     }
     

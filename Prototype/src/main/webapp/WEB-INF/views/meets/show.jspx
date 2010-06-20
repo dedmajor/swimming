@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps:ru.swimmasters.domain.Meet" object="${meet}" z="tz3xEoobCD3+g3dhCS7wwX2Mdi4=">
+        <field:display field="name" id="s:ru.swimmasters.domain.Meet.name" object="${meet}" z="+3mLmmWbDBfIMTLy8ZwAmOULyzQ="/>
+        <field:display field="pool" id="s:ru.swimmasters.domain.Meet.pool" object="${meet}" z="GLHwQKk4pLgq+i8G0tjxihMEWsA="/>
+        <field:display date="true" dateTimePattern="${meet_startdate_date_format}" field="startDate" id="s:ru.swimmasters.domain.Meet.startDate" object="${meet}" z="Ob8IGDEngd6Cg26+vuDWthW36Wc="/>
+    </page:show>
+</div>

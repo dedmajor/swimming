@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu:ru.swimmasters.domain.Meet" modelAttribute="meet" path="/meets" z="wDlJmoCR83+xgECHh8FfCBZl3rs=">
+        <field:input field="name" id="c:ru.swimmasters.domain.Meet.name" required="true" z="HQYzqrVSvfCEOJEqHWL+6J1Kz74="/>
+        <field:select field="pool" id="c:ru.swimmasters.domain.Meet.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="F0gBTdAlAYgqaW/xK1rfAXjpvjU="/>
+        <field:datetime dateTimePattern="${meet_startdate_date_format}" field="startDate" id="c:ru.swimmasters.domain.Meet.startDate" required="true" z="/2ql5D1mdnoxyniu0H2vJIH0wFs="/>
+    </form:update>
+</div>

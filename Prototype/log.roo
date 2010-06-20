@@ -1,0 +1,29 @@
+// Spring Roo 1.1.0.M1 [rev 3a0b8a3] log opened at 2010-06-20 20:15:49
+project --topLevelPackage ru.swimmasters
+persistence setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
+entity --class ~.domain.Pool
+field string --fieldName name --notNull
+field string --fieldName location --notNull
+field number --fieldName lanesCount --type java.lang.Integer --notNull --min 2
+entity --class ~.domain.Athlete
+field string --fieldName name --notNull 
+field number --fieldName birthYear --type java.lang.Integer --notNull
+entity --class ~.domain.Meet
+field string --fieldName name --notNull
+field reference --fieldName pool --type ~.domain.Pool --notNull
+field date --fieldName startDate --type java.util.Date --notNull
+entity --class ~.domain.Discipline
+field enum --fieldName gender --type ~.domain.Gender --notNull
+field string --fieldName name --notNull
+field number --fieldName distance --type java.lang.Integer --notNull
+entity --class ~.domain.Event
+field reference --fieldName meet --type ~.domain.Meet --notNull
+field reference --fieldName discipline --type ~.domain.Discipline --notNull
+field date --fieldName holdingDate --type java.util.Date --notNull
+entity --class ~.domain.Application
+field reference --fieldName event --type ~.domain.Event --notNull 
+field reference --fieldName participant --type Athlete --notNull 
+field number --fieldName declaredTime --type java.lang.Float --notNull --digitsFraction 2 --digitsInteger 5
+controller all --package ~.web
+// Spring Roo 1.1.0.M1 [rev 3a0b8a3] log opened at 2010-06-20 20:58:58
+poll now

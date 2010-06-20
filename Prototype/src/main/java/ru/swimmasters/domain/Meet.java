@@ -4,30 +4,31 @@ import javax.persistence.Entity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.tostring.RooToString;
 import org.springframework.roo.addon.entity.RooEntity;
-import ru.swimmasters.domain.Event;
 import javax.validation.constraints.NotNull;
+import ru.swimmasters.domain.Pool;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
-import ru.swimmasters.domain.Athlete;
-import javax.validation.constraints.Digits;
+import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Application {
+public class Meet {
 
     @NotNull
-    @ManyToOne(targetEntity = Event.class)
+    private String name;
+
+    @NotNull
+    @ManyToOne(targetEntity = Pool.class)
     @JoinColumn
-    private Event event;
+    private Pool pool;
 
     @NotNull
-    @ManyToOne(targetEntity = Athlete.class)
-    @JoinColumn
-    private Athlete participant;
-
-    @NotNull
-    @Digits(integer = 5, fraction = 2)
-    private Float declaredTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "S-")
+    private Date startDate;
 }
