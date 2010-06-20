@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu:org.olympic.swimming.domain.Pool" modelAttribute="pool" path="/pools" z="wn1cQ20+YQu4P4YK9vuJe2ng9F8=">
-        <field:input field="location" id="c:org.olympic.swimming.domain.Pool.location" required="true" z="ivl8EX6KT1aYSPyURRVJn2KSxNk="/>
-        <field:input field="length" id="c:org.olympic.swimming.domain.Pool.length" required="true" z="KA1FW+Iz0a5Nwkib/XZ9atFjSLA="/>
-        <field:input field="lanesCount" id="c:org.olympic.swimming.domain.Pool.lanesCount" min="2" required="true" z="2JWo21S7lIIfFYAuYkofx/GAp30="/>
-    <field:input field="name" id="c:org.olympic.swimming.domain.Pool.name" required="true" z="3JeM3TePaYxBMXswacMqS0XGVPE="/>
+    <form:update id="fu:ru.swimmasters.domain.Pool" modelAttribute="pool" path="/pools" z="user-managed">
+        <field:input field="location" id="c:ru.swimmasters.domain.Pool.location" required="true" z="user-managed"/>
+        <field:input field="length" id="c:ru.swimmasters.domain.Pool.length" required="true" z="user-managed"/>
+        <field:input field="lanesCount" id="c:ru.swimmasters.domain.Pool.lanesCount" min="2" required="true" z="user-managed"/>
+    <field:input field="name" id="c:ru.swimmasters.domain.Pool.name" required="true" z="user-managed"/>
     </form:update>
 </div>

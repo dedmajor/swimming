@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu:org.olympic.swimming.domain.Event" modelAttribute="event" path="/events" z="+U/w5MZzAO1GjwYSZRDPUdVBGAc=">
-        <field:select field="pool" id="c:org.olympic.swimming.domain.Event.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="0DOfEN+vHMHzEnACixTZiWeYwhg="/>
-        <field:datetime dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="c:org.olympic.swimming.domain.Event.holdingDate" required="true" z="b+jMcuj8jtnwGsq9lw3SGa54myo="/>
-    <field:input field="name" id="c:org.olympic.swimming.domain.Event.name" required="true" z="dscgm1N4nt2domcgf5Vbf56UYO8="/>
+    <form:update id="fu:ru.swimmasters.domain.Event" modelAttribute="event" path="/events" z="user-managed">
+        <field:select field="pool" id="c:ru.swimmasters.domain.Event.pool" itemValue="id" items="${pools}" path="/pools" required="true" z="user-managed"/>
+        <field:datetime dateTimePattern="${event_holdingdate_date_format}" field="holdingDate" id="c:ru.swimmasters.domain.Event.holdingDate" required="true" z="user-managed"/>
+    <field:input field="name" id="c:ru.swimmasters.domain.Event.name" required="true" z="user-managed"/>
     </form:update>
 </div>

@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:output omit-xml-declaration="yes"/>
-    <form:update id="fu:org.olympic.swimming.domain.Application" modelAttribute="application" path="/applications" z="etRpJW/0BkduaxRq0IHyH7wj/Ew=">
-        <field:select field="event" id="c:org.olympic.swimming.domain.Application.event" itemValue="id" items="${events}" path="/events" required="true" z="Fhd6NvvgPNC1dVwJpnUFc4mJMU8="/>
-        <field:select field="contestant" id="c:org.olympic.swimming.domain.Application.contestant" itemValue="id" items="${swimmers}" path="/swimmers" required="true" z="2EcGHHa4cgUu/TUiDiHeJh9cX60="/>
-        <field:input field="declaredTime" id="c:org.olympic.swimming.domain.Application.declaredTime" required="true" validationMessageCode="field.invalid.number" z="N/kzAx96UIzIYMSRv3mQv/9pVQs="/>
+    <form:update id="fu:ru.swimmasters.domain.Application" modelAttribute="application" path="/applications" z="user-managed">
+        <field:select field="event" id="c:ru.swimmasters.domain.Application.event" itemValue="id" items="${events}" path="/events" required="true" z="user-managed"/>
+        <field:select field="contestant" id="c:ru.swimmasters.domain.Application.contestant" itemValue="id" items="${swimmers}" path="/swimmers" required="true" z="user-managed"/>
+        <field:input field="declaredTime" id="c:ru.swimmasters.domain.Application.declaredTime" required="true" validationMessageCode="field.invalid.number" z="user-managed"/>
     </form:update>
 </div>
