@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.swimmasters.domain.Application;
+import ru.swimmasters.domain.Athlete;
 import ru.swimmasters.domain.Event;
-import ru.swimmasters.domain.Swimmer;
 
 privileged aspect ApplicationController_Roo_Controller {
     
@@ -38,8 +38,8 @@ privileged aspect ApplicationController_Roo_Controller {
     public String ApplicationController.createForm(ModelMap modelMap) {
         modelMap.addAttribute("application", new Application());
         List dependencies = new ArrayList();
-        if (Swimmer.countSwimmers() == 0) {
-            dependencies.add(new String[]{"contestant", "swimmers"});
+        if (Athlete.countAthletes() == 0) {
+            dependencies.add(new String[]{"contestant", "athletes"});
         }
         if (Event.countEvents() == 0) {
             dependencies.add(new String[]{"event", "events"});
@@ -93,20 +93,28 @@ privileged aspect ApplicationController_Roo_Controller {
         return "redirect:/applications?page=" + ((page == null) ? "1" : page.toString()) + "&size=" + ((size == null) ? "10" : size.toString());
     }
     
+    @ModelAttribute("athletes")
+    public Collection<Athlete> ApplicationController.populateAthletes() {
+        return Athlete.findAllAthletes();
+    }
+    
     @ModelAttribute("events")
     public Collection<Event> ApplicationController.populateEvents() {
         return Event.findAllEvents();
-    }
-    
-    @ModelAttribute("swimmers")
-    public Collection<Swimmer> ApplicationController.populateSwimmers() {
-        return Swimmer.findAllSwimmers();
     }
     
     Converter<Application, String> ApplicationController.getApplicationConverter() {
         return new Converter<Application, String>() {
             public String convert(Application application) {
                 return new StringBuilder().append(application.getDeclaredTime()).toString();
+            }
+        };
+    }
+    
+    Converter<Athlete, String> ApplicationController.getAthleteConverter() {
+        return new Converter<Athlete, String>() {
+            public String convert(Athlete athlete) {
+                return new StringBuilder().append(athlete.getName()).append(" ").append(athlete.getBirthYear()).toString();
             }
         };
     }
@@ -119,21 +127,13 @@ privileged aspect ApplicationController_Roo_Controller {
         };
     }
     
-    Converter<Swimmer, String> ApplicationController.getSwimmerConverter() {
-        return new Converter<Swimmer, String>() {
-            public String convert(Swimmer swimmer) {
-                return new StringBuilder().append(swimmer.getName()).append(" ").append(swimmer.getBirthYear()).toString();
-            }
-        };
-    }
-    
     @InitBinder
     void ApplicationController.registerConverters(WebDataBinder binder) {
         if (binder.getConversionService() instanceof GenericConversionService) {
             GenericConversionService conversionService = (GenericConversionService) binder.getConversionService();
             conversionService.addConverter(getApplicationConverter());
+            conversionService.addConverter(getAthleteConverter());
             conversionService.addConverter(getEventConverter());
-            conversionService.addConverter(getSwimmerConverter());
         }
     }
     

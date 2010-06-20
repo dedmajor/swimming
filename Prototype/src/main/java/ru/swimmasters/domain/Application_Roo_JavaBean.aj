@@ -1,8 +1,8 @@
 package ru.swimmasters.domain;
 
 import java.lang.Float;
+import ru.swimmasters.domain.Athlete;
 import ru.swimmasters.domain.Event;
-import ru.swimmasters.domain.Swimmer;
 
 privileged aspect Application_Roo_JavaBean {
     
@@ -14,11 +14,11 @@ privileged aspect Application_Roo_JavaBean {
         this.event = event;
     }
     
-    public Swimmer Application.getContestant() {
+    public Athlete Application.getContestant() {
         return this.contestant;
     }
     
-    public void Application.setContestant(Swimmer contestant) {
+    public void Application.setContestant(Athlete contestant) {
         this.contestant = contestant;
     }
     

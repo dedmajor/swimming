@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @RooJavaBean
 @RooToString
 @RooEntity
-public class Swimmer {
+public class Athlete {
 
     @NotNull
     private String name;

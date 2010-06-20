@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.ManyToOne;
 import javax.persistence.JoinColumn;
 import javax.validation.constraints.Digits;
-import ru.swimmasters.domain.Swimmer;
+import ru.swimmasters.domain.Athlete;
 
 @Entity
 @RooJavaBean
@@ -23,9 +23,9 @@ public class Application {
     private Event event;
 
     @NotNull
-    @ManyToOne(targetEntity = Swimmer.class)
+    @ManyToOne(targetEntity = Athlete.class)
     @JoinColumn
-    private Swimmer contestant;
+    private Athlete contestant;
 
     @NotNull
     @Digits(integer = 5, fraction = 2)
