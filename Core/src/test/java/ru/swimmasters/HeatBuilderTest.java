@@ -73,13 +73,22 @@ public class HeatBuilderTest {
                 .addApplication(new Application(event, new Athlete().setBirthYear(1980))
                         .setDeclaredTime(25.0f))
                 .addApplication(new Application(event, new Athlete().setBirthYear(1980))
+                        .setDeclaredTime(24.5f))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1980))
                         .setDeclaredTime(27.0f))
-                .addApplication(new Application(event, new Athlete().setBirthYear(1979))
-                        .setDeclaredTime(24.0f))
-                .addApplication(new Application(event, new Athlete().setBirthYear(1979))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1980))
                         .setDeclaredTime(24.0f))
                 .addApplication(new Application(event, new Athlete().setBirthYear(1978))
-                        .setDeclaredTime(23.0f));
+                        .setDeclaredTime(24.0f))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1979).setName("Z"))
+                        .setDeclaredTime(24.0f))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1979).setName("C"))
+                        .setDeclaredTime(24.0f))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1979).setName("A"))
+                        .setDeclaredTime(24.0f))
+                .addApplication(new Application(event, new Athlete().setBirthYear(1979).setName("B"))
+                        .setDeclaredTime(24.0f));
+
 
         return event;
     }
@@ -89,7 +98,7 @@ public class HeatBuilderTest {
         Event event = makeOneGroupEvent();
         List<Heat> heats = event.buildHeats(2);
 
-        // TODO: extract logic into validator
+        // TODO: extract logic into validator and check order for the same time?
 
         Float previousFastestDeclaredTime = null;
         AgeGroup previousAgeGroup = null;
@@ -105,6 +114,7 @@ public class HeatBuilderTest {
                 if (slowestDeclaredTime == null || application.getDeclaredTime() > slowestDeclaredTime) {
                     slowestDeclaredTime = application.getDeclaredTime();
                 }
+
                 if (previousAgeGroup != null) {
                     assertThat(application.getAgeGroup(), equalTo(previousAgeGroup));
                 }

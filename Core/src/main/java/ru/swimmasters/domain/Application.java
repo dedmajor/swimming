@@ -1,5 +1,6 @@
 package ru.swimmasters.domain;
 
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
@@ -79,7 +80,10 @@ public class Application implements Comparable<Application> {
     }
 
     public int compareTo(Application application) {
-        // TODO: FIXME: if time is equal, then order by age / name?
-        return declaredTime.compareTo(application.getDeclaredTime());
+        return new CompareToBuilder()
+                .append(declaredTime, application.getDeclaredTime())
+                .append(application.getParticipant().getBirthYear(), participant.getBirthYear())
+                .append(application.getParticipant().getName(), participant.getName())
+                .toComparison();
     }
 }
