@@ -1,8 +1,8 @@
-package org.olympic.swimming;
+package ru.swimmasters;
 
-import org.olympic.swimming.domain.Application;
-import org.olympic.swimming.domain.Event;
-import org.olympic.swimming.domain.Heat;
+import ru.swimmasters.domain.Application;
+import ru.swimmasters.domain.Event;
+import ru.swimmasters.domain.Heat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.jpa.EntityManagerFactoryInfo;

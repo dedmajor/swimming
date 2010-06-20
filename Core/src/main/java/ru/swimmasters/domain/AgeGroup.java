@@ -1,4 +1,4 @@
-package org.olympic.swimming.domain;
+package ru.swimmasters.domain;
 
 /**
  * @author dedmajor

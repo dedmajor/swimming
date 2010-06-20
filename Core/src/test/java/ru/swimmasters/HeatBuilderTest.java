@@ -1,8 +1,8 @@
-package org.olympic.swimming;
+package ru.swimmasters;
 
 import org.joda.time.LocalDate;
 import org.junit.Test;
-import org.olympic.swimming.domain.*;
+import ru.swimmasters.domain.*;
 
 import java.util.List;
 
