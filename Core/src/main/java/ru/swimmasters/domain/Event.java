@@ -85,6 +85,9 @@ public class Event {
     }
 
     /**
+     * Heats are built from the age queue of applications, considering the youngest
+     * and fastest athletes first. Then result is reverted to make it be at a natural order.
+     *
      * @param leadsInAgeGroup how many leads in each age group must start in one heat
      * @return minimal possible list of heats with respect to the leads rule
      */
@@ -112,11 +115,14 @@ public class Event {
                 leadsAreOut = true;
             }
         }
+
+        Collections.reverse(result);
+
         return result;
     }
 
     /**
-     * @return age queues ordered by their age group, from oldest to youngest
+     * @return age queues ordered by their age group, from youngest to oldest
      */
     private Collection<AgeQueue> buildAgeQueues() {
         Map<AgeGroup, AgeQueue> result = new EnumMap<AgeGroup, AgeQueue>(AgeGroup.class);
@@ -131,12 +137,7 @@ public class Event {
             queue.putApplication(application);
         }
 
-        List<AgeQueue> sortedResult = new ArrayList<AgeQueue>();
-        sortedResult.addAll(result.values());
-
-        Collections.reverse(sortedResult);
-
-        return sortedResult;
+        return result.values();
     }
 
     @Override
