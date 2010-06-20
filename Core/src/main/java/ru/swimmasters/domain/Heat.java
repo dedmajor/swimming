@@ -44,7 +44,7 @@ public class Heat {
     public List<Athlete> getAthletes() {
         List<Athlete> result = new ArrayList<Athlete>(applications.size());
         for (Application application : applications) {
-            result.add(application.getContestant());
+            result.add(application.getParticipant());
         }
         return result;
     }

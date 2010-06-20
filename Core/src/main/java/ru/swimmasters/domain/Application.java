@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
  * User: dedmajor
  * Date: Jun 2, 2010
  */
-// TODO: unique event and contestant
+// TODO: unique event and participant
 @Entity
 public class Application implements Comparable<Application> {
     @Id
@@ -26,7 +26,7 @@ public class Application implements Comparable<Application> {
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
     //@JoinColumn
-    private Athlete contestant; // TODO: rename, participant?
+    private Athlete participant;
 
     @NotNull
     @Digits(integer = 5, fraction = 2)
@@ -37,9 +37,9 @@ public class Application implements Comparable<Application> {
         // hibernate should pass
     }
 
-    public Application(Event event, Athlete contestant) {
+    public Application(Event event, Athlete participant) {
         this.event = event;
-        this.contestant = contestant;
+        this.participant = participant;
     }
 
     public Integer getId() {
@@ -50,8 +50,8 @@ public class Application implements Comparable<Application> {
         return event;
     }
 
-    public Athlete getContestant() {
-        return contestant;
+    public Athlete getParticipant() {
+        return participant;
     }
 
     public Float getDeclaredTime() {
@@ -64,7 +64,7 @@ public class Application implements Comparable<Application> {
     }
 
     public AgeGroup getAgeGroup() {
-        return AgeGroup.forAge(contestant.getAge(event.getHoldingDate().getYear()));
+        return AgeGroup.forAge(participant.getAge(event.getHoldingDate().getYear()));
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Application implements Comparable<Application> {
         return new ToStringBuilder(this).
                 append("id", id).
                 append("event.id", event.getId()).
-                append("contestant", contestant).
+                append("participant", participant).
                 append("declaredTime", declaredTime).
                 append("ageGroup", getAgeGroup()).
                 toString();
