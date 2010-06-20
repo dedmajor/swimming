@@ -17,7 +17,7 @@ public class HeatBuilderTest {
     @Test
     public void testLeads() {
         Event event = new Event()
-                .setPool(new Pool().setLanesCount((byte) 4))
+                .setPool(new Pool().setLanesCount(4))
                 .setHoldingDate(new LocalDate(2010, 04, 25));
 
         event

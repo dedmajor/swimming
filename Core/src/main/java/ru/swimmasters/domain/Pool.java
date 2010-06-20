@@ -27,11 +27,8 @@ public class Pool {
     private String location;
 
     @NotNull
-    private Byte length;
-
-    @NotNull
     @Min(2L)
-    private Byte lanesCount;
+    private Integer lanesCount;
 
 
     public Integer getId() {
@@ -56,20 +53,11 @@ public class Pool {
         return this;
     }
 
-    public Byte getLength() {
-        return length;
-    }
-
-    public Pool setLength(Byte length) {
-        this.length = length;
-        return this;
-    }
-
-    public Byte getLanesCount() {
+    public Integer getLanesCount() {
         return lanesCount;
     }
 
-    public Pool setLanesCount(Byte lanesCount) {
+    public Pool setLanesCount(Integer lanesCount) {
         this.lanesCount = lanesCount;
         return this;
     }
@@ -81,7 +69,6 @@ public class Pool {
                 append("id", id).
                 append("name", name).
                 append("location", location).
-                append("length", length).
                 append("lanesCount", lanesCount).
                 toString();
     }
