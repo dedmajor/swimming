@@ -9,7 +9,7 @@ privileged aspect Application_Roo_ToString {
         sb.append("Id: ").append(getId()).append(", ");
         sb.append("Version: ").append(getVersion()).append(", ");
         sb.append("Event: ").append(getEvent()).append(", ");
-        sb.append("Contestant: ").append(getContestant()).append(", ");
+        sb.append("Participant: ").append(getParticipant()).append(", ");
         sb.append("DeclaredTime: ").append(getDeclaredTime());
         return sb.toString();
     }

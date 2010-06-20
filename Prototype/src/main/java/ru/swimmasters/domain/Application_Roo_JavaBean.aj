@@ -14,12 +14,12 @@ privileged aspect Application_Roo_JavaBean {
         this.event = event;
     }
     
-    public Athlete Application.getContestant() {
-        return this.contestant;
+    public Athlete Application.getParticipant() {
+        return this.participant;
     }
     
-    public void Application.setContestant(Athlete contestant) {
-        this.contestant = contestant;
+    public void Application.setParticipant(Athlete participant) {
+        this.participant = participant;
     }
     
     public Float Application.getDeclaredTime() {

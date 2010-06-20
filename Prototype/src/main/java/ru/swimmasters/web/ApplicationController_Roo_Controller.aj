@@ -38,11 +38,11 @@ privileged aspect ApplicationController_Roo_Controller {
     public String ApplicationController.createForm(ModelMap modelMap) {
         modelMap.addAttribute("application", new Application());
         List dependencies = new ArrayList();
-        if (Athlete.countAthletes() == 0) {
-            dependencies.add(new String[]{"contestant", "athletes"});
-        }
         if (Event.countEvents() == 0) {
             dependencies.add(new String[]{"event", "events"});
+        }
+        if (Athlete.countAthletes() == 0) {
+            dependencies.add(new String[]{"participant", "athletes"});
         }
         modelMap.addAttribute("dependencies", dependencies);
         return "applications/create";

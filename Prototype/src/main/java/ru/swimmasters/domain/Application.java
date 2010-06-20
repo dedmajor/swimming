@@ -25,7 +25,7 @@ public class Application {
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
     @JoinColumn
-    private Athlete contestant;
+    private Athlete participant;
 
     @NotNull
     @Digits(integer = 5, fraction = 2)

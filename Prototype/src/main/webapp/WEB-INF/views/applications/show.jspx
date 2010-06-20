@@ -3,7 +3,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps:ru.swimmasters.domain.Application" object="${application}" z="user-managed">
         <field:display field="event" id="s:ru.swimmasters.domain.Application.event" object="${application}" z="user-managed"/>
-        <field:display field="contestant" id="s:ru.swimmasters.domain.Application.contestant" object="${application}" z="user-managed"/>
+        <field:display field="participant" id="s:ru.swimmasters.domain.Application.participant" object="${application}" z="user-managed"/>
         <field:display field="declaredTime" id="s:ru.swimmasters.domain.Application.declaredTime" object="${application}" z="user-managed"/>
     </page:show>
 </div>
