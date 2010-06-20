@@ -2,8 +2,7 @@ package ru.swimmasters.domain;
 
 import org.apache.commons.lang.builder.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -12,9 +11,14 @@ import javax.validation.constraints.NotNull;
  * Date: May 23, 2010
  */
 @Entity
+@Table(name = "POOL")
 public class Pool {
     @Id
+    @GeneratedValue
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @NotNull
     private String name;
@@ -38,12 +42,27 @@ public class Pool {
         return name;
     }
 
+    public Pool setName(String name) {
+        this.name = name;
+        return this;
+    }
+
     public String getLocation() {
         return location;
     }
 
+    public Pool setLocation(String location) {
+        this.location = location;
+        return this;
+    }
+
     public Byte getLength() {
         return length;
+    }
+
+    public Pool setLength(Byte length) {
+        this.length = length;
+        return this;
     }
 
     public Byte getLanesCount() {
@@ -54,6 +73,7 @@ public class Pool {
         this.lanesCount = lanesCount;
         return this;
     }
+
 
     @Override
     public String toString() {

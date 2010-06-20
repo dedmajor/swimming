@@ -2,22 +2,22 @@ package ru.swimmasters.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * TODO: rename to Athlete?
- *
  * User: dedmajor
  * Date: Jun 2, 2010
  */
 @Entity
+@Table(name = "ATHLETE")
 public class Athlete {
     @Id
+    @GeneratedValue
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @NotNull
     private String name;
@@ -28,6 +28,11 @@ public class Athlete {
 
     public String getName() {
         return name;
+    }
+
+    public Athlete setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public Integer getBirthYear() {

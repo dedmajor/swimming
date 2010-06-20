@@ -2,9 +2,7 @@ package ru.swimmasters.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
@@ -12,21 +10,23 @@ import javax.validation.constraints.NotNull;
  * User: dedmajor
  * Date: Jun 2, 2010
  */
-// TODO: unique event and participant
 @Entity
+@Table(name="APPLICATION", uniqueConstraints = @UniqueConstraint(columnNames = {"event", "participant"}))
 public class Application implements Comparable<Application> {
     @Id
+    @GeneratedValue
     private Integer id;
 
-    @NotNull
-    @ManyToOne(targetEntity = Event.class)
-    //@JoinColumn
-    private Event event;
+    @Version
+    private Integer version;
 
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
-    //@JoinColumn
     private Athlete participant;
+
+    @NotNull
+    @ManyToOne(targetEntity = Event.class)
+    private Event event;
 
     @NotNull
     @Digits(integer = 5, fraction = 2)

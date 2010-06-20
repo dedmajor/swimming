@@ -13,21 +13,23 @@ import java.util.*;
  * Date: Jun 1, 2010
  */
 @Entity
+@Table(name = "EVENT")
 public class Event {
     @Id
+    @GeneratedValue
     private Integer id;
+
+    @Version
+    private Integer version;
 
     @NotNull
     private String name;
 
     @NotNull
     @ManyToOne(targetEntity = Pool.class)
-    //@JoinColumn
     private Pool pool;
 
     @NotNull
-    //@Temporal(TemporalType.DATE)
-    //@DateTimeFormat(style = "S-")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
     private LocalDate holdingDate;
 
@@ -41,6 +43,11 @@ public class Event {
 
     public String getName() {
         return name;
+    }
+
+    public Event setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public Pool getPool() {
@@ -74,8 +81,6 @@ public class Event {
     }
 
     /**
-     * TODO: add link to the organization and/or rename package?
-     *
      * @param leadsInAgeGroup how many leads in each age group must start in one heat
      * @return minimal possible list of heats with respect to the leads rule
      */
