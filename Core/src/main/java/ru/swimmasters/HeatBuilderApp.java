@@ -17,6 +17,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.io.IOException;
@@ -87,8 +88,8 @@ public class HeatBuilderApp {
         //System.out.println("CONTEXT: " + jc);
         Unmarshaller um = jc.createUnmarshaller();
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        File file = new ClassPathResource("schema1.xsd").getFile();
-        um.setSchema(sf.newSchema(file));
+        ClassPathResource schema = new ClassPathResource("schema1.xsd");
+        um.setSchema(sf.newSchema(new StreamSource(schema.getInputStream())));
         um.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 
         Event event = (Event) um.unmarshal(System.in);
