@@ -4,14 +4,19 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author dedmajor
  * @since 20.06.2010
  */
+@XmlType
 @Entity
 @Table(name = "DISCIPLINE")
 public class Discipline {
+    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -29,7 +34,7 @@ public class Discipline {
     @NotNull
     private Integer distance;
 
-
+    @XmlElement(required = true)
     public Gender getGender() {
         return gender;
     }
@@ -39,6 +44,7 @@ public class Discipline {
         return this;
     }
 
+    @XmlElement(required = true)
     public String getName() {
         return name;
     }
@@ -48,6 +54,7 @@ public class Discipline {
         return this;
     }
 
+    @XmlElement(required = true)
     public Integer getDistance() {
         return distance;
     }

@@ -6,15 +6,19 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
  * User: dedmajor
  * Date: Jun 1, 2010
  */
+@XmlRootElement
+@XmlType
 @Entity
 @Table(name = "EVENT")
 public class Event {
+    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -43,22 +47,25 @@ public class Event {
         this.discipline = discipline;
     }
 
-    private Event() {
-        // hibernate should pass
+    public Event() {
+        // hibernate and JAXB should pass
     }
 
     public Integer getId() {
         return id;
     }
 
+    @XmlElement(required = true)
     public Meet getMeet() {
         return meet;
     }
 
+    @XmlElement(required = true)
     public Discipline getDiscipline() {
         return discipline;
     }
 
+    @XmlElement(required = true)
     public LocalDate getHoldingDate() {
         return holdingDate;
     }
@@ -80,6 +87,7 @@ public class Event {
         return this;
     }
 
+    @XmlElement(required = true)
     public List<Application> getApplications() {
         return Collections.unmodifiableList(applications);
     }

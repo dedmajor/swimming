@@ -6,14 +6,20 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * User: dedmajor
  * Date: Jun 2, 2010
  */
+@XmlType
 @Entity
 @Table(name="APPLICATION", uniqueConstraints = @UniqueConstraint(columnNames = {"event", "participant"}))
 public class Application implements Comparable<Application> {
+    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -21,6 +27,7 @@ public class Application implements Comparable<Application> {
     @Version
     private Integer version;
 
+    @XmlElement(required = true)
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
     private Athlete participant;
@@ -34,8 +41,8 @@ public class Application implements Comparable<Application> {
     private Float declaredTime;
     
 
-    private Application() {
-        // hibernate should pass
+    public Application() {
+        // hibernate and JAXB should pass
     }
 
     public Application(Event event, Athlete participant) {
@@ -55,6 +62,7 @@ public class Application implements Comparable<Application> {
         return participant;
     }
 
+    @XmlElement(required = true)    
     public Float getDeclaredTime() {
         return declaredTime;
     }

@@ -6,14 +6,19 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author dedmajor
  * @since 20.06.2010
  */
+@XmlType
 @Entity
 @Table(name = "MEET")
 public class Meet {
+    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -33,6 +38,7 @@ public class Meet {
     private LocalDate startDate;
 
 
+    @XmlElement(required = true)
     public String getName() {
         return name;
     }
@@ -42,6 +48,7 @@ public class Meet {
         return this;
     }
 
+    @XmlElement(required = true)
     public Pool getPool() {
         return pool;
     }
@@ -51,6 +58,7 @@ public class Meet {
         return this;
     }
 
+    @XmlElement(required = true)    
     public LocalDate getStartDate() {
         return startDate;
     }

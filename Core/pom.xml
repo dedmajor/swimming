@@ -100,6 +100,11 @@
             <artifactId>joda-time</artifactId>
             <version>1.5</version>
         </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -137,18 +142,37 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.0</version>
+                <groupId>com.sun.tools.jxc.maven2</groupId>
+                <artifactId>maven-jaxb-schemagen-plugin</artifactId>
+                <version>1.2</version>
                 <configuration>
-                    <programs>
-                        <program>
-                            <mainClass>ru.swimmasters.HeatBuilderApp</mainClass>
-                            <name>heat-builder</name>
-                        </program>
-                    </programs>
+                    <destdir>${project.build.outputDirectory}</destdir>
+                    <!-- FIXME: replace with annotated interfaces -->
+                    <includes>
+                        <include>java/ru/swimmasters/domain/Application.java</include>
+                        <include>java/ru/swimmasters/domain/Athlete.java</include>
+                        <include>java/ru/swimmasters/domain/Discipline.java</include>
+                        <include>java/ru/swimmasters/domain/Event.java</include>
+                        <include>java/ru/swimmasters/domain/Gender.java</include>
+                        <include>java/ru/swimmasters/domain/Meet.java</include>
+                        <include>java/ru/swimmasters/domain/Pool.java</include>
+                        <include>java/ru/swimmasters/domain/package-info.java</include>
+                    </includes>
+                    <schemas>
+                        <schema>
+                            <namespace>http://swimmasters.ru/namespace</namespace>
+                            <file>event.xsd</file> <!-- FIXME: for what? -->
+                        </schema>
+                    </schemas>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-repository.dev.java.net</id>
+            <name>Java.net Maven 2 Repository</name>
+            <url>http://download.java.net/maven/2</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

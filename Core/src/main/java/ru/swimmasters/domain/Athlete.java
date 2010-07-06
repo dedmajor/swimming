@@ -4,14 +4,19 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * User: dedmajor
  * Date: Jun 2, 2010
  */
+@XmlType
 @Entity
 @Table(name = "ATHLETE")
 public class Athlete {
+    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -26,6 +31,7 @@ public class Athlete {
     private Integer birthYear;
 
 
+    @XmlElement(required = true)    
     public String getName() {
         return name;
     }
@@ -35,11 +41,12 @@ public class Athlete {
         return this;
     }
 
+    @XmlElement(required = true)    
     public Integer getBirthYear() {
         return birthYear;
     }
 
-    public Athlete setBirthYear(int birthYear) {
+    public Athlete setBirthYear(Integer birthYear) {
         this.birthYear = birthYear;
         return this;
     }
