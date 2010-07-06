@@ -3,10 +3,34 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
     <persistence-unit name="persistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <!--
+            TODO: remove
+        -->
+        <class>ru.swimmasters.domain.Pool</class>
+        <class>ru.swimmasters.domain.Athlete</class>
+        <class>ru.swimmasters.domain.Event</class>
+        <class>ru.swimmasters.domain.Application</class>
+        <class>ru.swimmasters.domain.Meet</class>
+        <class>ru.swimmasters.domain.Discipline</class>
+            <!-- 
+        -->
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <!-- 
+                 TODO: remove
+        -->
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
+            <property name="hibernate.connection.url" value="jdbc:hsqldb:file:${user.home}/swimmasters;shutdown=true"/>
+            <property name="hibernate.connection.username" value="sa"/>
+            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.pool_size" value="0"/>
+            <!-- 
+            -->
         </properties>
     </persistence-unit>
 </persistence>

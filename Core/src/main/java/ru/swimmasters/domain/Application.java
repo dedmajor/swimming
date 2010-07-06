@@ -6,6 +6,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -74,6 +75,10 @@ public class Application implements Comparable<Application> {
 
     public AgeGroup getAgeGroup() {
         return AgeGroup.forAge(participant.getAge(event.getHoldingDate().getYear()));
+    }
+
+    public void afterUnmarshal(Unmarshaller u, Object parent) {
+        this.event = (Event) parent;
     }
 
     @Override

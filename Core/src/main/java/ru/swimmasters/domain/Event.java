@@ -60,9 +60,17 @@ public class Event {
         return meet;
     }
 
+    public void setMeet(Meet meet) {
+        this.meet = meet;
+    }
+
     @XmlElement(required = true)
     public Discipline getDiscipline() {
         return discipline;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
     }
 
     @XmlElement(required = true)
@@ -89,7 +97,9 @@ public class Event {
 
     @XmlElement(required = true)
     public List<Application> getApplications() {
-        return Collections.unmodifiableList(applications);
+        // TODO: not immutable due to jaxb
+        //return Collections.unmodifiableList(applications);
+        return applications;
     }
 
     /**
@@ -155,6 +165,7 @@ public class Event {
                 append("meet", meet).
                 append("discipline", discipline).
                 append("holdingDate", holdingDate).
+                append("applications.size", applications.size()).
                 toString();
     }
 }
