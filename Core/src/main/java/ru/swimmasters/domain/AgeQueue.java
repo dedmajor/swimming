@@ -2,6 +2,8 @@ package ru.swimmasters.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -16,6 +18,7 @@ import java.util.Queue;
 public class AgeQueue {
     private AgeGroup ageGroup;
     private Queue<Application> applications;
+    private boolean leadsRemoved;
 
     public AgeQueue(AgeGroup ageGroup) {
         this.ageGroup = ageGroup;
@@ -39,7 +42,31 @@ public class AgeQueue {
     }
 
     public Application nextApplication() {
-        return applications.remove();
+        Application result = applications.remove();
+        leadsRemoved = true;
+        return result;
+    }
+
+    /**
+     * @return true if head of the queue (lead) is already removed
+     */
+    public boolean isLeadsRemoved() {
+        return leadsRemoved;
+    }
+
+    public List<Application> nextApplicationsBrick(int size) {
+        if (size > applications.size()) {
+            throw new IllegalArgumentException(
+                    "queue has only " + applications.size() + " applications, but requested: " + size);
+        }
+
+        List<Application> result = new ArrayList<Application>(size);
+
+        for (int i = 0; i < size; i++) {
+            result.add(nextApplication());
+        }
+
+        return result;
     }
 
     public int getRemainingApplicationsCount() {

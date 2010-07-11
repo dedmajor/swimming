@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <event id="1">
+    <!--
     <applications id="1">
         <participant id="1">
             <birthYear>1925</birthYear>
@@ -7,6 +8,7 @@
         </participant>
         <declaredTime>43.0</declaredTime>
     </applications>
+    -->
     <applications id="2">
         <participant id="2">
             <birthYear>1921</birthYear>

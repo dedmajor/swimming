@@ -37,8 +37,29 @@ public class Heat {
         applications.add(application);
     }
 
+    /**
+     * Calls {@link #addApplication} for each application in brick
+     * @param applicationsBrick applications to add
+     */
+    public void addAllApplications(List<Application> applicationsBrick) {
+        for (Application application : applicationsBrick) {
+            addApplication(application);
+        }
+    }
+
     public List<Application> getApplications() {
         return Collections.unmodifiableList(applications);
+    }
+        
+    public int getApplicationsCount() {
+        return applications.size();
+    }
+
+    /**
+     * @return true if this heat has more than one application (athlete)
+     */
+    public boolean isCompetitive() {
+        return applications.size() > 1;
     }
 
     public List<Athlete> getAthletes() {
@@ -56,5 +77,17 @@ public class Heat {
                 append("applications.size", applications.size()).
                 append("applications", applications).
                 toString();
+    }
+
+    /**
+     * Removes all applications from the heat.
+     * @param applicationsBrick applications to be removed.
+     */
+    public void removeAllApplications(List<Application> applicationsBrick) {
+        if (!applications.containsAll(applicationsBrick)) {
+            throw new IllegalArgumentException(
+                    "heat does not contain all the requested applications: " + applicationsBrick);
+        }
+        applications.removeAll(applicationsBrick);
     }
 }

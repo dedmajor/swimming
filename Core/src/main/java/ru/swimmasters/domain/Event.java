@@ -112,26 +112,37 @@ public class Event {
     public List<Heat> buildHeats(int leadsInAgeGroup) {
         List<Heat> result = new ArrayList<Heat>();
         Heat currentHeat = null;
-        
-        for (AgeQueue queue : buildAgeQueues()) {
-            boolean leadsAreOut = false;
+        Heat previousBrickHeat = null;
+        List<Application> applicationsBrick = null;
+        List<Application> previousBrick = null;
 
+        for (AgeQueue queue : buildAgeQueues()) {
             while (queue.hasMoreApplications()) {
-                int requiredSpace = leadsAreOut
+                // TODO: push this logic into queue
+                int requiredSpace = queue.isLeadsRemoved()
                         ? 1
                         : Math.min(queue.getRemainingApplicationsCount(), leadsInAgeGroup);
 
+                previousBrick = applicationsBrick;
+                previousBrickHeat = currentHeat;
+
                 if (currentHeat == null || !currentHeat.hasMoreSpace(requiredSpace)) {
+                    assert currentHeat == null || currentHeat.isCompetitive();
                     currentHeat = new Heat(this);
                     result.add(currentHeat);
                 }
 
-                for (int i = 0; i < requiredSpace; i++) {
-                    currentHeat.addApplication(queue.nextApplication());
-                }
-
-                leadsAreOut = true;
+                applicationsBrick = queue.nextApplicationsBrick(requiredSpace);
+                currentHeat.addAllApplications(applicationsBrick);
             }
+        }
+
+        if (currentHeat != null && !currentHeat.isCompetitive()) {
+            if (previousBrickHeat == null) {
+                throw new IllegalStateException("not enough applications to build competitive heats");
+            }
+            previousBrickHeat.removeAllApplications(previousBrick);
+            currentHeat.addAllApplications(previousBrick);
         }
 
         Collections.reverse(result);

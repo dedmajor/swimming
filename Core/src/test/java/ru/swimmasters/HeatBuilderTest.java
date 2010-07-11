@@ -3,6 +3,7 @@ package ru.swimmasters;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.validator.SingleAthleteValidator;
 
 import java.util.List;
 
@@ -127,5 +128,13 @@ public class HeatBuilderTest {
 
             previousFastestDeclaredTime = fastestDeclaredTime;
         }
+    }
+
+    @Test
+    public void testSingleAthlete() {
+        Event event = makeOneGroupEvent();
+        List<Heat> heats = event.buildHeats(2);
+
+        new SingleAthleteValidator().validate(heats);
     }
 }
