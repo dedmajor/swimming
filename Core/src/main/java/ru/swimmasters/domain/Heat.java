@@ -12,7 +12,8 @@ import java.util.List;
  */
 public class Heat {
     private final Event event;
-    private List<Application> applications;
+    private final List<Application> applications;
+    private List<Application> lastAddedApplications;
 
     public Heat(Event event) {
         this.event = event;
@@ -27,7 +28,7 @@ public class Heat {
         return applications.size() + athletesCount <= event.getPool().getLanesCount();
     }
 
-    public void addApplication(Application application) {
+    private void addApplication(Application application) {
         if (!application.getEvent().equals(event)) {
             throw new IllegalArgumentException("cannot add application from another event: " + application);
         }
@@ -45,16 +46,13 @@ public class Heat {
         for (Application application : applicationsBrick) {
             addApplication(application);
         }
+        lastAddedApplications = applicationsBrick;
     }
 
     public List<Application> getApplications() {
         return Collections.unmodifiableList(applications);
     }
         
-    public int getApplicationsCount() {
-        return applications.size();
-    }
-
     /**
      * @return true if this heat has more than one application (athlete)
      */
@@ -70,6 +68,26 @@ public class Heat {
         return result;
     }
 
+    public List<Application> removeLastAddedApplications() {
+        if (lastAddedApplications == null) {
+            throw new IllegalStateException("no applications were added");
+        }
+        removeAllApplications(lastAddedApplications);
+        return lastAddedApplications;
+    }
+
+    /**
+     * Removes all applications from the heat.
+     * @param applicationsBrick applications to be removed.
+     */
+    private void removeAllApplications(List<Application> applicationsBrick) {
+        if (!applications.containsAll(applicationsBrick)) {
+            throw new IllegalArgumentException(
+                    "heat does not contain all the requested applications: " + applicationsBrick);
+        }
+        applications.removeAll(applicationsBrick);
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).
@@ -77,17 +95,5 @@ public class Heat {
                 append("applications.size", applications.size()).
                 append("applications", applications).
                 toString();
-    }
-
-    /**
-     * Removes all applications from the heat.
-     * @param applicationsBrick applications to be removed.
-     */
-    public void removeAllApplications(List<Application> applicationsBrick) {
-        if (!applications.containsAll(applicationsBrick)) {
-            throw new IllegalArgumentException(
-                    "heat does not contain all the requested applications: " + applicationsBrick);
-        }
-        applications.removeAll(applicationsBrick);
     }
 }

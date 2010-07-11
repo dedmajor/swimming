@@ -39,7 +39,7 @@ public class Event {
     private LocalDate holdingDate;
 
     @OneToMany(mappedBy = "event")
-    private List<Application> applications = new ArrayList<Application>();
+    private final List<Application> applications = new ArrayList<Application>();
 
 
     public Event(Meet meet, Discipline discipline) {
@@ -113,27 +113,18 @@ public class Event {
         List<Heat> result = new ArrayList<Heat>();
         Heat currentHeat = null;
         Heat previousBrickHeat = null;
-        List<Application> applicationsBrick = null;
-        List<Application> previousBrick = null;
 
-        for (AgeQueue queue : buildAgeQueues()) {
+        for (AgeQueue queue : buildAgeQueues(leadsInAgeGroup)) {
             while (queue.hasMoreApplications()) {
-                // TODO: push this logic into queue
-                int requiredSpace = queue.isLeadsRemoved()
-                        ? 1
-                        : Math.min(queue.getRemainingApplicationsCount(), leadsInAgeGroup);
-
-                previousBrick = applicationsBrick;
                 previousBrickHeat = currentHeat;
 
-                if (currentHeat == null || !currentHeat.hasMoreSpace(requiredSpace)) {
+                if (currentHeat == null || !currentHeat.hasMoreSpace(queue.nextBrickSize())) {
                     assert currentHeat == null || currentHeat.isCompetitive();
                     currentHeat = new Heat(this);
                     result.add(currentHeat);
                 }
 
-                applicationsBrick = queue.nextApplicationsBrick(requiredSpace);
-                currentHeat.addAllApplications(applicationsBrick);
+                currentHeat.addAllApplications(queue.nextBrick());
             }
         }
 
@@ -141,8 +132,7 @@ public class Event {
             if (previousBrickHeat == null) {
                 throw new IllegalStateException("not enough applications to build competitive heats");
             }
-            previousBrickHeat.removeAllApplications(previousBrick);
-            currentHeat.addAllApplications(previousBrick);
+            currentHeat.addAllApplications(previousBrickHeat.removeLastAddedApplications());
         }
 
         Collections.reverse(result);
@@ -152,14 +142,15 @@ public class Event {
 
     /**
      * @return age queues ordered by their age group, from youngest to oldest
+     * @param leadsInAgeGroup see {@link #buildHeats}
      */
-    private Collection<AgeQueue> buildAgeQueues() {
+    private Collection<AgeQueue> buildAgeQueues(int leadsInAgeGroup) {
         Map<AgeGroup, AgeQueue> result = new EnumMap<AgeGroup, AgeQueue>(AgeGroup.class);
 
         for (Application application : applications) {
             AgeQueue queue = result.get(application.getAgeGroup());
             if (queue == null) {
-                queue = new AgeQueue(application.getAgeGroup());
+                queue = new AgeQueue(application.getAgeGroup(), leadsInAgeGroup);
                 result.put(application.getAgeGroup(), queue);
             }
 
