@@ -3,6 +3,7 @@ package ru.swimmasters;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.validator.GroupsOrderValidator;
 import ru.swimmasters.validator.SingleAthleteValidator;
 
 import java.util.List;
@@ -53,16 +54,7 @@ public class HeatBuilderTest {
         Event event = makeTwoGroupsEvent();
         List<Heat> heats = event.buildHeats(2);
 
-        // TODO: make unified validator
-        List<Athlete> firstHeatAthletes = heats.get(0).getAthletes();
-        assertThat(AgeGroup.forAge(firstHeatAthletes.get(0).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(firstHeatAthletes.get(1).getAge(2010)), equalTo(AgeGroup.OVER_30));
-        assertThat(AgeGroup.forAge(firstHeatAthletes.get(2).getAge(2010)), equalTo(AgeGroup.OVER_30));
-
-        List<Athlete> secondHeatAthletes = heats.get(1).getAthletes();
-        assertThat(AgeGroup.forAge(secondHeatAthletes.get(0).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(secondHeatAthletes.get(1).getAge(2010)), equalTo(AgeGroup.OVER_25));
-        assertThat(AgeGroup.forAge(secondHeatAthletes.get(2).getAge(2010)), equalTo(AgeGroup.OVER_25));
+        new GroupsOrderValidator().validate(heats);
     }
 
 

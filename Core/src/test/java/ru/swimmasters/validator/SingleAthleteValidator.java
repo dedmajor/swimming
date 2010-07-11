@@ -11,6 +11,7 @@ import static org.junit.Assert.assertTrue;
  * Date: Jul 10, 2010
  */
 public class SingleAthleteValidator implements HeatsValidator {
+    @Override
     public void validate(List<Heat> heats) {
         for (Heat heat : heats) {
             assertTrue("all heats MUST contain at least two athletes", heat.isCompetitive());

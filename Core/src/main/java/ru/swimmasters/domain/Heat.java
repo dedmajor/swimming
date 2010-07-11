@@ -68,6 +68,16 @@ public class Heat {
         return result;
     }
 
+    public AgeGroup getYoungestAgeGroup() {
+        AgeGroup result = null;
+        for (Application application : applications) {
+            if (result == null || application.getAgeGroup().compareTo(result) < 0) {
+                result = application.getAgeGroup();
+            }
+        }
+        return result;
+    }
+
     public List<Application> removeLastAddedApplications() {
         if (lastAddedApplications == null) {
             throw new IllegalStateException("no applications were added");

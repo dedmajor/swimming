@@ -13,5 +13,5 @@ public interface HeatsValidator {
      * Applies {@link org.junit.Assert}s to the heats
      * @param heats heats to be validated
      */
-    public void validate(List<Heat> heats);
+    void validate(List<Heat> heats);
 }
