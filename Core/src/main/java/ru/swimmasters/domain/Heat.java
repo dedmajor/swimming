@@ -78,6 +78,25 @@ public class Heat {
         return result;
     }
 
+    /**
+     * @return fastest application for specified ageGroup
+     * @see Application#compareTo for more accurate ordering definition
+     */
+    public Application getFastestApplication(AgeGroup ageGroup) {
+        Application result = null;
+        for (Application application : applications) {
+            if (application.getAgeGroup() == ageGroup
+                    && (result == null || application.compareTo(result) < 0)) {
+                result = application;
+            }
+        }
+        if (result == null) {
+            throw new IllegalArgumentException("no applications for group " + ageGroup);
+        }
+        assert result.getAgeGroup() == ageGroup;
+        return result;
+    }
+
     public List<Application> removeLastAddedApplications() {
         if (lastAddedApplications == null) {
             throw new IllegalStateException("no applications were added");

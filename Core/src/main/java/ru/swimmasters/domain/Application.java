@@ -92,9 +92,17 @@ public class Application implements Comparable<Application> {
                 toString();
     }
 
+    /**
+     * First goes the fastest application. For applications of the same time,
+     * first goes the youngest athlete's application (for athletes of the same
+     * age first goes the athlete with name starting with Z, athlete with name
+     * starting with A goes the last).
+     */
+    @Override
     public int compareTo(Application application) {
         return new CompareToBuilder()
                 .append(declaredTime, application.getDeclaredTime())
+                // TODO: move comparison to athlete:
                 .append(application.getParticipant().getBirthYear(), participant.getBirthYear())
                 .append(application.getParticipant().getName(), participant.getName())
                 .toComparison();

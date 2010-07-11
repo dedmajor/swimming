@@ -3,6 +3,7 @@ package ru.swimmasters;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.validator.AthletesOrderValidator;
 import ru.swimmasters.validator.GroupsOrderValidator;
 import ru.swimmasters.validator.SingleAthleteValidator;
 
@@ -91,35 +92,7 @@ public class HeatBuilderTest {
         Event event = makeOneGroupEvent();
         List<Heat> heats = event.buildHeats(2);
 
-        // TODO: extract logic into validator and check order for the same time?
-
-        Float previousFastestDeclaredTime = null;
-        AgeGroup previousAgeGroup = null;
-
-        for (Heat heat : heats) {
-            Float fastestDeclaredTime = null;
-            Float slowestDeclaredTime = null;
-
-            for (Application application : heat.getApplications()) {
-                if (fastestDeclaredTime == null || application.getDeclaredTime() < fastestDeclaredTime) {
-                    fastestDeclaredTime = application.getDeclaredTime();
-                }
-                if (slowestDeclaredTime == null || application.getDeclaredTime() > slowestDeclaredTime) {
-                    slowestDeclaredTime = application.getDeclaredTime();
-                }
-
-                if (previousAgeGroup != null) {
-                    assertThat(application.getAgeGroup(), equalTo(previousAgeGroup));
-                }
-                previousAgeGroup = application.getAgeGroup();
-            }
-
-            if (previousFastestDeclaredTime != null) {
-                assertThat(previousFastestDeclaredTime, greaterThanOrEqualTo(slowestDeclaredTime));
-            }
-
-            previousFastestDeclaredTime = fastestDeclaredTime;
-        }
+        new AthletesOrderValidator().validate(heats);
     }
 
     @Test
