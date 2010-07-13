@@ -1,26 +1,16 @@
 package ru.swimmasters;
 
 import org.joda.time.LocalDate;
-import org.springframework.core.io.ClassPathResource;
-import org.xml.sax.SAXException;
 import ru.swimmasters.domain.*;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.orm.jpa.EntityManagerFactoryInfo;
+import ru.swimmasters.jaxb.ContextHolder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.SchemaFactory;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,7 +19,7 @@ import java.util.List;
  * Date: May 23, 2010
  */
 public class HeatBuilderApp {
-    public static void main(String args[]) throws Exception {
+    public static void main(String args[]) {
         // integration();
 
         run(args);
@@ -58,7 +48,7 @@ public class HeatBuilderApp {
         emf.close();
     }
 
-    private static void run(String[] args) throws JAXBException, SAXException, IOException {
+    private static void run(String[] args) {
         if (args.length < 1) {
             usage();
             return;
@@ -83,17 +73,14 @@ public class HeatBuilderApp {
         System.err.println("HeatBuilderApp build < event.xml");
     }
 
-    private static void xmlLoadEvents() throws JAXBException, SAXException, IOException {
-        JAXBContext jc = JAXBContext.newInstance("ru.swimmasters.domain");
-        //System.out.println("CONTEXT: " + jc);
-        Unmarshaller um = jc.createUnmarshaller();
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        ClassPathResource schema = new ClassPathResource("schema1.xsd");
-        um.setSchema(sf.newSchema(new StreamSource(schema.getInputStream())));
-        um.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
-
-        Event event = (Event) um.unmarshal(System.in);
-
+    private static void xmlLoadEvents() {
+        Unmarshaller um = new ContextHolder().createUnmarshaller();
+        Event event;
+        try {
+            event = (Event) um.unmarshal(System.in);
+        } catch (JAXBException e) {
+            throw new IllegalArgumentException(e);
+        }
         dumpEvent(event);
     }
 
@@ -149,17 +136,19 @@ public class HeatBuilderApp {
         }
     }
 
-    private static void xmlDumpEvents(EntityManager em) throws JAXBException {
+    private static void xmlDumpEvents(EntityManager em) {
         @SuppressWarnings({"unchecked"}) // JPA
                 List<Event> events = (List<Event>) Collections.checkedList(
                 em.createQuery("from Event").getResultList(), Event.class);
 
-        JAXBContext jc = JAXBContext.newInstance("ru.swimmasters.domain");
-        Marshaller m = jc.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        Marshaller m = new ContextHolder().createMarshaller();
 
         for (Event event : events) {
-            m.marshal(event, System.out);
+            try {
+                m.marshal(event, System.out);
+            } catch (JAXBException e) {
+                throw new IllegalArgumentException(e);
+            }
             break; // TODO: fixme: dumping only the first
         }
 

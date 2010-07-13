@@ -23,30 +23,57 @@ public class LeadsValidator implements HeatsValidator {
     @Override
     public void validate(List<Heat> heats) {
         Collection<AgeGroup> checkedGroups = EnumSet.noneOf(AgeGroup.class);
-        EnumMap<AgeGroup, Integer> groupedHeatAthletes
-                = new EnumMap<AgeGroup, Integer>(AgeGroup.class);
+
 
         List<Heat> reverseHeats = reverseHeats(heats);
 
-        for (Heat heat : reverseHeats) {
-            groupedHeatAthletes.clear();
+        EnumMap<AgeGroup, Integer> totalAthletes = calculateTotalAthletes(reverseHeats);
 
-            for (Application application : heat.getApplications()) {
-                AgeGroup group = application.getAgeGroup();
-                if (!checkedGroups.contains(group)) {
-                    groupedHeatAthletes.put(group,
-                            groupedHeatAthletes.get(group) == null
-                                    ? 1
-                                    : groupedHeatAthletes.get(group) + 1);
-                }
-            }
+        for (Heat heat : reverseHeats) {
+            EnumMap<AgeGroup, Integer> groupedHeatAthletes = calculateGroupedAthletes(heat);
 
             for (Map.Entry<AgeGroup, Integer> entry : groupedHeatAthletes.entrySet()) {
-                assertThat("leads rule violated for age group " + entry.getKey() + " and heat " + heat,
-                        entry.getValue(), greaterThanOrEqualTo(leadsInAgeGroup));
-                checkedGroups.add(entry.getKey());
+                AgeGroup group = entry.getKey();
+                int expectedLeads = Math.min(leadsInAgeGroup, totalAthletes.get(group));
+
+                if (!checkedGroups.contains(group)) {
+                    assertThat("leads rule violated for age group " + group + " and heat " + heat,
+                            entry.getValue(), greaterThanOrEqualTo(expectedLeads));
+
+                    checkedGroups.add(group);
+                }
             }
         }
+    }
+
+    private static EnumMap<AgeGroup, Integer> calculateGroupedAthletes(Heat heat) {
+        EnumMap<AgeGroup, Integer> groupedHeatAthletes
+            = new EnumMap<AgeGroup, Integer>(AgeGroup.class);
+        for (Application application : heat.getApplications()) {
+            AgeGroup group = application.getAgeGroup();
+                groupedHeatAthletes.put(group,
+                        groupedHeatAthletes.get(group) == null
+                                ? 1
+                                : groupedHeatAthletes.get(group) + 1);
+        }
+        return groupedHeatAthletes;
+    }
+
+    private static EnumMap<AgeGroup, Integer> calculateTotalAthletes(List<Heat> heats) {
+        EnumMap<AgeGroup, Integer> totalAthletes
+                = new EnumMap<AgeGroup, Integer>(AgeGroup.class);
+
+        for (Heat heat : heats) {
+            for (Application application : heat.getApplications()) {
+                AgeGroup group = application.getAgeGroup();
+                totalAthletes.put(group,
+                        totalAthletes.get(group) == null
+                                ? 1
+                                : totalAthletes.get(group) + 1);
+            }
+        }
+
+        return totalAthletes;
     }
 
     private static List<Heat> reverseHeats(List<Heat> heats) {
