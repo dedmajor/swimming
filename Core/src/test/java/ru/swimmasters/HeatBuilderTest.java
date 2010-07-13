@@ -3,14 +3,9 @@ package ru.swimmasters;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
-import ru.swimmasters.validator.AthletesOrderValidator;
-import ru.swimmasters.validator.GroupsOrderValidator;
-import ru.swimmasters.validator.SingleAthleteValidator;
+import ru.swimmasters.validator.*;
 
 import java.util.List;
-
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author dedmajor
@@ -44,10 +39,8 @@ public class HeatBuilderTest {
         Event event = makeTwoGroupsEvent();
         List<Heat> heats = event.buildHeats(2);
 
-        // TODO: make unified validator
-        assertThat(heats.size(), equalTo(2));
-        assertThat(heats.get(0).getAthletes().size(), equalTo(3));
-        assertThat(heats.get(1).getAthletes().size(), equalTo(3));
+        new EmptyHeatsValidator().validate(heats);
+        new LeadsValidator(2).validate(heats);
     }
 
     @Test
