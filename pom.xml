@@ -14,6 +14,15 @@
         <module>Core</module>
         <module>Gui</module>
     </modules>
+    <scm>
+        <connection>scm:git:git://github.com/dedmajor/swimming.git</connection>
+        <url>http://github.com/dedmajor/swimming</url>
+        <developerConnection>scm:git:git@github.com:dedmajor/swimming.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <system>github</system>
+        <url>http://github.com/dedmajor/swimming/issues</url>
+    </issueManagement>
     <distributionManagement>
         <site>
             <id>swimmasters</id>
