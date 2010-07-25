@@ -5,10 +5,20 @@
     <artifactId>swimmasters</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <name>Swimmasters</name>
+    <url>http://dedmajor.ru/swimmasters/</url>
+    <properties>
+        <myScpBaseUrl>scpexe://dedmajor.ru/var/www/dedmajor.ru/docs/swimmasters/</myScpBaseUrl>
+    </properties>
     <packaging>pom</packaging>
     <modules>
         <module>Core</module>
         <module>Gui</module>
     </modules>
+    <distributionManagement>
+        <site>
+            <id>swimmasters</id>
+            <url>${myScpBaseUrl}/site</url>
+        </site>
+    </distributionManagement>
 </project>
 

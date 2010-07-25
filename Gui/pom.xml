@@ -111,7 +111,7 @@
                 <version>1.0-beta-3</version>
                 <executions>
                     <execution>
-                        <!-- <phase>site</phase> TODO -->
+                        <phase>site-deploy</phase>
                         <goals>
                             <goal>upload</goal>
                         </goals>
@@ -119,8 +119,7 @@
                 </executions>
                 <configuration>
                     <fromDir>target/jnlp</fromDir>
-                    <url>scpexe://dedmajor.ru/</url>
-                    <toDir>/var/www/dedmajor.ru/docs/swimmasters/${project.version}/jnlp</toDir>
+                    <url>${myScpBaseUrl}/${project.version}/jnlp</url>
                 </configuration>
             </plugin>
 

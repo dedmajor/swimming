@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0+" codebase="http://dedmajor.ru/swimmasters/$project.version/jnlp/" href="$outputFile">
+<jnlp spec="1.0+" codebase="$project.url/$project.version/jnlp/" href="$outputFile">
   <information>
     <title>Swimmasters HeatBuilder</title>
     <vendor>Swimmasters</vendor>
