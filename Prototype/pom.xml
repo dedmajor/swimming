@@ -5,7 +5,7 @@
 	<artifactId>swimmasters-prototype</artifactId>
 	<packaging>war</packaging>
 	<version>0.1.0-SNAPSHOT</version>
-	<name>swimmasters-prototype</name>
+	<name>Prototype</name>
 	<properties>
 		<roo.version>1.1.0.M1</roo.version>
 		<spring.version>3.0.2.RELEASE</spring.version>
