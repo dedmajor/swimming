@@ -56,6 +56,7 @@
                     <dependenciesAsLibraries>true</dependenciesAsLibraries>
                 </configuration>
             </plugin>
+	    <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -80,6 +81,49 @@
                     </archive>
                 </configuration>
             </plugin>
+	    -->
+            <plugin>
+                <groupId>org.codehaus.mojo.webstart</groupId>
+                <artifactId>webstart-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jnlp</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jnlp>
+                        <mainClass>ru.swimmasters.HeatBuilderGui</mainClass>
+                    </jnlp>
+                    <sign>
+                        <keypass>123123</keypass>
+                        <!-- TODO: fixme: actual keystore -->
+                        <storepass>123123</storepass>
+                        <alias>swimmasters</alias>
+                        <verify>true</verify>
+                    </sign>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-3</version>
+                <executions>
+                    <execution>
+                        <!-- <phase>site</phase> TODO -->
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <fromDir>target/jnlp</fromDir>
+                    <url>scpexe://dedmajor.ru/</url>
+                    <toDir>/var/www/dedmajor.ru/docs/swimmasters/${project.version}/jnlp</toDir>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>

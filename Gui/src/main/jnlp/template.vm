@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="http://dedmajor.ru/swimmasters/$project.version/jnlp/" href="$outputFile">
+  <information>
+    <title>Swimmasters HeatBuilder</title>
+    <vendor>Swimmasters</vendor>
+    <offline-allowed/>
+  </information>
+  <security>
+     <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.6+"/>
+    $dependencies
+  </resources>
+  <application-desc main-class="$mainClass"/>
+</jnlp>
+
