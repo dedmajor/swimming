@@ -2,11 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.swimmasters</groupId>
-    <artifactId>swimmasters</artifactId>
+    <artifactId>meetmanager</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>Swimmasters</name>
+    <name>Swimmasters Meet Manager</name>
     <url>http://dedmajor.ru/swimmasters/</url>
     <properties>
+        <!-- MUST match url -->
         <myScpBaseUrl>scpexe://dedmajor.ru/var/www/dedmajor.ru/docs/swimmasters/</myScpBaseUrl>
     </properties>
     <packaging>pom</packaging>
@@ -26,7 +27,7 @@
     <distributionManagement>
         <site>
             <id>swimmasters</id>
-            <url>${myScpBaseUrl}/site</url>
+            <url>${myScpBaseUrl}/${project.version}/site</url>
         </site>
     </distributionManagement>
 </project>

@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.swimmasters</groupId>
-    <artifactId>swimmasters-gui</artifactId>
+    <artifactId>meetmanager-gui</artifactId>
     <version>0.1.0-SNAPSHOT</version>
-    <name>Gui</name>
+    <name>Meet Manager Gui</name>
     <parent>
     	<groupId>ru.swimmasters</groupId>
-	<artifactId>swimmasters</artifactId>
+	<artifactId>meetmanager</artifactId>
 	<version>0.1.0-SNAPSHOT</version>
     </parent>
     <properties>
@@ -27,7 +27,7 @@
         </dependency>
         <dependency>
             <groupId>${pom.groupId}</groupId>
-            <artifactId>swimmasters-core</artifactId>
+            <artifactId>meetmanager-core</artifactId>
             <version>${pom.version}</version>
         </dependency>
     </dependencies>
