@@ -157,7 +157,7 @@
                 <version>1.2</version>
                 <executions>
                     <execution>
-                        <phase>prepare-package</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
