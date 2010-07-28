@@ -29,7 +29,7 @@ public class ContextHolder {
         }
 
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        ClassPathResource classPathResource = new ClassPathResource("schema1.xsd");
+        ClassPathResource classPathResource = new ClassPathResource("meetRegister.xsd");
         InputStream inputStream;
         try {
             inputStream = classPathResource.getInputStream();

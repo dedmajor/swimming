@@ -177,12 +177,43 @@
                         <include>java/ru/swimmasters/domain/Pool.java</include>
                         <include>java/ru/swimmasters/domain/package-info.java</include>
                     </includes>
-                    <schemas>
-                        <schema>
-                            <namespace>http://swimmasters.ru/namespace</namespace>
-                            <file>event.xsd</file> <!-- FIXME: for what? -->
-                        </schema>
-                    </schemas>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <configuration>
+                            <tasks>
+                                <move file="${project.build.outputDirectory}/schema1.xsd"
+                                      toFile="${project.build.outputDirectory}/meetRegister.xsd" />
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>wagon-maven-plugin</artifactId>
+                <version>1.0-beta-3</version>
+                <executions>
+                    <execution>
+                        <phase>site-deploy</phase>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <fromDir>${project.build.outputDirectory}/</fromDir>
+                    <includes>meetRegister.xsd</includes>
+                    <url>${myScpBaseUrl}/${project.version}/schema</url>
                 </configuration>
             </plugin>
         </plugins>
