@@ -1,0 +1,1399 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<meetRegister>
+    <athletes>
+        <athleteID>A92</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Денщиков Антон</name>
+    </athletes>
+    <athletes>
+        <athleteID>A121</athleteID>
+        <birthYear>1980</birthYear>
+        <name>Вахмин Степан</name>
+    </athletes>
+    <athletes>
+        <athleteID>A22</athleteID>
+        <birthYear>1946</birthYear>
+        <name>Иванчев Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A118</athleteID>
+        <birthYear>1979</birthYear>
+        <name>Шибаев Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A68</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Мельников Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A16</athleteID>
+        <birthYear>1943</birthYear>
+        <name>Черевко Иван</name>
+    </athletes>
+    <athletes>
+        <athleteID>A42</athleteID>
+        <birthYear>1960</birthYear>
+        <name>Семенов Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A17</athleteID>
+        <birthYear>1942</birthYear>
+        <name>Ефремов Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A59</athleteID>
+        <birthYear>1963</birthYear>
+        <name>Загребенко Владислав</name>
+    </athletes>
+    <athletes>
+        <athleteID>A79</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Иванов Эдуард</name>
+    </athletes>
+    <athletes>
+        <athleteID>A29</athleteID>
+        <birthYear>1954</birthYear>
+        <name>Галавтин Михаил</name>
+    </athletes>
+    <athletes>
+        <athleteID>A2</athleteID>
+        <birthYear>1921</birthYear>
+        <name>Смирягин Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A131</athleteID>
+        <birthYear>1978</birthYear>
+        <name>Никитин Константин</name>
+    </athletes>
+    <athletes>
+        <athleteID>A115</athleteID>
+        <birthYear>1977</birthYear>
+        <name>Коршунов Максим</name>
+    </athletes>
+    <athletes>
+        <athleteID>A114</athleteID>
+        <birthYear>1976</birthYear>
+        <name>Сиделев Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A49</athleteID>
+        <birthYear>1957</birthYear>
+        <name>Ложкин  Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A89</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Ефимов Петр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A133</athleteID>
+        <birthYear>1980</birthYear>
+        <name>Добровольский Евгений</name>
+    </athletes>
+    <athletes>
+        <athleteID>A47</athleteID>
+        <birthYear>1960</birthYear>
+        <name>Александров Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A116</athleteID>
+        <birthYear>1978</birthYear>
+        <name>Грюнер Эдуард</name>
+    </athletes>
+    <athletes>
+        <athleteID>A77</athleteID>
+        <birthYear>1966</birthYear>
+        <name>Дылдин Константин</name>
+    </athletes>
+    <athletes>
+        <athleteID>A81</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Кузяков Данил</name>
+    </athletes>
+    <athletes>
+        <athleteID>A143</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Конев Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A50</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Юдин Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A102</athleteID>
+        <birthYear>1973</birthYear>
+        <name>Епифанов Станислав</name>
+    </athletes>
+    <athletes>
+        <athleteID>A52</athleteID>
+        <birthYear>1960</birthYear>
+        <name>Зюкин Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A128</athleteID>
+        <birthYear>1977</birthYear>
+        <name>Егоров Роман</name>
+    </athletes>
+    <athletes>
+        <athleteID>A82</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Трусов Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A25</athleteID>
+        <birthYear>1949</birthYear>
+        <name>Дунаев Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A55</athleteID>
+        <birthYear>1957</birthYear>
+        <name>Марков Олег</name>
+    </athletes>
+    <athletes>
+        <athleteID>A60</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Кромский Дмитрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A6</athleteID>
+        <birthYear>1936</birthYear>
+        <name>Сарычев Виктор</name>
+    </athletes>
+    <athletes>
+        <athleteID>A57</athleteID>
+        <birthYear>1965</birthYear>
+        <name>Красавин Виталий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A44</athleteID>
+        <birthYear>1956</birthYear>
+        <name>Берсенёв Эдуард</name>
+    </athletes>
+    <athletes>
+        <athleteID>A78</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Ногуманов Равиль</name>
+    </athletes>
+    <athletes>
+        <athleteID>A141</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Тамбовцев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A75</athleteID>
+        <birthYear>1964</birthYear>
+        <name>Мотайло Виктор</name>
+    </athletes>
+    <athletes>
+        <athleteID>A64</athleteID>
+        <birthYear>1962</birthYear>
+        <name>Ленчицкий Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A108</athleteID>
+        <birthYear>1973</birthYear>
+        <name>Петров Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A87</athleteID>
+        <birthYear>1967</birthYear>
+        <name>Любшов  Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A120</athleteID>
+        <birthYear>1980</birthYear>
+        <name>Кирсанов Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A88</athleteID>
+        <birthYear>1967</birthYear>
+        <name>Панин Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A54</athleteID>
+        <birthYear>1958</birthYear>
+        <name>Тервинский Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A148</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Пащенко  Николай</name>
+    </athletes>
+    <athletes>
+        <athleteID>A15</athleteID>
+        <birthYear>1945</birthYear>
+        <name>Сухопаров Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A35</athleteID>
+        <birthYear>1954</birthYear>
+        <name>Лунин Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A26</athleteID>
+        <birthYear>1949</birthYear>
+        <name>Малов Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A91</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Раков  Валентин</name>
+    </athletes>
+    <athletes>
+        <athleteID>A112</athleteID>
+        <birthYear>1974</birthYear>
+        <name>Козлов  Денис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A51</athleteID>
+        <birthYear>1960</birthYear>
+        <name>Агапов Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A119</athleteID>
+        <birthYear>1980</birthYear>
+        <name>Газимов Айрат</name>
+    </athletes>
+    <athletes>
+        <athleteID>A33</athleteID>
+        <birthYear>1952</birthYear>
+        <name>Дронов  Николай</name>
+    </athletes>
+    <athletes>
+        <athleteID>A28</athleteID>
+        <birthYear>1948</birthYear>
+        <name>Кононов Валерий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A98</athleteID>
+        <birthYear>1975</birthYear>
+        <name>Быстров Павел</name>
+    </athletes>
+    <athletes>
+        <athleteID>A9</athleteID>
+        <birthYear>1940</birthYear>
+        <name>Пономарёв Станислав</name>
+    </athletes>
+    <athletes>
+        <athleteID>A138</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Скрябин  Артём</name>
+    </athletes>
+    <athletes>
+        <athleteID>A137</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Корнюхин  Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A45</athleteID>
+        <birthYear>1956</birthYear>
+        <name>Хапкин Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A117</athleteID>
+        <birthYear>1979</birthYear>
+        <name>Ситников Игорь</name>
+    </athletes>
+    <athletes>
+        <athleteID>A38</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Бубликов Константин</name>
+    </athletes>
+    <athletes>
+        <athleteID>A74</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Малых Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A69</athleteID>
+        <birthYear>1962</birthYear>
+        <name>Скоробогатов Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A37</athleteID>
+        <birthYear>1953</birthYear>
+        <name>Шихов Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A134</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Филаретов  Дмитрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A70</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Лохоня Максим</name>
+    </athletes>
+    <athletes>
+        <athleteID>A95</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Аджигитов Рафаэль</name>
+    </athletes>
+    <athletes>
+        <athleteID>A71</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Середа Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A65</athleteID>
+        <birthYear>1965</birthYear>
+        <name>Брагин Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A24</athleteID>
+        <birthYear>1946</birthYear>
+        <name>Самодерженков Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A80</athleteID>
+        <birthYear>1967</birthYear>
+        <name>Тюрин Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A40</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Походин Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A103</athleteID>
+        <birthYear>1971</birthYear>
+        <name>Тукумов Эрмек</name>
+    </athletes>
+    <athletes>
+        <athleteID>A13</athleteID>
+        <birthYear>1944</birthYear>
+        <name>Шаповальянц Виктор</name>
+    </athletes>
+    <athletes>
+        <athleteID>A85</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Мезенцев  Борис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A63</athleteID>
+        <birthYear>1964</birthYear>
+        <name>Дударев Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A135</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Родкин Денис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A41</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Тушин Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A21</athleteID>
+        <birthYear>1949</birthYear>
+        <name>Ткаченко  Петр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A31</athleteID>
+        <birthYear>1954</birthYear>
+        <name>Рожин Иван</name>
+    </athletes>
+    <athletes>
+        <athleteID>A150</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Суровцев Михаил</name>
+    </athletes>
+    <athletes>
+        <athleteID>A152</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Иванов  Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A110</athleteID>
+        <birthYear>1973</birthYear>
+        <name>Невзоров  Олег</name>
+    </athletes>
+    <athletes>
+        <athleteID>A18</athleteID>
+        <birthYear>1950</birthYear>
+        <name>Кулик Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A84</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Садовников Дмитрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A86</athleteID>
+        <birthYear>1967</birthYear>
+        <name>Гусев  Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A107</athleteID>
+        <birthYear>1972</birthYear>
+        <name>Ушаков Юрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A14</athleteID>
+        <birthYear>1944</birthYear>
+        <name>Лустин Борис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A20</athleteID>
+        <birthYear>1947</birthYear>
+        <name>Петкау Олег</name>
+    </athletes>
+    <athletes>
+        <athleteID>A73</athleteID>
+        <birthYear>1963</birthYear>
+        <name>Дядюх  Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A129</athleteID>
+        <birthYear>1978</birthYear>
+        <name>Габуев Дмитрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A149</athleteID>
+        <birthYear>1982</birthYear>
+        <name>Шишунов Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A76</athleteID>
+        <birthYear>1964</birthYear>
+        <name>Черепанов Дмитрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A101</athleteID>
+        <birthYear>1975</birthYear>
+        <name>Панаев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A144</athleteID>
+        <birthYear>1982</birthYear>
+        <name>Титов Антон</name>
+    </athletes>
+    <athletes>
+        <athleteID>A123</athleteID>
+        <birthYear>1978</birthYear>
+        <name>Потёмкин Евгений</name>
+    </athletes>
+    <athletes>
+        <athleteID>A30</athleteID>
+        <birthYear>1955</birthYear>
+        <name>Карелин Геннадий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A1</athleteID>
+        <birthYear>1925</birthYear>
+        <name>Лисицкий Анатолий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A147</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Полозов Ярослав</name>
+    </athletes>
+    <athletes>
+        <athleteID>A48</athleteID>
+        <birthYear>1956</birthYear>
+        <name>Антипов Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A132</athleteID>
+        <birthYear>1977</birthYear>
+        <name>Далечин  Олег</name>
+    </athletes>
+    <athletes>
+        <athleteID>A97</athleteID>
+        <birthYear>1971</birthYear>
+        <name>Зайков Антон</name>
+    </athletes>
+    <athletes>
+        <athleteID>A19</athleteID>
+        <birthYear>1946</birthYear>
+        <name>Башмаков Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A113</athleteID>
+        <birthYear>1975</birthYear>
+        <name>Хусаинов Альберт</name>
+    </athletes>
+    <athletes>
+        <athleteID>A12</athleteID>
+        <birthYear>1944</birthYear>
+        <name>Лукин Олав</name>
+    </athletes>
+    <athletes>
+        <athleteID>A39</athleteID>
+        <birthYear>1957</birthYear>
+        <name>Данилов Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A93</athleteID>
+        <birthYear>1970</birthYear>
+        <name>Попов Николай</name>
+    </athletes>
+    <athletes>
+        <athleteID>A151</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Топчев  Данил</name>
+    </athletes>
+    <athletes>
+        <athleteID>A153</athleteID>
+        <birthYear>1993</birthYear>
+        <name>Дубовик Николай</name>
+    </athletes>
+    <athletes>
+        <athleteID>A94</athleteID>
+        <birthYear>1970</birthYear>
+        <name>Павлов Павел</name>
+    </athletes>
+    <athletes>
+        <athleteID>A126</athleteID>
+        <birthYear>1980</birthYear>
+        <name>Шибаев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A36</athleteID>
+        <birthYear>1953</birthYear>
+        <name>Рожков Виктор</name>
+    </athletes>
+    <athletes>
+        <athleteID>A122</athleteID>
+        <birthYear>1979</birthYear>
+        <name>Семашко Пётр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A46</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Терентьев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A83</athleteID>
+        <birthYear>1968</birthYear>
+        <name>Каракчиев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A3</athleteID>
+        <birthYear>1930</birthYear>
+        <name>Аблам Герман</name>
+    </athletes>
+    <athletes>
+        <athleteID>A140</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Коновалов  Вениамин</name>
+    </athletes>
+    <athletes>
+        <athleteID>A43</athleteID>
+        <birthYear>1957</birthYear>
+        <name>Началов Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A58</athleteID>
+        <birthYear>1964</birthYear>
+        <name>Башмаков Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A66</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Артёмов Валерий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A72</athleteID>
+        <birthYear>1964</birthYear>
+        <name>Кишкин Владимир</name>
+    </athletes>
+    <athletes>
+        <athleteID>A145</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Гриднев  Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A106</athleteID>
+        <birthYear>1972</birthYear>
+        <name>Балашов Игорь</name>
+    </athletes>
+    <athletes>
+        <athleteID>A139</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Воропаев Аркадий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A142</athleteID>
+        <birthYear>1984</birthYear>
+        <name>Акчурин Георгий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A127</athleteID>
+        <birthYear>1977</birthYear>
+        <name>Рукавишников Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A109</athleteID>
+        <birthYear>1973</birthYear>
+        <name>Ковалев Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A34</athleteID>
+        <birthYear>1952</birthYear>
+        <name>Баскаков Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A96</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Муратов Динар</name>
+    </athletes>
+    <athletes>
+        <athleteID>A105</athleteID>
+        <birthYear>1975</birthYear>
+        <name>Рудаков Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A104</athleteID>
+        <birthYear>1975</birthYear>
+        <name>Полномочных Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A10</athleteID>
+        <birthYear>1937</birthYear>
+        <name>Пятницкий Виталий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A146</athleteID>
+        <birthYear>1982</birthYear>
+        <name>Чернышов Андрей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A53</athleteID>
+        <birthYear>1960</birthYear>
+        <name>Богдан Леонард</name>
+    </athletes>
+    <athletes>
+        <athleteID>A11</athleteID>
+        <birthYear>1944</birthYear>
+        <name>Ружицкий Борис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A56</athleteID>
+        <birthYear>1959</birthYear>
+        <name>Креневич Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A62</athleteID>
+        <birthYear>1963</birthYear>
+        <name>Пчельников Аркадий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A5</athleteID>
+        <birthYear>1935</birthYear>
+        <name>Поляков Михаил</name>
+    </athletes>
+    <athletes>
+        <athleteID>A23</athleteID>
+        <birthYear>1947</birthYear>
+        <name>Езерский Виктор</name>
+    </athletes>
+    <athletes>
+        <athleteID>A111</athleteID>
+        <birthYear>1971</birthYear>
+        <name>Иванов Сергей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A4</athleteID>
+        <birthYear>1927</birthYear>
+        <name>Ухов Борис</name>
+    </athletes>
+    <athletes>
+        <athleteID>A7</athleteID>
+        <birthYear>1940</birthYear>
+        <name>Скотаренко Адольф</name>
+    </athletes>
+    <athletes>
+        <athleteID>A124</athleteID>
+        <birthYear>1976</birthYear>
+        <name>Иванов Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A61</athleteID>
+        <birthYear>1961</birthYear>
+        <name>Филонов Алексей</name>
+    </athletes>
+    <athletes>
+        <athleteID>A27</athleteID>
+        <birthYear>1950</birthYear>
+        <name>Попов Александр</name>
+    </athletes>
+    <athletes>
+        <athleteID>A67</athleteID>
+        <birthYear>1962</birthYear>
+        <name>Соловьев Иван</name>
+    </athletes>
+    <athletes>
+        <athleteID>A8</athleteID>
+        <birthYear>1940</birthYear>
+        <name>Жуков Валерий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A32</athleteID>
+        <birthYear>1952</birthYear>
+        <name>Малахов Валерий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A90</athleteID>
+        <birthYear>1969</birthYear>
+        <name>Котов Юрий</name>
+    </athletes>
+    <athletes>
+        <athleteID>A100</athleteID>
+        <birthYear>1974</birthYear>
+        <name>Агарков Иван</name>
+    </athletes>
+    <athletes>
+        <athleteID>A136</athleteID>
+        <birthYear>1983</birthYear>
+        <name>Лымарев Вадим</name>
+    </athletes>
+    <athletes>
+        <athleteID>A125</athleteID>
+        <birthYear>1977</birthYear>
+        <name>Беляев  Илья</name>
+    </athletes>
+    <athletes>
+        <athleteID>A99</athleteID>
+        <birthYear>1971</birthYear>
+        <name>Варданьянц Артур</name>
+    </athletes>
+    <athletes>
+        <athleteID>A130</athleteID>
+        <birthYear>1976</birthYear>
+        <name>Чернокозов Дмитрий</name>
+    </athletes>
+    <disciplines>
+        <disciplineID>D1</disciplineID>
+        <distance>50</distance>
+        <gender>MEN</gender>
+        <name>вольный стиль</name>
+    </disciplines>
+    <meet id="1">
+        <events id="1">
+            <applications id="1">
+                <declaredTime>43.0</declaredTime>
+                <participant>A1</participant>
+            </applications>
+            <applications id="2">
+                <declaredTime>65.0</declaredTime>
+                <participant>A2</participant>
+            </applications>
+            <applications id="3">
+                <declaredTime>48.0</declaredTime>
+                <participant>A3</participant>
+            </applications>
+            <applications id="4">
+                <declaredTime>53.0</declaredTime>
+                <participant>A4</participant>
+            </applications>
+            <applications id="5">
+                <declaredTime>47.0</declaredTime>
+                <participant>A5</participant>
+            </applications>
+            <applications id="6">
+                <declaredTime>31.8</declaredTime>
+                <participant>A6</participant>
+            </applications>
+            <applications id="7">
+                <declaredTime>32.0</declaredTime>
+                <participant>A7</participant>
+            </applications>
+            <applications id="8">
+                <declaredTime>35.0</declaredTime>
+                <participant>A8</participant>
+            </applications>
+            <applications id="9">
+                <declaredTime>40.0</declaredTime>
+                <participant>A9</participant>
+            </applications>
+            <applications id="10">
+                <declaredTime>45.0</declaredTime>
+                <participant>A10</participant>
+            </applications>
+            <applications id="11">
+                <declaredTime>29.0</declaredTime>
+                <participant>A11</participant>
+            </applications>
+            <applications id="12">
+                <declaredTime>31.5</declaredTime>
+                <participant>A12</participant>
+            </applications>
+            <applications id="13">
+                <declaredTime>33.0</declaredTime>
+                <participant>A13</participant>
+            </applications>
+            <applications id="14">
+                <declaredTime>38.0</declaredTime>
+                <participant>A14</participant>
+            </applications>
+            <applications id="15">
+                <declaredTime>39.0</declaredTime>
+                <participant>A15</participant>
+            </applications>
+            <applications id="16">
+                <declaredTime>40.0</declaredTime>
+                <participant>A16</participant>
+            </applications>
+            <applications id="17">
+                <declaredTime>42.0</declaredTime>
+                <participant>A17</participant>
+            </applications>
+            <applications id="18">
+                <declaredTime>28.5</declaredTime>
+                <participant>A18</participant>
+            </applications>
+            <applications id="19">
+                <declaredTime>29.0</declaredTime>
+                <participant>A19</participant>
+            </applications>
+            <applications id="20">
+                <declaredTime>29.9</declaredTime>
+                <participant>A20</participant>
+            </applications>
+            <applications id="21">
+                <declaredTime>31.5</declaredTime>
+                <participant>A21</participant>
+            </applications>
+            <applications id="22">
+                <declaredTime>32.0</declaredTime>
+                <participant>A22</participant>
+            </applications>
+            <applications id="23">
+                <declaredTime>32.0</declaredTime>
+                <participant>A23</participant>
+            </applications>
+            <applications id="24">
+                <declaredTime>34.0</declaredTime>
+                <participant>A24</participant>
+            </applications>
+            <applications id="25">
+                <declaredTime>34.0</declaredTime>
+                <participant>A25</participant>
+            </applications>
+            <applications id="26">
+                <declaredTime>34.0</declaredTime>
+                <participant>A26</participant>
+            </applications>
+            <applications id="27">
+                <declaredTime>36.0</declaredTime>
+                <participant>A27</participant>
+            </applications>
+            <applications id="28">
+                <declaredTime>37.0</declaredTime>
+                <participant>A28</participant>
+            </applications>
+            <applications id="29">
+                <declaredTime>28.0</declaredTime>
+                <participant>A29</participant>
+            </applications>
+            <applications id="30">
+                <declaredTime>30.0</declaredTime>
+                <participant>A30</participant>
+            </applications>
+            <applications id="31">
+                <declaredTime>31.0</declaredTime>
+                <participant>A31</participant>
+            </applications>
+            <applications id="32">
+                <declaredTime>31.2</declaredTime>
+                <participant>A32</participant>
+            </applications>
+            <applications id="33">
+                <declaredTime>32.0</declaredTime>
+                <participant>A33</participant>
+            </applications>
+            <applications id="34">
+                <declaredTime>33.0</declaredTime>
+                <participant>A34</participant>
+            </applications>
+            <applications id="35">
+                <declaredTime>33.0</declaredTime>
+                <participant>A35</participant>
+            </applications>
+            <applications id="36">
+                <declaredTime>35.0</declaredTime>
+                <participant>A36</participant>
+            </applications>
+            <applications id="37">
+                <declaredTime>37.0</declaredTime>
+                <participant>A37</participant>
+            </applications>
+            <applications id="38">
+                <declaredTime>26.3</declaredTime>
+                <participant>A38</participant>
+            </applications>
+            <applications id="39">
+                <declaredTime>27.72</declaredTime>
+                <participant>A39</participant>
+            </applications>
+            <applications id="40">
+                <declaredTime>28.0</declaredTime>
+                <participant>A40</participant>
+            </applications>
+            <applications id="41">
+                <declaredTime>28.5</declaredTime>
+                <participant>A41</participant>
+            </applications>
+            <applications id="42">
+                <declaredTime>28.5</declaredTime>
+                <participant>A42</participant>
+            </applications>
+            <applications id="43">
+                <declaredTime>28.8</declaredTime>
+                <participant>A43</participant>
+            </applications>
+            <applications id="44">
+                <declaredTime>29.0</declaredTime>
+                <participant>A44</participant>
+            </applications>
+            <applications id="45">
+                <declaredTime>29.0</declaredTime>
+                <participant>A45</participant>
+            </applications>
+            <applications id="46">
+                <declaredTime>30.0</declaredTime>
+                <participant>A46</participant>
+            </applications>
+            <applications id="47">
+                <declaredTime>30.2</declaredTime>
+                <participant>A47</participant>
+            </applications>
+            <applications id="48">
+                <declaredTime>31.0</declaredTime>
+                <participant>A48</participant>
+            </applications>
+            <applications id="49">
+                <declaredTime>31.0</declaredTime>
+                <participant>A49</participant>
+            </applications>
+            <applications id="50">
+                <declaredTime>31.0</declaredTime>
+                <participant>A50</participant>
+            </applications>
+            <applications id="51">
+                <declaredTime>31.0</declaredTime>
+                <participant>A51</participant>
+            </applications>
+            <applications id="52">
+                <declaredTime>31.0</declaredTime>
+                <participant>A52</participant>
+            </applications>
+            <applications id="53">
+                <declaredTime>33.8</declaredTime>
+                <participant>A53</participant>
+            </applications>
+            <applications id="54">
+                <declaredTime>34.0</declaredTime>
+                <participant>A54</participant>
+            </applications>
+            <applications id="55">
+                <declaredTime>35.5</declaredTime>
+                <participant>A55</participant>
+            </applications>
+            <applications id="56">
+                <declaredTime>46.5</declaredTime>
+                <participant>A56</participant>
+            </applications>
+            <applications id="57">
+                <declaredTime>25.2</declaredTime>
+                <participant>A57</participant>
+            </applications>
+            <applications id="58">
+                <declaredTime>25.5</declaredTime>
+                <participant>A58</participant>
+            </applications>
+            <applications id="59">
+                <declaredTime>26.5</declaredTime>
+                <participant>A59</participant>
+            </applications>
+            <applications id="60">
+                <declaredTime>26.8</declaredTime>
+                <participant>A60</participant>
+            </applications>
+            <applications id="61">
+                <declaredTime>27.0</declaredTime>
+                <participant>A61</participant>
+            </applications>
+            <applications id="62">
+                <declaredTime>27.0</declaredTime>
+                <participant>A62</participant>
+            </applications>
+            <applications id="63">
+                <declaredTime>27.0</declaredTime>
+                <participant>A63</participant>
+            </applications>
+            <applications id="64">
+                <declaredTime>27.5</declaredTime>
+                <participant>A64</participant>
+            </applications>
+            <applications id="65">
+                <declaredTime>27.9</declaredTime>
+                <participant>A65</participant>
+            </applications>
+            <applications id="66">
+                <declaredTime>28.0</declaredTime>
+                <participant>A66</participant>
+            </applications>
+            <applications id="67">
+                <declaredTime>28.0</declaredTime>
+                <participant>A67</participant>
+            </applications>
+            <applications id="68">
+                <declaredTime>28.5</declaredTime>
+                <participant>A68</participant>
+            </applications>
+            <applications id="69">
+                <declaredTime>28.9</declaredTime>
+                <participant>A69</participant>
+            </applications>
+            <applications id="70">
+                <declaredTime>29.0</declaredTime>
+                <participant>A70</participant>
+            </applications>
+            <applications id="71">
+                <declaredTime>29.0</declaredTime>
+                <participant>A71</participant>
+            </applications>
+            <applications id="72">
+                <declaredTime>29.0</declaredTime>
+                <participant>A72</participant>
+            </applications>
+            <applications id="73">
+                <declaredTime>31.0</declaredTime>
+                <participant>A73</participant>
+            </applications>
+            <applications id="74">
+                <declaredTime>32.0</declaredTime>
+                <participant>A74</participant>
+            </applications>
+            <applications id="75">
+                <declaredTime>32.0</declaredTime>
+                <participant>A75</participant>
+            </applications>
+            <applications id="76">
+                <declaredTime>33.0</declaredTime>
+                <participant>A76</participant>
+            </applications>
+            <applications id="77">
+                <declaredTime>25.0</declaredTime>
+                <participant>A77</participant>
+            </applications>
+            <applications id="78">
+                <declaredTime>25.5</declaredTime>
+                <participant>A78</participant>
+            </applications>
+            <applications id="79">
+                <declaredTime>25.5</declaredTime>
+                <participant>A79</participant>
+            </applications>
+            <applications id="80">
+                <declaredTime>26.0</declaredTime>
+                <participant>A80</participant>
+            </applications>
+            <applications id="81">
+                <declaredTime>26.5</declaredTime>
+                <participant>A81</participant>
+            </applications>
+            <applications id="82">
+                <declaredTime>26.5</declaredTime>
+                <participant>A82</participant>
+            </applications>
+            <applications id="83">
+                <declaredTime>27.0</declaredTime>
+                <participant>A83</participant>
+            </applications>
+            <applications id="84">
+                <declaredTime>27.0</declaredTime>
+                <participant>A84</participant>
+            </applications>
+            <applications id="85">
+                <declaredTime>27.5</declaredTime>
+                <participant>A85</participant>
+            </applications>
+            <applications id="86">
+                <declaredTime>28.0</declaredTime>
+                <participant>A86</participant>
+            </applications>
+            <applications id="87">
+                <declaredTime>28.0</declaredTime>
+                <participant>A87</participant>
+            </applications>
+            <applications id="88">
+                <declaredTime>28.0</declaredTime>
+                <participant>A88</participant>
+            </applications>
+            <applications id="89">
+                <declaredTime>28.0</declaredTime>
+                <participant>A89</participant>
+            </applications>
+            <applications id="90">
+                <declaredTime>28.0</declaredTime>
+                <participant>A90</participant>
+            </applications>
+            <applications id="91">
+                <declaredTime>28.5</declaredTime>
+                <participant>A91</participant>
+            </applications>
+            <applications id="92">
+                <declaredTime>29.0</declaredTime>
+                <participant>A92</participant>
+            </applications>
+            <applications id="93">
+                <declaredTime>29.0</declaredTime>
+                <participant>A93</participant>
+            </applications>
+            <applications id="94">
+                <declaredTime>30.0</declaredTime>
+                <participant>A94</participant>
+            </applications>
+            <applications id="95">
+                <declaredTime>30.5</declaredTime>
+                <participant>A95</participant>
+            </applications>
+            <applications id="96">
+                <declaredTime>39.0</declaredTime>
+                <participant>A96</participant>
+            </applications>
+            <applications id="97">
+                <declaredTime>25.0</declaredTime>
+                <participant>A97</participant>
+            </applications>
+            <applications id="98">
+                <declaredTime>25.5</declaredTime>
+                <participant>A98</participant>
+            </applications>
+            <applications id="99">
+                <declaredTime>26.0</declaredTime>
+                <participant>A99</participant>
+            </applications>
+            <applications id="100">
+                <declaredTime>26.0</declaredTime>
+                <participant>A100</participant>
+            </applications>
+            <applications id="101">
+                <declaredTime>26.0</declaredTime>
+                <participant>A101</participant>
+            </applications>
+            <applications id="102">
+                <declaredTime>26.5</declaredTime>
+                <participant>A102</participant>
+            </applications>
+            <applications id="103">
+                <declaredTime>27.0</declaredTime>
+                <participant>A103</participant>
+            </applications>
+            <applications id="104">
+                <declaredTime>27.0</declaredTime>
+                <participant>A104</participant>
+            </applications>
+            <applications id="105">
+                <declaredTime>27.0</declaredTime>
+                <participant>A105</participant>
+            </applications>
+            <applications id="106">
+                <declaredTime>28.0</declaredTime>
+                <participant>A106</participant>
+            </applications>
+            <applications id="107">
+                <declaredTime>28.5</declaredTime>
+                <participant>A107</participant>
+            </applications>
+            <applications id="108">
+                <declaredTime>29.0</declaredTime>
+                <participant>A108</participant>
+            </applications>
+            <applications id="109">
+                <declaredTime>30.0</declaredTime>
+                <participant>A109</participant>
+            </applications>
+            <applications id="110">
+                <declaredTime>30.5</declaredTime>
+                <participant>A110</participant>
+            </applications>
+            <applications id="111">
+                <declaredTime>32.0</declaredTime>
+                <participant>A111</participant>
+            </applications>
+            <applications id="112">
+                <declaredTime>32.5</declaredTime>
+                <participant>A112</participant>
+            </applications>
+            <applications id="113">
+                <declaredTime>35.0</declaredTime>
+                <participant>A113</participant>
+            </applications>
+            <applications id="114">
+                <declaredTime>25.0</declaredTime>
+                <participant>A114</participant>
+            </applications>
+            <applications id="115">
+                <declaredTime>25.0</declaredTime>
+                <participant>A115</participant>
+            </applications>
+            <applications id="116">
+                <declaredTime>25.0</declaredTime>
+                <participant>A116</participant>
+            </applications>
+            <applications id="117">
+                <declaredTime>25.0</declaredTime>
+                <participant>A117</participant>
+            </applications>
+            <applications id="118">
+                <declaredTime>25.0</declaredTime>
+                <participant>A118</participant>
+            </applications>
+            <applications id="119">
+                <declaredTime>25.0</declaredTime>
+                <participant>A119</participant>
+            </applications>
+            <applications id="120">
+                <declaredTime>25.0</declaredTime>
+                <participant>A120</participant>
+            </applications>
+            <applications id="121">
+                <declaredTime>25.1</declaredTime>
+                <participant>A121</participant>
+            </applications>
+            <applications id="122">
+                <declaredTime>25.2</declaredTime>
+                <participant>A122</participant>
+            </applications>
+            <applications id="123">
+                <declaredTime>25.5</declaredTime>
+                <participant>A123</participant>
+            </applications>
+            <applications id="124">
+                <declaredTime>26.0</declaredTime>
+                <participant>A124</participant>
+            </applications>
+            <applications id="125">
+                <declaredTime>26.0</declaredTime>
+                <participant>A125</participant>
+            </applications>
+            <applications id="126">
+                <declaredTime>26.0</declaredTime>
+                <participant>A126</participant>
+            </applications>
+            <applications id="127">
+                <declaredTime>26.5</declaredTime>
+                <participant>A127</participant>
+            </applications>
+            <applications id="128">
+                <declaredTime>27.0</declaredTime>
+                <participant>A128</participant>
+            </applications>
+            <applications id="129">
+                <declaredTime>27.35</declaredTime>
+                <participant>A129</participant>
+            </applications>
+            <applications id="130">
+                <declaredTime>28.0</declaredTime>
+                <participant>A130</participant>
+            </applications>
+            <applications id="131">
+                <declaredTime>28.0</declaredTime>
+                <participant>A131</participant>
+            </applications>
+            <applications id="132">
+                <declaredTime>32.0</declaredTime>
+                <participant>A132</participant>
+            </applications>
+            <applications id="133">
+                <declaredTime>40.0</declaredTime>
+                <participant>A133</participant>
+            </applications>
+            <applications id="134">
+                <declaredTime>24.0</declaredTime>
+                <participant>A134</participant>
+            </applications>
+            <applications id="135">
+                <declaredTime>24.5</declaredTime>
+                <participant>A135</participant>
+            </applications>
+            <applications id="136">
+                <declaredTime>25.0</declaredTime>
+                <participant>A136</participant>
+            </applications>
+            <applications id="137">
+                <declaredTime>25.0</declaredTime>
+                <participant>A137</participant>
+            </applications>
+            <applications id="138">
+                <declaredTime>25.0</declaredTime>
+                <participant>A138</participant>
+            </applications>
+            <applications id="139">
+                <declaredTime>25.5</declaredTime>
+                <participant>A139</participant>
+            </applications>
+            <applications id="140">
+                <declaredTime>25.5</declaredTime>
+                <participant>A140</participant>
+            </applications>
+            <applications id="141">
+                <declaredTime>26.0</declaredTime>
+                <participant>A141</participant>
+            </applications>
+            <applications id="142">
+                <declaredTime>26.0</declaredTime>
+                <participant>A142</participant>
+            </applications>
+            <applications id="143">
+                <declaredTime>26.0</declaredTime>
+                <participant>A143</participant>
+            </applications>
+            <applications id="144">
+                <declaredTime>26.5</declaredTime>
+                <participant>A144</participant>
+            </applications>
+            <applications id="145">
+                <declaredTime>26.9</declaredTime>
+                <participant>A145</participant>
+            </applications>
+            <applications id="146">
+                <declaredTime>27.0</declaredTime>
+                <participant>A146</participant>
+            </applications>
+            <applications id="147">
+                <declaredTime>27.2</declaredTime>
+                <participant>A147</participant>
+            </applications>
+            <applications id="148">
+                <declaredTime>27.9</declaredTime>
+                <participant>A148</participant>
+            </applications>
+            <applications id="149">
+                <declaredTime>28.0</declaredTime>
+                <participant>A149</participant>
+            </applications>
+            <applications id="150">
+                <declaredTime>28.0</declaredTime>
+                <participant>A150</participant>
+            </applications>
+            <applications id="151">
+                <declaredTime>28.5</declaredTime>
+                <participant>A151</participant>
+            </applications>
+            <applications id="152">
+                <declaredTime>30.0</declaredTime>
+                <participant>A152</participant>
+            </applications>
+            <applications id="153">
+                <declaredTime>30.0</declaredTime>
+                <participant>A153</participant>
+            </applications>
+            <discipline>D1</discipline>
+            <holdingDate>2010-04-25T00:00:00+04:00</holdingDate>
+        </events>
+        <name>XIX Чемпионат России 2010 г. по плаванию в категории &quot;Мастерс&quot;</name>
+        <pool id="1">
+            <lanesCount>8</lanesCount>
+            <location>г. Дубна</location>
+            <name>Бассейн &quot;Архимед&quot;</name>
+        </pool>
+        <startDate>2010-04-25T00:00:00+04:00</startDate>
+    </meet>
+</meetRegister>

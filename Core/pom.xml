@@ -173,6 +173,7 @@
                         <include>java/ru/swimmasters/domain/Event.java</include>
                         <include>java/ru/swimmasters/domain/Gender.java</include>
                         <include>java/ru/swimmasters/domain/Meet.java</include>
+                        <include>java/ru/swimmasters/domain/MeetRegister.java</include>
                         <include>java/ru/swimmasters/domain/Pool.java</include>
                         <include>java/ru/swimmasters/domain/package-info.java</include>
                     </includes>

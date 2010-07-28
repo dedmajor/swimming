@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 /**
  * @author dedmajor
@@ -36,6 +37,9 @@ public class Meet {
     @NotNull
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
     private LocalDate startDate;
+
+    @OneToMany(mappedBy = "meet")
+    private List<Event> events;
 
 
     @XmlElement(required = true)
@@ -68,12 +72,22 @@ public class Meet {
         return this;
     }
 
+    @XmlElement(required = true)
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<Event> events) {
+        this.events = events;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this).
                 append("id", id).
                 append("name", name).
                 append("pool", pool).
+                append("startDate", startDate).
                 toString();
     }
 }

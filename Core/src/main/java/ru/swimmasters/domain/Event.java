@@ -6,14 +6,16 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import java.util.*;
 
 /**
+ * TODO: unique Meet, Discipline
+ *
  * User: dedmajor
  * Date: Jun 1, 2010
  */
-@XmlRootElement
 @XmlType
 @Entity
 @Table(name = "EVENT")
@@ -55,7 +57,7 @@ public class Event {
         return id;
     }
 
-    @XmlElement(required = true)
+    @XmlTransient
     public Meet getMeet() {
         return meet;
     }
@@ -64,7 +66,7 @@ public class Event {
         this.meet = meet;
     }
 
-    @XmlElement(required = true)
+    @XmlIDREF
     public Discipline getDiscipline() {
         return discipline;
     }
@@ -158,6 +160,11 @@ public class Event {
         }
 
         return result.values();
+    }
+
+
+    public void afterUnmarshal(Unmarshaller u, Object parent) {
+        this.meet = (Meet) parent;
     }
 
     @Override

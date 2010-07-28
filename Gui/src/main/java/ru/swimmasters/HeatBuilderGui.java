@@ -1,8 +1,6 @@
 package ru.swimmasters;
 
-import ru.swimmasters.domain.Application;
-import ru.swimmasters.domain.Event;
-import ru.swimmasters.domain.Heat;
+import ru.swimmasters.domain.*;
 import ru.swimmasters.jaxb.ContextHolder;
 
 import javax.swing.*;
@@ -23,7 +21,7 @@ public class HeatBuilderGui extends JFrame {
     private final JFileChooser loadFileChooser;
     private final JFileChooser safeFileChooser;
 
-    private Event event;
+    private Meet meet;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -41,11 +39,11 @@ public class HeatBuilderGui extends JFrame {
         loadFileChooser = new JFileChooser();
         loadFileChooser.setFileFilter(new FileNameExtensionFilter("XML Documents", "xml"));
 
-        JButton loadButton = new JButton("Load event...");
+        JButton loadButton = new JButton("Load meet register...");
         loadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (loadFileChooser.showOpenDialog(HeatBuilderGui.this) == JFileChooser.APPROVE_OPTION) {
-                    loadEvent(loadFileChooser.getSelectedFile());
+                    loadMeet(loadFileChooser.getSelectedFile());
                     buildButton.setEnabled(true);
                 }
             }
@@ -73,22 +71,23 @@ public class HeatBuilderGui extends JFrame {
         pack();
     }
 
-    private void loadEvent(File selectedFile) {
+    private void loadMeet(File selectedFile) {
         Unmarshaller um = new ContextHolder().createUnmarshaller();
         try {
-            event = (Event) um.unmarshal(selectedFile);
+            MeetRegister meetRegister = (MeetRegister) um.unmarshal(selectedFile);
+            meet = meetRegister.getMeet();
         } catch (JAXBException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
     private void buildHeats(File selectedFile) {
-        assert event != null;
+        assert meet != null;
 
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(selectedFile);
-            formatEvent(pw);
+            formatMeet(pw);
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException(e);
         } finally {
@@ -98,7 +97,14 @@ public class HeatBuilderGui extends JFrame {
         }
     }
 
-    private void formatEvent(PrintWriter pw) {
+    private void formatMeet(PrintWriter pw) {
+        pw.println("MEET: " + meet);
+        for (Event event : meet.getEvents()) {
+            formatEvent(event, pw);
+        }
+    }
+
+    private void formatEvent(Event event, PrintWriter pw) {
         // TODO: FIXME: extract formatter
         pw.println("EVENT: " + event);
 

@@ -4,8 +4,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "DISCIPLINE")
 public class Discipline {
-    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -33,6 +32,17 @@ public class Discipline {
 
     @NotNull
     private Integer distance;
+
+
+    @XmlID
+    public String getDisciplineID() {
+        // TODO: FIXME: more reliable ids
+        return 'D' + String.valueOf(id);
+    }
+
+    public void setDisciplineID(String disciplineID) {
+        id = Integer.valueOf(disciplineID.substring(1));
+    }
 
     @XmlElement(required = true)
     public Gender getGender() {

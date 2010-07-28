@@ -138,14 +138,15 @@ public class HeatBuilderApp {
 
     private static void xmlDumpEvents(EntityManager em) {
         @SuppressWarnings({"unchecked"}) // JPA
-                List<Event> events = (List<Event>) Collections.checkedList(
-                em.createQuery("from Event").getResultList(), Event.class);
+                List<Meet> meets = (List<Meet>) Collections.checkedList(
+                em.createQuery("from Meet").getResultList(), Meet.class);
 
         Marshaller m = new ContextHolder().createMarshaller();
 
-        for (Event event : events) {
+        for (Meet meet : meets) {
             try {
-                m.marshal(event, System.out);
+                MeetRegister register = new MeetRegister(meet);
+                m.marshal(register, System.out);
             } catch (JAXBException e) {
                 throw new IllegalArgumentException(e);
             }

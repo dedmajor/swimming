@@ -4,8 +4,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -16,7 +16,6 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "ATHLETE")
 public class Athlete {
-    @XmlAttribute(required = true)
     @Id
     @GeneratedValue
     private Integer id;
@@ -29,6 +28,16 @@ public class Athlete {
 
     @NotNull
     private Integer birthYear;
+
+    @XmlID
+    public String getAthleteID() {
+        // TODO: FIXME: more reliable ids
+        return 'A' + String.valueOf(id);
+    }
+
+    public void setAthleteID(String athleteID) {
+        id = Integer.valueOf(athleteID.substring(1));
+    }
 
 
     @XmlElement(required = true)    

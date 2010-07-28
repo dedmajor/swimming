@@ -72,7 +72,7 @@ public class EventTestCaseFactory {
 
     public Event makeRealEvent() {
         Unmarshaller um = jaxbContextHolder.createUnmarshaller();
-        ClassPathResource classPathResource = new ClassPathResource("event1.xml");
+        ClassPathResource classPathResource = new ClassPathResource("meetRegister1.xml");
         InputStream inputStream;
         try {
             inputStream = classPathResource.getInputStream();
@@ -80,7 +80,7 @@ public class EventTestCaseFactory {
             throw new IllegalStateException(e);
         }
         try {
-            return (Event) um.unmarshal(inputStream);
+            return ((MeetRegister) um.unmarshal(inputStream)).getMeet().getEvents().get(0);
         } catch (JAXBException e) {
             throw new IllegalStateException(e);
         }

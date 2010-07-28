@@ -7,10 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * User: dedmajor
@@ -28,7 +25,6 @@ public class Application implements Comparable<Application> {
     @Version
     private Integer version;
 
-    @XmlElement(required = true)
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
     private Athlete participant;
@@ -59,11 +55,16 @@ public class Application implements Comparable<Application> {
         return event;
     }
 
+    @XmlIDREF
     public Athlete getParticipant() {
         return participant;
     }
 
-    @XmlElement(required = true)    
+    public void setParticipant(Athlete participant) {
+        this.participant = participant;
+    }
+
+    @XmlElement(required = true)
     public Float getDeclaredTime() {
         return declaredTime;
     }
