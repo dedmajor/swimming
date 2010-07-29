@@ -43,6 +43,7 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private final List<Application> applications = new ArrayList<Application>();
 
+    private List<Heat> heats;
 
     public Event(Meet meet, Discipline discipline) {
         this.meet = meet;
@@ -162,6 +163,17 @@ public class Event {
         return result.values();
     }
 
+    @XmlTransient
+    public List<Heat> getHeats() {
+        if (heats == null) {
+            throw new IllegalStateException("heats are not built yet");
+        }
+        return Collections.unmodifiableList(heats);
+    }
+
+    public void setHeats(List<Heat> heats) {
+        this.heats = heats;
+    }
 
     public void afterUnmarshal(Unmarshaller u, Object parent) {
         this.meet = (Meet) parent;

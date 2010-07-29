@@ -2,9 +2,7 @@ package ru.swimmasters.domain;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author dedmajor
@@ -115,6 +113,29 @@ public class Heat {
                     "heat does not contain all the requested applications: " + applicationsBrick);
         }
         applications.removeAll(applicationsBrick);
+    }
+
+    public boolean isLaneOccupied(Lane lane) {
+        return assignLanes().containsKey(lane);
+    }
+
+    public Application getApplicationByLane(Lane lane) {
+        if (!isLaneOccupied(lane)) {
+            throw new IllegalArgumentException("lane " + lane + " is not occupied");
+        }
+        return assignLanes().get(lane);
+    }
+
+    private Map<Lane, Application> assignLanes() {
+        // TODO: implement me
+        Map<Lane, Application> result = new HashMap<Lane, Application>(applications.size());
+        List<Lane> poolLanes = event.getPool().getLanes();
+        assert poolLanes.size() >= applications.size();
+
+        for (int i = 0; i < applications.size(); i++) {
+            result.put(poolLanes.get(i), applications.get(i));
+        }
+        return result;
     }
 
     @Override

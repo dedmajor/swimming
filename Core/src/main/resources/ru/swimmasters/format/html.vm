@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+	<h1>$meet.Name<h1>
+	<h5>$meet.startDate, $meet.Pool.Name, $meet.Pool.Location</h5>
+
+	#foreach ($event in $meet.Events)
+		<h3>$event.Discipline.Name, $event.Discipline.Distance, $event.Discipline.Gender</h3>
+
+		<table border="1" cellpadding="3" cellspacing="1" rules="rows" frame="hsides">
+
+		#foreach ($heat in $event.Heats)
+			<tr>
+			<td rowspan="$meet.Pool.LanesCount" style="padding-right: 10px;">$velocityCount</td>
+				#foreach ($lane in $meet.Pool.Lanes)
+					<td style="padding-right: 10px;">$lane.Number</td>
+					#if ($heat.isLaneOccupied($lane))
+						#set($application = $heat.getApplicationByLane($lane))
+						<td>$application.Participant.Name</td>
+						<td style="padding-right: 20px;">$application.Participant.BirthYear</td>
+						<td>$application.DeclaredTime</td>
+					#end
+                    </tr><tr>
+				#end
+			</tr>
+		#end
+		</table>
+	#end
+    <p>&copy; 2010 Swimmasters</p>
+</body>
+</html>
+

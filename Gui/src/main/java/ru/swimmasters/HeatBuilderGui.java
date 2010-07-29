@@ -1,6 +1,10 @@
 package ru.swimmasters;
 
+import org.apache.velocity.Template;
+import org.apache.velocity.app.Velocity;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.format.MeetFormatter;
+import ru.swimmasters.format.VelocityMeetFormatter;
 import ru.swimmasters.jaxb.ContextHolder;
 
 import javax.swing.*;
@@ -50,7 +54,7 @@ public class HeatBuilderGui extends JFrame {
         });
 
         safeFileChooser = new JFileChooser();
-        safeFileChooser.setFileFilter(new FileNameExtensionFilter("Text Document", "txt"));
+        safeFileChooser.setFileFilter(new FileNameExtensionFilter("HTML Document", "html"));
         
         buildButton = new JButton("Build heats...");
         buildButton.setEnabled(false);
@@ -84,10 +88,33 @@ public class HeatBuilderGui extends JFrame {
     private void buildHeats(File selectedFile) {
         assert meet != null;
 
+        // TODO: FIXME: extract builder
+        for (Event event : meet.getEvents()) {
+            event.setHeats(event.buildHeats(3));
+        }
+
+        Velocity.setProperty("resource.loader", "class");
+        Velocity.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        try {
+            Velocity.init();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+
+        Template template;
+        try {
+            template = Velocity.getTemplate("ru/swimmasters/format/html.vm"); // TODO: guess formatter from file name
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(selectedFile);
-            formatMeet(pw);
+            MeetFormatter formatter = new VelocityMeetFormatter(template);
+
+            formatter.format(meet, pw);
+
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException(e);
         } finally {
@@ -98,23 +125,5 @@ public class HeatBuilderGui extends JFrame {
     }
 
     private void formatMeet(PrintWriter pw) {
-        pw.println("MEET: " + meet);
-        for (Event event : meet.getEvents()) {
-            formatEvent(event, pw);
-        }
-    }
-
-    private void formatEvent(Event event, PrintWriter pw) {
-        // TODO: FIXME: extract formatter
-        pw.println("EVENT: " + event);
-
-        int heatNumber = 0;
-        for (Heat heat : event.buildHeats(3)) {
-            heatNumber++;
-            pw.println(String.format("HEAT #%d (size=%d):", heatNumber, heat.getApplications().size()));
-            for (Application application : heat.getApplications()) {
-                pw.println(application);
-            }
-        }
     }
 }

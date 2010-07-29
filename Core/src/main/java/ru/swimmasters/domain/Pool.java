@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: dedmajor
@@ -70,6 +72,17 @@ public class Pool {
         return this;
     }
 
+    /**
+     * @return list of {@link #lanesCount} {@link Lane}s starting from 1
+     */
+    public List<Lane> getLanes() {
+        List<Lane> result = new ArrayList<Lane>();
+        for (int i = 0; i < lanesCount; i++) {
+            Lane lane = new Lane(i + 1);
+            result.add(lane);
+        }
+        return result;
+    }
 
     @Override
     public String toString() {
