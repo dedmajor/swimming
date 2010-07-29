@@ -93,7 +93,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <fromDir>${project.build.outputDirectory}/jnlp</fromDir>
+                    <fromDir>${project.build.directory}/jnlp</fromDir>
                     <url>${myScpBaseUrl}/${project.version}/jnlp</url>
                 </configuration>
             </plugin>
