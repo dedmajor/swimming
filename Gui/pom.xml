@@ -94,7 +94,7 @@
                 </executions>
                 <configuration>
                     <fromDir>${project.build.directory}/jnlp</fromDir>
-                    <url>${myScpBaseUrl}/${project.version}/jnlp</url>
+                    <url>${myScpBaseUrl}/${project.artifactId}/${project.version}/jnlp</url>
                 </configuration>
             </plugin>
 
