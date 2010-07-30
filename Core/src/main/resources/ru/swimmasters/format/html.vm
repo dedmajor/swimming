@@ -19,6 +19,7 @@
 					#if ($heat.isLaneOccupied($lane))
 						#set($application = $heat.getApplicationByLane($lane))
 						<td>$application.Participant.Name</td>
+                        <td>${application.AgeGroup.MinAge}-${application.AgeGroup.MaxAge}</td>
 						<td style="padding-right: 20px;">$application.Participant.BirthYear</td>
 						<td>$application.DeclaredTime</td>
 					#end
