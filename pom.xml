@@ -7,6 +7,9 @@
     <name>Swimmasters Meet Manager</name>
     <url>http://dedmajor.ru/swimmasters/</url>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
         <!-- MUST match url -->
         <myScpBaseUrl>scpexe://dedmajor.ru/var/www/dedmajor.ru/docs/swimmasters/</myScpBaseUrl>
     </properties>
@@ -30,5 +33,14 @@
             <url>${myScpBaseUrl}/${project.version}/site</url>
         </site>
     </distributionManagement>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
 
