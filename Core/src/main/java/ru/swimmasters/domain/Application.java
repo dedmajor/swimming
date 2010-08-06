@@ -8,6 +8,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * User: dedmajor
@@ -107,5 +109,17 @@ public class Application implements Comparable<Application> {
                 .append(application.getParticipant().getBirthYear(), participant.getBirthYear())
                 .append(application.getParticipant().getName(), participant.getName())
                 .toComparison();
+    }
+
+
+    public static class DeclaredTimeComparator implements Comparator<Application>, Serializable {
+        private static final long serialVersionUID = -2634540637576682685L;
+
+        @Override
+        public int compare(Application first, Application second) {
+            return new CompareToBuilder()
+                    .append(first.getDeclaredTime(), second.getDeclaredTime())
+                    .toComparison();
+        }
     }
 }

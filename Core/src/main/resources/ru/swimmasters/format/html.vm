@@ -26,6 +26,7 @@
                     </tr><tr>
 				#end
 			</tr>
+            <tr><td>&nbsp;</td></tr>
 		#end
 		</table>
 	#end

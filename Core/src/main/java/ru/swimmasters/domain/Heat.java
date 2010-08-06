@@ -126,16 +126,79 @@ public class Heat {
         return assignLanes().get(lane);
     }
 
+    /**
+     * Assigns lanes to applications, each group is side by side, fastest applications
+     * in the center of each group, free lanes (if any) balanced at the left and right.
+     */
     private Map<Lane, Application> assignLanes() {
-        // TODO: implement me
         Map<Lane, Application> result = new HashMap<Lane, Application>(applications.size());
-        List<Lane> poolLanes = event.getPool().getLanes();
+        Queue<Lane> poolLanes = new PriorityQueue<Lane>(event.getPool().getLanes());
         assert poolLanes.size() >= applications.size();
 
-        for (int i = 0; i < applications.size(); i++) {
-            result.put(poolLanes.get(i), applications.get(i));
+        removeFreeLanesFromLeft(poolLanes);
+
+        Map<AgeGroup, List<Application>> groupedApplications = groupApplicationsByAge();
+        
+        for (Map.Entry<AgeGroup, List<Application>> ageEntry : groupedApplications.entrySet()) {
+            List<Application> centeredApplications = centerApplications(ageEntry.getValue());
+
+            for (Application application : centeredApplications) {
+                result.put(poolLanes.remove(), application);
+            }
         }
+        
         return result;
+    }
+
+    private void removeFreeLanesFromLeft(Queue<Lane> poolLanes) {
+        int freeLanes = poolLanes.size() - applications.size();
+        int freeLanesFromLeft = freeLanes / 2;
+        for (int i = 0; i < freeLanesFromLeft; i++) {
+            poolLanes.remove();
+        }
+    }
+
+    private Map<AgeGroup, List<Application>> groupApplicationsByAge() {
+        // TODO: copypaste logic for AgeQueue?
+        Map<AgeGroup, List<Application>> groupedApplications =
+                new EnumMap<AgeGroup, List<Application>>(AgeGroup.class);
+
+        for (Application application : applications) {
+            List<Application> applicationsOfSameAge = groupedApplications.get(application.getAgeGroup());
+            if (applicationsOfSameAge == null) {
+                applicationsOfSameAge = new ArrayList<Application>();
+                groupedApplications.put(application.getAgeGroup(), applicationsOfSameAge);
+            }
+
+          applicationsOfSameAge.add(application);
+        }
+        return groupedApplications;
+    }
+
+    /**
+     * Orders applications by declared time and puts them from the left and right by turns.
+     *
+     * @param sample unordered list
+     * @return list with the fastest applications in the center
+     */
+    private static List<Application> centerApplications(List<Application> sample) {
+        Deque<Application> resultQueue = new LinkedList<Application>();
+
+        List<Application> sortedApplications = new ArrayList<Application>(sample);
+        Collections.sort(sortedApplications, new Application.DeclaredTimeComparator());
+
+        boolean insertLeft = true;
+        for (Application application : sortedApplications) {
+            if (insertLeft) {
+                resultQueue.addFirst(application);
+            } else {
+                resultQueue.addLast(application);
+            }
+            insertLeft = !insertLeft;
+        }
+        List<Application> result = new ArrayList<Application>(resultQueue);
+
+        return Collections.unmodifiableList(result);
     }
 
     @Override
