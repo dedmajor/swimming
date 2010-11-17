@@ -12,6 +12,8 @@ import java.io.Serializable;
 import java.util.Comparator;
 
 /**
+ * TODO: unique event, athlete
+ * 
  * User: dedmajor
  * Date: Jun 2, 2010
  */
@@ -29,7 +31,7 @@ public class Application implements Comparable<Application> {
 
     @NotNull
     @ManyToOne(targetEntity = Athlete.class)
-    private Athlete participant;
+    private Athlete participant; // TODO: FINA names it competitor
 
     @NotNull
     @ManyToOne(targetEntity = Event.class)
@@ -38,13 +40,17 @@ public class Application implements Comparable<Application> {
     @NotNull
     @Digits(integer = 5, fraction = 2)
     private Float declaredTime;
-    
+
 
     public Application() {
         // hibernate and JAXB should pass
     }
 
     public Application(Event event, Athlete participant) {
+        if (event.getDiscipline().getGender() != participant.getGender()) {
+            throw new IllegalArgumentException("athlete " + participant + " cannot participate in "
+                    + event + " because of the gender");
+        }
         this.event = event;
         this.participant = participant;
     }
@@ -80,7 +86,12 @@ public class Application implements Comparable<Application> {
         return AgeGroup.forAge(participant.getAge(event.getHoldingDate().getYear()));
     }
 
+    public boolean isComplete() {
+        return declaredTime != null;
+    }
+
     public void afterUnmarshal(Unmarshaller u, Object parent) {
+        // TODO: strong validation
         this.event = (Event) parent;
     }
 

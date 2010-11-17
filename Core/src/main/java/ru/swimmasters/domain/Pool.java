@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TODO: rename to Venue?
+ * 
  * User: dedmajor
  * Date: May 23, 2010
  */
@@ -19,6 +21,13 @@ import java.util.List;
 @Entity
 @Table(name = "POOL")
 public class Pool {
+    public static final int STANDARD_LANES_COUNT = 8;
+
+    /**
+     * Lanes count for World Championships and Olympic Games.
+     */
+    public static final int OLYMPIC_LANES_COUNT = 10;
+
     @XmlAttribute(required = true)
     @Id
     @GeneratedValue
@@ -35,8 +44,15 @@ public class Pool {
 
     @NotNull
     @Min(2L)
-    private Integer lanesCount;
+    private Integer lanesCount = STANDARD_LANES_COUNT;
 
+    public Pool() {
+    }
+
+    public Pool(String name, String location) {
+        this.name = name;
+        this.location = location;
+    }
 
     public Integer getId() {
         return id;
@@ -62,7 +78,7 @@ public class Pool {
         return this;
     }
 
-    @XmlElement(required = true)    
+    @XmlElement(required = true)
     public Integer getLanesCount() {
         return lanesCount;
     }
@@ -84,6 +100,10 @@ public class Pool {
         return result;
     }
 
+    public Lane getLaneByNumber(int i) {
+        return getLanes().get(i);
+    }
+    
     @Override
     public String toString() {
         return new ToStringBuilder(this).

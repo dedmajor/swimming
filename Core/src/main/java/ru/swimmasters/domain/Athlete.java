@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * TODO: city / country / club
+ * 
  * User: dedmajor
  * Date: Jun 2, 2010
  */
@@ -24,10 +26,23 @@ public class Athlete {
     private Integer version;
 
     @NotNull
-    private String name;
+    private String name; // TODO: firstName, lastName
 
     @NotNull
     private Integer birthYear;
+
+    @NotNull
+    private Gender gender;
+
+    
+    public Athlete() {
+    }
+
+    public Athlete(String name, Integer birthYear, Gender gender) {
+        this.name = name;
+        this.birthYear = birthYear;
+        this.gender = gender;
+    }
 
     @XmlID
     public String getAthleteID() {
@@ -64,6 +79,9 @@ public class Athlete {
         return year - birthYear;
     }
 
+    public Gender getGender() {
+        return gender;
+    }
 
     @Override
     public String toString() {
@@ -71,6 +89,7 @@ public class Athlete {
                 append("id", id).
                 append("name", name).
                 append("birthYear", birthYear).
+                append("gender", gender).
                 toString();
     }
 }

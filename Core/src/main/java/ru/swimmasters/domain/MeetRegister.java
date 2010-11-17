@@ -2,11 +2,17 @@ package ru.swimmasters.domain;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
+ * After registration is closed, Meet Register goes as a source
+ * for a credentials committee.
+ *
  * @author dedmajor
  * @since 27.07.2010
  */
@@ -17,6 +23,10 @@ public class MeetRegister {
 
     private Set<Discipline> disciplines = new HashSet<Discipline>();
     private Set<Athlete> athletes = new HashSet<Athlete>();
+
+    // TODO: FIXME: find better place?
+    @XmlTransient
+    private final List<StartList> startLists = new ArrayList<StartList>();
 
     public MeetRegister(Meet meet) {
         this.meet = meet;
@@ -57,5 +67,13 @@ public class MeetRegister {
 
     public void setAthletes(Set<Athlete> athletes) {
         this.athletes = athletes;
+    }
+
+    public List<StartList> getStartLists() {
+        return startLists;
+    }
+
+    public void addStartList(StartList startList) {
+        startLists.add(startList);
     }
 }

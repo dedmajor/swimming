@@ -3,7 +3,7 @@ package ru.swimmasters.format;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
-import ru.swimmasters.domain.Meet;
+import ru.swimmasters.domain.MeetRegister;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -20,9 +20,9 @@ public class VelocityMeetFormatter implements MeetFormatter {
     }
 
     @Override
-    public void format(Meet meet, Writer writer) {
+    public void format(MeetRegister meetRegister, Writer writer) {
         Context context = new VelocityContext();
-        context.put("meet", meet);
+        context.put("meetRegister", meetRegister);
         try {
             template.merge(context, writer);
         } catch (IOException e) {

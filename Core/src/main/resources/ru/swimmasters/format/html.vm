@@ -3,18 +3,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-	<h1>$meet.Name<h1>
-	<h5>$meet.startDate, $meet.Pool.Name, $meet.Pool.Location</h5>
+	<h1>$meetRegister.Meet.Name<h1>
+	<h5>$meetRegister.Meet.startDate, $meetRegister.Meet.Pool.Name, $meetRegister.Meet.Pool.Location</h5>
 
-	#foreach ($event in $meet.Events)
-		<h3>$event.Discipline.Name, $event.Discipline.Distance, $event.Discipline.Gender</h3>
+	#foreach ($startList in $meetRegister.StartLists)
+		<h3>$startList.Event.Discipline.Name, $startList.Event.Discipline.Distance,
+		$startList.Event.Discipline.Gender</h3>
 
 		<table border="1" cellpadding="3" cellspacing="1" rules="rows" frame="hsides">
 
-		#foreach ($heat in $event.Heats)
+		#foreach ($heat in $startList.Heats)
 			<tr>
-			<td rowspan="$meet.Pool.LanesCount" style="padding-right: 10px;">$velocityCount</td>
-				#foreach ($lane in $meet.Pool.Lanes)
+			<td rowspan="$meetRegister.Meet.Pool.LanesCount" style="padding-right: 10px;">$velocityCount</td>
+				#foreach ($lane in $meetRegister.Meet.Pool.Lanes)
 					<td style="padding-right: 10px;">$lane.Number</td>
 					#if ($heat.isLaneOccupied($lane))
 						#set($application = $heat.getApplicationByLane($lane))

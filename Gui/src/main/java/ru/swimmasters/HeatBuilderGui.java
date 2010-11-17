@@ -25,7 +25,7 @@ public class HeatBuilderGui extends JFrame {
     private final JFileChooser loadFileChooser;
     private final JFileChooser safeFileChooser;
 
-    private Meet meet;
+    private MeetRegister meetRegister;
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -47,7 +47,7 @@ public class HeatBuilderGui extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (loadFileChooser.showOpenDialog(HeatBuilderGui.this) == JFileChooser.APPROVE_OPTION) {
-                    loadMeet(loadFileChooser.getSelectedFile());
+                    loadMeetRegister(loadFileChooser.getSelectedFile());
                     buildButton.setEnabled(true);
                 }
             }
@@ -75,22 +75,23 @@ public class HeatBuilderGui extends JFrame {
         pack();
     }
 
-    private void loadMeet(File selectedFile) {
+    private void loadMeetRegister(File selectedFile) {
         Unmarshaller um = new ContextHolder().createUnmarshaller();
         try {
-            MeetRegister meetRegister = (MeetRegister) um.unmarshal(selectedFile);
-            meet = meetRegister.getMeet();
+            meetRegister = (MeetRegister) um.unmarshal(selectedFile);
         } catch (JAXBException e) {
             throw new IllegalArgumentException(e);
         }
     }
 
     private void buildHeats(File selectedFile) {
-        assert meet != null;
+        assert meetRegister != null;
 
         // TODO: FIXME: extract builder
-        for (Event event : meet.getEvents()) {
-            event.setHeats(event.buildHeats(3));
+        for (Event event : meetRegister.getMeet().getEvents()) {
+            StartList startList = new StartList(event);
+            startList.addHeats(event.buildHeats(3));
+            meetRegister.addStartList(startList);
         }
 
         Velocity.setProperty("resource.loader", "class");
@@ -113,7 +114,7 @@ public class HeatBuilderGui extends JFrame {
             pw = new PrintWriter(selectedFile);
             MeetFormatter formatter = new VelocityMeetFormatter(template);
 
-            formatter.format(meet, pw);
+            formatter.format(meetRegister, pw);
 
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException(e);

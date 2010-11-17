@@ -13,6 +13,8 @@ import java.util.*;
 /**
  * TODO: unique Meet, Discipline
  *
+ * TODO: in LENEX, holdingDate is an attribute of the Session, and dayTime for event.
+ *
  * User: dedmajor
  * Date: Jun 1, 2010
  */
@@ -43,11 +45,14 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private final List<Application> applications = new ArrayList<Application>();
 
-    private List<Heat> heats;
-
     public Event(Meet meet, Discipline discipline) {
         this.meet = meet;
         this.discipline = discipline;
+    }
+
+    public Event(Discipline discipline, LocalDate holdingDate) {
+        this.discipline = discipline;
+        this.holdingDate = holdingDate;
     }
 
     public Event() {
@@ -105,6 +110,10 @@ public class Event {
         return applications;
     }
 
+    public boolean containsApplication(Application appliaction) {
+        return applications.contains(appliaction);
+    }
+    
     /**
      * Heats are built from the age queue of applications, considering the youngest
      * and fastest athletes first. Then result is reverted to make it be at a natural order.
@@ -116,6 +125,7 @@ public class Event {
         List<Heat> result = new ArrayList<Heat>();
         Heat currentHeat = null;
         Heat previousBrickHeat = null;
+        int number = 0;
 
         for (AgeQueue queue : buildAgeQueues(leadsInAgeGroup)) {
             while (queue.hasMoreApplications()) {
@@ -123,7 +133,8 @@ public class Event {
 
                 if (currentHeat == null || !currentHeat.hasMoreSpace(queue.nextBrickSize())) {
                     assert currentHeat == null || currentHeat.isCompetitive();
-                    currentHeat = new Heat(this);
+                    number++;
+                    currentHeat = new Heat(this, number);
                     result.add(currentHeat);
                 }
 
@@ -161,18 +172,6 @@ public class Event {
         }
 
         return result.values();
-    }
-
-    @XmlTransient
-    public List<Heat> getHeats() {
-        if (heats == null) {
-            throw new IllegalStateException("heats are not built yet");
-        }
-        return Collections.unmodifiableList(heats);
-    }
-
-    public void setHeats(List<Heat> heats) {
-        this.heats = heats;
     }
 
     public void afterUnmarshal(Unmarshaller u, Object parent) {

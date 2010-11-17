@@ -1,6 +1,6 @@
 package ru.swimmasters.format;
 
-import ru.swimmasters.domain.Meet;
+import ru.swimmasters.domain.MeetRegister;
 
 import java.io.Writer;
 
@@ -9,5 +9,5 @@ import java.io.Writer;
  * @since 28.07.2010
  */
 public interface MeetFormatter {
-    void format(Meet meet, Writer writer);
+    void format(MeetRegister meetRegister, Writer writer);
 }

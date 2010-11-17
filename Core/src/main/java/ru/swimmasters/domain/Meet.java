@@ -9,9 +9,13 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TODO: in LENEX events organized in Sessions groupped by date.
+ * TODO: rename pool to venue
+ * 
  * @author dedmajor
  * @since 20.06.2010
  */
@@ -39,8 +43,18 @@ public class Meet {
     private LocalDate startDate;
 
     @OneToMany(mappedBy = "meet")
-    private List<Event> events;
+    private List<Event> events = new ArrayList<Event>();
 
+    // TODO: LENEX: reverse association with Club / Athlete / Results
+    // we: applications or application results
+
+
+    public Meet() {
+    }
+
+    public Meet(String name) {
+        this.name = name;
+    }
 
     @XmlElement(required = true)
     public String getName() {
@@ -79,6 +93,11 @@ public class Meet {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public void addEvent(Event event) {
+        events.add(event);
+        event.setMeet(this);
     }
 
     @Override

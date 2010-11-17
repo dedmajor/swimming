@@ -89,10 +89,8 @@ public class HeatBuilderApp {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
 
-        Pool pool = new Pool()
-                .setLanesCount(9)
-                .setName("name")
-                .setLocation("location");
+        Pool pool = new Pool("name", "location")
+                .setLanesCount(9);
         Athlete participant = new Athlete().setBirthYear(1985).setName("name");
         Meet meet = new Meet().setPool(pool).setName("name").setStartDate(new LocalDate("2010-04-25"));
         Discipline discipline = new Discipline()

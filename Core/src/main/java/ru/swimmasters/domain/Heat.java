@@ -8,14 +8,20 @@ import java.util.*;
  * @author dedmajor
  * @since 13.06.2010
  */
-public class Heat {
+public class Heat implements Comparable<Heat> {
     private final Event event;
+    private final int number;
     private final List<Application> applications;
     private List<Application> lastAddedApplications;
 
-    public Heat(Event event) {
+    public Heat(Event event, int number) {
         this.event = event;
+        this.number = number;
         applications = new ArrayList<Application>(event.getPool().getLanesCount());
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public boolean hasMoreSpace() {
@@ -126,6 +132,10 @@ public class Heat {
         return assignLanes().get(lane);
     }
 
+    public boolean containsApplication(Application application) {
+        return applications.contains(application);
+    }
+
     /**
      * Assigns lanes to applications, each group is side by side, fastest applications
      * in the center of each group, free lanes (if any) balanced at the left and right.
@@ -208,5 +218,19 @@ public class Heat {
                 append("applications.size", applications.size()).
                 append("applications", applications).
                 toString();
+    }
+
+    public Lane getLaneByApplication(Application appliaction) {
+        for (Map.Entry<Lane, Application> entry: assignLanes().entrySet()) {
+            if (entry.getValue().equals(appliaction)) {
+                return entry.getKey();
+            }
+        }
+        throw new IllegalArgumentException("heat " + this + " doesn't contain application " + appliaction);
+    }
+
+    @Override
+    public int compareTo(Heat o) {
+        return Integer.valueOf(number).compareTo(o.getNumber());
     }
 }

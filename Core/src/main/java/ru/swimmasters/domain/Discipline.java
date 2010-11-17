@@ -28,11 +28,20 @@ public class Discipline {
     private Gender gender;
 
     @NotNull
-    private String name;
+    private String name; // TODO: SwimStyle / Stroke data type
 
     @NotNull
     private Integer distance;
 
+
+    public Discipline() {
+    }
+
+    public Discipline(Gender gender, Integer distance, String name) {
+        this.gender = gender;
+        this.distance = distance;
+        this.name = name;
+    }
 
     @XmlID
     public String getDisciplineID() {
