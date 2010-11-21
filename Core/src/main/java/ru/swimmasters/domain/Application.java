@@ -39,7 +39,7 @@ public class Application implements Comparable<Application> {
 
     @NotNull
     @Digits(integer = 5, fraction = 2)
-    private Float declaredTime;
+    private Float declaredTime; // TODO: rename to seed time? Not always available?
 
 
     public Application() {

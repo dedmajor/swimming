@@ -48,8 +48,10 @@ public class MeetManagerDomainTest {
         for (Heat heat : startList.getHeats()) {
             assertTrue("heat must contain first application", heat.containsApplication(firstApplication));
             assertTrue("heat must contain second application", heat.containsApplication(secondApplication));
-            Result firstResult = new Result(heat, firstApplication);
-            Result secondResult = new Result(heat, secondApplication);
+            Result firstResult = new Result(firstApplication);
+            firstResult.setHeat(heat);
+            Result secondResult = new Result(secondApplication);
+            secondResult.setHeat(heat);
             secondResult.setResult(ResultCode.FINISHED, 0.42f);
 
             totalRanking.addResult(firstResult);
@@ -59,12 +61,12 @@ public class MeetManagerDomainTest {
         Result firstResult = totalRanking.getAbsoluteResults().first();
         Result secondResult = totalRanking.getAbsoluteResults().last();
 
-        assertEquals(secondApplication, firstResult.getAppliaction());
+        assertEquals(secondApplication, firstResult.getApplication());
         assertEquals(ResultCode.FINISHED, firstResult.getCode());
         assertEquals(1, firstResult.getHeatNumber());
         assertEquals(5, firstResult.getLaneNumber());
 
-        assertEquals(firstApplication, secondResult.getAppliaction());
+        assertEquals(firstApplication, secondResult.getApplication());
         assertEquals(ResultCode.DNS, secondResult.getCode());
         assertEquals(1, secondResult.getHeatNumber());
         assertEquals(4, secondResult.getLaneNumber());

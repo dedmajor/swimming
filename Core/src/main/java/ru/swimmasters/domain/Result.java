@@ -7,8 +7,8 @@ import javax.validation.constraints.Digits;
  * Date: Nov 17, 2010
  */
 public class Result implements Comparable<Result> {
-    private final Heat heat;
-    private final Application appliaction;
+    private final Application application;
+    private Heat heat;
 
     private ResultCode code = ResultCode.DNS;
 
@@ -19,16 +19,12 @@ public class Result implements Comparable<Result> {
     private int points; // TODO: just a cache?
 
 
-    public Result(Heat heat, Application application) {
-        if (!heat.containsApplication(application)) {
-            throw new IllegalArgumentException("heat " + heat + " doesn't contain application " + application);
-        }
-        this.heat = heat;
-        this.appliaction = application;
+    public Result(Application application) {
+        this.application = application;
     }
 
-    public Application getAppliaction() {
-        return appliaction;
+    public Application getApplication() {
+        return application;
     }
 
     public ResultCode getCode() {
@@ -37,6 +33,13 @@ public class Result implements Comparable<Result> {
 
     public Float getSwimTime() {
         return swimTime;
+    }
+
+    public void setHeat(Heat heat) {
+        if (!heat.containsApplication(application)) {
+            throw new IllegalArgumentException("heat " + heat + " doesn't contain application " + application);
+        }
+        this.heat = heat;
     }
 
     /**
@@ -59,6 +62,9 @@ public class Result implements Comparable<Result> {
     }
 
     public int getHeatNumber() {
+        if (heat == null) {
+            throw new IllegalStateException("heat is unknown");
+        }
         return heat.getNumber();
     }
 
@@ -67,7 +73,10 @@ public class Result implements Comparable<Result> {
     }
 
     public Lane getLane() {
-        return heat.getLaneByApplication(appliaction);
+        if (heat == null) {
+            throw new IllegalStateException("heat is unknown");
+        }
+        return heat.getLaneByApplication(application);
     }
 
     @Override

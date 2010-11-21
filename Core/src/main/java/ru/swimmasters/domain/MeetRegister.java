@@ -27,6 +27,8 @@ public class MeetRegister {
     // TODO: FIXME: find better place?
     @XmlTransient
     private final List<StartList> startLists = new ArrayList<StartList>();
+    @XmlTransient
+    private final List<TotalRanking> totalRankings = new ArrayList<TotalRanking>();
 
     public MeetRegister(Meet meet) {
         this.meet = meet;
@@ -75,5 +77,13 @@ public class MeetRegister {
 
     public void addStartList(StartList startList) {
         startLists.add(startList);
+    }
+
+    public List<TotalRanking> getTotalRankings() {
+        return totalRankings;
+    }
+
+    public void addTotalRanking(TotalRanking ranking) {
+        totalRankings.add(ranking);
     }
 }

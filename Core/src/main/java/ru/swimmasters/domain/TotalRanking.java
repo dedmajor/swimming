@@ -18,9 +18,9 @@ public class TotalRanking {
     }
     
     public void addResult(Result result) {
-        if (!event.containsApplication(result.getAppliaction())) {
+        if (!event.containsApplication(result.getApplication())) {
             throw new IllegalArgumentException("event " + event + " doesn't contains result application "
-                    + result.getAppliaction());
+                    + result.getApplication());
         }
         absoluteResults.add(result);
     }

@@ -32,7 +32,7 @@ public class Event {
 
     @NotNull
     @ManyToOne(targetEntity = Meet.class)
-    private Meet meet;
+    private Meet meet; // TODO: FIXME: is not required?
 
     @NotNull
     @ManyToOne(targetEntity = Discipline.class)
@@ -45,11 +45,20 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private final List<Application> applications = new ArrayList<Application>();
 
+    // TODO: FIXME: only one constructor?
+    public Event(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    // TODO: meet is not required for this class?
+    @Deprecated
     public Event(Meet meet, Discipline discipline) {
         this.meet = meet;
         this.discipline = discipline;
     }
 
+    // TODO: FIXME: holding date is a session property, not an event
+    @Deprecated
     public Event(Discipline discipline, LocalDate holdingDate) {
         this.discipline = discipline;
         this.holdingDate = holdingDate;
