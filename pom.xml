@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.swimmasters</groupId>
     <artifactId>meetmanager</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.2.0-SNAPSHOT</version>
     <name>Swimmasters Meet Manager</name>
     <url>http://dedmajor.ru/swimmasters/</url>
     <properties>
@@ -15,8 +15,8 @@
     </properties>
     <packaging>pom</packaging>
     <modules>
-        <module>Core</module>
-        <module>Gui</module>
+        <module>DomainModel</module>
+        <module>AdminConsole</module>
     </modules>
     <scm>
         <connection>scm:git:git://github.com/dedmajor/swimming.git</connection>
