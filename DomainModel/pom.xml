@@ -61,7 +61,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>3.1.0.GA</version>
+            <version>4.1.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <version>4.1.0.Final</version>
         </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
@@ -123,7 +128,6 @@
             </plugin>
         </plugins>
     </build>
-    <!--
     <repositories>
         <repository>
             <id>odfdom-snapshots</id>
@@ -137,7 +141,6 @@
             <layout>default</layout>
         </repository>
     </repositories>
-    -->
     <!--
     <pluginRepositories>
         <pluginRepository>

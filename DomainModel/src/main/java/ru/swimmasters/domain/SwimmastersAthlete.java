@@ -6,7 +6,7 @@ import org.joda.time.LocalDate;
  * User: dedmajor
  * Date: 3/7/11
  */
-public class SwimmastersAthlete {
+public class SwimmastersAthlete implements Athlete {
     // LEN (17 fields):
 
     /**
@@ -29,7 +29,7 @@ public class SwimmastersAthlete {
      * the date should be set to January 1st of that year.
      * Required field.
      */
-    LocalDate birthDate;
+    public LocalDate birthDate;
 
     /**
      * The first name of the athlete.
@@ -101,4 +101,9 @@ public class SwimmastersAthlete {
     //LocalDate passportIssuedOn;
     //Integer countryId;
     //LocalDate listingDate;
+
+    @Override
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 }

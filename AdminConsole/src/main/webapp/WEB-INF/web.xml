@@ -87,7 +87,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>meetmanager-adminconsole</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>10</session-timeout>
@@ -96,7 +96,7 @@
     <!--
     TODO: cleanup
     <welcome-file-list>
-        <welcome-file>index</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
     <error-page>
