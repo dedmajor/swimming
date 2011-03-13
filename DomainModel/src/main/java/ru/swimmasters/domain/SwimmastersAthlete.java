@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
+ * This contains all information of a athlete including all entries and results
+ * in the context of a meet sub tree.
+ *
  * User: dedmajor
  * Date: 3/7/11
  */

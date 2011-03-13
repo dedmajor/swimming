@@ -1,9 +1,19 @@
 package ru.swimmasters.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
+ * In the meet sub tree, this element contains information about a club,
+ * including athletes and relays with their entries and/or results.
+ *
+ * TODO: In the record list sub tree, the element contains information
+ * about the club or nation of record holders.
+ *
  * User: dedmajor
  * Date: 3/7/11
  */
+@Entity
 public class SwimmastersClub {
     // LEN (14 fields):
 
@@ -53,6 +63,7 @@ public class SwimmastersClub {
 
     // SwimMasters (5 fields):
 
+    @Id
     Integer id;
     // Integer cityId;
     // Integer akvspCode; // TODO: what is this?
