@@ -3,10 +3,7 @@ package ru.swimmasters.domain;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  * This contains all information of a athlete including all entries and results
@@ -16,7 +13,7 @@ import javax.persistence.OneToOne;
  * Date: 3/7/11
  */
 @Entity
-public class SwimmastersAthlete implements Athlete {
+public class SwimMastersAthlete implements Athlete {
     // LEN (17 fields):
 
     /**
@@ -29,10 +26,10 @@ public class SwimmastersAthlete implements Athlete {
     /**
      * The club or team for the athlete, when he swam the record.
      * (These elements/objects are allowed in a record list sub tree only.)
-     * Swimmasters: required field.
+     * SwimMasters: required field.
      */
-    @OneToOne(optional = false)
-    SwimmastersClub club;
+    @ManyToOne(optional = false)
+    SwimMastersClub club;
 
     // Entries entries;
     // Handicap handicap;
@@ -93,8 +90,8 @@ public class SwimmastersAthlete implements Athlete {
 
     /**
      * The passport number of the athlete.
-     * Swimmasters: to be validated on a mandate committee.
-     * Swimmasters: passportSeries + passportNumber.
+     * SwimMasters: to be validated on a mandate committee.
+     * SwimMasters: passportSeries + passportNumber.
      */
     String passport;
 
@@ -102,7 +99,7 @@ public class SwimmastersAthlete implements Athlete {
     //Results results;
     //Integer swrid;
 
-    // Swimmasters (21 fields):
+    // SwimMasters (21 fields):
 
     @Id
     Long id;

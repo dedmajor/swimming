@@ -11,7 +11,7 @@ package ru.swimmasters.domain;
  * User: dedmajor
  * Date: 3/13/11
  */
-public class SwimmastersEntry {
+public class SwimMastersEntry {
     // LEN (9 fields)
     String entryTime; // TODO: FIXME: SwimTime or LocalTime? SQL: interval?
 

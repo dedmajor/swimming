@@ -1,6 +1,8 @@
 package ru.swimmasters.domain;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -14,7 +16,7 @@ import javax.persistence.Id;
  * Date: 3/7/11
  */
 @Entity
-public class SwimmastersClub {
+public class SwimMastersClub {
     // LEN (14 fields):
 
     //String type; // club, national team, regional team, unattached

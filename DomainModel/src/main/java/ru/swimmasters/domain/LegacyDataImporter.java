@@ -62,6 +62,8 @@ public class LegacyDataImporter {
         convertClub();
         System.out.println("Converting athletes");
         convertAthlete();
+        System.out.println("Converting swim styles (disciplines)");
+        convertSwimStyles();
         // TODO: FIXME: hardcoded meet_id: 114
         transaction.commit();
     }
@@ -71,7 +73,7 @@ public class LegacyDataImporter {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-                    SwimmastersClub club = new SwimmastersClub();
+                    SwimMastersClub club = new SwimMastersClub();
                     club.id = resultSet.getInt("id");
                     club.name = resultSet.getString("name");
                     // TODO: FIXME:
@@ -96,7 +98,7 @@ public class LegacyDataImporter {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-                    SwimmastersAthlete athlete = new SwimmastersAthlete();
+                    SwimMastersAthlete athlete = new SwimMastersAthlete();
                     athlete.id = resultSet.getLong("id");
                     if (athlete.id == 0L) {
                         continue;
@@ -122,7 +124,7 @@ public class LegacyDataImporter {
                         default:
                             throw new IllegalStateException("gender is invalid, athlete " + athlete.id);
                     }
-                    athlete.club = entityManager.find(SwimmastersClub.class, resultSet.getInt("club_id"));
+                    athlete.club = entityManager.find(SwimMastersClub.class, resultSet.getInt("club_id"));
                     athlete.englishFirstName = resultSet.getString("en_name_first");
                     athlete.englishMiddleName = resultSet.getString("en_name_middle");
                     athlete.englishLastName = resultSet.getString("en_name_last");
@@ -143,6 +145,72 @@ public class LegacyDataImporter {
             }
         }.run();
     }
+
+    private void convertSwimStyles() {
+        new LegacyQueryTemplate("select id, stroke_id, sex_id, length, name, name_abbr, " +
+                "name_plain_abbr from discipline" ){
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    SwimMastersSwimStyle style = new SwimMastersSwimStyle();
+                    style.id = resultSet.getInt("id");
+                    style.distance = resultSet.getInt("length");
+                    int sexId = resultSet.getInt("sex_id");
+                    if (sexId == 1) {
+                        style.gender = Gender.MALE;
+                    } else if (sexId == 2) {
+                        style.gender = Gender.FEMALE;
+                    }
+                    style.name = resultSet.getString("name");
+                    switch (resultSet.getInt("stroke_id")) {
+                        case 0: // | все стили            | все
+                            style.stroke = Stroke.UNKNOWN;
+                            break;
+                        case 1: // | вольный стиль        | в/с
+                            style.stroke = Stroke.FREE;
+                            break;
+                        case 2: // | на спине             | н/с
+                            style.stroke = Stroke.BACK;
+                            break;
+                        case 3: // | брасс                | бр
+                            style.stroke = Stroke.BREAST;
+                            break;
+                        case 4: // | баттерфляй           | батт
+                            style.stroke = Stroke.FLY;
+                            break;
+                        case 5: // | комплексное плавание | к/п
+                            style.stroke = Stroke.MEDLEY;
+                            break;
+                        case 6: // | вольный стиль        | эст. в/с
+                            style.stroke = Stroke.FREE;
+                            turnToRelay(style);
+                            break;
+                        case 7: // | комбинированная      | эст. к/п
+                            style.stroke = Stroke.MEDLEY;
+                            turnToRelay(style);
+                            break;
+                        case 8: // | эстафета             | эст
+                        default:
+                            throw new IllegalStateException("don't know how to handle stroke");
+                    }
+                    style.nameAbbr = resultSet.getString("name_abbr");
+                    style.namePlainAbbr = resultSet.getString("name_plain_abbr");
+
+                    System.out.println(style);
+
+                    entityManager.persist(style);
+                }
+            }
+        }.run();
+    }
+
+    private static void turnToRelay(SwimMastersSwimStyle style) {
+        if (!style.name.startsWith("Эстафета 4×")) {
+            throw new IllegalStateException("unknown relay");
+        }
+        style.relayCount = 4;
+    }
+
 
     private abstract class LegacyQueryTemplate implements Runnable {
         private final String sqlQuery;
