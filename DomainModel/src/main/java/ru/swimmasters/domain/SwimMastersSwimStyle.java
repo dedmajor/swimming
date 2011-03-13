@@ -16,6 +16,7 @@ public class SwimMastersSwimStyle {
      * The full descriptive name of the swim style if the stroke is unknown
      * (e.g. "5 x 75m Breast with one Arm only").
      */
+    @Column(unique = true)
     String name;
 
     /**
@@ -55,9 +56,6 @@ public class SwimMastersSwimStyle {
     // name = name
     // length = distance * relayCount
     // stroke_id = stroke
-    // sex_id
-    Gender gender;
+    // sex_id - replaced with event.eventGender
     String nameAbbr;
-    String namePlainAbbr;
-
 }

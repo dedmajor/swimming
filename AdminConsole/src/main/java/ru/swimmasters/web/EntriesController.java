@@ -21,7 +21,7 @@ public class EntriesController {
     @RequestMapping("/listEntries.html")
     public ModelAndView listEntries() {
         ModelAndView mav = new ModelAndView("listEntries");
-        List<Athlete> athletes = (List<Athlete>) entityManager.createQuery("from SwimmastersAthlete")
+        List<Athlete> athletes = (List<Athlete>) entityManager.createQuery("from SwimMastersAthlete")
                 .getResultList();
         mav.addObject("athletes", athletes);
         return mav;

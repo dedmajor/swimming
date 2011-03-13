@@ -1,12 +1,10 @@
 package ru.swimmasters.domain;
 
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.LocalDate;
 import org.postgresql.ds.PGSimpleDataSource;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -64,12 +62,62 @@ public class LegacyDataImporter {
         convertAthlete();
         System.out.println("Converting swim styles (disciplines)");
         convertSwimStyles();
-        // TODO: FIXME: hardcoded meet_id: 114
+        System.out.println("Converting events");
+        convertEvents();
         transaction.commit();
     }
 
+    private void convertEvents() {
+        // TODO: FIXME: hardcoded meet_id: 114
+        new LegacyQueryTemplate("select event.id, discipline_id, discipline.name, sex_id, date, number from event " +
+                "left join discipline on discipline_id = discipline.id " +
+                "where meet_id = 114" ){
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    SwimMastersEvent event = new SwimMastersEvent();
+                    event.id = resultSet.getInt("id");
+                    event.eventGender = EventGender.ALL; // TODO: FIXME
+                    String dateString = resultSet.getString("date");
+                    if (dateString != null) {
+                        LocalDate date = new LocalDate(dateString);
+                        // TODO: FIXME: handle sessions
+                    }
+                    event.number = resultSet.getInt("number");
+
+                    SwimMastersSwimStyle style = new SwimMastersSwimStyle();
+                    style.name = resultSet.getString("name");
+                    normalizeStyleName(style);
+                    event.swimStyle = findStyleByNormalizedName(style);
+                    if (event.swimStyle == null) {
+                        throw new IllegalStateException("cannot find discipline, event " + event.id);
+                    }
+
+                    int sexId = resultSet.getInt("sex_id");
+                    switch (sexId) {
+                        case 1:
+                            event.eventGender = EventGender.MALE;
+                            break;
+                        case 2:
+                            event.eventGender = EventGender.FEMALE;
+                            break;
+                        case 3:
+                            event.eventGender = EventGender.MIXED;
+                            break;
+                        default:
+                            throw new IllegalStateException("unknown gender: " + sexId);
+                    }
+
+                    System.out.println(event);
+
+                    entityManager.persist(event);
+                }
+            }
+        }.run();
+    }
+
     private void convertClub() {
-        new LegacyQueryTemplate("select \"id\", \"name\", \"city_id\", \"akvsp_code\", \"en_name\" from club" ){
+        new LegacyQueryTemplate("select id, name, city_id, akvsp_code, en_name from club" ){
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
@@ -155,13 +203,14 @@ public class LegacyDataImporter {
                     SwimMastersSwimStyle style = new SwimMastersSwimStyle();
                     style.id = resultSet.getInt("id");
                     style.distance = resultSet.getInt("length");
-                    int sexId = resultSet.getInt("sex_id");
-                    if (sexId == 1) {
-                        style.gender = Gender.MALE;
-                    } else if (sexId == 2) {
-                        style.gender = Gender.FEMALE;
-                    }
+                    // sex_id is ignored and set in event
                     style.name = resultSet.getString("name");
+                    normalizeStyleName(style);
+                    SwimMastersSwimStyle foundStyle = findStyleByNormalizedName(style);
+                    if (foundStyle != null) {
+                        // will find later
+                        continue;
+                    }
                     switch (resultSet.getInt("stroke_id")) {
                         case 0: // | все стили            | все
                             style.stroke = Stroke.UNKNOWN;
@@ -193,8 +242,7 @@ public class LegacyDataImporter {
                         default:
                             throw new IllegalStateException("don't know how to handle stroke");
                     }
-                    style.nameAbbr = resultSet.getString("name_abbr");
-                    style.namePlainAbbr = resultSet.getString("name_plain_abbr");
+                    style.nameAbbr = resultSet.getString("name_plain_abbr");
 
                     System.out.println(style);
 
@@ -202,6 +250,22 @@ public class LegacyDataImporter {
                 }
             }
         }.run();
+    }
+
+    @Nullable
+    private SwimMastersSwimStyle findStyleByNormalizedName(SwimMastersSwimStyle style) {
+        try {
+            return (SwimMastersSwimStyle) entityManager.createQuery("from SwimMastersSwimStyle where name=:name")
+                    .setParameter("name", style.name).getSingleResult();
+        } catch (NoResultException ignored) {
+            return null;
+        }
+    }
+
+    private static void normalizeStyleName(SwimMastersSwimStyle style) {
+        style.name = style.name.replace(" женщины", "");
+        style.name = style.name.replace(" мужчины", "");
+        style.name = style.name.replace(" смешанная", "");
     }
 
     private static void turnToRelay(SwimMastersSwimStyle style) {
