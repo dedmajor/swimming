@@ -15,6 +15,10 @@ public class SwimmastersEntry {
     // LEN (9 fields)
     String entryTime; // TODO: FIXME: SwimTime or LocalTime? SQL: interval?
 
+    /**
+     * Reference to the EVENT element using the id attribute.
+     * Required field.
+     */
     Integer eventId;
     Integer heatId;
     Integer lane;

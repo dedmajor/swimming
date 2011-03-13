@@ -66,5 +66,9 @@ public class SwimmastersClub {
     @Id
     Integer id;
     // Integer cityId;
-    // Integer akvspCode; // TODO: what is this?
+
+    /**
+     * Required for creating aggregate result tables.
+     */
+    // Integer akvspCode;
 }

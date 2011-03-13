@@ -1,9 +1,12 @@
 package ru.swimmasters.domain;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * This contains all information of a athlete including all entries and results
@@ -26,8 +29,11 @@ public class SwimmastersAthlete implements Athlete {
     /**
      * The club or team for the athlete, when he swam the record.
      * (These elements/objects are allowed in a record list sub tree only.)
+     * Swimmasters: required field.
      */
-    //SwimmastersClub club;
+    @OneToOne(optional = false)
+    SwimmastersClub club;
+
     // Entries entries;
     // Handicap handicap;
 
@@ -36,6 +42,8 @@ public class SwimmastersAthlete implements Athlete {
      * the date should be set to January 1st of that year.
      * Required field.
      */
+    @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+    @Column(nullable = false)
     public LocalDate birthDate;
 
     /**
@@ -69,6 +77,7 @@ public class SwimmastersAthlete implements Athlete {
      * Gender of the athlete.
      * Required field.
      */
+    @Column(nullable = false)
     Gender gender;
 
     /**
@@ -84,7 +93,8 @@ public class SwimmastersAthlete implements Athlete {
 
     /**
      * The passport number of the athlete.
-     * SwimMasters: passportSeries + passportNumber.
+     * Swimmasters: to be validated on a mandate committee.
+     * Swimmasters: passportSeries + passportNumber.
      */
     String passport;
 
@@ -92,7 +102,7 @@ public class SwimmastersAthlete implements Athlete {
     //Results results;
     //Integer swrid;
 
-    // SwimMasters (21 fields):
+    // Swimmasters (21 fields):
 
     @Id
     Long id;
@@ -100,15 +110,15 @@ public class SwimmastersAthlete implements Athlete {
     String email;
     String phone;
 
-    //Integer clubId;
     //Integer cityId;
     //Integer titleId; // sport master, candidate, etc
-    //String englishMiddleName;
+    String englishMiddleName;
     //SmallInteger statusId; // pending, active, dead
-    //String passportIssuedBy;
-    //LocalDate passportIssuedOn;
+    String passportIssuedBy;
+    @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
+    LocalDate passportIssuedOn;
     //Integer countryId;
-    //LocalDate listingDate;
+    //LocalDate listingDate; // TODO: FIXME: why we need this?
 
     @Override
     public LocalDate getBirthDate() {
