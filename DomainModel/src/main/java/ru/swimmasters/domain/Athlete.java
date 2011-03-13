@@ -8,4 +8,5 @@ import org.joda.time.LocalDate;
  */
 public interface Athlete {
     LocalDate getBirthDate();
+    String getFirstName();
 }

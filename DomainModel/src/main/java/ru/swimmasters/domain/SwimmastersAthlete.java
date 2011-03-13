@@ -2,10 +2,14 @@ package ru.swimmasters.domain;
 
 import org.joda.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * User: dedmajor
  * Date: 3/7/11
  */
+@Entity
 public class SwimmastersAthlete implements Athlete {
     // LEN (17 fields):
 
@@ -35,7 +39,7 @@ public class SwimmastersAthlete implements Athlete {
      * The first name of the athlete.
      * Required field.
      */
-    String firstName;
+    public String firstName;
 
     /**
      *  The first name in english.
@@ -87,6 +91,7 @@ public class SwimmastersAthlete implements Athlete {
 
     // SwimMasters (21 fields):
 
+    @Id
     Long id;
 
     String email;
@@ -105,5 +110,10 @@ public class SwimmastersAthlete implements Athlete {
     @Override
     public LocalDate getBirthDate() {
         return birthDate;
+    }
+
+    @Override
+    public String getFirstName() {
+        return firstName;
     }
 }
