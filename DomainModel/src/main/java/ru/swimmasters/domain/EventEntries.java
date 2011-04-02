@@ -17,6 +17,8 @@ public interface EventEntries extends Entries {
      */
     boolean isHeatsPrepared();
 
+    Map<AgeGroup, EventEntries> getGroupedByAge();
+
     /**
      * Maps the heat number (from 1 to all.size()) to the list of entries
      * ordered by a lane number.

@@ -6,9 +6,9 @@ import ru.swimmasters.domain.SwimMastersEntry;
 import ru.swimmasters.domain.SwimMastersHeat;
 
 /**
- * HeatBuilder which keeps leaders of the same age group together in the top heat of each group.
+ * HeatBuilder which keeps leaders of the same age group together in the best heat of each group.
  * Younger groups swim later in time. Fastest (top) sportsmen swim later in each group.
- * Several groups can swim together in the same heat, but age group leads are always in the same heat.
+ * Several groups can swim together in the same heat.
  *
  * User: dedmajor
  * Date: 4/2/11
@@ -28,5 +28,9 @@ public class SwimMastersHeatBuilder implements HeatBuilderService {
             ourEntry.setLane(1);
             heat.entries.add(ourEntry);
         }
+    }
+
+    public void setLeadsInAgeGroup(int leadsInAgeGroup) {
+        this.leadsInAgeGroup = leadsInAgeGroup;
     }
 }

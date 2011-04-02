@@ -143,6 +143,14 @@ public class SwimMastersAthlete implements MeetAthlete {
         return firstName + ", " + lastName;
     }
 
+    /**
+     * Returns the age of athlete by Dec, 31 of the given date.
+     */
+    @Override
+    public int getAge(LocalDate date) {
+        return date.getYear() - birthDate.getYear();
+    }
+
     @Override
     public Entries getEntries() {
         return new Entries() {

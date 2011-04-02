@@ -26,4 +26,6 @@ public interface Entry {
      * @return true if heat and lane are set, false otherwise
      */
     boolean isHeatPrepared();
+
+    AgeGroup getAgeGroup();
 }

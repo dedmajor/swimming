@@ -17,6 +17,11 @@ public abstract class CheckedEventEntries implements EventEntries {
     }
 
     @Override
+    public Map<AgeGroup, EventEntries> getGroupedByAge() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public boolean isAllHeatsCompetitive() {
         checkHeatsPrepared();
         for (Entry entry : getAll()) {
