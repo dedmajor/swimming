@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
  * Date: 3/13/11
  */
 @Entity
-public class SwimMastersEvent {
+public class SwimMastersEvent implements Event {
     // LEN (15 fields)
     // AGEGROUPS
     // daytime
@@ -49,4 +49,10 @@ public class SwimMastersEvent {
     // discipline_id = swimstyle
     // date - moved to session
     // number = number
+
+
+    @Override
+    public SwimStyle getSwimStyle() {
+        return swimStyle;
+    }
 }

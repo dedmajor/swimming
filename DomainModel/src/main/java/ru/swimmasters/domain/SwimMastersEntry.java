@@ -20,7 +20,7 @@ import javax.persistence.ManyToOne;
  * Date: 3/13/11
  */
 @Entity
-public class SwimMastersEntry {
+public class SwimMastersEntry implements Entry {
     // LEN (9 fields)
     /**
      * The entry time in the swim time format.
@@ -59,4 +59,14 @@ public class SwimMastersEntry {
     SwimMastersAthlete athlete;
 
     //LocalTimeStamp mandateTimestamp; ??
+
+    @Override
+    public Event getEvent() {
+        return event;
+    }
+
+    @Override
+    public Duration getEntryTime() {
+        return entryTime;
+    }
 }

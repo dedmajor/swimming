@@ -4,6 +4,9 @@ import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * This contains all information of a athlete including all entries and results
@@ -13,7 +16,7 @@ import javax.persistence.*;
  * Date: 3/7/11
  */
 @Entity
-public class SwimMastersAthlete implements Athlete {
+public class SwimMastersAthlete implements MeetAthlete {
     // LEN (17 fields):
 
     /**
@@ -31,8 +34,8 @@ public class SwimMastersAthlete implements Athlete {
     @ManyToOne(optional = false)
     SwimMastersClub club;
 
-    // TODO: reverse link to entries
-    // Entries entries;
+    @OneToMany(mappedBy = "athlete")
+    List<SwimMastersEntry> entries;
 
     // Handicap handicap;
 
@@ -127,5 +130,20 @@ public class SwimMastersAthlete implements Athlete {
     @Override
     public String getFirstName() {
         return firstName;
+    }
+
+    @Override
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Override
+    public Entries getEntries() {
+        return new Entries() {
+            @Override
+            public List<Entry> getAll() {
+                return new ArrayList<Entry>(entries);
+            }
+        };
     }
 }

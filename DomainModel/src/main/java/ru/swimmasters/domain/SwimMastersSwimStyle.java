@@ -9,7 +9,7 @@ import javax.persistence.Id;
  * Date: 3/13/11
  */
 @Entity
-public class SwimMastersSwimStyle {
+public class SwimMastersSwimStyle implements SwimStyle {
     // LEN (6 fields)
 
     /**
@@ -58,4 +58,9 @@ public class SwimMastersSwimStyle {
     // stroke_id = stroke
     // sex_id - replaced with event.eventGender
     String nameAbbr;
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }
