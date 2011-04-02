@@ -10,4 +10,5 @@ public interface Athlete {
     LocalDate getBirthDate();
     String getFirstName();
     String getLastName();
+    String getFullName();
 }

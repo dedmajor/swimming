@@ -7,6 +7,7 @@ import org.joda.time.Duration;
  * Date: 4/2/11
  */
 public interface Entry {
+    MeetAthlete getAthlete();
     Event getEvent();
     Duration getEntryTime();
 }

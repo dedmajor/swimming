@@ -61,6 +61,11 @@ public class SwimMastersEntry implements Entry {
     //LocalTimeStamp mandateTimestamp; ??
 
     @Override
+    public MeetAthlete getAthlete() {
+        return athlete;
+    }
+
+    @Override
     public Event getEvent() {
         return event;
     }

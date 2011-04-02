@@ -13,7 +13,8 @@
     <!-- JSR-303 support will be detected on classpath and enabled automatically -->
     <mvc:annotation-driven/>
 
-    <bean id="entriesController" class="ru.swimmasters.web.AthletesController" />
+    <bean id="athletesController" class="ru.swimmasters.web.AthletesController" />
+    <bean id="eventsController" class="ru.swimmasters.web.EventsController" />
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

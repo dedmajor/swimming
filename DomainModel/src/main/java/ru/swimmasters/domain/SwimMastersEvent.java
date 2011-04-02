@@ -1,9 +1,8 @@
 package ru.swimmasters.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: dedmajor
@@ -19,7 +18,11 @@ public class SwimMastersEvent implements Event {
 
     @Column(nullable = false)
     EventGender eventGender = EventGender.ALL;
-    // HEATS
+
+    // TODO: Len: HEATS
+    @OneToMany(mappedBy = "event")
+    List<SwimMastersEntry> entries;
+
     // maxentries
 
     /**
@@ -52,7 +55,22 @@ public class SwimMastersEvent implements Event {
 
 
     @Override
+    public EventGender getEventGender() {
+        return eventGender;
+    }
+
+    @Override
     public SwimStyle getSwimStyle() {
         return swimStyle;
+    }
+
+    @Override
+    public Entries getEntries() {
+        return new Entries() {
+            @Override
+            public List<Entry> getAll() {
+                return new ArrayList<Entry>(entries);
+            }
+        };
     }
 }

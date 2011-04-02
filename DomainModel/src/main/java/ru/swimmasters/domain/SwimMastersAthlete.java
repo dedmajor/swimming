@@ -138,6 +138,12 @@ public class SwimMastersAthlete implements MeetAthlete {
     }
 
     @Override
+    public String getFullName() {
+        // TODO: presentation stuff?
+        return firstName + ", " + lastName;
+    }
+
+    @Override
     public Entries getEntries() {
         return new Entries() {
             @Override

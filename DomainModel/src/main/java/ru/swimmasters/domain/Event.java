@@ -5,5 +5,7 @@ package ru.swimmasters.domain;
  * Date: 4/2/11
  */
 public interface Event {
+    EventGender getEventGender();
     SwimStyle getSwimStyle();
+    Entries getEntries();
 }
