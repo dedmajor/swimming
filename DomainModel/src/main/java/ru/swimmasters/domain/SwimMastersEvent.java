@@ -1,5 +1,7 @@
 package ru.swimmasters.domain;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +67,9 @@ public class SwimMastersEvent implements Event {
     }
 
     @Override
-    public Entries getEntries() {
-        return new Entries() {
+    public EventEntries getEntries() {
+        return new CheckedEventEntries() {
+            @NotNull
             @Override
             public List<Entry> getAll() {
                 return new ArrayList<Entry>(entries);

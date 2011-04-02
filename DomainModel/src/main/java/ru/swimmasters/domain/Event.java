@@ -7,5 +7,5 @@ package ru.swimmasters.domain;
 public interface Event {
     EventGender getEventGender();
     SwimStyle getSwimStyle();
-    Entries getEntries();
+    EventEntries getEntries();
 }

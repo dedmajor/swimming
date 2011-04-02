@@ -4,7 +4,6 @@ package ru.swimmasters.domain;
 import org.hibernate.annotations.Type;
 import org.joda.time.Duration;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -34,10 +33,12 @@ public class SwimMastersEntry implements Entry {
      * XML: eventId
      */
     @ManyToOne(optional = false)
-    SwimMastersEvent event;
+    public SwimMastersEvent event;
 
-    //Integer heatId;
-    //Integer lane;
+    //Len: Integer heatId;
+    SwimMastersHeat heat;
+
+    Integer lane;
 
     /**
      * This attribute is used for the entry status information.
@@ -56,7 +57,7 @@ public class SwimMastersEntry implements Entry {
     Integer id;
 
     @ManyToOne(optional = false)
-    SwimMastersAthlete athlete;
+    public SwimMastersAthlete athlete;
 
     //LocalTimeStamp mandateTimestamp; ??
 
@@ -73,5 +74,28 @@ public class SwimMastersEntry implements Entry {
     @Override
     public Duration getEntryTime() {
         return entryTime;
+    }
+
+    @Override
+    public Heat getHeat() {
+        return heat;
+    }
+
+    @Override
+    public Integer getLane() {
+        return lane;
+    }
+
+    @Override
+    public boolean isHeatPrepared() {
+        return heat != null && lane != null;
+    }
+
+    public void setHeat(Heat heat) {
+        this.heat = (SwimMastersHeat) heat;
+    }
+
+    public void setLane(int lane) {
+        this.lane = lane;
     }
 }
