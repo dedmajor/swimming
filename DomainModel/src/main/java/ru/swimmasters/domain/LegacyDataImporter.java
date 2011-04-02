@@ -1,6 +1,7 @@
 package ru.swimmasters.domain;
 
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -64,7 +65,39 @@ public class LegacyDataImporter {
         convertSwimStyles();
         System.out.println("Converting events");
         convertEvents();
+        System.out.println("Converting entries (heats)");
+        convertEntries();
         transaction.commit();
+    }
+
+    private void convertEntries() {
+        new LegacyQueryTemplate("select heat.id, event_id, " +
+                "entry_time, extract(milliseconds from result_time) as result_time, athlete_id " +
+                "from heat " +
+                "left join event on event_id = event.id where meet_id=114;") {
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    SwimMastersEntry entry = new SwimMastersEntry();
+                    entry.id = resultSet.getInt("id");
+                    entry.event = entityManager.find(SwimMastersEvent.class, resultSet.getInt("event_id"));
+
+                    // TODO: FIXME: overriding entry time with result time just to test a heat builder
+                    //String entryTime = resultSet.getString("entry_time");
+                    Long entryTimeMs = resultSet.getLong("result_time");
+                    if (entryTimeMs != 0L) {
+                        entry.entryTime = new Duration(entryTimeMs);
+                    }
+
+                    entry.athlete = entityManager.find(SwimMastersAthlete.class, resultSet.getLong("athlete_id"));
+                    if (entry.athlete == null) {
+                        throw new IllegalStateException("athlete cannot be null for entry " + entry.id);
+                    }
+
+                    entityManager.persist(entry);
+                }
+            }
+        }.run();
     }
 
     private void convertEvents() {

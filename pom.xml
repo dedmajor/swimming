@@ -4,7 +4,7 @@
     <groupId>ru.swimmasters</groupId>
     <artifactId>meetmanager</artifactId>
     <version>0.2.0-SNAPSHOT</version>
-    <name>Swimmasters Meet Manager</name>
+    <name>SwimMasters Meet Manager</name>
     <url>http://dedmajor.ru/swimmasters/</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

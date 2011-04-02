@@ -1,6 +1,14 @@
 package ru.swimmasters.domain;
 
 
+import org.hibernate.annotations.Type;
+import org.joda.time.Duration;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * This element contains the information for a single entry of an athlete or a relay
  * to a specific round of a meet.
@@ -11,17 +19,25 @@ package ru.swimmasters.domain;
  * User: dedmajor
  * Date: 3/13/11
  */
+@Entity
 public class SwimMastersEntry {
     // LEN (9 fields)
-    String entryTime; // TODO: FIXME: SwimTime or LocalTime? SQL: interval?
+    /**
+     * The entry time in the swim time format.
+     */
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDuration")
+    Duration entryTime;
 
     /**
      * Reference to the EVENT element using the id attribute.
      * Required field.
+     * XML: eventId
      */
-    Integer eventId;
-    Integer heatId;
-    Integer lane;
+    @ManyToOne(optional = false)
+    SwimMastersEvent event;
+
+    //Integer heatId;
+    //Integer lane;
 
     /**
      * This attribute is used for the entry status information.
@@ -31,5 +47,16 @@ public class SwimMastersEntry {
     //Integer ageGroupId;
     //Integer entryCourse;
     //MeetInfo meetInfo;
+
+    // TODO: relay positions
     //RelayPositions relayPositions;
+
+    // SwimMasters
+    @Id
+    Integer id;
+
+    @ManyToOne(optional = false)
+    SwimMastersAthlete athlete;
+
+    //LocalTimeStamp mandateTimestamp; ??
 }

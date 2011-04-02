@@ -31,7 +31,9 @@ public class SwimMastersAthlete implements Athlete {
     @ManyToOne(optional = false)
     SwimMastersClub club;
 
+    // TODO: reverse link to entries
     // Entries entries;
+
     // Handicap handicap;
 
     /**
