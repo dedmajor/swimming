@@ -14,13 +14,13 @@ import java.util.List;
  * Date: 3/12/11
  */
 @Controller
-public class EntriesController {
+public class AthletesController {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @RequestMapping("/listEntries.html")
+    @RequestMapping("/listAthletes.html")
     public ModelAndView listEntries() {
-        ModelAndView mav = new ModelAndView("listEntries");
+        ModelAndView mav = new ModelAndView("listAthletes");
         List<Athlete> athletes = (List<Athlete>) entityManager.createQuery("from SwimMastersAthlete")
                 .getResultList();
         mav.addObject("athletes", athletes);

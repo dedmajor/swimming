@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Entries</title>
+    <title>Athletes</title>
     <style type="text/css">
         .entries_table {
             /* nop; */
