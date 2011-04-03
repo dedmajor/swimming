@@ -3,6 +3,7 @@ package ru.swimmasters.service;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
+import org.junit.Before;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
 
@@ -17,53 +18,65 @@ import static org.junit.Assert.assertFalse;
  * Date: 4/2/11
  */
 public class HeatBuilderSimpleTest {
+    private EventEntries singleEntry;
+    private EventEntries someEntries;
+
+    @Before
+    public void setUp() {
+        singleEntry = singleTestEntry();
+        someEntries = threeAgeGroupEntries();
+    }
+
     @Test
     public void testNonCompetitive() {
-        HeatBuilderService service = new SwimMastersHeatBuilder();
-        EventEntries entries = singleTestEntry();
-        service.buildHeats(entries);
-        assertFalse("the only heat cannot be competitive", entries.isAllHeatsCompetitive());
+        StartListBuilder service = new PrimitiveStartListBuilder();
+        setUp();
+        service.buildHeats(singleEntry);
+        assertFalse("the only heat cannot be competitive", singleEntry.isAllHeatsCompetitive());
     }
 
     @Test
     public void testPoolLanes() {
-        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
-        EventEntries entries = threeAgeGroupEntries();
-        service.buildHeats(entries);
-        new PoolLanesValidator().validateEntries(entries);
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.buildHeats(someEntries);
+        new PoolLanesValidator().validateEntries(someEntries);
     }
 
     @Test
     public void testGroupsOrder() {
-        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
-        EventEntries entries = threeAgeGroupEntries();
-        service.buildHeats(entries);
-        new GroupsOrderValidator().validateEntries(entries);
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.buildHeats(someEntries);
+        new GroupsOrderValidator().validateEntries(someEntries);
 
     }
 
     @Test
     public void testHeatNumbersOrder() {
-        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
-        EventEntries entries = threeAgeGroupEntries();
-        service.buildHeats(entries);
-        new HeatNumberValidator().validateEntries(entries);
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.buildHeats(someEntries);
+        new HeatNumberValidator().validateEntries(someEntries);
     }
 
     @Test
     public void testEmptyHeatsValidator() {
-        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
-        EventEntries entries = threeAgeGroupEntries();
-        service.buildHeats(entries);
-        new EmptyHeatsValidator().validateEntries(entries);
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.buildHeats(someEntries);
+        new EmptyHeatsValidator().validateEntries(someEntries);
     }
 
     @Test
     public void testAthletesOrder() {
-        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
-        EventEntries entries = threeAgeGroupEntries();
-        service.buildHeats(entries);
-        new AthletesOrderValidator().validateEntries(entries);
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.buildHeats(someEntries);
+        new AthletesOrderValidator().validateEntries(someEntries);
+    }
+
+    @Test
+    public void testLeads() {
+        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
+        service.setLeadsInAgeGroup(3);
+        service.buildHeats(someEntries);
+        new LeadsValidator(3).validateEntries(someEntries);
     }
 
     private static EventEntries threeAgeGroupEntries() {
@@ -73,7 +86,7 @@ public class HeatBuilderSimpleTest {
                 SwimMastersPool pool = new SwimMastersPool();
                 event.setPool(pool);
                 pool.setLaneMin(2);
-                pool.setLaneMax(2);
+                pool.setLaneMax(3);
             }
             private final List<Entry> entries = new ArrayList<Entry>();
             {

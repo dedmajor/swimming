@@ -18,7 +18,7 @@ public interface EventEntries extends Entries {
      * TODO: rename to isStartListPrepared()
      *
      * Checks that all entries have Heat and lane information, i. e. prepared with
-     * {@link ru.swimmasters.service.HeatBuilderService}.
+     * {@link ru.swimmasters.service.StartListBuilder}.
      */
     boolean isHeatsPrepared();
 

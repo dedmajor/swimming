@@ -1,5 +1,6 @@
 package ru.swimmasters.service;
 
+import org.apache.commons.collections.iterators.ArrayListIterator;
 import ru.swimmasters.domain.AgeGroup;
 import ru.swimmasters.domain.Entry;
 import ru.swimmasters.domain.EventEntries;
@@ -24,8 +25,7 @@ public class LeadsValidator implements StartListValidator {
     @Override
     public void validateEntries(EventEntries entries) {
         List<Heat> heats = entries.getHeatsOrderedByNumber();
-        Collection<AgeGroup> checkedGroups = null;
-
+        Collection<AgeGroup> checkedGroups = new ArrayList<AgeGroup>();
 
         List<Heat> reverseHeats = reverseHeats(heats);
 
@@ -39,7 +39,8 @@ public class LeadsValidator implements StartListValidator {
                 int expectedLeads = Math.min(leadsInAgeGroup, totalAthletes.get(group));
 
                 if (!checkedGroups.contains(group)) {
-                    assertThat("leads rule violated for age group " + group + " and heat " + heat,
+                    assertThat("leads rule violated for age group " + group + " and heat " + heat.getNumber()
+                            + " of " + reverseHeats.size() + ", groups: " + groupedHeatAthletes,
                             entry.getValue(), greaterThanOrEqualTo(expectedLeads));
 
                     checkedGroups.add(group);

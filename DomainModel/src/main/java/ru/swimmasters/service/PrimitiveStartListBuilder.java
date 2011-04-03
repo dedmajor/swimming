@@ -17,7 +17,7 @@ import java.util.*;
  * User: dedmajor
  * Date: 4/2/11
  */
-public class SwimMastersHeatBuilder implements HeatBuilderService {
+public class PrimitiveStartListBuilder implements StartListBuilder {
     private int leadsInAgeGroup;
 
     /**
@@ -29,18 +29,30 @@ public class SwimMastersHeatBuilder implements HeatBuilderService {
         List<AgeGroup> groups = entries.getEvent().getAgeGroups().getAllOrderedByAge();
         Collections.reverse(groups);
         int heatNumber = 1;
+        SwimMastersHeat heat = new SwimMastersHeat();
+        int lane = entries.getEvent().getPool().getLaneMin();
         for (AgeGroup group : groups) {
             List<Entry> groupEntries = new ArrayList<Entry>(groupedByAge.get(group).getAll());
             Collections.sort(groupEntries, SwimMastersEntry.heatEntryComparator());
             Collections.reverse(groupEntries);
-            for (Entry entry : groupEntries) {
-                SwimMastersHeat heat = new SwimMastersHeat();
-                heat.setNumber(heatNumber);
+            if (heat.hasNumber()) {
+                lane = entries.getEvent().getPool().getLaneMin();
+                heat = new SwimMastersHeat();
                 heatNumber++;
+            }
+            for (Entry entry : groupEntries) {
+                heat.setNumber(heatNumber);
                 SwimMastersEntry ourEntry = (SwimMastersEntry) entry;
                 ourEntry.setHeat(heat);
-                ourEntry.setLane(entries.getEvent().getPool().getLaneMax());
+                ourEntry.setLane(lane);
                 heat.entries.add(ourEntry);
+
+                lane++;
+                if (lane > entries.getEvent().getPool().getLaneMax()) {
+                    lane = entries.getEvent().getPool().getLaneMin();
+                    heat = new SwimMastersHeat();
+                    heatNumber++;
+                }
             }
         }
     }

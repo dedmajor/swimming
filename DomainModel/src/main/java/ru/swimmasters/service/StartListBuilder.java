@@ -8,7 +8,7 @@ import ru.swimmasters.domain.Heat;
  * User: dedmajor
  * Date: 4/2/11
  */
-public interface HeatBuilderService {
+public interface StartListBuilder {
     /**
      * Prepares and sets {@link Heat} and lane information for each {@link Entry}.
      */

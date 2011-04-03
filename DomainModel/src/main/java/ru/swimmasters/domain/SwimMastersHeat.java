@@ -54,6 +54,10 @@ public class SwimMastersHeat implements Heat {
         this.number = number;
     }
 
+    public boolean hasNumber() {
+        return number != null;
+    }
+
     @Override
     public Entries getEntries() {
         return new CheckedEventEntries() {
