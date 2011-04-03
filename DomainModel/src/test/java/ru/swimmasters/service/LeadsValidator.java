@@ -1,6 +1,5 @@
 package ru.swimmasters.service;
 
-import org.apache.commons.collections.iterators.ArrayListIterator;
 import ru.swimmasters.domain.AgeGroup;
 import ru.swimmasters.domain.Entry;
 import ru.swimmasters.domain.EventEntries;

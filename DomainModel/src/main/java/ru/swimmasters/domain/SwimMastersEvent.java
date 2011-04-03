@@ -1,11 +1,8 @@
 package ru.swimmasters.domain;
 
-import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -114,6 +111,8 @@ public class SwimMastersEvent implements Event {
 
     // TODO: store in db
     private transient Pool pool;
+    private transient LocalDate date;
+
 
 
     @Override
@@ -128,39 +127,24 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public LocalDate getDate() {
-        // TODO: FIXME: several dates possible depending on Session
-        return new LocalDate("2010-11-04");
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     @Override
     public EventEntries getEntries() {
-        return new CheckedEventEntries() {
-            @NotNull
-            @Override
-            public List<Entry> getAll() {
-                return new ArrayList<Entry>(entries);
-            }
-        };
+        return new CheckedEventEntries(entries);
     }
 
     @Override
     public AgeGroups getAgeGroups() {
         if (ageGroups == null) {
-            throw new IllegalStateException("age groups haven't been build yet");
+            throw new IllegalStateException("age groups haven't been built yet");
         }
-        return new SwimMastersAgeGroups() {
-            @Override
-            public List<AgeGroup> getAllOrderedByAge() {
-                ArrayList<AgeGroup> result = new ArrayList<AgeGroup>(ageGroups);
-                Collections.sort(result);
-                return result;
-            }
-
-            @Override
-            public Event getEvent() {
-                return SwimMastersEvent.this;
-            }
-        };
+        return new SwimMastersAgeGroups(this, ageGroups);
     }
 
     @Override

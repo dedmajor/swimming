@@ -6,6 +6,15 @@ import ru.swimmasters.domain.*;
 import java.util.*;
 
 /**
+ * Heat builder which MUST keep leaders (the fastest athletes) of the same age group together
+ * in the best heat (i. e. the last heat, heat with the maximum number) of each group.
+ *
+ * Younger groups MUST swim later in time (i. e. in greater heat numbers).
+ *
+ * Faster sportsmen MUST swim later in each group (i. e. in the greater heat number).
+ *
+ * Several groups CAN swim together in the same heat.
+ *
  * User: dedmajor
  * Date: 4/3/11
  */
@@ -28,6 +37,9 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
         int number = 0;
         for (AgeGroup group : groups) {
             AgeQueue queue = queues.get(group);
+            if (queue == null) {
+                continue;
+            }
             while (queue.hasMoreEntries()) {
                 previousBrickHeat = currentHeat;
 

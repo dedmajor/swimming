@@ -132,6 +132,12 @@ public class SwimMastersAthlete implements MeetAthlete {
         this.birthDate = birthDate;
     }
 
+    public SwimMastersAthlete(LocalDate birthDate, String firstName, String lastName) {
+        this.birthDate = birthDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Override
     public LocalDate getBirthDate() {
         return birthDate;

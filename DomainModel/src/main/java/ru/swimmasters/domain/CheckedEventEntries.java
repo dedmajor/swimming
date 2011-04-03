@@ -11,7 +11,19 @@ import java.util.*;
  * User: dedmajor
  * Date: 4/2/11
  */
-public abstract class CheckedEventEntries implements EventEntries {
+public class CheckedEventEntries implements EventEntries {
+    private final List<Entry> entries;
+
+    public CheckedEventEntries(List<? extends Entry> entries) {
+        this.entries = new ArrayList<Entry>(entries);
+    }
+
+    @NotNull
+    @Override
+    public List<Entry> getAll() {
+        return entries;
+    }
+
     @Override
     public List<Heat> getHeatsOrderedByNumber() {
         checkHeatsPrepared();
@@ -21,7 +33,7 @@ public abstract class CheckedEventEntries implements EventEntries {
                 return Integer.valueOf(o1.getNumber()).compareTo(o2.getNumber());
             }
         });
-        for (Entry entry : getAll()) {
+        for (Entry entry : entries) {
             sortedHeats.add(entry.getHeat());
         }
         return new ArrayList<Heat>(sortedHeats);
@@ -30,7 +42,7 @@ public abstract class CheckedEventEntries implements EventEntries {
     @Override
     public boolean isAllHeatsCompetitive() {
         checkHeatsPrepared();
-        for (Entry entry : getAll()) {
+        for (Entry entry : entries) {
             Heat heat = entry.getHeat();
             assert heat != null;
             if (!heat.isCompetitive()) {
@@ -43,7 +55,7 @@ public abstract class CheckedEventEntries implements EventEntries {
     @Override
     public Event getEvent() {
         checkTheSameEvent();
-        return getAll().get(0).getEvent();
+        return entries.get(0).getEvent();
     }
 
     @Override
@@ -51,7 +63,7 @@ public abstract class CheckedEventEntries implements EventEntries {
         checkTheSameEvent();
         Map<AgeGroup, Entries> result = new TreeMap<AgeGroup, Entries>();
         Map<AgeGroup, ArrayList<Entry>> map = new HashMap<AgeGroup, ArrayList<Entry>>();
-        for (Entry entry : getAll()) {
+        for (Entry entry : entries) {
             if (map.containsKey(entry.getAgeGroup())) {
                 map.get(entry.getAgeGroup()).add(entry);
             } else {
@@ -72,7 +84,7 @@ public abstract class CheckedEventEntries implements EventEntries {
 
     @Override
     public boolean isHeatsPrepared() {
-        for (Entry entry : getAll()) {
+        for (Entry entry : entries) {
             if (!entry.isHeatPrepared()) {
                 return false;
             }
@@ -89,7 +101,7 @@ public abstract class CheckedEventEntries implements EventEntries {
 
     private boolean isOfTheSameEvent() {
         Event event = null;
-        for (Entry entry : getAll()) {
+        for (Entry entry : entries) {
             if (event == null) {
                 event = entry.getEvent();
             } else {

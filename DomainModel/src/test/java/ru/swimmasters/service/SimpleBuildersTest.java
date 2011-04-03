@@ -59,16 +59,6 @@ public class SimpleBuildersTest {
         new AthletesOrderValidator().validateEntries(serviceEntries.entries);
     }
 
-    /*
-    @Test
-    public void testLeads(EventEntries entries) {
-        PrimitiveStartListBuilder service = new PrimitiveStartListBuilder();
-        service.setLeadsInAgeGroup(3);
-        service.buildHeats(entries);
-        new LeadsValidator(3).validateEntries(entries);
-    }
-    */
-
     private static class BuilderEntries {
         public final StartListBuilder service;
         public final EventEntries entries;
@@ -80,52 +70,43 @@ public class SimpleBuildersTest {
     }
 
     private static EventEntries threeAgeGroupEntries() {
-        return new CheckedEventEntries() {
-            private final SwimMastersEvent event = new SwimMastersEvent();
-            {
-                SwimMastersPool pool = new SwimMastersPool();
-                event.setPool(pool);
-                pool.setLaneMin(2);
-                pool.setLaneMax(3);
-            }
-            private final List<Entry> entries = new ArrayList<Entry>();
-            {
-                event.setAgeGroups(Arrays.asList(
-                        new SwimMastersAgeGroup(0, 20),
-                        new SwimMastersAgeGroup(21, 25),
-                        new SwimMastersAgeGroup(26, 30)
-                ));
-                // event.date = 2010-11-04
+        SwimMastersEvent event = new SwimMastersEvent();
+        SwimMastersPool pool = new SwimMastersPool();
+        event.setPool(pool);
+        pool.setLaneMin(2);
+        pool.setLaneMax(3);
+        event.setDate(new LocalDate("2010-11-04"));
 
-                entries.add(
-                        new SwimMastersEntry(event,
-                                new SwimMastersAthlete(new LocalDate("2010-11-04")),
-                                new Duration(1L))); // 0
+        List<Entry> entries = new ArrayList<Entry>();
+        event.setAgeGroups(Arrays.asList(
+                new SwimMastersAgeGroup(0, 20),
+                new SwimMastersAgeGroup(21, 25),
+                new SwimMastersAgeGroup(26, 30)
+        ));
 
-                entries.add(
-                        new SwimMastersEntry(event,
-                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
-                                new Duration(1L))); // 30 - 1 sec
-                entries.add(
-                        new SwimMastersEntry(event,
-                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
-                                new Duration(3L))); // 30 - 3 sec
-                entries.add(
-                        new SwimMastersEntry(event,
-                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
-                                new Duration(2L))); // 30 - 2 sec
+        entries.add(
+                new SwimMastersEntry(event,
+                        new SwimMastersAthlete(new LocalDate("2010-11-04")),
+                        new Duration(1L))); // 0
 
-                entries.add(
-                        new SwimMastersEntry(event, new SwimMastersAthlete(new
-                                LocalDate("1989-11-04")),
-                                new Duration(1L))); // 21
-            }
+        entries.add(
+                new SwimMastersEntry(event,
+                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        new Duration(1L))); // 30 - 1 sec
+        entries.add(
+                new SwimMastersEntry(event,
+                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        new Duration(3L))); // 30 - 3 sec
+        entries.add(
+                new SwimMastersEntry(event,
+                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        new Duration(2L))); // 30 - 2 sec
 
-            @NotNull
-            @Override
-            public List<Entry> getAll() {
-                return entries;
-            }
-        };
+        entries.add(
+                new SwimMastersEntry(event, new SwimMastersAthlete(new
+                        LocalDate("1989-11-04")),
+                        new Duration(1L))); // 21
+
+        return new CheckedEventEntries(entries);
     }
 }

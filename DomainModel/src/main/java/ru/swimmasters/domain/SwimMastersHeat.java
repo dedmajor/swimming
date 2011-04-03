@@ -1,7 +1,5 @@
 package ru.swimmasters.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,13 +59,7 @@ public class SwimMastersHeat implements Heat {
 
     @Override
     public Entries getEntries() {
-        return new CheckedEventEntries() {
-            @NotNull
-            @Override
-            public List<Entry> getAll() {
-                return new ArrayList<Entry>(entries);
-            }
-        };
+        return new CheckedEventEntries(entries);
     }
 
     @Override
