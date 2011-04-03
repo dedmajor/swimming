@@ -21,7 +21,7 @@ public class GroupsOrderValidator implements StartListValidator {
         Heat previousHeat = null;
         for (Heat heat : heats) {
             if (previousHeat != null) {
-                assertThat("heat number " + heat.getNumber() + " must gave younger groups",
+                assertThat("heat number " + heat.getNumber() + " must have younger groups",
                         heat.getOldestAgeGroup(),
                         lessThanOrEqualTo(previousHeat.getYoungestAgeGroup()));
             }

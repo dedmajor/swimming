@@ -2,11 +2,9 @@ package ru.swimmasters.domain;
 
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -44,6 +42,9 @@ public class SwimMastersHeat implements Heat {
 
     @OneToMany(mappedBy = "heat")
     public List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
+
+    @Transient
+    private List<SwimMastersEntry> lastAddedBrick;
 
     @Override
     public int getNumber() {
@@ -120,5 +121,30 @@ public class SwimMastersHeat implements Heat {
         }
         assert result.getAgeGroup().equals(ageGroup);
         return result;
+    }
+
+    public void addBrick(List<SwimMastersEntry> brick) {
+        entries.addAll(brick);
+        lastAddedBrick = brick;
+    }
+
+    public List<SwimMastersEntry> removeLastAddedBrick() {
+        if (lastAddedBrick == null) {
+            throw new IllegalStateException("no applications were added");
+        }
+        removeAllEntries(lastAddedBrick);
+        return lastAddedBrick;
+    }
+
+    /**
+     * Removes all applications from the heat.
+     * @param entriesBrick applications to be removed.
+     */
+    private void removeAllEntries(Collection<SwimMastersEntry> entriesBrick) {
+        if (!entries.containsAll(entriesBrick)) {
+            throw new IllegalArgumentException(
+                    "heat does not contain all the requested applications: " + entriesBrick);
+        }
+        entries.removeAll(entriesBrick);
     }
 }

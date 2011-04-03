@@ -80,7 +80,7 @@ public class SwimMastersEvent implements Event {
 
     // TODO: Len: HEATS
     @OneToMany(mappedBy = "event")
-    List<SwimMastersEntry> entries;
+    private List<SwimMastersEntry> entries;
 
     // maxentries
 
