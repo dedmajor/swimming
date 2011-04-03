@@ -46,7 +46,7 @@ public class SwimMastersAthlete implements MeetAthlete {
      */
     @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
     @Column(nullable = false)
-    public LocalDate birthDate;
+    LocalDate birthDate;
 
     /**
      * The first name of the athlete.
@@ -121,6 +121,14 @@ public class SwimMastersAthlete implements MeetAthlete {
     LocalDate passportIssuedOn;
     //Integer countryId;
     //LocalDate listingDate; // TODO: FIXME: why we need this?
+
+
+    SwimMastersAthlete() {
+    }
+
+    public SwimMastersAthlete(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
     @Override
     public LocalDate getBirthDate() {

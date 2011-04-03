@@ -37,7 +37,6 @@ public class HeatBuilderSimpleTest {
         SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
         EventEntries entries = threeAgeGroupEntries();
         service.buildHeats(entries);
-        List<Heat> heats = entries.getHeatsOrderedByNumber();
         new GroupsOrderValidator().validateEntries(entries);
     }
 
@@ -59,22 +58,12 @@ public class HeatBuilderSimpleTest {
                 ));
                 // event.date = 2010-11-04
 
-                SwimMastersAthlete athlete1 = new SwimMastersAthlete();
-                athlete1.birthDate = new LocalDate("2010-11-04"); // 0
-                SwimMastersEntry entry1 = new SwimMastersEntry(event, athlete1);
-
-                SwimMastersAthlete athlete2 = new SwimMastersAthlete();
-                athlete2.birthDate = new LocalDate("1989-11-04"); // 21
-                SwimMastersEntry entry2 = new SwimMastersEntry(event, athlete2);
-
-                SwimMastersAthlete athlete3 = new SwimMastersAthlete();
-                athlete3.birthDate = new LocalDate("1980-11-04"); // 30
-                SwimMastersEntry entry3 = new SwimMastersEntry(event, athlete3);
-
-                // 1, 3, 2
-                entries.add(entry1);
-                entries.add(entry3);
-                entries.add(entry2);
+                entries.add(
+                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("2010-11-04")))); // 0
+                entries.add(
+                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("1980-11-04")))); // 30
+                entries.add(
+                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("1989-11-04")))); // 21
             }
 
             @NotNull
@@ -89,7 +78,17 @@ public class HeatBuilderSimpleTest {
         return new CheckedEventEntries() {
             private final List<Entry> entries = new ArrayList<Entry>();
             {
-                entries.add(new SwimMastersEntry(new SwimMastersEvent(), new SwimMastersAthlete()));
+                SwimMastersEvent event = new SwimMastersEvent();
+                SwimMastersPool pool = new SwimMastersPool();
+                event.setPool(pool);
+                pool.setLaneMin(2);
+                pool.setLaneMax(2);
+                ArrayList<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
+                ageGroups.add(new SwimMastersAgeGroup(0, 0));
+                event.setAgeGroups(ageGroups);
+                // event.date = 2010-11-04
+                entries.add(new SwimMastersEntry(
+                        event, new SwimMastersAthlete(new LocalDate("2010-11-04"))));
             }
 
             @NotNull
