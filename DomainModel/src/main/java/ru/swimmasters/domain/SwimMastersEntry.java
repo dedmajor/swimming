@@ -7,9 +7,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.joda.time.Duration;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -66,6 +64,7 @@ public class SwimMastersEntry implements Entry {
     @ManyToOne(optional = false)
     SwimMastersEvent event;
 
+    @ManyToOne
     SwimMastersHeat heat;
 
     Integer lane;
@@ -76,7 +75,7 @@ public class SwimMastersEntry implements Entry {
     EntryStatus status = EntryStatus.REGULAR;
 
     @Id
-    Integer id;
+    Long id;
 
     @ManyToOne(optional = false)
     SwimMastersAthlete athlete;

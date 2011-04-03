@@ -69,7 +69,8 @@ public class SwimMastersEvent implements Event {
              * MANUAL1: Timing was done with one manual time per lane.
      */
 
-    @ManyToMany
+    //@ManyToMany
+    @Transient
     List<SwimMastersAgeGroup> ageGroups;
 
     @Column(nullable = false)
@@ -103,7 +104,7 @@ public class SwimMastersEvent implements Event {
     // SwimMasters
 
     @Id
-    Integer id;
+    Long id;
     // meet_id - not used yet
     // discipline_id = swimstyle
     // date - moved to session

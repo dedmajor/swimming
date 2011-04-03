@@ -10,7 +10,7 @@ import javax.persistence.Entity;
  * User: dedmajor
  * Date: 4/3/11
  */
-@Entity
+//@Entity
 public class SwimMastersAgeGroup implements AgeGroup {
     // LEN
     /*

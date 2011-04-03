@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <title>Athletes</title>
+    <title>Events</title>
     <link rel="stylesheet" type="text/css" href="css/light-console.css" media="all">
 </head>
 <body>

@@ -35,7 +35,6 @@ public class SwimMastersHeat implements Heat {
     @Id
     Long id;
 
-    @Column(nullable = false)
     private Integer number;
 
     @OneToMany(mappedBy = "heat")

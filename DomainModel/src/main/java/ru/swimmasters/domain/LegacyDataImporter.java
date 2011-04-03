@@ -79,8 +79,8 @@ public class LegacyDataImporter {
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
                     SwimMastersEntry entry = new SwimMastersEntry();
-                    entry.id = resultSet.getInt("id");
-                    entry.event = entityManager.find(SwimMastersEvent.class, resultSet.getInt("event_id"));
+                    entry.id = resultSet.getLong("id");
+                    entry.event = entityManager.find(SwimMastersEvent.class, resultSet.getLong("event_id"));
 
                     // TODO: FIXME: overriding entry time with result time just to test a heat builder
                     //String entryTime = resultSet.getString("entry_time");
@@ -109,7 +109,7 @@ public class LegacyDataImporter {
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
                     SwimMastersEvent event = new SwimMastersEvent();
-                    event.id = resultSet.getInt("id");
+                    event.id = resultSet.getLong("id");
                     event.eventGender = EventGender.ALL; // TODO: FIXME
                     String dateString = resultSet.getString("date");
                     if (dateString != null) {
