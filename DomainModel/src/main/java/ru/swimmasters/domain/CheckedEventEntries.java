@@ -1,6 +1,8 @@
 package ru.swimmasters.domain;
 
-import java.util.Map;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.*;
 
 /**
  * Default implementation of {@link EventEntries} interface which checks elements
@@ -11,14 +13,18 @@ import java.util.Map;
  */
 public abstract class CheckedEventEntries implements EventEntries {
     @Override
-    public Map<Heat, Entries> getGroupedByHeats() {
+    public List<Heat> getHeatsOrderedByNumber() {
         checkHeatsPrepared();
-        return null;
-    }
-
-    @Override
-    public Map<AgeGroup, EventEntries> getGroupedByAge() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        SortedSet<Heat> sortedHeats = new TreeSet<Heat>(new Comparator<Heat>() {
+            @Override
+            public int compare(Heat o1, Heat o2) {
+                return Integer.valueOf(o1.getNumber()).compareTo(o2.getNumber());
+            }
+        });
+        for (Entry entry : getAll()) {
+            sortedHeats.add(entry.getHeat());
+        }
+        return new ArrayList<Heat>(sortedHeats);
     }
 
     @Override
@@ -38,6 +44,30 @@ public abstract class CheckedEventEntries implements EventEntries {
     public Event getEvent() {
         checkTheSameEvent();
         return getAll().get(0).getEvent();
+    }
+
+    @Override
+    public Map<AgeGroup, Entries> getGroupedByAge() {
+        checkTheSameEvent();
+        Map<AgeGroup, Entries> result = new TreeMap<AgeGroup, Entries>();
+        Map<AgeGroup, ArrayList<Entry>> map = new HashMap<AgeGroup, ArrayList<Entry>>();
+        for (Entry entry : getAll()) {
+            if (map.containsKey(entry.getAgeGroup())) {
+                map.get(entry.getAgeGroup()).add(entry);
+            } else {
+                final ArrayList<Entry> entries = new ArrayList<Entry>();
+                entries.add(entry);
+                map.put(entry.getAgeGroup(), entries);
+                result.put(entry.getAgeGroup(), new Entries() {
+                    @NotNull
+                    @Override
+                    public List<Entry> getAll() {
+                        return entries;
+                    }
+                });
+            }
+        }
+        return result;
     }
 
     @Override

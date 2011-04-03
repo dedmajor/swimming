@@ -40,7 +40,7 @@ public class SwimMastersHeat implements Heat {
     Long id;
 
     @Column(nullable = false)
-    Integer number;
+    private Integer number;
 
     @OneToMany(mappedBy = "heat")
     public List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
@@ -50,8 +50,12 @@ public class SwimMastersHeat implements Heat {
         return number;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
     @Override
-    public EventEntries getEntries() {
+    public Entries getEntries() {
         return new CheckedEventEntries() {
             @NotNull
             @Override
@@ -64,5 +68,53 @@ public class SwimMastersHeat implements Heat {
     @Override
     public boolean isCompetitive() {
         return entries.size() > 1;
+    }
+
+    @Override
+    public AgeGroup getOldestAgeGroup() {
+        AgeGroup result = null;
+        for (Entry entry : entries) {
+            if (result == null || entry.getAgeGroup().compareTo(result) > 0) {
+                result = entry.getAgeGroup();
+            }
+        }
+        if (result == null) {
+            throw new IllegalStateException("should be at least one entry");
+        }
+        return result;
+    }
+
+    @Override
+    public AgeGroup getYoungestAgeGroup() {
+        AgeGroup result = null;
+        for (Entry entry : entries) {
+            if (result == null || entry.getAgeGroup().compareTo(result) < 0) {
+                result = entry.getAgeGroup();
+            }
+        }
+        if (result == null) {
+            throw new IllegalStateException("should be at least one entry");
+        }
+        return result;
+    }
+
+    /**
+     * If two entries have the same entry time, order is taken from
+     * {@link SwimMastersEntry.HeatEntryComparator}.
+     */
+    @Override
+    public Entry getFastestEntry(AgeGroup ageGroup) {
+        Entry result = null;
+        for (Entry entry : entries) {
+            if (entry.getAgeGroup().compareTo(ageGroup) == 0 &&
+                    (result == null || SwimMastersEntry.heatEntryComparator().compare(result, entry) > 0)) {
+                result = entry;
+            }
+        }
+        if (result == null) {
+            throw new IllegalArgumentException("we have no heats of group " + ageGroup);
+        }
+        assert result.getAgeGroup().equals(ageGroup);
+        return result;
     }
 }

@@ -1,14 +1,20 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.Entry;
-import ru.swimmasters.domain.EventEntries;
-import ru.swimmasters.domain.SwimMastersEntry;
-import ru.swimmasters.domain.SwimMastersHeat;
+import ru.swimmasters.domain.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
- * HeatBuilder which keeps leaders of the same age group together in the best heat of each group.
- * Younger groups swim later in time. Fastest (top) sportsmen swim later in each group.
- * Several groups can swim together in the same heat.
+ * Heat builder which MUST keep leaders (the fastest athletes) of the same age group together
+ * in the best heat (i. e. the last heat, heat with the maximum number) of each group.
+ *
+ * Younger groups MUST swim later in time (i. e. in greater heat numbers).
+ *
+ * Faster sportsmen MUST swim later in each group (i. e. in the greater heat number).
+ *
+ * Several groups CAN swim together in the same heat.
  *
  * User: dedmajor
  * Date: 4/2/11
@@ -21,12 +27,20 @@ public class SwimMastersHeatBuilder implements HeatBuilderService {
      */
     @Override
     public void buildHeats(EventEntries entries) {
-        SwimMastersHeat heat = new SwimMastersHeat();
-        for (Entry entry : entries.getAll()) {
-            SwimMastersEntry ourEntry = (SwimMastersEntry) entry;
-            ourEntry.setHeat(heat);
-            ourEntry.setLane(1);
-            heat.entries.add(ourEntry);
+        int heatNumber = 1;
+        Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
+        List<AgeGroup> groups = entries.getEvent().getAgeGroups().getAllOrderedByAge();
+        Collections.reverse(groups);
+        for (AgeGroup group : groups) {
+            for (Entry entry : groupedByAge.get(group).getAll()) {
+                SwimMastersHeat heat = new SwimMastersHeat();
+                heat.setNumber(heatNumber);
+                heatNumber++;
+                SwimMastersEntry ourEntry = (SwimMastersEntry) entry;
+                ourEntry.setHeat(heat);
+                ourEntry.setLane(entries.getEvent().getPool().getLaneMax());
+                heat.entries.add(ourEntry);
+            }
         }
     }
 

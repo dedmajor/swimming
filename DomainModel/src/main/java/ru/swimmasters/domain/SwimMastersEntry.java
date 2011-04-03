@@ -1,12 +1,15 @@
 package ru.swimmasters.domain;
 
 
+import org.apache.commons.lang.builder.CompareToBuilder;
 import org.hibernate.annotations.Type;
 import org.joda.time.Duration;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * This element contains the information for a single entry of an athlete or a relay
@@ -78,6 +81,8 @@ public class SwimMastersEntry implements Entry {
 
     //LocalTimeStamp mandateTimestamp; ??
 
+    private static final Comparator<Entry> HEATS_ENTRY_COMPARATOR = new HeatEntryComparator();
+
 
     SwimMastersEntry() {
     }
@@ -129,5 +134,29 @@ public class SwimMastersEntry implements Entry {
 
     public void setLane(int lane) {
         this.lane = lane;
+    }
+
+    public static Comparator<Entry> heatEntryComparator() {
+        return HEATS_ENTRY_COMPARATOR;
+    }
+
+    /**
+     * First goes the fastest entry. For entries of the same time,
+     * first goes the youngest athlete's entry (for athletes of the same
+     * age first goes the athlete with name starting with Z, athlete with name
+     * starting with A goes the last).
+     */
+    private static class HeatEntryComparator implements Comparator<Entry>, Serializable {
+        private static final long serialVersionUID = 467231419266351742L;
+
+        @Override
+        public int compare(Entry o1, Entry o2) {
+            return new CompareToBuilder()
+                    .append(o1.getEntryTime(), o1.getEntryTime())
+                    // TODO: move comparison to athlete:
+                    .append(o1.getAthlete().getBirthYear(), o2.getAthlete().getBirthYear())
+                    .append(o1.getAthlete().getFullName(), o2.getAthlete().getFullName())
+                    .toComparison();
+        }
     }
 }

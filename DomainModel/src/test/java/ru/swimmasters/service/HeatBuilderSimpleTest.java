@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 
 /**
  * User: dedmajor
  * Date: 4/2/11
  */
-public class HeatBuilderTest {
+public class HeatBuilderSimpleTest {
     @Test
     public void testNonCompetitive() {
         HeatBuilderService service = new SwimMastersHeatBuilder();
@@ -27,23 +25,31 @@ public class HeatBuilderTest {
     }
 
     @Test
-    public void testGroupsOrder() {
-        HeatBuilderService service = new SwimMastersHeatBuilder();
+    public void testPoolLanes() {
+        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
         EventEntries entries = threeAgeGroupEntries();
         service.buildHeats(entries);
-        AgeGroup group = null;
-        for (Entry entry : entries.getAll()) {
-            if (group == null) {
-                group = entry.getAgeGroup();
-            } else {
-                assertThat(entry.getAgeGroup(), lessThanOrEqualTo(group));
-            }
-        }
+        new PoolLanesValidator().validateEntries(entries);
     }
 
-    private EventEntries threeAgeGroupEntries() {
+    @Test
+    public void testGroupsOrder() {
+        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
+        EventEntries entries = threeAgeGroupEntries();
+        service.buildHeats(entries);
+        List<Heat> heats = entries.getHeatsOrderedByNumber();
+        new GroupsOrderValidator().validateEntries(entries);
+    }
+
+    private static EventEntries threeAgeGroupEntries() {
         return new CheckedEventEntries() {
             private final SwimMastersEvent event = new SwimMastersEvent();
+            {
+                SwimMastersPool pool = new SwimMastersPool();
+                event.setPool(pool);
+                pool.setLaneMin(2);
+                pool.setLaneMax(2);
+            }
             private final List<Entry> entries = new ArrayList<Entry>();
             {
                 event.setAgeGroups(Arrays.asList(

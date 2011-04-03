@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -111,6 +112,9 @@ public class SwimMastersEvent implements Event {
     // date - moved to session
     // number = number
 
+    // TODO: store in db
+    private transient Pool pool;
+
 
     @Override
     public EventGender getEventGender() {
@@ -146,8 +150,10 @@ public class SwimMastersEvent implements Event {
         }
         return new SwimMastersAgeGroups() {
             @Override
-            public List<AgeGroup> getAll() {
-                return new ArrayList<AgeGroup>(ageGroups);
+            public List<AgeGroup> getAllOrderedByAge() {
+                ArrayList<AgeGroup> result = new ArrayList<AgeGroup>(ageGroups);
+                Collections.sort(result);
+                return result;
             }
 
             @Override
@@ -155,6 +161,15 @@ public class SwimMastersEvent implements Event {
                 return SwimMastersEvent.this;
             }
         };
+    }
+
+    @Override
+    public Pool getPool() {
+        return pool;
+    }
+
+    public void setPool(Pool pool) {
+        this.pool = pool;
     }
 
     public void setAgeGroups(List<SwimMastersAgeGroup> ageGroups) {

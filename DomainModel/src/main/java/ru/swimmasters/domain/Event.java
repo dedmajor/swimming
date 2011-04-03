@@ -12,4 +12,6 @@ public interface Event {
     LocalDate getDate();
     EventEntries getEntries();
     AgeGroups getAgeGroups();
+
+    Pool getPool();
 }

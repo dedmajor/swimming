@@ -8,7 +8,8 @@ import java.util.List;
  */
 public interface AgeGroups {
     Event getEvent();
-    List<AgeGroup> getAll();
+
+    List<AgeGroup> getAllOrderedByAge();
 
     /**
      * Finds appropriate group for Athlete or throws IllegalArgumentException.

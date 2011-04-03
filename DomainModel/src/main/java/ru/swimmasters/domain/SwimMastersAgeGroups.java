@@ -7,7 +7,7 @@ package ru.swimmasters.domain;
 public abstract class SwimMastersAgeGroups implements AgeGroups {
     @Override
     public AgeGroup getFor(Athlete athlete) {
-        for (AgeGroup group : getAll()) {
+        for (AgeGroup group : getAllOrderedByAge()) {
             if (group.containsAge(athlete.getAge(getEvent().getDate()))) {
                 return group;
             }

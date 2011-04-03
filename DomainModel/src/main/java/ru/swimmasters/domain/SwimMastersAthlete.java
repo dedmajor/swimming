@@ -148,7 +148,12 @@ public class SwimMastersAthlete implements MeetAthlete {
      */
     @Override
     public int getAge(LocalDate date) {
-        return date.getYear() - birthDate.getYear();
+        return date.getYear() - getBirthYear();
+    }
+
+    @Override
+    public int getBirthYear() {
+        return birthDate.getYear();
     }
 
     @Override

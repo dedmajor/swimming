@@ -1,5 +1,6 @@
 package ru.swimmasters.domain;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,21 +12,20 @@ import java.util.Map;
 public interface EventEntries extends Entries {
     Event getEvent();
 
+    Map<AgeGroup, Entries> getGroupedByAge();
+
     /**
+     * TODO: rename to isStartListPrepared()
+     *
      * Checks that all entries have Heat and lane information, i. e. prepared with
      * {@link ru.swimmasters.service.HeatBuilderService}.
      */
     boolean isHeatsPrepared();
 
-    Map<AgeGroup, EventEntries> getGroupedByAge();
-
     /**
-     * Maps the heat number (from 1 to all.size()) to the list of entries
-     * ordered by a lane number.
-     *
      * Entries MUST have prepared heats, otherwise IllegalStateException is thrown.
      */
-    Map<Heat, Entries> getGroupedByHeats();
+    List<Heat> getHeatsOrderedByNumber();
 
     /**
      * Check that each prepared heat is competitive.
