@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
  * Date: 4/2/11
  */
 public interface Event {
+    Long getId();
     EventGender getEventGender();
     SwimStyle getSwimStyle();
     LocalDate getDate();

@@ -14,8 +14,11 @@
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${events}" var="event">
         <tr>
-            <td colspan="3" class="entries_athlete_header">
+            <td colspan="2" class="entries_athlete_header">
                 <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/>
+            </td>
+            <td class="entries_athlete_header">
+                <a href="<c:url value="/startList.html?event=${event.id}" />">стартовый протокол</a>
             </td>
         </tr>
         <c:forEach items="${event.entries.all}" var="entry">

@@ -115,6 +115,10 @@ public class SwimMastersEvent implements Event {
     private transient LocalDate date;
 
 
+    @Override
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public EventGender getEventGender() {
