@@ -2,6 +2,8 @@ package ru.swimmasters.domain;
 
 
 import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.joda.time.Duration;
 
@@ -87,8 +89,8 @@ public class SwimMastersEntry implements Entry {
     SwimMastersEntry() {
     }
 
-    public SwimMastersEntry(SwimMastersEvent event, SwimMastersAthlete athlete) {
-
+    public SwimMastersEntry(SwimMastersEvent event, SwimMastersAthlete athlete, Duration entryTime) {
+        this.entryTime = entryTime;
         this.event = event;
         this.athlete = athlete;
     }
@@ -136,6 +138,15 @@ public class SwimMastersEntry implements Entry {
         this.lane = lane;
     }
 
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE).
+                append("entryTime", entryTime).
+                append("athlete", athlete).
+                append("ageGroup", getAgeGroup()).
+                toString();
+    }
+
     public static Comparator<Entry> heatEntryComparator() {
         return HEATS_ENTRY_COMPARATOR;
     }
@@ -145,6 +156,7 @@ public class SwimMastersEntry implements Entry {
      * first goes the youngest athlete's entry (for athletes of the same
      * age first goes the athlete with name starting with Z, athlete with name
      * starting with A goes the last).
+     * Entries without the time goes last.
      */
     private static class HeatEntryComparator implements Comparator<Entry>, Serializable {
         private static final long serialVersionUID = 467231419266351742L;
@@ -152,8 +164,7 @@ public class SwimMastersEntry implements Entry {
         @Override
         public int compare(Entry o1, Entry o2) {
             return new CompareToBuilder()
-                    .append(o1.getEntryTime(), o1.getEntryTime())
-                    // TODO: move comparison to athlete:
+                    .append(o1.getEntryTime(), o2.getEntryTime())
                     .append(o1.getAthlete().getBirthYear(), o2.getAthlete().getBirthYear())
                     .append(o1.getAthlete().getFullName(), o2.getAthlete().getFullName())
                     .toComparison();

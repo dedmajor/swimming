@@ -28,7 +28,9 @@ public class AthletesOrderValidator implements StartListValidator {
             for (Entry entry : heat.getEntries().getAll()) {
                 if (previousHeat != null
                         && previousHeat.getYoungestAgeGroup().equals(entry.getAgeGroup())) {
-                    assertThat(SwimMastersEntry.heatEntryComparator().compare(entry,
+                    assertThat("entry " + entry + " cannot happen after heat " + previousHeat.getNumber()
+                            + " with entries " + previousHeat.getEntries().getAll(),
+                            SwimMastersEntry.heatEntryComparator().compare(entry,
                             previousHeat.getFastestEntry(previousHeat.getYoungestAgeGroup())),
                             lessThan(0));
                 }

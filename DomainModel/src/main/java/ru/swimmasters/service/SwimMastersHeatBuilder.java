@@ -2,9 +2,7 @@ package ru.swimmasters.service;
 
 import ru.swimmasters.domain.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Heat builder which MUST keep leaders (the fastest athletes) of the same age group together
@@ -27,12 +25,15 @@ public class SwimMastersHeatBuilder implements HeatBuilderService {
      */
     @Override
     public void buildHeats(EventEntries entries) {
-        int heatNumber = 1;
         Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
         List<AgeGroup> groups = entries.getEvent().getAgeGroups().getAllOrderedByAge();
         Collections.reverse(groups);
+        int heatNumber = 1;
         for (AgeGroup group : groups) {
-            for (Entry entry : groupedByAge.get(group).getAll()) {
+            List<Entry> groupEntries = new ArrayList<Entry>(groupedByAge.get(group).getAll());
+            Collections.sort(groupEntries, SwimMastersEntry.heatEntryComparator());
+            Collections.reverse(groupEntries);
+            for (Entry entry : groupEntries) {
                 SwimMastersHeat heat = new SwimMastersHeat();
                 heat.setNumber(heatNumber);
                 heatNumber++;

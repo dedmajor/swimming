@@ -1,6 +1,7 @@
 package ru.swimmasters.service;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import ru.swimmasters.domain.*;
@@ -38,6 +39,31 @@ public class HeatBuilderSimpleTest {
         EventEntries entries = threeAgeGroupEntries();
         service.buildHeats(entries);
         new GroupsOrderValidator().validateEntries(entries);
+
+    }
+
+    @Test
+    public void testHeatNumbersOrder() {
+        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
+        EventEntries entries = threeAgeGroupEntries();
+        service.buildHeats(entries);
+        new HeatNumberValidator().validateEntries(entries);
+    }
+
+    @Test
+    public void testEmptyHeatsValidator() {
+        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
+        EventEntries entries = threeAgeGroupEntries();
+        service.buildHeats(entries);
+        new EmptyHeatsValidator().validateEntries(entries);
+    }
+
+    @Test
+    public void testAthletesOrder() {
+        SwimMastersHeatBuilder service = new SwimMastersHeatBuilder();
+        EventEntries entries = threeAgeGroupEntries();
+        service.buildHeats(entries);
+        new AthletesOrderValidator().validateEntries(entries);
     }
 
     private static EventEntries threeAgeGroupEntries() {
@@ -59,11 +85,27 @@ public class HeatBuilderSimpleTest {
                 // event.date = 2010-11-04
 
                 entries.add(
-                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("2010-11-04")))); // 0
+                        new SwimMastersEntry(event,
+                                new SwimMastersAthlete(new LocalDate("2010-11-04")),
+                                new Duration(1L))); // 0
+
                 entries.add(
-                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("1980-11-04")))); // 30
+                        new SwimMastersEntry(event,
+                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                                new Duration(1L))); // 30 - 1 sec
                 entries.add(
-                        new SwimMastersEntry(event, new SwimMastersAthlete(new LocalDate("1989-11-04")))); // 21
+                        new SwimMastersEntry(event,
+                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                                new Duration(3L))); // 30 - 3 sec
+                entries.add(
+                        new SwimMastersEntry(event,
+                                new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                                new Duration(2L))); // 30 - 2 sec
+
+                entries.add(
+                        new SwimMastersEntry(event, new SwimMastersAthlete(new
+                                LocalDate("1989-11-04")),
+                                new Duration(1L))); // 21
             }
 
             @NotNull
@@ -83,12 +125,12 @@ public class HeatBuilderSimpleTest {
                 event.setPool(pool);
                 pool.setLaneMin(2);
                 pool.setLaneMax(2);
-                ArrayList<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
+                List<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
                 ageGroups.add(new SwimMastersAgeGroup(0, 0));
                 event.setAgeGroups(ageGroups);
                 // event.date = 2010-11-04
                 entries.add(new SwimMastersEntry(
-                        event, new SwimMastersAthlete(new LocalDate("2010-11-04"))));
+                        event, new SwimMastersAthlete(new LocalDate("2010-11-04")), new Duration(1)));
             }
 
             @NotNull

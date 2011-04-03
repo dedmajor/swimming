@@ -1,5 +1,7 @@
 package ru.swimmasters.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.LocalDate;
@@ -173,5 +175,14 @@ public class SwimMastersAthlete implements MeetAthlete {
                 return new ArrayList<Entry>(entries);
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).
+                append("firstName", firstName).
+                append("lastName", lastName).
+                append("birthDate", birthDate).
+                toString();
     }
 }
