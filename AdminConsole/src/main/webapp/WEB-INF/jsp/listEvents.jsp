@@ -14,7 +14,7 @@
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${events}" var="event">
         <tr>
-            <td colspan="2" class="entries_athlete_header" style="border-right:0;">
+            <td class="entries_athlete_header" style="border-right:0;">
                 <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/>
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
@@ -24,7 +24,6 @@
         <c:forEach items="${event.entries.all}" var="entry">
             <tr class="entries_event_time">
                 <td class="entries_event">${entry.athlete.fullName}</td>
-                <td class="entries_event">${entry.athlete.birthDate}</td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
         </c:forEach>

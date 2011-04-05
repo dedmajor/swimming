@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <jsp:useBean id="athletes" scope="request" type="java.util.List<ru.swimmasters.domain.MeetAthlete>"/>
 
@@ -16,8 +17,28 @@
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${athletes}" var="athlete">
         <tr>
-            <td colspan="2" class="entries_athlete_header">
+            <td class="entries_athlete_header" style="border-right:0;">
                 <c:out value="${athlete.fullName}"/>
+            </td>
+            <td class="entries_athlete_header" style="border-left:0;">
+                <c:choose>
+                <c:when test="athlete.approvalStatus == REJECTED">
+                    <span class="approval_rejected_status">
+                        <c:out value="${athlete.approvalStatus}"/>
+                    </span>
+                </c:when>
+                <c:when test="athlete.approvalStatus == APPROVED">
+                    <span class="approval_approved_status">
+                        <c:out value="${athlete.approvalStatus}"/>
+                    </span>
+                </c:when>
+                <c:otherwise>
+                    <c:if test="${fn:length(athlete.entries.all) > 0}">
+                        <a href="<c:url value="/approveAthlete.html?athlete=${athlete.id}" />">не подтвержден</a>
+                    </c:if>
+                    &nbsp;
+                </c:otherwise>
+                </c:choose>
             </td>
         </tr>
         <c:forEach items="${athlete.entries.all}" var="entry">

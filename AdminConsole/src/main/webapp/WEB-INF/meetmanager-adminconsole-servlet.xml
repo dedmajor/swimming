@@ -10,7 +10,10 @@
     <!-- JSR-303 support will be detected on classpath and enabled automatically -->
     <mvc:annotation-driven/>
 
+    <bean id="realTimeClock" class="ru.swimmasters.time.RealTimeClock"/>
+
     <bean id="startListBuilderService" class="ru.swimmasters.service.SwimMastersStartListBuilder">
+        <constructor-arg name="clock" ref="realTimeClock" />
         <property name="leadsInAgeGroup" value="3" />
     </bean>
 
@@ -19,4 +22,5 @@
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
 </beans>

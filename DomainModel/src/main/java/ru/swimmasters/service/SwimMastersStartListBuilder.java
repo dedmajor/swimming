@@ -2,6 +2,7 @@ package ru.swimmasters.service;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.time.Clock;
 
 import java.util.*;
 
@@ -19,14 +20,22 @@ import java.util.*;
  * Date: 4/3/11
  */
 public class SwimMastersStartListBuilder implements StartListBuilder {
+    private final Clock clock;
     private int leadsInAgeGroup = 1;
+
+    public SwimMastersStartListBuilder(Clock clock) {
+        this.clock = clock;
+    }
 
     public void setLeadsInAgeGroup(int leadsInAgeGroup) {
         this.leadsInAgeGroup = leadsInAgeGroup;
     }
 
     @Override
-    public void buildHeats(EventEntries entries) {
+    public void buildHeats(Event event) {
+        ((SwimMastersEvent) event).setStartListTimestamp(clock.now());
+
+        EventEntries entries = event.getEntries();
         Map<AgeGroup, AgeQueue> queues = buildAgeQueues(entries);
 
         List<AgeGroup> groups = new ArrayList<AgeGroup>(entries.getEvent().getAgeGroups().getAllOrderedByAge());

@@ -38,7 +38,7 @@ public class StartListController {
         event.setPool(pool);
         pool.setLaneMin(2);
         pool.setLaneMax(8);
-        builder.buildHeats(event.getEntries());
+        builder.buildHeats(event);
         mav.addObject("event", event);
         return mav;
     }

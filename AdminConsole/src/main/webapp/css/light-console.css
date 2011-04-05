@@ -1,5 +1,5 @@
 .entries_table {
-/* nop; */
+    /* nop; */
 }
 
 .entries_athlete_header {
@@ -22,4 +22,12 @@
 
 .entries_event_delimiter {
     height: 1em;
+}
+
+.approval_approved_status {
+    color: lime;
+}
+
+.approval_rejected_status {
+    color: red;
 }

@@ -18,7 +18,8 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
      * @param entries the collection of {@link SwimMastersEntry} elements.
      */
     @Override
-    public void buildHeats(EventEntries entries) {
+    public void buildHeats(Event event) {
+        EventEntries entries = event.getEntries();
         Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
         List<AgeGroup> groups = entries.getEvent().getAgeGroups().getAllOrderedByAge();
         Collections.reverse(groups);

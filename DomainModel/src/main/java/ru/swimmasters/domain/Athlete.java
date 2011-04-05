@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
  * Date: 3/12/11
  */
 public interface Athlete {
+    Long getId();
     LocalDate getBirthDate();
     String getFirstName();
     String getLastName();

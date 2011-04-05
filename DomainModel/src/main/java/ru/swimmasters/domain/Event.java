@@ -1,5 +1,6 @@
 package ru.swimmasters.domain;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 /**
@@ -11,7 +12,10 @@ public interface Event {
     EventGender getEventGender();
     SwimStyle getSwimStyle();
     LocalDate getDate();
+
     EventEntries getEntries();
+    DateTime getStartListTimestamp();
+
     AgeGroups getAgeGroups();
 
     Pool getPool();

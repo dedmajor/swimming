@@ -1,5 +1,6 @@
 package ru.swimmasters.service;
 
+import com.sun.xml.internal.ws.api.model.SEIModel;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.junit.experimental.theories.DataPoints;
@@ -7,6 +8,7 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.time.RealTimeClock;
 
 import java.util.Arrays;
 
@@ -25,16 +27,18 @@ import java.util.Arrays;
  */
 @RunWith(Theories.class)
 public class SwimMastersBuilderTest {
-    private static final SwimMastersStartListBuilder SWIM_MASTERS_SERVICE = new SwimMastersStartListBuilder();
+    private static final SwimMastersStartListBuilder SWIM_MASTERS_SERVICE
+            = new SwimMastersStartListBuilder(new RealTimeClock());
     static {
         SWIM_MASTERS_SERVICE.setLeadsInAgeGroup(3);
     }
 
     @DataPoints
-    public static final EventEntries[] ENTRIES = new EventEntries[2];
+    public static final SwimMastersEvent[] EVENTS = new SwimMastersEvent[2];
     static {
         SwimMastersEvent event1 = createEvent();
-        ENTRIES[0] = new CheckedEventEntries(Arrays.asList(
+        EVENTS[0] = event1;
+        EVENTS[0].setEntries(Arrays.asList(
                 new SwimMastersEntry(event1,
                         new SwimMastersAthlete(new LocalDate("1980-11-04")),
                         new Duration(25000L)),
@@ -63,8 +67,10 @@ public class SwimMastersBuilderTest {
                         new SwimMastersAthlete(new LocalDate("1979-11-04"), "B", null),
                         new Duration(24000L))
         ));
+
         SwimMastersEvent event2 = createEvent();
-        ENTRIES[1] = new CheckedEventEntries(Arrays.asList(
+        EVENTS[1] = event2;
+        EVENTS[1].setEntries(Arrays.asList(
                 new SwimMastersEntry(event2,
                         new SwimMastersAthlete(new LocalDate("1980-11-04")),
                         new Duration(25000L)),
@@ -98,14 +104,14 @@ public class SwimMastersBuilderTest {
     }
 
     @Theory
-    public void testEntries(EventEntries entries) {
-        SWIM_MASTERS_SERVICE.buildHeats(entries);
+    public void testEntries(Event event) {
+        SWIM_MASTERS_SERVICE.buildHeats(event);
 
-        new EmptyHeatsValidator().validateEntries(entries);
-        new HeatNumberValidator().validateEntries(entries);
-        new PoolLanesValidator().validateEntries(entries);
-        new GroupsOrderValidator().validateEntries(entries);
-        new AthletesOrderValidator().validateEntries(entries);
-        new LeadsValidator(3).validateEntries(entries);
+        new EmptyHeatsValidator().validateEntries(event.getEntries());
+        new HeatNumberValidator().validateEntries(event.getEntries());
+        new PoolLanesValidator().validateEntries(event.getEntries());
+        new GroupsOrderValidator().validateEntries(event.getEntries());
+        new AthletesOrderValidator().validateEntries(event.getEntries());
+        new LeadsValidator(3).validateEntries(event.getEntries());
     }
 }

@@ -1,6 +1,5 @@
 package ru.swimmasters.service;
 
-import org.jetbrains.annotations.NotNull;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.junit.experimental.theories.DataPoints;
@@ -8,6 +7,7 @@ import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 import ru.swimmasters.domain.*;
+import ru.swimmasters.time.RealTimeClock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,8 @@ import java.util.List;
 @RunWith(Theories.class)
 public class SimpleBuildersTest {
     private static final StartListBuilder PRIMITIVE_SERVICE = new PrimitiveStartListBuilder();
-    private static final StartListBuilder SWIM_MASTERS_SERVICE = new SwimMastersStartListBuilder();
+    private static final StartListBuilder SWIM_MASTERS_SERVICE
+            = new SwimMastersStartListBuilder(new RealTimeClock());
 
     @DataPoints
     public static final BuilderEntries[] DATA_POINTS = {
@@ -30,46 +31,46 @@ public class SimpleBuildersTest {
 
     @Theory
     public void testPoolLanes(BuilderEntries serviceEntries) {
-        serviceEntries.service.buildHeats(serviceEntries.entries);
-        new PoolLanesValidator().validateEntries(serviceEntries.entries);
+        serviceEntries.service.buildHeats(serviceEntries.event);
+        new PoolLanesValidator().validateEntries(serviceEntries.event.getEntries());
     }
 
     @Theory
     public void testGroupsOrder(BuilderEntries serviceEntries) {
-        serviceEntries.service.buildHeats(serviceEntries.entries);
-        new GroupsOrderValidator().validateEntries(serviceEntries.entries);
+        serviceEntries.service.buildHeats(serviceEntries.event);
+        new GroupsOrderValidator().validateEntries(serviceEntries.event.getEntries());
 
     }
 
     @Theory
     public void testHeatNumbersOrder(BuilderEntries serviceEntries) {
-        serviceEntries.service.buildHeats(serviceEntries.entries);
-        new HeatNumberValidator().validateEntries(serviceEntries.entries);
+        serviceEntries.service.buildHeats(serviceEntries.event);
+        new HeatNumberValidator().validateEntries(serviceEntries.event.getEntries());
     }
 
     @Theory
     public void testEmptyHeatsValidator(BuilderEntries serviceEntries) {
-        serviceEntries.service.buildHeats(serviceEntries.entries);
-        new EmptyHeatsValidator().validateEntries(serviceEntries.entries);
+        serviceEntries.service.buildHeats(serviceEntries.event);
+        new EmptyHeatsValidator().validateEntries(serviceEntries.event.getEntries());
     }
 
     @Theory
     public void testAthletesOrder(BuilderEntries serviceEntries) {
-        serviceEntries.service.buildHeats(serviceEntries.entries);
-        new AthletesOrderValidator().validateEntries(serviceEntries.entries);
+        serviceEntries.service.buildHeats(serviceEntries.event);
+        new AthletesOrderValidator().validateEntries(serviceEntries.event.getEntries());
     }
 
     private static class BuilderEntries {
         public final StartListBuilder service;
-        public final EventEntries entries;
+        public final Event event;
 
-        private BuilderEntries(StartListBuilder service, EventEntries entries) {
+        private BuilderEntries(StartListBuilder service, Event event) {
             this.service = service;
-            this.entries = entries;
+            this.event = event;
         }
     }
 
-    private static EventEntries threeAgeGroupEntries() {
+    private static Event threeAgeGroupEntries() {
         SwimMastersEvent event = new SwimMastersEvent();
         SwimMastersPool pool = new SwimMastersPool();
         event.setPool(pool);
@@ -77,7 +78,7 @@ public class SimpleBuildersTest {
         pool.setLaneMax(3);
         event.setDate(new LocalDate("2010-11-04"));
 
-        List<Entry> entries = new ArrayList<Entry>();
+        List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
         event.setAgeGroups(Arrays.asList(
                 new SwimMastersAgeGroup(0, 20),
                 new SwimMastersAgeGroup(21, 25),
@@ -107,6 +108,8 @@ public class SimpleBuildersTest {
                         LocalDate("1989-11-04")),
                         new Duration(1L))); // 21
 
-        return new CheckedEventEntries(entries);
+        event.setEntries(entries);
+
+        return event;
     }
 }

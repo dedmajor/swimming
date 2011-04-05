@@ -1,5 +1,7 @@
 package ru.swimmasters.domain;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -114,6 +116,9 @@ public class SwimMastersEvent implements Event {
     private transient Pool pool;
     private transient LocalDate date;
 
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime startListTimestamp;
+
 
     @Override
     public Long getId() {
@@ -145,6 +150,11 @@ public class SwimMastersEvent implements Event {
     }
 
     @Override
+    public DateTime getStartListTimestamp() {
+        return startListTimestamp;
+    }
+
+    @Override
     public AgeGroups getAgeGroups() {
         if (ageGroups == null) {
             throw new IllegalStateException("age groups haven't been built yet");
@@ -164,5 +174,13 @@ public class SwimMastersEvent implements Event {
     public void setAgeGroups(List<SwimMastersAgeGroup> ageGroups) {
         // TODO: check intersection
         this.ageGroups = ageGroups;
+    }
+
+    public void setStartListTimestamp(DateTime startListTimestamp) {
+        this.startListTimestamp = startListTimestamp;
+    }
+
+    public void setEntries(List<SwimMastersEntry> entries) {
+        this.entries = entries;
     }
 }

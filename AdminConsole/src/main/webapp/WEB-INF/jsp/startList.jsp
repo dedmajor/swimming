@@ -12,15 +12,13 @@
     <link rel="stylesheet" type="text/css" href="css/light-console.css" media="all">
 </head>
 <body>
+<h1>
+    Start List: <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/>
+</h1>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <tr>
-        <td colspan="5">
-            Start List: <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/>
-        </td>
-    </tr>
     <c:set var="totalHeats" value="${fn:length(event.entries.heatsOrderedByNumber)}" />
     <c:forEach items="${event.entries.heatsOrderedByNumber}" var="heat">
-        <tr><td colspan="5" class="entries_athlete_header">${heat.number} / ${totalHeats}</td></tr>
+        <tr><td colspan="5" class="entries_athlete_header">Heat #${heat.number} / ${totalHeats}</td></tr>
         <c:forEach items="${heat.entries.all}" var="entry">
             <tr class="entries_event_time">
                 <td class="entries_event">${entry.lane}</td>
@@ -33,5 +31,8 @@
         <tr><td colspan="5" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
+<p>
+    Start List created: ${event.startListTimestamp}
+</p>
 </body>
 </html>
