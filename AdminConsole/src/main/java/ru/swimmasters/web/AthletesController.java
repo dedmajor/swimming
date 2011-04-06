@@ -11,7 +11,6 @@ import ru.swimmasters.domain.SwimMastersAthlete;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,24 +35,25 @@ public class AthletesController {
     @Transactional
     @RequestMapping("/approveAthlete.html")
     public ModelAndView approveAthlete(@RequestParam("athlete") Long athleteId) {
-        System.out.println(entityManager.getClass());
-        System.out.println(entityManager.getClass());
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
+        return setAthleteStatus(athleteId, ApprovalStatus.APPROVED);
+    }
+
+    @Transactional
+    @RequestMapping("/rejectAthlete.html")
+    public ModelAndView rejectAthlete(@RequestParam("athlete") Long athleteId) {
+        return setAthleteStatus(athleteId, ApprovalStatus.REJECTED);
+    }
+
+    private ModelAndView setAthleteStatus(Long athleteId, ApprovalStatus status) {
         SwimMastersAthlete athlete = entityManager.find(SwimMastersAthlete.class, athleteId);
         if (athlete == null) {
             throw new IllegalArgumentException("no athlete " + athleteId);
         }
 
-        athlete.setApprovalStatus(ApprovalStatus.APPROVED);
+        athlete.setApprovalStatus(status);
 
-        entityManager.merge(athlete);
+        entityManager.persist(athlete);
 
-        ModelAndView mav = new ModelAndView("listAthletes");
-        mav.addObject("athletes", Collections.emptyList());
-        return mav;
+        return new ModelAndView("redirect:/listAthletes.html");
     }
 }

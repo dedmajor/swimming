@@ -2,9 +2,11 @@ package ru.swimmasters.web;
 
 import org.joda.time.LocalDate;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.swimmasters.domain.Entry;
 import ru.swimmasters.domain.SwimMastersAgeGroups;
 import ru.swimmasters.domain.SwimMastersEvent;
 import ru.swimmasters.domain.SwimMastersPool;
@@ -25,6 +27,7 @@ public class StartListController {
     @Resource
     private StartListBuilder builder;
 
+    @Transactional
     @RequestMapping("/startList.html")
     public ModelAndView listEntries(@RequestParam("event") Long eventId) {
         ModelAndView mav = new ModelAndView("startList");
@@ -39,6 +42,12 @@ public class StartListController {
         pool.setLaneMin(2);
         pool.setLaneMax(8);
         builder.buildHeats(event);
+
+        // TODO: remove old heats
+        for (Entry entry : event.getEntries().getAll()) {
+            entityManager.persist(entry.getHeat());
+        }
+
         mav.addObject("event", event);
         return mav;
     }

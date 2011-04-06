@@ -10,12 +10,17 @@
     <!-- JSR-303 support will be detected on classpath and enabled automatically -->
     <mvc:annotation-driven/>
 
+    <!-- TODO: include TransactionAttribute instead of spring transactions -->
+    <tx:annotation-driven mode="proxy" proxy-target-class="true" transaction-manager="transactionManager"/>
+
+
     <bean id="realTimeClock" class="ru.swimmasters.time.RealTimeClock"/>
 
     <bean id="startListBuilderService" class="ru.swimmasters.service.SwimMastersStartListBuilder">
         <constructor-arg name="clock" ref="realTimeClock" />
         <property name="leadsInAgeGroup" value="3" />
     </bean>
+
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>

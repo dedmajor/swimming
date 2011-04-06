@@ -33,6 +33,7 @@ public class SwimMastersHeat implements Heat {
                 * OFFICIAL: Results of the heat are official.
      */
     @Id
+    @GeneratedValue
     Long id;
 
     private Integer number;

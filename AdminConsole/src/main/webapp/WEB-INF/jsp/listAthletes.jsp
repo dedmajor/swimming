@@ -22,14 +22,14 @@
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
-                <c:when test="athlete.approvalStatus == REJECTED">
+                <c:when test="${athlete.approvalStatus == 'REJECTED'}">
                     <span class="approval_rejected_status">
-                        <c:out value="${athlete.approvalStatus}"/>
+                        <a  class="approval_rejected_status" href="<c:url value="/approveAthlete.html?athlete=${athlete.id}" />"><c:out value="${athlete.approvalStatus}"/></a>
                     </span>
                 </c:when>
-                <c:when test="athlete.approvalStatus == APPROVED">
+                <c:when test="${athlete.approvalStatus == 'APPROVED'}">
                     <span class="approval_approved_status">
-                        <c:out value="${athlete.approvalStatus}"/>
+                        <a  class="approval_approved_status" href="<c:url value="/rejectAthlete.html?athlete=${athlete.id}" />"><c:out value="${athlete.approvalStatus}"/></a>
                     </span>
                 </c:when>
                 <c:otherwise>
