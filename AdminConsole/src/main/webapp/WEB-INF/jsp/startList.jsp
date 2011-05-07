@@ -20,7 +20,7 @@
     <c:forEach items="${event.entries.heatsOrderedByNumber}" var="heat">
         <tr><td colspan="5" class="entries_athlete_header">Heat #${heat.number} / ${totalHeats}</td></tr>
         <c:forEach items="${heat.entries.all}" var="entry">
-            <tr class="entries_event_time">
+            <tr class="entries_athlete_time">
                 <td class="entries_event">${entry.lane}</td>
                 <td class="entries_event">${entry.athlete.fullName}</td>
                 <td class="entries_event">${entry.athlete.birthDate}</td>

@@ -6,4 +6,7 @@ package ru.swimmasters.domain;
  */
 public interface SwimStyle {
     String getName();
+    int getDistance();
+    int getRelayCount();
+    Stroke getStroke();
 }

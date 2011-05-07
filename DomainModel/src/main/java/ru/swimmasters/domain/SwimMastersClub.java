@@ -14,7 +14,7 @@ import javax.persistence.Id;
  * Date: 3/7/11
  */
 @Entity
-public class SwimMastersClub {
+public class SwimMastersClub implements Club {
     // LEN (14 fields):
 
     //String type; // club, national team, regional team, unattached
@@ -71,4 +71,9 @@ public class SwimMastersClub {
      * Required for creating aggregate result tables.
      */
     // Integer akvspCode;
+
+    @Override
+    public String getName() {
+        return name;
+    }
 }

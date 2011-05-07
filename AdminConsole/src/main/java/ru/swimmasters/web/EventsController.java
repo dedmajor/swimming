@@ -19,7 +19,10 @@ public class EventsController {
     @RequestMapping("/listEvents.html")
     public ModelAndView listEntries() {
         ModelAndView mav = new ModelAndView("listEvents");
-        mav.addObject("events",  entityManager.createQuery("from SwimMastersEvent").getResultList());
+        // TODO: FIXME: meet.getEvents()
+        mav.addObject("events",
+                entityManager.createQuery("from SwimMastersEvent order by number")
+                        .getResultList());
         return mav;
     }
 }

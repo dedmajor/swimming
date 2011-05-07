@@ -137,7 +137,16 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public LocalDate getDate() {
+        // TODO: FIXME: get date from session
+        if (date == null) {
+            return new LocalDate("1980-01-01");
+        }
         return date;
+    }
+
+    @Override
+    public int getNumber() {
+        return number;
     }
 
     public void setDate(LocalDate date) {

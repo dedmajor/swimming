@@ -25,6 +25,7 @@ public class AthletesController {
     @RequestMapping("/listAthletes.html")
     public ModelAndView listEntries() {
         ModelAndView mav = new ModelAndView("listAthletes");
+        // TODO: FIXME: meet.getAthletes()
         List<Athlete> athletes = (List<Athlete>) entityManager.createQuery("from SwimMastersAthlete")
                 .getResultList();
         mav.addObject("athletes", athletes);

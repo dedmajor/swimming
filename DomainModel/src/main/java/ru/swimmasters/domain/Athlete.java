@@ -15,4 +15,6 @@ public interface Athlete {
 
     int getBirthYear();
     int getAge(LocalDate date);
+
+    Club getClub();
 }

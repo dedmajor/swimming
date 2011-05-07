@@ -12,6 +12,7 @@ public interface Event {
     EventGender getEventGender();
     SwimStyle getSwimStyle();
     LocalDate getDate();
+    int getNumber();
 
     EventEntries getEntries();
     DateTime getStartListTimestamp();

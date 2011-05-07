@@ -63,4 +63,19 @@ public class SwimMastersSwimStyle implements SwimStyle {
     public String getName() {
         return name;
     }
+
+    @Override
+    public int getDistance() {
+        return distance;
+    }
+
+    @Override
+    public int getRelayCount() {
+        return relayCount;
+    }
+
+    @Override
+    public Stroke getStroke() {
+        return stroke;
+    }
 }

@@ -6,13 +6,17 @@
     border: 1px solid black;
 }
 
-.entries_event_time {
+.entries_athlete_time {
     /* border: 1px solid rgb(220, 220, 220); */
 }
 
 .entries_event {
     border-bottom: 1px solid rgb(220, 220, 220);
     padding-right: 2em;
+}
+
+.entries_athlete_not_approved {
+    text-decoration: line-through;
 }
 
 .entries_time {

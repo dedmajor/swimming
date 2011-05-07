@@ -183,6 +183,11 @@ public class SwimMastersAthlete implements MeetAthlete {
     }
 
     @Override
+    public Club getClub() {
+        return club;
+    }
+
+    @Override
     public int getBirthYear() {
         return birthDate.getYear();
     }
