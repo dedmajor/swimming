@@ -16,9 +16,13 @@
 
     <bean id="realTimeClock" class="ru.swimmasters.time.RealTimeClock"/>
 
-    <bean id="startListBuilderService" class="ru.swimmasters.service.SwimMastersStartListBuilder">
+    <bean class="ru.swimmasters.service.SwimMastersStartListBuilder">
         <constructor-arg name="clock" ref="realTimeClock" />
         <property name="leadsInAgeGroup" value="3" />
+    </bean>
+
+    <bean class="ru.swimmasters.service.SwimMastersMandateCommittee">
+        <constructor-arg name="clock" ref="realTimeClock" />
     </bean>
 
 

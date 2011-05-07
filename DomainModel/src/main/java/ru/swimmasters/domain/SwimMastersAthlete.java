@@ -4,6 +4,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.annotations.Type;
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -134,6 +135,9 @@ public class SwimMastersAthlete implements MeetAthlete {
 
     ApprovalStatus approvalStatus;
 
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime approvalTimestamp;
+
 
     SwimMastersAthlete() {
     }
@@ -171,7 +175,7 @@ public class SwimMastersAthlete implements MeetAthlete {
     @Override
     public String getFullName() {
         // TODO: presentation stuff?
-        return firstName + ", " + lastName;
+        return lastName + ", " + firstName;
     }
 
     /**
@@ -208,6 +212,11 @@ public class SwimMastersAthlete implements MeetAthlete {
         return approvalStatus;
     }
 
+    @Override
+    public DateTime getApprovalTimestamp() {
+        return approvalTimestamp;
+    }
+
     public void setApprovalStatus(ApprovalStatus approvalStatus) {
         this.approvalStatus = approvalStatus;
     }
@@ -219,5 +228,9 @@ public class SwimMastersAthlete implements MeetAthlete {
                 append("lastName", lastName).
                 append("birthDate", birthDate).
                 toString();
+    }
+
+    public void setApprovalTimestamp(DateTime approvalTimestamp) {
+        this.approvalTimestamp = approvalTimestamp;
     }
 }

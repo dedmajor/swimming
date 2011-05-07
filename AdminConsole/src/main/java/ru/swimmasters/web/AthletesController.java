@@ -8,7 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import ru.swimmasters.domain.ApprovalStatus;
 import ru.swimmasters.domain.Athlete;
 import ru.swimmasters.domain.SwimMastersAthlete;
+import ru.swimmasters.service.MandateCommittee;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
@@ -21,12 +23,15 @@ import java.util.List;
 public class AthletesController {
     @PersistenceContext
     private EntityManager entityManager;
+    @Resource
+    private MandateCommittee mandateCommittee;
 
     @RequestMapping("/listAthletes.html")
     public ModelAndView listEntries() {
         ModelAndView mav = new ModelAndView("listAthletes");
         // TODO: FIXME: meet.getAthletes()
-        List<Athlete> athletes = (List<Athlete>) entityManager.createQuery("from SwimMastersAthlete")
+        List<Athlete> athletes = (List<Athlete>) entityManager.createQuery(
+                "from SwimMastersAthlete order by club.name, lastName, firstName")
                 .getResultList();
         mav.addObject("athletes", athletes);
         return mav;
@@ -51,7 +56,7 @@ public class AthletesController {
             throw new IllegalArgumentException("no athlete " + athleteId);
         }
 
-        athlete.setApprovalStatus(status);
+        mandateCommittee.setAthleteStatus(athlete, status);
 
         entityManager.persist(athlete);
 

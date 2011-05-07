@@ -1,6 +1,7 @@
 package ru.swimmasters.domain;
 
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.DateTime;
 
 /**
  * An athlete in a context of a single meet.
@@ -14,4 +15,6 @@ public interface MeetAthlete extends Athlete {
 
     @Nullable
     ApprovalStatus getApprovalStatus();
+    @Nullable
+    DateTime getApprovalTimestamp();
 }

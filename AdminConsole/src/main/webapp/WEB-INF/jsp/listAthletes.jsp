@@ -11,15 +11,18 @@
 
 <html>
 <head>
-    <title>Athletes</title>
+    <title>Заявки на участие в соревновании - Мандатная комиссия</title>
     <link rel="stylesheet" type="text/css" href="css/light-console.css" media="all">
 </head>
 <body>
+<h1>Мандатная комиссия</h1>
+<h3>Заявки на участие в соревновании</h3>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${athletes}" var="athlete">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
-                <c:out value="${athlete.fullName}, ${athlete.birthYear}, ${athlete.club.name}"/>
+                <c:out value="${athlete.club.name}"/> <br />
+                <c:out value="${athlete.fullName}, ${athlete.birthYear}"/>
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -40,6 +43,8 @@
                     &nbsp;
                 </c:otherwise>
                 </c:choose>
+                <br />
+                <c:out value="${athlete.approvalTimestamp}" />
             </td>
         </tr>
         <c:forEach items="${athlete.entries.all}" var="entry">
