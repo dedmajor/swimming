@@ -15,7 +15,7 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
     private int leadsInAgeGroup;
 
     /**
-     * @param entries the collection of {@link SwimMastersEntry} elements.
+     * @param event the event with the collection of {@link SwimMastersEntry} elements.
      */
     @Override
     public void buildHeats(Event event) {

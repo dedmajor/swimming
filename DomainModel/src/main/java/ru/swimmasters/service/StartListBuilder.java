@@ -11,7 +11,9 @@ import ru.swimmasters.domain.Heat;
  */
 public interface StartListBuilder {
     /**
-     * Prepares and sets {@link Heat} and lane information for each {@link Entry}.
+     * Prepares and sets {@link Heat} and lane information for each {@link Entry}
+     * with the regular status.
+     * Event MUST have at least one entry, otherwise IllegalArgumentException is thrown.
      */
     void buildHeats(Event event);
 }

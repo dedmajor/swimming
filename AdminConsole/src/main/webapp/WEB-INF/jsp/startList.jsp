@@ -8,13 +8,18 @@
 
 <html>
 <head>
-    <title>Start List: <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/></title>
+    <title><c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/> - Стартовый протокол</title>
     <link rel="stylesheet" type="text/css" href="css/light-console.css" media="all">
 </head>
 <body>
 <h1>
-    Start List: <c:out value="${event.swimStyle.name}"/>, <c:out value="${event.eventGender}"/>
+    Стартовый протокол
 </h1>
+<h3>
+    <c:out value="${event.date}"/> <br />
+    <c:out value="${event.number}: ${event.swimStyle.name}"/>
+    (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
+</h3>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:set var="totalHeats" value="${fn:length(event.entries.heatsOrderedByNumber)}" />
     <c:forEach items="${event.entries.heatsOrderedByNumber}" var="heat">
@@ -32,7 +37,7 @@
     </c:forEach>
 </table>
 <p>
-    Start List created: ${event.startListTimestamp}
+    Стартовый протокол сформирован: <c:out value="${event.startListTimestamp}" />
 </p>
 </body>
 </html>

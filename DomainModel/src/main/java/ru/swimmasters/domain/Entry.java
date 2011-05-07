@@ -15,6 +15,11 @@ public interface Entry {
     @NotNull
     Event getEvent();
 
+    /**
+     * This is used for the entry status information.
+     */
+    EntryStatus getStatus();
+
     Duration getEntryTime();
 
     @Nullable

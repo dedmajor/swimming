@@ -8,10 +8,15 @@
 
 <html>
 <head>
-    <title>Events</title>
+    <title>Стартовые протоколы</title>
     <link rel="stylesheet" type="text/css" href="css/light-console.css" media="all">
 </head>
 <body>
+<h1>Стартовые протоколы</h1>
+<div>
+    <p><a href="listAthletes.html">Вернуться к мандатной комиссии</a></p>
+    <p><a href="prepareAllStartLists.html">Сформировать все стартовые протоколы</a></p>
+</div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${events}" var="event">
         <tr>
@@ -21,9 +26,15 @@
                 (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
-                <a href="<c:url value="/startList.html?event=${event.id}" />">стартовый протокол</a>
-                <br />
-                <c:out value="${event.startListTimestamp}" />
+                <c:choose>
+                    <c:when test="${event.entries.startListPrepared}">
+                        <a href="<c:url value="/startList.html?event=${event.id}" />">стартовый протокол</a>
+                        <br />
+                        <c:out value="${event.startListTimestamp}" />
+                    </c:when>
+                    <c:otherwise>не сформирован</c:otherwise>
+                </c:choose>
+
             </td>
         </tr>
         <c:forEach items="${event.entries.all}" var="entry">

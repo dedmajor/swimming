@@ -73,6 +73,12 @@ public class SwimMastersAgeGroup implements AgeGroup {
 
     @Override
     public boolean containsAge(int age) {
+        if (min == AgeGroup.NO_LOWER_BOUND) {
+            return age <= max;
+        }
+        if (max == AgeGroup.NO_UPPER_BOUND) {
+            return age >= min;
+        }
         return age >= min && age <= max;
     }
 

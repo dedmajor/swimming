@@ -1,7 +1,6 @@
 package ru.swimmasters.domain;
 
 import org.jetbrains.annotations.NotNull;
-import org.joda.time.DateTime;
 
 import java.util.*;
 
@@ -23,6 +22,18 @@ public class CheckedEventEntries implements EventEntries {
     @Override
     public List<Entry> getAll() {
         return entries;
+    }
+
+    @NotNull
+    @Override
+    public EventEntries getRegular() {
+        List<Entry> result = new ArrayList<Entry>();
+        for (Entry entry : entries) {
+            if (entry.getStatus() == EntryStatus.REGULAR) {
+                result.add(entry);
+            }
+        }
+        return new CheckedEventEntries(result);
     }
 
     @Override
@@ -56,6 +67,9 @@ public class CheckedEventEntries implements EventEntries {
     @Override
     public Event getEvent() {
         checkTheSameEvent();
+        if (entries.isEmpty()) {
+            throw new IllegalStateException("entries list is empty, so cannot determine event from it");
+        }
         return entries.get(0).getEvent();
     }
 
@@ -84,7 +98,7 @@ public class CheckedEventEntries implements EventEntries {
     }
 
     @Override
-    public boolean isHeatsPrepared() {
+    public boolean isStartListPrepared() {
         for (Entry entry : entries) {
             if (!entry.isHeatPrepared()) {
                 return false;
@@ -95,7 +109,7 @@ public class CheckedEventEntries implements EventEntries {
 
     private void checkHeatsPrepared() {
         checkTheSameEvent();
-        if (!isHeatsPrepared()) {
+        if (!isStartListPrepared()) {
             throw new IllegalStateException("heats are not prepared");
         }
     }

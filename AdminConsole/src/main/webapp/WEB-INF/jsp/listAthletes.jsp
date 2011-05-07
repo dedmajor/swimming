@@ -1,3 +1,4 @@
+<%@ page import="ru.swimmasters.time.RealTimeClock" %>
 <%@ page session="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -16,7 +17,14 @@
 </head>
 <body>
 <h1>Мандатная комиссия</h1>
+<div>
+    <!-- TODO: FIXME: remove hardcode -->
+    <p>Время работы: 20 мая, с 13.30 до 18.00, холл бассейна «ЦСК ВВС» (Волжский пр., д. 10)</p>
+    <p>Текущее время: <c:out value="<%=new RealTimeClock().now()%>" /></p>
+    <p><a href="listEvents.html">Перейти к стартовым протоколам</a></p>
+</div>
 <h3>Заявки на участие в соревновании</h3>
+<div>Возрастные группы: <!-- TODO --></div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${athletes}" var="athlete">
         <tr>

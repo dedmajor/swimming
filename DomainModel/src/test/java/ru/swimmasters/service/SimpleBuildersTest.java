@@ -67,6 +67,9 @@ public class SimpleBuildersTest {
         private BuilderEntries(StartListBuilder service, Event event) {
             this.service = service;
             this.event = event;
+            for (Entry entry : event.getEntries().getAll()) {
+                ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+            }
         }
     }
 

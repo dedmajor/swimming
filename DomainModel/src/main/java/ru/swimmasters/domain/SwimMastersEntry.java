@@ -69,11 +69,6 @@ public class SwimMastersEntry implements Entry {
 
     Integer lane;
 
-    /**
-     * This attribute is used for the entry status information.
-     */
-    EntryStatus status = EntryStatus.REGULAR;
-
     @Id
     Long id;
 
@@ -102,6 +97,14 @@ public class SwimMastersEntry implements Entry {
     @Override
     public Event getEvent() {
         return event;
+    }
+
+    @Override
+    public EntryStatus getStatus() {
+        if (athlete.getApprovalStatus() == ApprovalStatus.APPROVED) {
+            return EntryStatus.REGULAR;
+        }
+        return EntryStatus.REJECTED;
     }
 
     @Override

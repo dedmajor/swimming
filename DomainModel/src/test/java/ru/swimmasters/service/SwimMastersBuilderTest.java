@@ -90,6 +90,12 @@ public class SwimMastersBuilderTest {
                         new SwimMastersAthlete(new LocalDate("1984-11-04")),
                         new Duration(28000L))
         ));
+
+        for (Event event : EVENTS) {
+            for (Entry entry : event.getEntries().getAll()) {
+                ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+            }
+        }
     }
 
     private static SwimMastersEvent createEvent() {
