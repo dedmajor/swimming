@@ -198,6 +198,7 @@ public class SwimMastersAthlete implements MeetAthlete {
         };
     }
 
+    @Override
     public ApprovalStatus getApprovalStatus() {
         return approvalStatus;
     }
