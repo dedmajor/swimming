@@ -1,6 +1,7 @@
 package ru.swimmasters.domain;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -19,12 +20,22 @@ public interface Event {
     EventEntries getEntries();
 
     /**
-     * @return entries with the regular status only
+     * Checks that all entries have Heat and lane information, i. e. prepared with
+     * {@link ru.swimmasters.service.StartListBuilder}.
+     */
+    boolean isStartListPrepared();
+
+    /**
+     * @return the date when the latest start list have been prepared
+     */
+    @Nullable
+    DateTime getStartListTimestamp();
+
+    /**
+     * @return entries with the regular status
      */
     @NotNull
-    EventEntries getRegularEntries();
-
-    DateTime getStartListTimestamp();
+    EventEntries getStartListEntries();
 
     AgeGroups getAgeGroups();
 

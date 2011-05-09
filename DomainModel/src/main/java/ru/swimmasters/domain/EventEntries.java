@@ -15,12 +15,6 @@ public interface EventEntries extends Entries {
     Map<AgeGroup, Entries> getGroupedByAge();
 
     /**
-     * Checks that all entries have Heat and lane information, i. e. prepared with
-     * {@link ru.swimmasters.service.StartListBuilder}.
-     */
-    boolean isStartListPrepared();
-
-    /**
      * Entries MUST have prepared heats, otherwise IllegalStateException is thrown.
      */
     List<Heat> getHeatsOrderedByNumber();

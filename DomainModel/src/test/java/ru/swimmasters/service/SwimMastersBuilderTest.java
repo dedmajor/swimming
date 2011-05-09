@@ -1,6 +1,5 @@
 package ru.swimmasters.service;
 
-import com.sun.xml.internal.ws.api.model.SEIModel;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.junit.experimental.theories.DataPoints;

@@ -163,7 +163,7 @@ public class SwimMastersEvent implements Event {
 
     @NotNull
     @Override
-    public EventEntries getRegularEntries() {
+    public EventEntries getStartListEntries() {
         List<Entry> result = new ArrayList<Entry>();
         for (Entry entry : entries) {
             if (entry.getStatus() == EntryStatus.REGULAR) {
@@ -171,6 +171,16 @@ public class SwimMastersEvent implements Event {
             }
         }
         return new CheckedEventEntries(result);
+    }
+
+    @Override
+    public boolean isStartListPrepared() {
+        for (Entry entry : getStartListEntries().getAll()) {
+            if (!entry.isHeatPrepared()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

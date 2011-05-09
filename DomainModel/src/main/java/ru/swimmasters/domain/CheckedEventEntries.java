@@ -85,19 +85,9 @@ public class CheckedEventEntries implements EventEntries {
         return result;
     }
 
-    @Override
-    public boolean isStartListPrepared() {
-        for (Entry entry : entries) {
-            if (!entry.isHeatPrepared()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private void checkHeatsPrepared() {
         checkTheSameEvent();
-        if (!isStartListPrepared()) {
+        if (!getEvent().isStartListPrepared()) {
             throw new IllegalStateException("heats are not prepared");
         }
     }
