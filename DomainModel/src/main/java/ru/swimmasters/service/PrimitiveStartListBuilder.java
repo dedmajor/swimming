@@ -21,17 +21,17 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
     public void buildHeats(Event event) {
         EventEntries entries = event.getEntries();
         Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
-        List<AgeGroup> groups = entries.getEvent().getAgeGroups().getAllOrderedByAge();
+        List<AgeGroup> groups = event.getAgeGroups().getAllOrderedByAge();
         Collections.reverse(groups);
         int heatNumber = 1;
         SwimMastersHeat heat = new SwimMastersHeat();
-        int lane = entries.getEvent().getPool().getLaneMin();
+        int lane = event.getPool().getLaneMin();
         for (AgeGroup group : groups) {
             List<Entry> groupEntries = new ArrayList<Entry>(groupedByAge.get(group).getAll());
             Collections.sort(groupEntries, SwimMastersEntry.heatEntryComparator());
             Collections.reverse(groupEntries);
             if (heat.hasNumber()) {
-                lane = entries.getEvent().getPool().getLaneMin();
+                lane = event.getPool().getLaneMin();
                 heat = new SwimMastersHeat();
                 heatNumber++;
             }
@@ -43,8 +43,8 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
                 heat.entries.add(ourEntry);
 
                 lane++;
-                if (lane > entries.getEvent().getPool().getLaneMax()) {
-                    lane = entries.getEvent().getPool().getLaneMin();
+                if (lane > event.getPool().getLaneMax()) {
+                    lane = event.getPool().getLaneMin();
                     heat = new SwimMastersHeat();
                     heatNumber++;
                 }

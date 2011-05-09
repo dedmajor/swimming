@@ -25,39 +25,8 @@ public class CheckedEventEntries implements EventEntries {
     }
 
     @Override
-    public List<Heat> getHeatsOrderedByNumber() {
-        checkHeatsPrepared();
-        SortedSet<Heat> sortedHeats = new TreeSet<Heat>(new Comparator<Heat>() {
-            @Override
-            public int compare(Heat o1, Heat o2) {
-                return Integer.valueOf(o1.getNumber()).compareTo(o2.getNumber());
-            }
-        });
-        for (Entry entry : entries) {
-            sortedHeats.add(entry.getHeat());
-        }
-        return new ArrayList<Heat>(sortedHeats);
-    }
-
-    @Override
-    public boolean isAllHeatsCompetitive() {
-        checkHeatsPrepared();
-        for (Entry entry : entries) {
-            Heat heat = entry.getHeat();
-            assert heat != null;
-            if (!heat.isCompetitive()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
     public Event getEvent() {
         checkTheSameEvent();
-        if (entries.isEmpty()) {
-            throw new IllegalStateException("entries list is empty, so cannot determine event from it");
-        }
         return entries.get(0).getEvent();
     }
 
@@ -85,14 +54,10 @@ public class CheckedEventEntries implements EventEntries {
         return result;
     }
 
-    private void checkHeatsPrepared() {
-        checkTheSameEvent();
-        if (!getEvent().isStartListPrepared()) {
-            throw new IllegalStateException("heats are not prepared");
-        }
-    }
-
     private boolean isOfTheSameEvent() {
+        if (entries.isEmpty()) {
+            throw new IllegalStateException("entries list is empty, so cannot determine event from it");
+        }
         Event event = null;
         for (Entry entry : entries) {
             if (event == null) {

@@ -173,6 +173,12 @@ public class SwimMastersEvent implements Event {
         return new CheckedEventEntries(result);
     }
 
+    @NotNull
+    @Override
+    public StartListHeats getStartListHeats() {
+        return new CheckedStartListHeats((CheckedEventEntries) getStartListEntries());
+    }
+
     @Override
     public boolean isStartListPrepared() {
         for (Entry entry : getStartListEntries().getAll()) {

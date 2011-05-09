@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%-- TODO: replace with Domain Collection --%>
 <jsp:useBean id="events" scope="request" type="java.util.List<ru.swimmasters.domain.Event>"/>
@@ -27,7 +28,7 @@
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
-                    <c:when test="${event.entries.startListPrepared}">
+                    <c:when test="${event.startListPrepared}">
                         <a href="<c:url value="/startList.html?event=${event.id}" />">стартовый протокол</a>
                         <br />
                         <c:out value="${event.startListTimestamp}" />
@@ -45,6 +46,7 @@
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
         </c:forEach>
+        <tr><td colspan="2" class="entries_event_total">Всего заявок: <c:out value="${fn:length(event.entries.all)}" /></td></tr>
         <tr><td colspan="2" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>

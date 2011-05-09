@@ -43,7 +43,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
         Map<AgeGroup, AgeQueue> queues = buildAgeQueues(entries);
 
-        List<AgeGroup> groups = new ArrayList<AgeGroup>(entries.getEvent().getAgeGroups().getAllOrderedByAge());
+        List<AgeGroup> groups = new ArrayList<AgeGroup>(event.getAgeGroups().getAllOrderedByAge());
         Collections.reverse(groups);
 
         SwimMastersHeat currentHeat = null;
@@ -57,14 +57,14 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
             while (queue.hasMoreEntries()) {
                 previousBrickHeat = currentHeat;
 
-                if (currentHeat == null || !hasMoreSpace(entries, currentHeat, queue.nextBrickSize())) {
+                if (currentHeat == null || !hasMoreSpace(event, currentHeat, queue.nextBrickSize())) {
                     assert currentHeat == null || currentHeat.isCompetitive();
                     number++;
                     currentHeat = new SwimMastersHeat();
                     currentHeat.setNumber(number);
                 }
 
-                linkHeatToBrick(entries.getEvent(), currentHeat, queue.nextBrick());
+                linkHeatToBrick(event, currentHeat, queue.nextBrick());
             }
         }
 
@@ -83,9 +83,9 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
         currentHeat.addBrick(nextBrick);
     }
 
-    private static boolean hasMoreSpace(EventEntries entries, Heat currentHeat, int size) {
+    private static boolean hasMoreSpace(Event event, Heat currentHeat, int size) {
         return currentHeat.getEntries().getAll().size() + size
-                <= entries.getEvent().getPool().getMeetLanesCount();
+                <= event.getPool().getMeetLanesCount();
     }
 
     /**

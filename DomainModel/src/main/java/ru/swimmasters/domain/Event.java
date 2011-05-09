@@ -37,6 +37,12 @@ public interface Event {
     @NotNull
     EventEntries getStartListEntries();
 
+    /**
+     * @return heats containing start list entries
+     */
+    @NotNull
+    StartListHeats getStartListHeats();
+
     AgeGroups getAgeGroups();
 
     Pool getPool();

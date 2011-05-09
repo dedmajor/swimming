@@ -2,6 +2,7 @@ package ru.swimmasters.service;
 
 import ru.swimmasters.domain.EventEntries;
 import ru.swimmasters.domain.Heat;
+import ru.swimmasters.domain.StartListHeats;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ import static junit.framework.Assert.assertEquals;
  */
 public class HeatNumberValidator implements StartListValidator {
     @Override
-    public void validateEntries(EventEntries entries) {
-        List<Heat> heats = entries.getHeatsOrderedByNumber();
-        for (int i = 0; i < heats.size(); i++) {
+    public void validateEntries(StartListHeats heats) {
+        List<Heat> heatsList = heats.getHeatsOrderedByNumber();
+        for (int i = 0; i < heatsList.size(); i++) {
             assertEquals("heat numbers must be a sequence",
-                    i + 1, heats.get(i).getNumber());
+                    i + 1, heatsList.get(i).getNumber());
         }
     }
 }

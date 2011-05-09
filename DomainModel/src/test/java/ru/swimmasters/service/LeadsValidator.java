@@ -1,9 +1,6 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.AgeGroup;
-import ru.swimmasters.domain.Entry;
-import ru.swimmasters.domain.EventEntries;
-import ru.swimmasters.domain.Heat;
+import ru.swimmasters.domain.*;
 
 import java.util.*;
 
@@ -22,11 +19,10 @@ public class LeadsValidator implements StartListValidator {
     }
 
     @Override
-    public void validateEntries(EventEntries entries) {
-        List<Heat> heats = entries.getHeatsOrderedByNumber();
+    public void validateEntries(StartListHeats heats) {
         Collection<AgeGroup> checkedGroups = new ArrayList<AgeGroup>();
 
-        List<Heat> reverseHeats = reverseHeats(heats);
+        List<Heat> reverseHeats = reverseHeats(heats.getHeatsOrderedByNumber());
 
         Map<AgeGroup, Integer> totalAthletes = calculateTotalAthletes(reverseHeats);
 

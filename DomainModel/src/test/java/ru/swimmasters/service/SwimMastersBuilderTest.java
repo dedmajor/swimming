@@ -112,11 +112,11 @@ public class SwimMastersBuilderTest {
     public void testEntries(Event event) {
         SWIM_MASTERS_SERVICE.buildHeats(event);
 
-        new EmptyHeatsValidator().validateEntries(event.getEntries());
-        new HeatNumberValidator().validateEntries(event.getEntries());
-        new PoolLanesValidator().validateEntries(event.getEntries());
-        new GroupsOrderValidator().validateEntries(event.getEntries());
-        new AthletesOrderValidator().validateEntries(event.getEntries());
-        new LeadsValidator(3).validateEntries(event.getEntries());
+        new EmptyHeatsValidator().validateEntries(event.getStartListHeats());
+        new HeatNumberValidator().validateEntries(event.getStartListHeats());
+        new PoolLanesValidator().validateEntries(event.getStartListHeats());
+        new GroupsOrderValidator().validateEntries(event.getStartListHeats());
+        new AthletesOrderValidator().validateEntries(event.getStartListHeats());
+        new LeadsValidator(3).validateEntries(event.getStartListHeats());
     }
 }

@@ -1,7 +1,7 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.EventEntries;
 import ru.swimmasters.domain.Heat;
+import ru.swimmasters.domain.StartListHeats;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -11,8 +11,8 @@ import static junit.framework.Assert.assertTrue;
  */
 public class SingleAthleteValidator implements StartListValidator {
     @Override
-    public void validateEntries(EventEntries entries) {
-        for (Heat heat : entries.getHeatsOrderedByNumber()) {
+    public void validateEntries(StartListHeats heats) {
+        for (Heat heat : heats.getHeatsOrderedByNumber()) {
             assertTrue("all heats MUST contain at least two athletes", heat.isCompetitive());
         }
     }

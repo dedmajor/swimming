@@ -21,8 +21,8 @@
     (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
 </h3>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <c:set var="totalHeats" value="${fn:length(event.entries.heatsOrderedByNumber)}" />
-    <c:forEach items="${event.entries.heatsOrderedByNumber}" var="heat">
+    <c:set var="totalHeats" value="${fn:length(event.startListHeats.heatsOrderedByNumber)}" />
+    <c:forEach items="${event.startListHeats.heatsOrderedByNumber}" var="heat">
         <tr><td colspan="5" class="entries_athlete_header">Heat #${heat.number} / ${totalHeats}</td></tr>
         <c:forEach items="${heat.entries.all}" var="entry">
             <tr class="entries_athlete_time">
@@ -36,6 +36,9 @@
         <tr><td colspan="5" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
+<p>
+    Всего заявок: <c:out value="${fn:length(event.startListEntries.all)}" />
+</p>
 <p>
     Стартовый протокол сформирован: <c:out value="${event.startListTimestamp}" />
 </p>

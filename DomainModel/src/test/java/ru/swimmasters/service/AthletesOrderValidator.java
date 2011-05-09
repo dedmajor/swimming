@@ -1,9 +1,6 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.Entry;
-import ru.swimmasters.domain.EventEntries;
-import ru.swimmasters.domain.Heat;
-import ru.swimmasters.domain.SwimMastersEntry;
+import ru.swimmasters.domain.*;
 
 import java.util.List;
 
@@ -21,10 +18,9 @@ import static org.junit.Assert.assertThat;
  */
 public class AthletesOrderValidator implements StartListValidator {
     @Override
-    public void validateEntries(EventEntries entries) {
-        List<Heat> heats = entries.getHeatsOrderedByNumber();
+    public void validateEntries(StartListHeats heats) {
         Heat previousHeat = null;
-        for (Heat heat : heats) {
+        for (Heat heat : heats.getHeatsOrderedByNumber()) {
             for (Entry entry : heat.getEntries().getAll()) {
                 if (previousHeat != null
                         && previousHeat.getYoungestAgeGroup().equals(entry.getAgeGroup())) {

@@ -32,32 +32,32 @@ public class SimpleBuildersTest {
     @Theory
     public void testPoolLanes(BuilderEntries serviceEntries) {
         serviceEntries.service.buildHeats(serviceEntries.event);
-        new PoolLanesValidator().validateEntries(serviceEntries.event.getEntries());
+        new PoolLanesValidator().validateEntries(serviceEntries.event.getStartListHeats());
     }
 
     @Theory
     public void testGroupsOrder(BuilderEntries serviceEntries) {
         serviceEntries.service.buildHeats(serviceEntries.event);
-        new GroupsOrderValidator().validateEntries(serviceEntries.event.getEntries());
+        new GroupsOrderValidator().validateEntries(serviceEntries.event.getStartListHeats());
 
     }
 
     @Theory
     public void testHeatNumbersOrder(BuilderEntries serviceEntries) {
         serviceEntries.service.buildHeats(serviceEntries.event);
-        new HeatNumberValidator().validateEntries(serviceEntries.event.getEntries());
+        new HeatNumberValidator().validateEntries(serviceEntries.event.getStartListHeats());
     }
 
     @Theory
     public void testEmptyHeatsValidator(BuilderEntries serviceEntries) {
         serviceEntries.service.buildHeats(serviceEntries.event);
-        new EmptyHeatsValidator().validateEntries(serviceEntries.event.getEntries());
+        new EmptyHeatsValidator().validateEntries(serviceEntries.event.getStartListHeats());
     }
 
     @Theory
     public void testAthletesOrder(BuilderEntries serviceEntries) {
         serviceEntries.service.buildHeats(serviceEntries.event);
-        new AthletesOrderValidator().validateEntries(serviceEntries.event.getEntries());
+        new AthletesOrderValidator().validateEntries(serviceEntries.event.getStartListHeats());
     }
 
     private static class BuilderEntries {
@@ -112,6 +112,10 @@ public class SimpleBuildersTest {
                         new Duration(1L))); // 21
 
         event.setEntries(entries);
+
+        for (Entry entry : event.getEntries().getAll()) {
+            ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+        }
 
         return event;
     }

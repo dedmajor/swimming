@@ -30,7 +30,7 @@ public class NonCompetitiveBuilderTest {
         Event singleEntryEvent = singleTestEntry();
         service.buildHeats(singleEntryEvent);
         assertFalse("the only heat cannot be competitive",
-                singleEntryEvent.getEntries().isAllHeatsCompetitive());
+                singleEntryEvent.getStartListHeats().isAllHeatsCompetitive());
     }
 
     private static Event singleTestEntry() {
