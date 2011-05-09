@@ -23,7 +23,11 @@
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:set var="totalHeats" value="${fn:length(event.startListHeats.heatsOrderedByNumber)}" />
     <c:forEach items="${event.startListHeats.heatsOrderedByNumber}" var="heat">
-        <tr><td colspan="5" class="entries_athlete_header">Heat #${heat.number} / ${totalHeats}</td></tr>
+        <tr><td colspan="5" class="entries_athlete_header">
+            Заплыв # ${heat.absoluteNumber}
+            <br />
+            ${heat.number} / ${totalHeats}
+        </td></tr>
         <c:forEach items="${heat.entries.all}" var="entry">
             <tr class="entries_athlete_time">
                 <td class="entries_event">${entry.lane}</td>

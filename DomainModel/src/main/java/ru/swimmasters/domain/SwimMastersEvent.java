@@ -75,7 +75,7 @@ public class SwimMastersEvent implements Event {
 
     //@ManyToMany
     @Transient
-    List<SwimMastersAgeGroup> ageGroups;
+    List<SwimMastersAgeGroup> ageGroups = SwimMastersAgeGroups.createDefaultGroups();
 
     @Column(nullable = false)
     EventGender eventGender = EventGender.ALL;
@@ -114,9 +114,8 @@ public class SwimMastersEvent implements Event {
     // date - moved to session
     // number = number
 
-    // TODO: store in db
-    private transient Pool pool;
-    private transient LocalDate date;
+    @ManyToOne(optional = false)
+    SwimMastersSession session;
 
     @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime startListTimestamp;
@@ -139,11 +138,17 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public LocalDate getDate() {
-        // TODO: FIXME: get date from session
-        if (date == null) {
-            return new LocalDate("1980-01-01");
-        }
-        return date;
+        return session.getDate();
+    }
+
+    @Override
+    public Meet getMeet() {
+        return session.getMeet();
+    }
+
+    @Override
+    public Session getSession() {
+        return session;
     }
 
     @Override
@@ -151,8 +156,8 @@ public class SwimMastersEvent implements Event {
         return number;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setSession(SwimMastersSession session) {
+        this.session = session;
     }
 
     @NotNull
@@ -204,11 +209,7 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public Pool getPool() {
-        return pool;
-    }
-
-    public void setPool(Pool pool) {
-        this.pool = pool;
+        return session.getMeet().getPool();
     }
 
     public void setAgeGroups(List<SwimMastersAgeGroup> ageGroups) {

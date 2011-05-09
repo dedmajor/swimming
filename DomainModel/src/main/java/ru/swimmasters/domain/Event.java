@@ -13,7 +13,21 @@ public interface Event {
     Long getId();
     EventGender getEventGender();
     SwimStyle getSwimStyle();
+
+    Session getSession();
+
+    /**
+     * @return the date of the session
+     */
     LocalDate getDate();
+
+    Meet getMeet();
+
+    Pool getPool();
+
+    /**
+     * @return unique number within the meet
+     */
     int getNumber();
 
     @NotNull
@@ -47,6 +61,4 @@ public interface Event {
     StartListHeats getStartListHeats();
 
     AgeGroups getAgeGroups();
-
-    Pool getPool();
 }

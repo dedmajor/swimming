@@ -99,12 +99,11 @@ public class SwimMastersBuilderTest {
 
     private static SwimMastersEvent createEvent() {
         SwimMastersEvent event = new SwimMastersEvent();
-        SwimMastersPool pool = new SwimMastersPool();
-        pool.setLaneMin(2);
-        pool.setLaneMax(6);
-        event.setPool(pool);
+        SwimMastersPool pool = new SwimMastersPool(2, 6);
+        SwimMastersMeet meet = new SwimMastersMeet(pool);
+        SwimMastersSession session = new SwimMastersSession(meet, new LocalDate(2010, 4, 25));
+        event.setSession(session);
         event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
-        event.setDate(new LocalDate(2010, 04, 25));
         return event;
     }
 

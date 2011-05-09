@@ -52,7 +52,10 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
         SwimMastersHeat currentHeat = null;
         SwimMastersHeat previousBrickHeat = null;
+
+        // TODO: FIXME: and absolute?
         int number = 0;
+
         for (AgeGroup group : groups) {
             AgeQueue queue = queues.get(group);
             if (queue == null) {
@@ -74,6 +77,30 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
         if (!(currentHeat == null || currentHeat.isCompetitive() || previousBrickHeat == null)) {
             currentHeat.addBrick(previousBrickHeat.removeLastAddedBrick());
+        }
+        return result;
+    }
+
+    @Override
+    public List<Heat> prepareHeats(Meet meet) {
+        List<Heat> result = new ArrayList<Heat>();
+        int absoluteNumber = 0;
+        for (Event event : meet.getEvents().getAll()) {
+            if (event.getStartListEntries().getAll().isEmpty()) {
+                continue;
+            }
+            List<Heat> eventResult = buildHeats(event);
+            result.addAll(eventResult);
+            absoluteNumber = setAbsoluteNumber(absoluteNumber, event);
+        }
+        return result;
+    }
+
+    private static int setAbsoluteNumber(int absoluteNumber, Event event) {
+        int result = absoluteNumber;
+        for (Heat heat : event.getStartListHeats().getHeatsOrderedByNumber()) {
+            ++result;
+            ((SwimMastersHeat) heat).setAbsoluteNumber(result);
         }
         return result;
     }

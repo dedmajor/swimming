@@ -36,7 +36,11 @@ public class SwimMastersHeat implements Heat {
     @GeneratedValue
     Long id;
 
+    @Column(nullable = false)
     private Integer number;
+
+    @Column(nullable = false)
+    private Integer absoluteNumber;
 
     @OneToMany(mappedBy = "heat")
     public List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
@@ -47,6 +51,15 @@ public class SwimMastersHeat implements Heat {
     @Override
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int getAbsoluteNumber() {
+        return absoluteNumber;
+    }
+
+    public void setAbsoluteNumber(Integer absoluteNumber) {
+        this.absoluteNumber = absoluteNumber;
     }
 
     public void setNumber(int number) {

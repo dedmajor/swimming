@@ -5,7 +5,15 @@ package ru.swimmasters.domain;
  * Date: 4/2/11
  */
 public interface Heat {
+    /**
+     * @return an unique number within one event
+     */
     int getNumber();
+
+    /**
+     * @return an absolute unique number within one meet
+     */
+    int getAbsoluteNumber();
 
     /**
      * All entries of this heat (i. e. {@link Entry#getHeat() equals this heat)}.

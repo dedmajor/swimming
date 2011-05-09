@@ -54,7 +54,7 @@ public class CheckedEventEntries implements EventEntries {
                     @NotNull
                     @Override
                     public List<Entry> getAll() {
-                        return entries;
+                        return Collections.unmodifiableList(entries);
                     }
                 });
             }

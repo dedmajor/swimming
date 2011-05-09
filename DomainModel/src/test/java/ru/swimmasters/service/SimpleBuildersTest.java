@@ -75,11 +75,10 @@ public class SimpleBuildersTest {
 
     private static Event threeAgeGroupEntries() {
         SwimMastersEvent event = new SwimMastersEvent();
-        SwimMastersPool pool = new SwimMastersPool();
-        event.setPool(pool);
-        pool.setLaneMin(2);
-        pool.setLaneMax(3);
-        event.setDate(new LocalDate("2010-11-04"));
+        SwimMastersPool pool = new SwimMastersPool(2, 3);
+        SwimMastersMeet meet = new SwimMastersMeet(pool);
+        SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2010-11-04"));
+        event.setSession(session);
 
         List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
         event.setAgeGroups(Arrays.asList(

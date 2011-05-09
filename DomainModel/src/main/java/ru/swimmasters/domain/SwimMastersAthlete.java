@@ -9,6 +9,7 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -202,7 +203,7 @@ public class SwimMastersAthlete implements MeetAthlete {
             @NotNull
             @Override
             public List<Entry> getAll() {
-                return new ArrayList<Entry>(entries);
+                return Collections.<Entry>unmodifiableList(entries);
             }
         };
     }

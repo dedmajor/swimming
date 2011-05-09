@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- TODO: replace with Domain Collection --%>
-<jsp:useBean id="events" scope="request" type="java.util.List<ru.swimmasters.domain.Event>"/>
+<jsp:useBean id="meet" scope="request" type="ru.swimmasters.domain.Meet"/>
 
 <html>
 <head>
@@ -19,13 +18,17 @@
     <p><a href="prepareAllStartLists.html">Сформировать все стартовые протоколы</a></p>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <c:forEach items="${events}" var="event">
+    <c:forEach items="${meet.sessions.all}" var="session">
+        <tr>
+            <td class="entries_event_delimiter" colspan="2">
+                <h2><c:out value="${session.date}"/></h2>
+            </td>
+        </tr>
+    <c:forEach items="${session.events.all}" var="event">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
                 Дисциплина #<c:out value="${event.number}: ${event.swimStyle.name}"/>
                 (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
-                <br />
-                <c:out value="${event.date}"/>
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -48,6 +51,7 @@
             </tr>
         </c:forEach>
         <tr><td colspan="2" class="entries_event_delimiter">&nbsp;</td></tr>
+    </c:forEach>
     </c:forEach>
 </table>
 </body>

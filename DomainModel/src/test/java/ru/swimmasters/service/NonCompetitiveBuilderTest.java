@@ -48,11 +48,10 @@ public class NonCompetitiveBuilderTest {
     private static Event singleTestEntry() {
         List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
         SwimMastersEvent event = new SwimMastersEvent();
-        SwimMastersPool pool = new SwimMastersPool();
-        event.setPool(pool);
-        pool.setLaneMin(2);
-        pool.setLaneMax(2);
-        event.setDate(new LocalDate("2010-11-04"));
+        SwimMastersPool pool = new SwimMastersPool(2, 2);
+        SwimMastersMeet meet = new SwimMastersMeet(pool);
+        SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2010-11-04"));
+        event.setSession(session);
         List<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
         ageGroups.add(new SwimMastersAgeGroup(0, 0));
         event.setAgeGroups(ageGroups);

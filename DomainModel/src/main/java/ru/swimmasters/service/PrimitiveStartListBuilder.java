@@ -58,6 +58,11 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
         return result;
     }
 
+    @Override
+    public List<Heat> prepareHeats(Meet meet) {
+        throw new UnsupportedOperationException("Not Implemented");
+    }
+
     public void setLeadsInAgeGroup(int leadsInAgeGroup) {
         this.leadsInAgeGroup = leadsInAgeGroup;
     }

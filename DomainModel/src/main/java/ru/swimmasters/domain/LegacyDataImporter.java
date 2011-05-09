@@ -25,6 +25,8 @@ public class LegacyDataImporter {
     private final EntityManager entityManager;
     private final Connection legacyConnection;
 
+    private SwimMastersMeet meet;
+
     public LegacyDataImporter(EntityManager entityManager, Connection legacyConnection) {
         this.entityManager = entityManager;
         this.legacyConnection = legacyConnection;
@@ -57,12 +59,18 @@ public class LegacyDataImporter {
     public void runImport() {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
+        System.out.println("Converting venues");
+        convertVenues();
+        System.out.println("Converting meet");
+        convertMeet();
         System.out.println("Converting clubs");
         convertClub();
         System.out.println("Converting athletes");
         convertAthlete();
         System.out.println("Converting swim styles (disciplines)");
         convertSwimStyles();
+
+
         System.out.println("Converting events");
         convertEvents();
         System.out.println("Converting entries (heats)");
@@ -70,11 +78,38 @@ public class LegacyDataImporter {
         transaction.commit();
     }
 
+    private void convertVenues() {
+        // TODO: FIXME: remove hardcode
+        if (entityManager.find(SwimMastersPool.class, 1) == null) {
+            SwimMastersPool pool = new SwimMastersPool();
+            pool.setId(1);
+            // todo: Meet.setCity
+            // todo: Meet.setAddress
+            // todo: Meet.setCourse(50)
+            pool.setName("бассейн «ЦСК ВВС»");
+            pool.setLaneMin(1);
+            pool.setLaneMax(8);
+            entityManager.persist(pool);
+        }
+    }
+
+    private void convertMeet() {
+        // TODO: FIXME: remove hardcode
+        meet = entityManager.find(SwimMastersMeet.class, "kubok-2010");
+        if (meet == null) {
+            meet = new SwimMastersMeet(entityManager.find(SwimMastersPool.class, 1));
+            meet.setId("kubok-2010");
+            meet.setSmId(114);
+            meet.setName("I Открытый лично-командный турнир «Black Sepia Volga Cup» по плаванию в категории «Мастерс»");
+            entityManager.persist(meet);
+        }
+    }
+
     private void convertEntries() {
         new LegacyQueryTemplate("select heat.id, event_id, " +
                 "entry_time, extract(milliseconds from result_time) as result_time, athlete_id " +
                 "from heat " +
-                "left join event on event_id = event.id where meet_id=114;") {
+                "left join event on event_id = event.id where meet_id='" + meet.getSMId() + "';") {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
@@ -101,10 +136,9 @@ public class LegacyDataImporter {
     }
 
     private void convertEvents() {
-        // TODO: FIXME: hardcoded meet_id: 114
         new LegacyQueryTemplate("select event.id, discipline_id, discipline.name, sex_id, date, number from event " +
                 "left join discipline on discipline_id = discipline.id " +
-                "where meet_id = 114" ){
+                "where meet_id = " + meet.getSMId()){
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
@@ -114,7 +148,13 @@ public class LegacyDataImporter {
                     String dateString = resultSet.getString("date");
                     if (dateString != null) {
                         LocalDate date = new LocalDate(dateString);
-                        // TODO: FIXME: handle sessions
+                        SwimMastersSession session = (SwimMastersSession) meet.getSessions().findByDate(date);
+                        if (session == null) {
+                            session = new SwimMastersSession(meet, date);
+                            meet.addSession(session);
+                            entityManager.persist(session);
+                        }
+                        event.setSession(session);
                     }
                     event.number = resultSet.getInt("number");
 

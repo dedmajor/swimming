@@ -124,7 +124,7 @@ public class SwimMastersEntry implements Entry {
 
     @Override
     public boolean isHeatPrepared() {
-        return heat != null && lane != null && heat.getNumber() != 0;
+        return heat != null && lane != null;
     }
 
     @Override

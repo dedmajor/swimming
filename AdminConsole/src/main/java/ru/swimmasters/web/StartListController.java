@@ -27,11 +27,6 @@ public class StartListController {
         if (event == null) {
             throw new IllegalStateException("no such event: " + eventId);
         }
-        // TODO: FIXME: non-transient
-        event.setDate(new LocalDate("2011-05-20"));
-        // TODO: FIXME: non-transient
-        event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
-
         mav.addObject("event", event);
         return mav;
     }
