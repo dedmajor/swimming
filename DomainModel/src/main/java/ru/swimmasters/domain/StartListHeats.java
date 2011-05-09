@@ -8,10 +8,13 @@ import java.util.List;
  */
 public interface StartListHeats {
     Event getEvent();
+
     List<Heat> getHeatsOrderedByNumber();
 
     /**
      * Check that each prepared heat is competitive.
+     *
+     * @see Heat#isCompetitive()
      */
     boolean isAllHeatsCompetitive();
 }

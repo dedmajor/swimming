@@ -32,7 +32,11 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
     }
 
     @Override
-    public void buildHeats(Event event) {
+    public List<Heat> buildHeats(Event event) {
+        List<Heat> result = event.isStartListPrepared()
+                ? event.getStartListHeats().getHeatsOrderedByNumber()
+                : Collections.<Heat>emptyList();
+
         EventEntries entries = event.getStartListEntries();
 
         if (entries.getAll().isEmpty()) {
@@ -71,6 +75,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
         if (!(currentHeat == null || currentHeat.isCompetitive() || previousBrickHeat == null)) {
             currentHeat.addBrick(previousBrickHeat.removeLastAddedBrick());
         }
+        return result;
     }
 
     private static void linkHeatToBrick(Event event, SwimMastersHeat currentHeat, List<SwimMastersEntry> nextBrick) {

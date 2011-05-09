@@ -24,11 +24,6 @@
     padding-right: 2em;
 }
 
-.entries_event_total {
-    border-top: 1px solid rgb(0, 0, 0);
-    height: 1em;
-}
-
 .entries_event_delimiter {
     height: 1em;
 }

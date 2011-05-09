@@ -22,9 +22,10 @@
     <c:forEach items="${events}" var="event">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
-                <c:out value="${event.date}"/> <br />
-                <c:out value="${event.number}: ${event.swimStyle.name}"/>
+                Дисциплина #<c:out value="${event.number}: ${event.swimStyle.name}"/>
                 (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
+                <br />
+                <c:out value="${event.date}"/>
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -38,15 +39,14 @@
 
             </td>
         </tr>
-        <c:forEach items="${event.entries.all}" var="entry">
+        <c:forEach items="${event.entries.allSortedByAthleteName}" var="entry"  varStatus="entryStatus">
             <tr class="entries_athlete_time">
                 <td class="entries_event ${entry.athlete.approvalStatus == 'APPROVED' ? '' : 'entries_athlete_not_approved'}">
-                ${entry.athlete.fullName}
+                ${entryStatus.index + 1}. ${entry.athlete.fullName}
                 </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
         </c:forEach>
-        <tr><td colspan="2" class="entries_event_total">Всего заявок: <c:out value="${fn:length(event.entries.all)}" /></td></tr>
         <tr><td colspan="2" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>

@@ -5,10 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import ru.swimmasters.domain.Entry;
-import ru.swimmasters.domain.SwimMastersAgeGroups;
-import ru.swimmasters.domain.SwimMastersEvent;
-import ru.swimmasters.domain.SwimMastersPool;
+import ru.swimmasters.domain.*;
 import ru.swimmasters.service.StartListBuilder;
 
 import javax.annotation.Resource;
@@ -56,13 +53,18 @@ public class EventsController {
             event.setPool(pool);
             pool.setLaneMin(2);
             pool.setLaneMax(8);
-            builder.buildHeats(event);
+
+            List<Heat> cleanupHeats = builder.buildHeats(event);
+
+            for (Heat heat : cleanupHeats) {
+                entityManager.remove(heat);
+            }
 
             for (Entry entry : event.getStartListEntries().getAll()) {
                 entityManager.persist(entry.getHeat());
+                entityManager.persist(entry);
             }
 
-            // TODO: this removes old heats?
             entityManager.persist(event);
         }
         return new ModelAndView("redirect:/listEvents.html");

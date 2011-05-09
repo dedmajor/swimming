@@ -38,6 +38,9 @@ public interface Event {
     EventEntries getStartListEntries();
 
     /**
+     * Method does not check that start list is prepared. Use {@link #isStartListPrepared()}
+     * beforehand to do this check.
+     *
      * @return heats containing start list entries
      */
     @NotNull

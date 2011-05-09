@@ -12,7 +12,10 @@ import ru.swimmasters.time.RealTimeClock;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * User: dedmajor
@@ -24,6 +27,15 @@ public class NonCompetitiveBuilderTest {
     public static final StartListBuilder PRIMITIVE_SERVICE = new PrimitiveStartListBuilder();
     @DataPoint
     public static final StartListBuilder SWIM_MASTERS_SERVICE = new SwimMastersStartListBuilder(new RealTimeClock());
+
+    @Theory
+    public void testReturnValue(StartListBuilder service) {
+        Event event = singleTestEntry();
+        List<Heat> initialResult = service.buildHeats(event);
+        assertTrue("initial result must be empty", initialResult.isEmpty());
+        List<Heat> previous = service.buildHeats(event);
+        assertThat("there should be previous heats", previous.size(), greaterThan(0));
+    }
 
     @Theory
     public void testNonCompetitive(StartListBuilder service) {

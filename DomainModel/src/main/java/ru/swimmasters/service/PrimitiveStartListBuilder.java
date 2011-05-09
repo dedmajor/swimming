@@ -15,11 +15,16 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
     private int leadsInAgeGroup;
 
     /**
-     * @param event the event with the collection of {@link SwimMastersEntry} elements.
+     * @param event the event with the collection of {@link ru.swimmasters.domain.SwimMastersEntry} elements.
      */
     @Override
-    public void buildHeats(Event event) {
+    public List<Heat> buildHeats(Event event) {
         EventEntries entries = event.getEntries();
+
+        List<Heat> result = event.isStartListPrepared()
+                ? event.getStartListHeats().getHeatsOrderedByNumber()
+                : Collections.<Heat>emptyList();
+
         Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
         List<AgeGroup> groups = event.getAgeGroups().getAllOrderedByAge();
         Collections.reverse(groups);
@@ -50,6 +55,7 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
                 }
             }
         }
+        return result;
     }
 
     public void setLeadsInAgeGroup(int leadsInAgeGroup) {

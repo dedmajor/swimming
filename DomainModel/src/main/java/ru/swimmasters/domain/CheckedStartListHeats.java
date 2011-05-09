@@ -3,6 +3,9 @@ package ru.swimmasters.domain;
 import java.util.*;
 
 /**
+ * The implementation of the StartListHeats which checks
+ * the start list for the preparation status.
+ *
  * User: dedmajor
  * Date: 5/9/11
  */

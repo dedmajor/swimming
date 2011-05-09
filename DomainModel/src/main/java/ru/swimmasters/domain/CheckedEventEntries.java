@@ -13,6 +13,7 @@ import java.util.*;
  */
 public class CheckedEventEntries implements EventEntries {
     private final List<Entry> entries;
+    private static final Comparator<Entry> ENTRIES_COMPARATOR = new EntryAthleteNameComparator();
 
     public CheckedEventEntries(List<? extends Entry> entries) {
         this.entries = new ArrayList<Entry>(entries);
@@ -28,6 +29,13 @@ public class CheckedEventEntries implements EventEntries {
     public Event getEvent() {
         checkTheSameEvent();
         return entries.get(0).getEvent();
+    }
+
+    @Override
+    public List<Entry> getAllSortedByAthleteName() {
+        List<Entry> result = entries;
+        Collections.sort(result, ENTRIES_COMPARATOR);
+        return result;
     }
 
     @Override
