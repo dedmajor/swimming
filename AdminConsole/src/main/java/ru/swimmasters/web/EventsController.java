@@ -45,7 +45,7 @@ public class EventsController {
                 entityManager.createQuery("from SwimMastersEvent order by number")
                 .getResultList();
         for (SwimMastersEvent event : events) {
-            if (event.getEntries().getAll().isEmpty()) {
+            if (event.getRegularEntries().getAll().isEmpty()) {
                 continue;
             }
             // TODO: FIXME: non-transient
@@ -58,7 +58,7 @@ public class EventsController {
             pool.setLaneMax(8);
             builder.buildHeats(event);
 
-            for (Entry entry : event.getEntries().getAll()) {
+            for (Entry entry : event.getRegularEntries().getAll()) {
                 entityManager.persist(entry.getHeat());
             }
 

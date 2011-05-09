@@ -1,7 +1,5 @@
 package ru.swimmasters.domain;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.List;
 import java.util.Map;
 
@@ -31,10 +29,4 @@ public interface EventEntries extends Entries {
      * Check that each prepared heat is competitive.
      */
     boolean isAllHeatsCompetitive();
-
-    /**
-     * @return entries with the regular status only
-     */
-    @NotNull
-    EventEntries getRegular();
 }

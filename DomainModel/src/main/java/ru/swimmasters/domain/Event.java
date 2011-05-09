@@ -1,5 +1,6 @@
 package ru.swimmasters.domain;
 
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
@@ -14,7 +15,15 @@ public interface Event {
     LocalDate getDate();
     int getNumber();
 
+    @NotNull
     EventEntries getEntries();
+
+    /**
+     * @return entries with the regular status only
+     */
+    @NotNull
+    EventEntries getRegularEntries();
+
     DateTime getStartListTimestamp();
 
     AgeGroups getAgeGroups();

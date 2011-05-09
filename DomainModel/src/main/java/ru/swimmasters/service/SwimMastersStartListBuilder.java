@@ -33,7 +33,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
     @Override
     public void buildHeats(Event event) {
-        EventEntries entries = event.getEntries().getRegular();
+        EventEntries entries = event.getRegularEntries();
 
         if (entries.getAll().isEmpty()) {
             throw new IllegalArgumentException("event contain no regular entries");

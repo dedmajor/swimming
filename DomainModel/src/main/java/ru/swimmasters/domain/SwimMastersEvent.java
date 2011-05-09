@@ -1,10 +1,12 @@
 package ru.swimmasters.domain;
 
 import org.hibernate.annotations.Type;
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -153,9 +155,22 @@ public class SwimMastersEvent implements Event {
         this.date = date;
     }
 
+    @NotNull
     @Override
     public EventEntries getEntries() {
         return new CheckedEventEntries(entries);
+    }
+
+    @NotNull
+    @Override
+    public EventEntries getRegularEntries() {
+        List<Entry> result = new ArrayList<Entry>();
+        for (Entry entry : entries) {
+            if (entry.getStatus() == EntryStatus.REGULAR) {
+                result.add(entry);
+            }
+        }
+        return new CheckedEventEntries(result);
     }
 
     @Override

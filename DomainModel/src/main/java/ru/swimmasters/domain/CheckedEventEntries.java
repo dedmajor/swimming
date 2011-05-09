@@ -24,18 +24,6 @@ public class CheckedEventEntries implements EventEntries {
         return entries;
     }
 
-    @NotNull
-    @Override
-    public EventEntries getRegular() {
-        List<Entry> result = new ArrayList<Entry>();
-        for (Entry entry : entries) {
-            if (entry.getStatus() == EntryStatus.REGULAR) {
-                result.add(entry);
-            }
-        }
-        return new CheckedEventEntries(result);
-    }
-
     @Override
     public List<Heat> getHeatsOrderedByNumber() {
         checkHeatsPrepared();
