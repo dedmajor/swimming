@@ -80,13 +80,16 @@ public class LegacyDataImporter {
 
     private void convertVenues() {
         // TODO: FIXME: remove hardcode
-        if (entityManager.find(SwimMastersPool.class, 1) == null) {
-            SwimMastersPool pool = new SwimMastersPool();
-            pool.setId(1);
+        if (entityManager.find(SwimMastersPool.class, 32) == null) {
+            // 32 |    1781 | Бассейн ЦСК ВВС | Самара, Волжский проспект, 10 |
+            // 50 |     8 | http://maps.yandex.ru/-/CZDtjzS
+            SwimMastersPool pool;
+            pool = new SwimMastersPool();
+            pool.setId(32);
             // todo: Meet.setCity
             // todo: Meet.setAddress
             // todo: Meet.setCourse(50)
-            pool.setName("бассейн «ЦСК ВВС»");
+            pool.setName("Бассейн ЦСК ВВС»");
             pool.setLaneMin(1);
             pool.setLaneMax(8);
             entityManager.persist(pool);
@@ -95,11 +98,11 @@ public class LegacyDataImporter {
 
     private void convertMeet() {
         // TODO: FIXME: remove hardcode
-        meet = entityManager.find(SwimMastersMeet.class, "kubok-2010");
+        meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
         if (meet == null) {
-            meet = new SwimMastersMeet(entityManager.find(SwimMastersPool.class, 1));
-            meet.setId("kubok-2010");
-            meet.setSmId(114);
+            meet = new SwimMastersMeet(entityManager.find(SwimMastersPool.class, 32));
+            meet.setId("bsvc-samara-2011");
+            meet.setSmId(137);
             meet.setName("I Открытый лично-командный турнир «Black Sepia Volga Cup» по плаванию в категории «Мастерс»");
             entityManager.persist(meet);
         }

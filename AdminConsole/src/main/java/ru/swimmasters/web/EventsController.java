@@ -27,7 +27,7 @@ public class EventsController {
     @RequestMapping("/listEvents.html")
     public ModelAndView listEntries() {
         ModelAndView mav = new ModelAndView("listEvents");
-        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "kubok-2010");
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
         mav.addObject("meet", meet);
         return mav;
     }
@@ -35,7 +35,7 @@ public class EventsController {
     @Transactional
     @RequestMapping("/prepareAllStartLists.html")
     public ModelAndView prepareAllStartLists() {
-        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "kubok-2010");
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
 
         List<Heat> cleanupHeats = builder.prepareHeats(meet);
 
