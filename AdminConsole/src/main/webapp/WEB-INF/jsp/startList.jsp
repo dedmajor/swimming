@@ -33,28 +33,38 @@
             <br />
             ${heat.number} / ${heat.totalHeatsInEvent}
             </td>
-            <td class="entries_athlete_header" style="border-left:0;">
+            <td class="entries_athlete_header" style="border-left:0;border-right:0;">
                 <c:choose>
                 <c:when test="${heat.raceStatus == 'IN_PROGRESS'}">
-                    <span class="race_in_progress_status">
-                        <a  class="race_in_progress_status" href="<c:url value="/editRace.html?heat=${heat.id}" />"><c:out value="${heat.raceStatus}"/></a>
-                    </span>
+                    ${heat.startTimestamp}
                     <br />
-                    <a href="runRace.html?heat=${heat.id}">Рестарт</a>
+                    <span class="race_in_progress_status">
+                        <a class="race_in_progress_status" href="<c:url value="/editRace.html?heat=${heat.id}" />"><c:out value="${heat.raceStatus}"/></a>
+                    </span>
                 </c:when>
                 <c:when test="${heat.raceStatus == 'FINISHED'}">
-                    <span class="race_finished_status">
-                        <a  class="race_finished_status" href="<c:url value="/viewRace.html?heat=${heat.id}" />"><c:out value="${heat.raceStatus}"/></a>
-                    </span>
+                    ${heat.startTimestamp}
                     <br />
-                    <a href="runRace.html?heat=${heat.id}">Рестарт</a>
+                    <span class="race_finished_status">
+                        <c:out value="${heat.raceStatus}"/>
+                    </span>
                 </c:when>
                 <c:otherwise>
                     <span class="race_not_started_status">
                         <c:out value="${heat.raceStatus}"/>
                     </span>
-                    <br />
+                </c:otherwise>
+                </c:choose>
+            </td>
+            <td class="entries_athlete_header" style="border-left:0;">
+                <c:choose>
+                <c:when test="${heat.raceStatus == 'NOT_STARTED'}">
                     <a href="runRace.html?heat=${heat.id}">Старт!</a>
+                </c:when>
+                <c:otherwise>
+                    ${heat.finishTimestamp}
+                    <br />
+                    <a href="runRace.html?heat=${heat.id}">Рестарт</a>
                 </c:otherwise>
                 </c:choose>
             </td>
@@ -66,6 +76,16 @@
                 <td class="entries_event">${entry.athlete.athlete.birthDate}</td>
                 <td class="entries_event">${entry.ageGroup}</td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
+                <td class="entries_time">
+                    <c:choose>
+                    <c:when test="${entry.result != null}">
+                        ${entry.result.swimTime} / ${entry.result.status}
+                    </c:when>
+                    <c:otherwise>
+                        &nbsp;
+                    </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
         </c:forEach>
         <tr><td colspan="5" class="entries_event_delimiter">&nbsp;</td></tr>
