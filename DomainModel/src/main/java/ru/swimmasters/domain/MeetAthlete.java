@@ -3,6 +3,8 @@ package ru.swimmasters.domain;
 import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * An athlete in a context of a single meet.
  *
@@ -16,8 +18,7 @@ public interface MeetAthlete {
     Meet getMeet();
     Entries getEntries();
 
-    // TODO: extract to AthleteApproval (@Embedded)
-    @Nullable
+    @NotNull
     ApprovalStatus getApprovalStatus();
     @Nullable
     DateTime getApprovalTimestamp();

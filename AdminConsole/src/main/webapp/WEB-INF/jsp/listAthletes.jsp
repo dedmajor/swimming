@@ -21,6 +21,7 @@
     <p>Время работы: 20 мая, с 13.30 до 18.00, холл бассейна «ЦСК ВВС» (Волжский пр., д. 10)</p>
     <p>Текущее время: <c:out value="<%=new RealTimeClock().now()%>" /></p>
     <p><a href="listEvents.html">Перейти к стартовым протоколам</a></p>
+    <p><a href="approveAllAthletes.html?meet=${meet.id}">Подтвердить всех участников</a></p>
 </div>
 <h3>Заявки на участие в соревновании</h3>
 <div>Возрастные группы: <!-- TODO --></div>
@@ -28,8 +29,11 @@
     <c:forEach items="${meet.meetAthletes.allSortedByAthleteName}" var="athlete">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
-                <c:out value="${athlete.athlete.club.name}"/> <br />
-                <c:out value="${athlete.athlete.fullName}, ${athlete.athlete.birthYear}"/>
+                <c:out value="${athlete.athlete.fullName}"/> <br />
+                <c:out value="${athlete.athlete.club.name}"/>
+            </td>
+            <td class="entries_athlete_header" style="border-left:0;border-right:0;">
+                <c:out value="${athlete.athlete.birthYear}"/> <br />
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -45,7 +49,7 @@
                 </c:when>
                 <c:otherwise>
                     <c:if test="${fn:length(athlete.entries.all) > 0}">
-                        <a href="<c:url value="/approveAthlete.html?athlete=${athlete.id}" />">не подтвержден</a>
+                        <a href="<c:url value="/approveAthlete.html?athlete=${athlete.id}" />"><c:out value="${athlete.approvalStatus}"/></a>
                     </c:if>
                     &nbsp;
                 </c:otherwise>
@@ -57,6 +61,7 @@
         <c:forEach items="${athlete.entries.all}" var="entry">
             <tr class="entries_athlete_time">
                 <td class="entries_event">${entry.event.swimStyle.name}</td>
+                <td class="entries_time">${entry.ageGroup}</td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
         </c:forEach>

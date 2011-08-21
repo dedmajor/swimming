@@ -29,6 +29,20 @@ public class AthletesController {
         return new ModelAndView("listAthletes").addObject("meet", meet);
     }
 
+    @Transactional
+    @RequestMapping("/approveAllAthletes.html")
+    public ModelAndView approveAllAthletes(@RequestParam("meet") String meetId) {
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, meetId);
+        for (MeetAthlete athlete : meet.getMeetAthletes().getAll()) {
+            if (athlete.getApprovalStatus() == ApprovalStatus.PENDING) {
+                mandateCommittee.approveAthlete(athlete);
+                entityManager.persist(athlete);
+            }
+        }
+        return new ModelAndView("redirect:/listAthletes.html")
+                .addObject("meet", meet.getId());
+    }
+
 
     @Transactional
     @RequestMapping("/approveAthlete.html")

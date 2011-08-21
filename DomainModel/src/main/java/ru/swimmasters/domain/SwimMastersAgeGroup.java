@@ -112,9 +112,6 @@ public class SwimMastersAgeGroup implements AgeGroup {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).
-                append("min", min).
-                append("max", max).
-                toString();
+        return min + "-" + max;
     }
 }

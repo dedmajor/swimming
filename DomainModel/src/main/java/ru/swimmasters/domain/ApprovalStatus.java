@@ -5,7 +5,7 @@ package ru.swimmasters.domain;
  * Date: 4/4/11
  */
 public enum ApprovalStatus {
-    // TODO: PENDING status instead of not null?
+    PENDING,
     APPROVED,
     REJECTED
 }

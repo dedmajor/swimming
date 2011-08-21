@@ -14,7 +14,7 @@
 <body>
 <h1>Стартовые протоколы</h1>
 <div>
-    <p><a href="listAthletes.html">Вернуться к мандатной комиссии</a></p>
+    <p><a href="listAthletes.html?meet=${meet.id}">Вернуться к мандатной комиссии</a></p>
     <p><a href="prepareAllStartLists.html">Сформировать все стартовые протоколы</a></p>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
