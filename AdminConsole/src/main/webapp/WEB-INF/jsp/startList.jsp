@@ -26,11 +26,9 @@
     <c:when test="${event.rankingsTimestamp != null}">
         <p>Результаты по группам сформированы ${event.rankingsTimestamp}, версия: TODO</p>
         <p><a href="showAgeRankings.html?event=${event.id}">Посмотреть</a></p>
-        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать повторно</a></p>
     </c:when>
     <c:otherwise>
         <p>Результаты по группам не сформированы</p>
-        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать</a></p>
     </c:otherwise>
     </c:choose>
 </div>
@@ -100,6 +98,14 @@
         <tr><td colspan="6" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
+<c:choose>
+<c:when test="${event.rankingsTimestamp != null}">
+    <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам повторно</a></p>
+</c:when>
+<c:otherwise>
+    <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам</a></p>
+</c:otherwise>
+</c:choose>
 <p>
     Всего участников: <c:out value="${fn:length(event.startListEntries.all)}" />
 </p>
