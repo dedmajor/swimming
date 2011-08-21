@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -89,7 +90,7 @@ public class LegacyDataImporter {
             // todo: Meet.setCity
             // todo: Meet.setAddress
             // todo: Meet.setCourse(50)
-            pool.setName("Бассейн ЦСК ВВС»");
+            pool.setName("Бассейн ЦСК ВВС");
             pool.setLaneMin(1);
             pool.setLaneMax(8);
             entityManager.persist(pool);
@@ -110,7 +111,7 @@ public class LegacyDataImporter {
 
     private void convertEntries() {
         new LegacyQueryTemplate("select heat.id, event_id, " +
-                "entry_time, extract(milliseconds from result_time) as result_time, athlete_id " +
+                "extract(milliseconds from entry_time) as entry_time, athlete_id " +
                 "from heat " +
                 "left join event on event_id = event.id where meet_id='" + meet.getSMId() + "';") {
             @Override
@@ -120,17 +121,22 @@ public class LegacyDataImporter {
                     entry.id = resultSet.getLong("id");
                     entry.event = entityManager.find(SwimMastersEvent.class, resultSet.getLong("event_id"));
 
-                    // TODO: FIXME: overriding entry time with result time just to test a heat builder
-                    //String entryTime = resultSet.getString("entry_time");
-                    Long entryTimeMs = resultSet.getLong("result_time");
+                    Long entryTimeMs = resultSet.getLong("entry_time");
                     if (entryTimeMs != 0L) {
                         entry.entryTime = new Duration(entryTimeMs);
                     }
 
-                    entry.athlete = entityManager.find(SwimMastersAthlete.class, resultSet.getLong("athlete_id"));
-                    if (entry.athlete == null) {
+                    SwimMastersAthlete athlete = entityManager.find(SwimMastersAthlete.class, resultSet.getLong("athlete_id"));
+                    if (athlete == null) {
                         throw new IllegalStateException("athlete cannot be null for entry " + entry.id);
                     }
+                    SwimMastersMeetAthlete meetAthlete = (SwimMastersMeetAthlete) meet.getMeetAthletes().getByAthlete(athlete);
+                    if (meetAthlete == null) {
+                        meetAthlete = meet.addAthlete(athlete);
+                        entityManager.persist(meetAthlete);
+                    }
+
+                    entry.athlete = meetAthlete;
 
                     entityManager.persist(entry);
                 }

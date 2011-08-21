@@ -2,7 +2,7 @@ package ru.swimmasters.service;
 
 import ru.swimmasters.domain.ApprovalStatus;
 import ru.swimmasters.domain.MeetAthlete;
-import ru.swimmasters.domain.SwimMastersAthlete;
+import ru.swimmasters.domain.SwimMastersMeetAthlete;
 import ru.swimmasters.time.Clock;
 
 /**
@@ -28,7 +28,7 @@ public class SwimMastersMandateCommittee implements MandateCommittee {
 
     @Override
     public void setAthleteStatus(MeetAthlete athlete, ApprovalStatus status) {
-        ((SwimMastersAthlete) athlete).setApprovalTimestamp(clock.now());
-        ((SwimMastersAthlete) athlete).setApprovalStatus(status);
+        ((SwimMastersMeetAthlete) athlete).setApprovalTimestamp(clock.now());
+        ((SwimMastersMeetAthlete) athlete).setApprovalStatus(status);
     }
 }

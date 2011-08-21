@@ -39,31 +39,40 @@ public class SwimMastersBuilderTest {
         EVENTS[0] = event1;
         EVENTS[0].setEntries(Arrays.asList(
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(25000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(24500L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(27000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(24000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1978-11-04")),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1978-11-04"))),
                         new Duration(24000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1979-11-04"), "Z", null),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1979-11-04"), "Z", null)),
                         new Duration(24000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1979-11-04"), "C", null),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1979-11-04"), "C", null)),
                         new Duration(24000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1979-11-04"), "A", null),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1979-11-04"), "A", null)),
                         new Duration(24000L)),
                 new SwimMastersEntry(event1,
-                        new SwimMastersAthlete(new LocalDate("1979-11-04"), "B", null),
+                        ((SwimMastersMeet) event1.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1979-11-04"), "B", null)),
                         new Duration(24000L))
         ));
 
@@ -71,28 +80,34 @@ public class SwimMastersBuilderTest {
         EVENTS[1] = event2;
         EVENTS[1].setEntries(Arrays.asList(
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(25000L)),
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(27000L)),
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1979-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1979-11-04"))),
                         new Duration(24000L)),
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1985-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1985-11-04"))),
                         new Duration(25500L)),
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1984-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1984-11-04"))),
                         new Duration(24500L)),
                 new SwimMastersEntry(event2,
-                        new SwimMastersAthlete(new LocalDate("1984-11-04")),
+                        ((SwimMastersMeet) event2.getMeet()).addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1984-11-04"))),
                         new Duration(28000L))
         ));
 
         for (Event event : EVENTS) {
             for (Entry entry : event.getEntries().getAll()) {
-                ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+                ((SwimMastersMeetAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
             }
         }
     }

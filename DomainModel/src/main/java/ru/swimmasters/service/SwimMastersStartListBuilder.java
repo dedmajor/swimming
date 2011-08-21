@@ -43,6 +43,8 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
             throw new IllegalArgumentException("event contain no regular entries");
         }
 
+        // TODO: FIXME: check that race status is not_started
+
         ((SwimMastersEvent) event).setStartListTimestamp(clock.now());
 
         Map<AgeGroup, AgeQueue> queues = buildAgeQueues(entries);

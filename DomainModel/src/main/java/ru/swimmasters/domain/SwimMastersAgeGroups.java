@@ -12,6 +12,9 @@ public class SwimMastersAgeGroups implements AgeGroups {
     private final Event event;
     private final List<AgeGroup> groups;
 
+    // TODO: FIXME: is it against rules???
+    private final boolean attachYoungstersToLowestGroup = true;
+
     protected SwimMastersAgeGroups(Event event, List<? extends AgeGroup> groups) {
         this.event = event;
         this.groups = new ArrayList<AgeGroup>(groups);
@@ -64,9 +67,19 @@ public class SwimMastersAgeGroups implements AgeGroups {
                 return group;
             }
         }
+
+        if (attachYoungstersToLowestGroup && age < getLowestGroup().getMin()) {
+            // TODO: FIXME: is it a correct logic??
+            return getLowestGroup();
+        }
+
         throw new IllegalArgumentException(
-                "we have no age group for athlete with age " + age
-                        + " which is born at " + athlete.getBirthYear());
+                "we have no age group for athlete " + athlete.getFullName() + " with age " + age
+                        + " who was born at " + athlete.getBirthYear());
+    }
+
+    private AgeGroup getLowestGroup() {
+        return getAllOrderedByAge().get(0);
     }
 
     @Override

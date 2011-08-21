@@ -35,3 +35,15 @@
 .approval_rejected_status {
     color: red;
 }
+
+.race_finished_status {
+    color: lime;
+}
+
+.race_in_progress_status {
+    color: red;
+}
+
+.race_not_started_status {
+    color: gray;
+}

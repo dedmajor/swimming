@@ -56,9 +56,10 @@ public class NonCompetitiveBuilderTest {
         ageGroups.add(new SwimMastersAgeGroup(0, 0));
         event.setAgeGroups(ageGroups);
         SwimMastersAthlete athlete = new SwimMastersAthlete(new LocalDate("2010-11-04"));
-        athlete.setApprovalStatus(ApprovalStatus.APPROVED);
+        SwimMastersMeetAthlete meetAthlete = meet.addAthlete(athlete);
+        meetAthlete.setApprovalStatus(ApprovalStatus.APPROVED);
         entries.add(new SwimMastersEntry(
-                event, athlete, new Duration(1)));
+                event, meetAthlete, new Duration(1)));
         event.setEntries(entries);
         return event;
     }

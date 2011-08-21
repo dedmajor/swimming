@@ -1,7 +1,5 @@
 package ru.swimmasters.domain;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
-
 import java.io.Serializable;
 import java.util.Comparator;
 
@@ -13,11 +11,10 @@ import java.util.Comparator;
  */
 public class EntryAthleteNameComparator implements Comparator<Entry>, Serializable {
     private static final long serialVersionUID = 3299994088413152194L;
+    private static final Comparator<Athlete> ATHLETE_COMPARATOR = SwimMastersAthlete.getNameComparator();
 
     @Override
     public int compare(Entry o1, Entry o2) {
-        return new CompareToBuilder()
-                .append(o1.getAthlete().getFullName(), o2.getAthlete().getFullName())
-                .toComparison();
+        return ATHLETE_COMPARATOR.compare(o1.getAthlete().getAthlete(), o2.getAthlete().getAthlete());
     }
 }

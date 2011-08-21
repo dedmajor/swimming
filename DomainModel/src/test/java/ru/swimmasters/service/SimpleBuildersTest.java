@@ -68,7 +68,7 @@ public class SimpleBuildersTest {
             this.service = service;
             this.event = event;
             for (Entry entry : event.getEntries().getAll()) {
-                ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+                ((SwimMastersMeetAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
             }
         }
     }
@@ -89,31 +89,36 @@ public class SimpleBuildersTest {
 
         entries.add(
                 new SwimMastersEntry(event,
-                        new SwimMastersAthlete(new LocalDate("2010-11-04")),
+                        meet.addAthlete(
+                                new SwimMastersAthlete(new LocalDate("2010-11-04"))),
                         new Duration(1L))); // 0
 
         entries.add(
                 new SwimMastersEntry(event,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        meet.addAthlete(
+                            new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(1L))); // 30 - 1 sec
         entries.add(
                 new SwimMastersEntry(event,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        meet.addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(3L))); // 30 - 3 sec
         entries.add(
                 new SwimMastersEntry(event,
-                        new SwimMastersAthlete(new LocalDate("1980-11-04")),
+                        meet.addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1980-11-04"))),
                         new Duration(2L))); // 30 - 2 sec
 
         entries.add(
-                new SwimMastersEntry(event, new SwimMastersAthlete(new
-                        LocalDate("1989-11-04")),
+                new SwimMastersEntry(event,
+                        meet.addAthlete(
+                                new SwimMastersAthlete(new LocalDate("1989-11-04"))),
                         new Duration(1L))); // 21
 
         event.setEntries(entries);
 
         for (Entry entry : event.getEntries().getAll()) {
-            ((SwimMastersAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
+            ((SwimMastersMeetAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
         }
 
         return event;

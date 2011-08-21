@@ -9,6 +9,7 @@ import java.util.List;
  * Date: 4/2/11
  */
 public interface Entries {
+    // TODO: FIXME: map <Event, Entry> instead of a list
     @NotNull
     List<Entry> getAll();
 }

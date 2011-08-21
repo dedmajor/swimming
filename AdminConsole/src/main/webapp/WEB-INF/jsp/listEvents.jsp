@@ -45,7 +45,7 @@
         <c:forEach items="${event.entries.allSortedByAthleteName}" var="entry"  varStatus="entryStatus">
             <tr class="entries_athlete_time">
                 <td class="entries_event ${entry.athlete.approvalStatus == 'APPROVED' ? '' : 'entries_athlete_not_approved'}">
-                ${entryStatus.index + 1}. ${entry.athlete.fullName}
+                ${entryStatus.index + 1}. ${entry.athlete.athlete.fullName}
                 </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>

@@ -73,7 +73,10 @@ public class SwimMastersEntry implements Entry {
     Long id;
 
     @ManyToOne(optional = false)
-    SwimMastersAthlete athlete;
+    SwimMastersMeetAthlete athlete;
+
+    @OneToOne(optional = true)
+    private SwimMastersResult result;
 
     //LocalTimeStamp mandateTimestamp; ??
 
@@ -83,7 +86,11 @@ public class SwimMastersEntry implements Entry {
     SwimMastersEntry() {
     }
 
-    public SwimMastersEntry(SwimMastersEvent event, SwimMastersAthlete athlete, Duration entryTime) {
+    public SwimMastersEntry(SwimMastersEvent event, SwimMastersMeetAthlete athlete, Duration entryTime) {
+        if (!event.getMeet().equals(athlete.getMeet())) {
+            throw new IllegalArgumentException("athlete " + athlete.getAthlete()
+                    + " didn't register at meet " + event.getMeet());
+        }
         this.entryTime = entryTime;
         this.event = event;
         this.athlete = athlete;
@@ -129,7 +136,12 @@ public class SwimMastersEntry implements Entry {
 
     @Override
     public AgeGroup getAgeGroup() {
-        return event.getAgeGroups().getFor(athlete);
+        return event.getAgeGroups().getFor(athlete.getAthlete());
+    }
+
+    @Override
+    public Result getResult() {
+        return result;
     }
 
     public void setHeat(Heat heat) {
@@ -153,6 +165,10 @@ public class SwimMastersEntry implements Entry {
         return HEATS_ENTRY_COMPARATOR;
     }
 
+    public void setResult(SwimMastersResult result) {
+        this.result = result;
+    }
+
     /**
      * First goes the fastest entry. For entries of the same time,
      * first goes the youngest athlete's entry (for athletes of the same
@@ -167,8 +183,8 @@ public class SwimMastersEntry implements Entry {
         public int compare(Entry o1, Entry o2) {
             return new CompareToBuilder()
                     .append(o1.getEntryTime(), o2.getEntryTime())
-                    .append(o1.getAthlete().getBirthYear(), o2.getAthlete().getBirthYear())
-                    .append(o1.getAthlete().getFullName(), o2.getAthlete().getFullName())
+                    .append(o1.getAthlete().getAthlete().getBirthYear(), o2.getAthlete().getAthlete().getBirthYear())
+                    .append(o1.getAthlete().getAthlete().getFullName(), o2.getAthlete().getAthlete().getFullName())
                     .toComparison();
         }
     }

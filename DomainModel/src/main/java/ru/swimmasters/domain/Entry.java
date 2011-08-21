@@ -33,4 +33,7 @@ public interface Entry {
     boolean isHeatPrepared();
 
     AgeGroup getAgeGroup();
+
+    @Nullable
+    Result getResult();
 }

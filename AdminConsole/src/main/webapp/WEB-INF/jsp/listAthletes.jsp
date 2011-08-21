@@ -5,8 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<%-- TODO: replace with Domain Collection --%>
-<jsp:useBean id="athletes" scope="request" type="java.util.List<ru.swimmasters.domain.MeetAthlete>"/>
+<jsp:useBean id="meet" scope="request" type="ru.swimmasters.domain.Meet"/>
 
 <%-- TODO: let IDE autocomplete css filename --%>
 
@@ -26,11 +25,11 @@
 <h3>Заявки на участие в соревновании</h3>
 <div>Возрастные группы: <!-- TODO --></div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <c:forEach items="${athletes}" var="athlete">
+    <c:forEach items="${meet.meetAthletes.allSortedByAthleteName}" var="athlete">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
-                <c:out value="${athlete.club.name}"/> <br />
-                <c:out value="${athlete.fullName}, ${athlete.birthYear}"/>
+                <c:out value="${athlete.athlete.club.name}"/> <br />
+                <c:out value="${athlete.athlete.fullName}, ${athlete.athlete.birthYear}"/>
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -64,5 +63,6 @@
         <tr><td colspan="2" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
+<div>Всего участников: <c:out value="${fn:length(meet.meetAthletes.all)}"/></div>
 </body>
 </html>

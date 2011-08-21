@@ -1,5 +1,9 @@
 package ru.swimmasters.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -48,9 +52,33 @@ public class SwimMastersHeat implements Heat {
     @Transient
     private List<SwimMastersEntry> lastAddedBrick;
 
+    @Column(nullable = false)
+    private RaceStatus raceStatus = RaceStatus.NOT_STARTED;
+
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime startTimestamp;
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime finishTimestamp;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public Event getEvent() {
+        // TODO: FIXME: store event
+        return entries.get(0).getEvent();
+    }
+
     @Override
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public int getTotalHeatsInEvent() {
+        return getEvent().getStartListHeats().getHeatsOrderedByNumber().size();
     }
 
     @Override
@@ -73,6 +101,20 @@ public class SwimMastersHeat implements Heat {
     @Override
     public Entries getEntries() {
         return new CheckedEventEntries(entries);
+    }
+
+    @Override
+    public Entry getEntryByLane(int lane) {
+        for (Entry entry : entries) {
+            Integer entryLane = entry.getLane();
+            if (entryLane == null) {
+                throw new IllegalStateException();
+            }
+            if (entryLane == lane) {
+                return entry;
+            }
+        }
+        throw new IllegalArgumentException("heat " + id + " has no entry at the lane " + lane);
     }
 
     @Override
@@ -128,6 +170,33 @@ public class SwimMastersHeat implements Heat {
         return result;
     }
 
+    @Override
+    public RaceStatus getRaceStatus() {
+        return raceStatus;
+    }
+
+    @Override
+    public DateTime getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    @Override
+    public DateTime getFinishTimestamp() {
+        return finishTimestamp;
+    }
+
+    public void setRaceStatus(RaceStatus raceStatus) {
+        this.raceStatus = raceStatus;
+    }
+
+    public void setStartTimestamp(DateTime startTimestamp) {
+        this.startTimestamp = startTimestamp;
+    }
+
+    public void setFinishTimestamp(DateTime finishTimestamp) {
+        this.finishTimestamp = finishTimestamp;
+    }
+
     public void addBrick(List<SwimMastersEntry> brick) {
         entries.addAll(brick);
         lastAddedBrick = brick;
@@ -151,5 +220,12 @@ public class SwimMastersHeat implements Heat {
                     "heat does not contain all the requested applications: " + entriesBrick);
         }
         entries.removeAll(entriesBrick);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this).
+                append("id", id).
+                toString();
     }
 }

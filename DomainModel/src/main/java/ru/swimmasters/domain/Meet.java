@@ -22,6 +22,10 @@ public interface Meet {
      */
     Events getEvents();
 
+    EventEntries getAllEntries();
+    MeetAthletes getMeetAthletes();
+
+
     /**
      * @return the date of the first session
      */

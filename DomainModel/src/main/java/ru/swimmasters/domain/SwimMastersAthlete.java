@@ -6,55 +6,18 @@ import org.hibernate.annotations.Type;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
+import sun.security.pkcs11.P11TlsKeyMaterialGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 /**
- * This contains all information of a athlete including all entries and results
- * in the context of a meet sub tree.
- *
  * User: dedmajor
  * Date: 3/7/11
  */
 @Entity
-public class SwimMastersAthlete implements MeetAthlete {
-    // LEN (17 fields)
-    /*
-        Element ATHLETE
-        This contains all information of a athlete including all entries and results
-        in the context of a meet sub tree.
-
-        athleteid n r The id attribute should be unique over all athletes of a meet. It is
-                                            required for ATHLETE objects in a meet sub tree.
-        birthdate d r The date of birth for the athlete. If only the year of birth is known, the
-                     date should be set to January 1st of that year.
-        CLUB (1) o - The club or team for the athlete, when he swam the record.
-        ENTRIES (2) o - All entries of the athlete.
-        firstname s r The first name of the athlete.
-        firstname.en si - The first name in english.
-        gender e r Gender of the athlete. Values can be male (M) and female (F).
-        HANDICAP o - Information about the handicap classes of a swimmer.
-        lastname s r The last name of the athlete.
-        lastname.en si - The last name in english.
-        license s - The registration number given by the national federation. This number
-           should be looked at together with the nation of the club the athlete is
-          listed in the Lenex file.
-        middlename s - The middle name of the athlete.
-        nameprefix s - An optional name prefix. For example for Peter van den Hoogenband,
-                      this could be "van den".
-        nation e - See table "Nation Codes" for acceptable values.
-        passport s - The passport number of the athlete.
-        RESULTS (2) o - All results of the athlete.
-        swrid uid - The global unique athlete id given by swimrankings.net.
-        (1)
-        These elements/objects are allowed in a record list sub tree only.
-        (2)
-        These elements/objects are allowed in a meet sub tree only.
-     */
-
+public class SwimMastersAthlete implements Athlete {
     /**
      * The club or team for the athlete, when he swam the record.
      * (These elements/objects are allowed in a record list sub tree only.)
@@ -62,9 +25,6 @@ public class SwimMastersAthlete implements MeetAthlete {
      */
     @ManyToOne(optional = false)
     SwimMastersClub club;
-
-    @OneToMany(mappedBy = "athlete")
-    List<SwimMastersEntry> entries;
 
     /**
      * The date of birth for the athlete. If only the year of birth is known,
@@ -134,12 +94,6 @@ public class SwimMastersAthlete implements MeetAthlete {
     //Integer countryId;
     //LocalDate listingDate; // TODO: FIXME: why we need this?
 
-    ApprovalStatus approvalStatus;
-
-    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
-    private DateTime approvalTimestamp;
-
-
     SwimMastersAthlete() {
     }
 
@@ -198,31 +152,6 @@ public class SwimMastersAthlete implements MeetAthlete {
     }
 
     @Override
-    public Entries getEntries() {
-        return new Entries() {
-            @NotNull
-            @Override
-            public List<Entry> getAll() {
-                return Collections.<Entry>unmodifiableList(entries);
-            }
-        };
-    }
-
-    @Override
-    public ApprovalStatus getApprovalStatus() {
-        return approvalStatus;
-    }
-
-    @Override
-    public DateTime getApprovalTimestamp() {
-        return approvalTimestamp;
-    }
-
-    public void setApprovalStatus(ApprovalStatus approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
-
-    @Override
     public String toString() {
         return new ToStringBuilder(this, ToStringStyle.SIMPLE_STYLE).
                 append("firstName", firstName).
@@ -231,7 +160,16 @@ public class SwimMastersAthlete implements MeetAthlete {
                 toString();
     }
 
-    public void setApprovalTimestamp(DateTime approvalTimestamp) {
-        this.approvalTimestamp = approvalTimestamp;
+    public static Comparator<Athlete> getNameComparator() {
+        return new AthleteNameComparator();
+    }
+
+    private static class AthleteNameComparator implements Comparator<Athlete>, Serializable {
+        private static final long serialVersionUID = 3261855627341544471L;
+
+        @Override
+        public int compare(Athlete o1, Athlete o2) {
+            return o1.getFullName().compareTo(o2.getFullName());
+        }
     }
 }

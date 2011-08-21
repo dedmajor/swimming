@@ -5,15 +5,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.swimmasters.domain.ApprovalStatus;
-import ru.swimmasters.domain.Athlete;
-import ru.swimmasters.domain.SwimMastersAthlete;
+import ru.swimmasters.domain.*;
 import ru.swimmasters.service.MandateCommittee;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 /**
  * User: dedmajor
@@ -27,14 +24,9 @@ public class AthletesController {
     private MandateCommittee mandateCommittee;
 
     @RequestMapping("/listAthletes.html")
-    public ModelAndView listEntries() {
-        ModelAndView mav = new ModelAndView("listAthletes");
-        // TODO: FIXME: meet.getAthletes()
-        List<Athlete> athletes = (List<Athlete>) entityManager.createQuery(
-                "from SwimMastersAthlete order by club.name, lastName, firstName")
-                .getResultList();
-        mav.addObject("athletes", athletes);
-        return mav;
+    public ModelAndView listEntries(@RequestParam("meet") String meetId) {
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, meetId);
+        return new ModelAndView("listAthletes").addObject("meet", meet);
     }
 
 
@@ -51,7 +43,7 @@ public class AthletesController {
     }
 
     private ModelAndView setAthleteStatus(Long athleteId, ApprovalStatus status) {
-        SwimMastersAthlete athlete = entityManager.find(SwimMastersAthlete.class, athleteId);
+        SwimMastersMeetAthlete athlete = entityManager.find(SwimMastersMeetAthlete.class, athleteId);
         if (athlete == null) {
             throw new IllegalArgumentException("no athlete " + athleteId);
         }
@@ -60,6 +52,7 @@ public class AthletesController {
 
         entityManager.persist(athlete);
 
-        return new ModelAndView("redirect:/listAthletes.html");
+        return new ModelAndView("redirect:/listAthletes.html")
+                .addObject("meet", athlete.getMeet().getId());
     }
 }

@@ -1,11 +1,9 @@
 package ru.swimmasters.web;
 
-import org.joda.time.LocalDate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.swimmasters.domain.SwimMastersAgeGroups;
 import ru.swimmasters.domain.SwimMastersEvent;
 
 import javax.persistence.EntityManager;

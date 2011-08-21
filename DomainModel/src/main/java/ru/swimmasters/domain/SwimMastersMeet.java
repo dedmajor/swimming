@@ -1,11 +1,10 @@
 package ru.swimmasters.domain;
 
+import net.sf.cglib.core.MethodWrapper;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * User: dedmajor
@@ -91,6 +90,10 @@ public class SwimMastersMeet implements Meet {
 
     @OneToMany(mappedBy = "meet")
     List<SwimMastersSession> sessions = new ArrayList<SwimMastersSession>();
+
+    // TODO: establish consistency between sesssions and athletes?
+    @OneToMany(mappedBy = "meet")
+    List<SwimMastersMeetAthlete> athletes = new ArrayList<SwimMastersMeetAthlete>();
 
     SwimMastersMeet() {
     }
@@ -183,5 +186,59 @@ public class SwimMastersMeet implements Meet {
                 return result;
             }
         };
+    }
+
+    @Override
+    public EventEntries getAllEntries() {
+        List<Entry> result = new ArrayList<Entry>();
+        for (Event event: getEvents().getAll()) {
+            result.addAll(event.getEntries().getAll());
+        }
+        return new CheckedEventEntries(result);
+    }
+
+    @Override
+    public MeetAthletes getMeetAthletes() {
+        return new MeetAthletes() {
+
+            @Override
+            public Meet getMeet() {
+                return SwimMastersMeet.this;
+            }
+
+            @Override
+            public Collection<MeetAthlete> getAll() {
+                return Collections.<MeetAthlete>unmodifiableCollection(athletes);
+            }
+
+            @Override
+            public List<MeetAthlete> getAllSortedByAthleteName() {
+                List<MeetAthlete> result = new ArrayList<MeetAthlete>();
+                result.addAll(athletes);
+                Collections.sort(result, new Comparator<MeetAthlete>() {
+                    @Override
+                    public int compare(MeetAthlete o1, MeetAthlete o2) {
+                        return SwimMastersAthlete.getNameComparator().compare(o1.getAthlete(), o2.getAthlete());
+                    }
+                });
+                return result;
+            }
+
+            @Override
+            public MeetAthlete getByAthlete(Athlete athlete) {
+                for (MeetAthlete meetAthlete : athletes) {
+                    if (meetAthlete.getAthlete().equals(athlete)) {
+                        return meetAthlete;
+                    }
+                }
+                return null;
+            }
+        };
+    }
+
+    public SwimMastersMeetAthlete addAthlete(SwimMastersAthlete swimMastersAthlete) {
+        SwimMastersMeetAthlete result = new SwimMastersMeetAthlete(this, swimMastersAthlete);
+        this.athletes.add(result);
+        return result;
     }
 }

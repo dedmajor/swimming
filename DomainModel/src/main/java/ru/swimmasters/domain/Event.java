@@ -10,7 +10,9 @@ import org.joda.time.LocalDate;
  * Date: 4/2/11
  */
 public interface Event {
+    // TODO: replace id with meet_id, number ?
     Long getId();
+
     EventGender getEventGender();
     SwimStyle getSwimStyle();
 
