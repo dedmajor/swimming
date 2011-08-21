@@ -27,8 +27,12 @@
     <c:forEach items="${session.events.all}" var="event">
         <tr>
             <td class="entries_athlete_header" style="border-right:0;">
-                Дисциплина #<c:out value="${event.number}: ${event.swimStyle.name}"/>
-                (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
+                Дисциплина #<c:out value="${event.number}"/>
+            </td>
+            <td class="entries_athlete_header" style="border-left:0; border-right:0;">
+                ${event.swimStyle.name}
+                <br />
+                <c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />
             </td>
             <td class="entries_athlete_header" style="border-left:0;">
                 <c:choose>
@@ -46,6 +50,9 @@
             <tr class="entries_athlete_time">
                 <td class="entries_event ${entry.athlete.approvalStatus == 'APPROVED' ? '' : 'entries_athlete_not_approved'}">
                 ${entryStatus.index + 1}. ${entry.athlete.athlete.fullName}
+                </td>
+                <td class="entries_time">
+                ${entry.athlete.athlete.club.name} &nbsp;
                 </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
