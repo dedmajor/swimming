@@ -39,6 +39,15 @@ public class CheckedEventEntries implements EventEntries {
     }
 
     @Override
+    public Set<Heat> getHeats() {
+        Set<Heat> result = new HashSet<Heat>();
+        for (Entry entry : entries) {
+            result.add(entry.getHeat());
+        }
+        return result;
+    }
+
+    @Override
     public Map<AgeGroup, Entries> getGroupedByAge() {
         checkTheSameEvent();
         Map<AgeGroup, Entries> result = new TreeMap<AgeGroup, Entries>();

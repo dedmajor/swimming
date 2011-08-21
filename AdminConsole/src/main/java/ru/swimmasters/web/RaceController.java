@@ -37,6 +37,9 @@ public class RaceController {
         binder.registerCustomEditor(Duration.class, new PropertyEditorSupport() {
             @Override
             public String getAsText() {
+                if (getValue() == null) {
+                    return "";
+                }
                 return String.valueOf(((ReadableDuration) getValue()).getMillis());
             }
 
@@ -91,21 +94,10 @@ public class RaceController {
             entityManager.persist(registeredResult);
         }
 
-        ModelAndView mav = new ModelAndView("redirect:/editRace.html");
-        mav.addObject("heat", heat.getId());
-        return mav;
-    }
-
-    @Transactional
-    @RequestMapping("/finishRace.html")
-    public ModelAndView stopRace(@RequestParam("heat") Long heatId) {
-        SwimMastersHeat heat = getHeat(heatId);
-
         runner.finishRace(heat);
 
-        ModelAndView mav = new ModelAndView("redirect:/startList.html");
-        mav.addObject("event", heat.getEvent());
-        return mav;
+        return new ModelAndView("redirect:/startList.html")
+                .addObject("event", heat.getEvent().getId());
     }
 
 

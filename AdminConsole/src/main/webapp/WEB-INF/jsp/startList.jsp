@@ -21,6 +21,7 @@
     (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
 </h3>
 <div>
+    <p><a href="listEvents.html?meet=${event.meet.id}">Назад к другим стартовым протоколам</a></p>
     <p><a href="prepareRankings.html?event=${event.id}">Сформировать результаты</a></p>
     <p><a href="showRankings.html?event=${event.id}">Посмотреть результаты</a> (TODO: version / timestamp)</p>
 </div>

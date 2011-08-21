@@ -35,7 +35,7 @@
         </tr>
     </c:forEach>
 </table>
-<input type="submit"/>
+<input type="submit" value="Финиш!"/>
 </form:form>
 </body>
 </html>

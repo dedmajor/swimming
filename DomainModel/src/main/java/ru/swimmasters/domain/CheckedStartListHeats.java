@@ -19,16 +19,14 @@ public class CheckedStartListHeats implements StartListHeats {
     @Override
     public List<Heat> getHeatsOrderedByNumber() {
         checkStartListPrepared();
-        SortedSet<Heat> sortedHeats = new TreeSet<Heat>(new Comparator<Heat>() {
+        List<Heat> sortedHeats = new ArrayList<Heat>(entries.getHeats());
+        Collections.sort(sortedHeats, new Comparator<Heat>() {
             @Override
             public int compare(Heat o1, Heat o2) {
                 return Integer.valueOf(o1.getNumber()).compareTo(o2.getNumber());
             }
         });
-        for (Entry entry : entries.getAll()) {
-            sortedHeats.add(entry.getHeat());
-        }
-        return new ArrayList<Heat>(sortedHeats);
+        return sortedHeats;
     }
 
     private void checkStartListPrepared() {

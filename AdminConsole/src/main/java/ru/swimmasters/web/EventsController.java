@@ -3,6 +3,7 @@ package ru.swimmasters.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ru.swimmasters.domain.*;
 import ru.swimmasters.service.StartListBuilder;
@@ -25,17 +26,16 @@ public class EventsController {
 
     // TODO: FIXME: @RequestMapping("/{meet}/listEvents.html")
     @RequestMapping("/listEvents.html")
-    public ModelAndView listEntries() {
-        ModelAndView mav = new ModelAndView("listEvents");
-        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
-        mav.addObject("meet", meet);
-        return mav;
+    public ModelAndView listEntries(@RequestParam("meet") String meetId) {
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, meetId);
+        return new ModelAndView("listEvents")
+                .addObject("meet", meet);
     }
 
     @Transactional
     @RequestMapping("/prepareAllStartLists.html")
-    public ModelAndView prepareAllStartLists() {
-        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
+    public ModelAndView prepareAllStartLists(@RequestParam("meet") String meetId) {
+        SwimMastersMeet meet = entityManager.find(SwimMastersMeet.class, meetId);
 
         List<Heat> cleanupHeats = builder.prepareHeats(meet);
 
@@ -49,6 +49,7 @@ public class EventsController {
             }
             entityManager.persist(event);
         }
-        return new ModelAndView("redirect:/listEvents.html");
+        return new ModelAndView("redirect:/listEvents.html")
+                .addObject("meet", meet.getId());
     }
 }

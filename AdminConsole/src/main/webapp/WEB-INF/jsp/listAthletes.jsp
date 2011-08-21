@@ -23,7 +23,7 @@
     <p>Время работы мандатной комиссии: 20 мая, с 13.30 до 18.00, холл бассейна «ЦСК ВВС» (Волжский пр., д. 10)</p>
     <p>Текущее время: <c:out value="<%=new RealTimeClock().now()%>" /></p>
     <p><a href="approveAllAthletes.html?meet=${meet.id}">Подтвердить всех участников</a></p>
-    <p><a href="listEvents.html">Перейти к стартовым протоколам</a></p>
+    <p><a href="listEvents.html?meet=${meet.id}">Перейти к стартовым протоколам</a></p>
 </div>
 <h3>Заявки на участие в соревновании</h3>
 <table class="entries_table" cellpadding="0" cellspacing="0">
