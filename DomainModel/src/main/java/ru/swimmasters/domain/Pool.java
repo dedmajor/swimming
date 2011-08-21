@@ -5,6 +5,9 @@ package ru.swimmasters.domain;
  * Date: 4/3/11
  */
 public interface Pool {
+    Integer getId();
+    String getName();
+
     int getLaneMin();
     int getLaneMax();
 

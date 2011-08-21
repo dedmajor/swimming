@@ -50,6 +50,14 @@ public class SwimMastersPool implements Pool {
     SwimMastersPool() {
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public SwimMastersPool(int laneMin, int laneMax) {
         this.laneMin = laneMin;
         this.laneMax = laneMax;
