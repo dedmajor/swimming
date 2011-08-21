@@ -32,8 +32,12 @@ public class SwimMastersRaceRunner implements RaceRunner {
         checkHeatInProgress(heat);
         logger.debug("registering result " + finalLaneResult + " for heat " + heat);
         SwimMastersEntry entry = (SwimMastersEntry) heat.getEntryByLane(finalLaneResult.getLaneNumber());
-        SwimMastersResult result = new SwimMastersResult(entry);
-        entry.setResult(result);
+        SwimMastersResult result = (SwimMastersResult) entry.getResult();
+        if (result == null) {
+            result = new SwimMastersResult(entry);
+            entry.setResult(result);
+        }
+        result.update(finalLaneResult);
         return result;
     }
 

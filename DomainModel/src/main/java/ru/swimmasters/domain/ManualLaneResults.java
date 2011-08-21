@@ -1,5 +1,6 @@
 package ru.swimmasters.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,6 +12,13 @@ public class ManualLaneResults implements LaneResults {
 
     ManualLaneResults() {
         // spring mvc shall pass
+    }
+
+    public ManualLaneResults(Heat heat) {
+        results = new ArrayList<ManualLaneResult>(heat.getEntries().getAll().size());
+        for (Entry entry : heat.getEntries().getAll()) {
+            results.add(new ManualLaneResult(entry));
+        }
     }
 
     public ManualLaneResults(List<ManualLaneResult> results) {

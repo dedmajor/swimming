@@ -18,7 +18,7 @@ public interface RaceRunner {
     void startRace(Heat heat);
 
     /**
-     * Creates and adds the result entry to the athlete of the heat being in progress now.
+     * Creates or updates the result entry to the athlete of the heat being in progress now.
      *
      * @see Result
      */

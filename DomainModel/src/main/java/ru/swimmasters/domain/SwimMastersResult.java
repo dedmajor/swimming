@@ -42,7 +42,7 @@ import javax.persistence.*;
  */
 @Entity
 public class SwimMastersResult implements Result {
-    @Id
+    @Id @GeneratedValue
     Long id;
 
     @OneToOne(optional = false)
@@ -53,13 +53,22 @@ public class SwimMastersResult implements Result {
     private Duration swimTime;
 
     @Column(nullable = false)
-    private ResultStatus status;
+    private ResultStatus status = ResultStatus.QUALIFIED;
 
     SwimMastersResult() {
     }
 
     public SwimMastersResult(SwimMastersEntry entry) {
         this.entry = entry;
+    }
+
+    public void update(FinalLaneResult finalLaneResult) {
+        Integer lane = entry.getLane();
+        assert lane != null;
+        assert lane.equals(finalLaneResult.getLaneNumber());
+        swimTime = finalLaneResult.getFinalTime();
+        // TODO: status
+        // TODO: lap results
     }
 
     @Override

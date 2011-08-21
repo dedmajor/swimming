@@ -25,6 +25,19 @@ public class ManualLaneResult implements FinalLaneResult {
         this.finalTime = finalTime;
     }
 
+    public ManualLaneResult(Entry entry) {
+        if (!entry.isHeatPrepared()) {
+            throw new IllegalArgumentException("heats in entry " + entry + " are not prepared yet");
+        }
+        Integer lane = entry.getLane();
+        assert lane != null;
+        laneNumber = lane;
+        Result result = entry.getResult();
+        if (result != null) {
+            finalTime = result.getSwimTime();
+        }
+    }
+
     @Override
     public int getLaneNumber() {
         return laneNumber;

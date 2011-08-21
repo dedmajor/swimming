@@ -1,13 +1,15 @@
 package ru.swimmasters.web;
 
 import org.joda.time.Duration;
+import org.joda.time.LocalDate;
+import org.joda.time.ReadableDuration;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.DataBinder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ru.swimmasters.domain.*;
 import ru.swimmasters.service.RaceRunner;
@@ -16,7 +18,7 @@ import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.validation.Valid;
-import java.util.ArrayList;
+import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 /**
@@ -29,6 +31,25 @@ public class RaceController {
     private EntityManager entityManager;
     @Resource
     private RaceRunner runner;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Duration.class, new PropertyEditorSupport() {
+            @Override
+            public String getAsText() {
+                return String.valueOf(((ReadableDuration) getValue()).getMillis());
+            }
+
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                Duration value = new Duration(Long.valueOf(text));
+                if (value.getMillis() <= 0) {
+                    throw new IllegalArgumentException(text);
+                }
+                setValue(value);
+            }
+        });
+    }
 
     @Transactional
     @RequestMapping("/runRace.html")
@@ -46,16 +67,9 @@ public class RaceController {
     public ModelAndView editRace(@RequestParam("heat") Long heatId) {
         SwimMastersHeat heat = getHeatInProgress(heatId);
 
-        List<ManualLaneResult> results = new ArrayList<ManualLaneResult>();
-        results.add(new ManualLaneResult(1, new Duration(1000)));
-        results.add(new ManualLaneResult(2, new Duration(1000)));
-        results.add(new ManualLaneResult(3, new Duration(1000)));
-        LaneResults result = new ManualLaneResults(results);
-
-        ModelAndView mav = new ModelAndView("editRace");
-        mav.addObject("heat", heat);
-        mav.addObject("command", result);
-        return mav;
+        return new ModelAndView("editRace")
+                .addObject("heat", heat)
+                .addObject("command", new ManualLaneResults(heat));
     }
 
     @Transactional
@@ -71,9 +85,11 @@ public class RaceController {
 
         // TODO: validate lane result
 
-        System.out.println();
+        List<Result> registeredResults = runner.registerAllLaneResults(heat, laneResults);
 
-        runner.registerAllLaneResults(heat, laneResults);
+        for (Result registeredResult : registeredResults) {
+            entityManager.persist(registeredResult);
+        }
 
         ModelAndView mav = new ModelAndView("redirect:/editRace.html");
         mav.addObject("heat", heat.getId());
