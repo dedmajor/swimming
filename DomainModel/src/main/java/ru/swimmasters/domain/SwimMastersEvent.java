@@ -119,6 +119,8 @@ public class SwimMastersEvent implements Event {
 
     @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime startListTimestamp;
+    @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
+    private DateTime rankingsTimestamp;
 
 
     @Override
@@ -208,6 +210,21 @@ public class SwimMastersEvent implements Event {
     }
 
     @Override
+    public boolean isAllHeatsFinished() {
+        for (Heat heat : getStartListHeats().getHeatsOrderedByNumber()) {
+            if (!heat.isRaceFinished()) {
+               return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public DateTime getRankingsTimestamp() {
+        return rankingsTimestamp;
+    }
+
+    @Override
     public Pool getPool() {
         return session.getMeet().getPool();
     }
@@ -223,5 +240,9 @@ public class SwimMastersEvent implements Event {
 
     public void setEntries(List<SwimMastersEntry> entries) {
         this.entries = entries;
+    }
+
+    public void setRankingsTimestamp(DateTime rankingsTimestamp) {
+        this.rankingsTimestamp = rankingsTimestamp;
     }
 }

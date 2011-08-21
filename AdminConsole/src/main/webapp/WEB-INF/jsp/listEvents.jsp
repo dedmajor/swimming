@@ -46,7 +46,16 @@
 
             </td>
             <td class="entries_athlete_header table_header_right">
-            &nbsp; <!-- TODO: результаты -->
+            <c:choose>
+            <c:when test="${event.rankingsTimestamp != null}">
+                <a href="showAgeRankings.html?event=${event.id}">результаты</a>
+                <br />
+                ${event.rankingsTimestamp}
+            </c:when>
+            <c:otherwise>
+                &nbsp;
+            </c:otherwise>
+            </c:choose>
             </td>
         </tr>
         <c:forEach items="${event.entries.allSortedByAthleteName}" var="entry"  varStatus="entryStatus">

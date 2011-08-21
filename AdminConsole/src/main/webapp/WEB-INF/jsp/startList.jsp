@@ -22,8 +22,17 @@
 </h3>
 <div>
     <p><a href="listEvents.html?meet=${event.meet.id}">Назад к другим стартовым протоколам</a></p>
-    <p><a href="prepareRankings.html?event=${event.id}">Сформировать результаты</a></p>
-    <p><a href="showRankings.html?event=${event.id}">Посмотреть результаты</a> (TODO: version / timestamp)</p>
+    <c:choose>
+    <c:when test="${event.rankingsTimestamp != null}">
+        <p>Результаты по группам сформированы ${event.rankingsTimestamp}, версия: TODO</p>
+        <p><a href="showAgeRankings.html?event=${event.id}">Посмотреть</a></p>
+        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать повторно</a></p>
+    </c:when>
+    <c:otherwise>
+        <p>Результаты по группам не сформированы</p>
+        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать</a></p>
+    </c:otherwise>
+    </c:choose>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${event.startListHeats.heatsOrderedByNumber}" var="heat">
@@ -95,7 +104,7 @@
     Всего участников: <c:out value="${fn:length(event.startListEntries.all)}" />
 </p>
 <p>
-    Стартовый протокол сформирован: <c:out value="${event.startListTimestamp}" />, версия: TODO
+    Стартовый протокол сформирован <c:out value="${event.startListTimestamp}" />, версия: TODO
 </p>
 </body>
 </html>

@@ -57,6 +57,11 @@ public interface Heat {
     RaceStatus getRaceStatus();
 
     /**
+     * @return getRaceStatus() == RaceStatus.FINISHED
+     */
+    boolean isRaceFinished();
+
+    /**
      * @return start timestamp if race was started
      */
     @Nullable

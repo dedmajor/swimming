@@ -176,6 +176,11 @@ public class SwimMastersHeat implements Heat {
     }
 
     @Override
+    public boolean isRaceFinished() {
+        return raceStatus == RaceStatus.FINISHED;
+    }
+
+    @Override
     public DateTime getStartTimestamp() {
         return startTimestamp;
     }

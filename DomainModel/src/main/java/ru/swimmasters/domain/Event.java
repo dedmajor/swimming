@@ -63,4 +63,15 @@ public interface Event {
     StartListHeats getStartListHeats();
 
     AgeGroups getAgeGroups();
+
+    /**
+     * Checks that all heats are finished.
+     */
+    boolean isAllHeatsFinished();
+
+    /**
+     * @return the date when the latest start list have been prepared
+     */
+    @Nullable
+    DateTime getRankingsTimestamp();
 }
