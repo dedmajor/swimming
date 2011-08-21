@@ -6,6 +6,19 @@
     border: 1px solid black;
 }
 
+.table_header_left {
+    border-right: 0;
+}
+
+.table_header_middle {
+    border-left: 0;
+    border-right: 0;
+}
+
+.table_header_right {
+    border-left: 0;
+}
+
 .entries_athlete_time {
     /* border: 1px solid rgb(220, 220, 220); */
 }

@@ -88,7 +88,7 @@
                 </td>
             </tr>
         </c:forEach>
-        <tr><td colspan="5" class="entries_event_delimiter">&nbsp;</td></tr>
+        <tr><td colspan="6" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
 <p>

@@ -15,7 +15,7 @@
 <h1>Стартовые протоколы</h1>
 <div>
     <p><a href="listAthletes.html?meet=${meet.id}">Вернуться к мандатной комиссии</a></p>
-    <p><a href="prepareAllStartLists.html">Сформировать все стартовые протоколы</a></p>
+    <p><a href="prepareAllStartLists.html?meet=${meet.id}">Сформировать все стартовые протоколы</a></p>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${meet.sessions.all}" var="session">
@@ -26,15 +26,15 @@
         </tr>
     <c:forEach items="${session.events.all}" var="event">
         <tr>
-            <td class="entries_athlete_header" style="border-right:0;">
+            <td class="entries_athlete_header table_header_left">
                 Дисциплина #<c:out value="${event.number}"/>
             </td>
-            <td class="entries_athlete_header" style="border-left:0; border-right:0;">
+            <td colspan="2" class="entries_athlete_header" style="border-left:0; border-right:0;">
                 ${event.swimStyle.name}
                 <br />
                 <c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />
             </td>
-            <td class="entries_athlete_header" style="border-left:0;">
+            <td class="entries_athlete_header table_header_middle">
                 <c:choose>
                     <c:when test="${event.startListPrepared}">
                         <a href="<c:url value="/startList.html?event=${event.id}" />">стартовый протокол</a>
@@ -45,6 +45,9 @@
                 </c:choose>
 
             </td>
+            <td class="entries_athlete_header table_header_right">
+            &nbsp; <!-- TODO: результаты -->
+            </td>
         </tr>
         <c:forEach items="${event.entries.allSortedByAthleteName}" var="entry"  varStatus="entryStatus">
             <tr class="entries_athlete_time">
@@ -54,7 +57,20 @@
                 <td class="entries_time">
                 ${entry.athlete.athlete.club.name} &nbsp;
                 </td>
+                <td class="entries_time">
+                ${entry.ageGroup} &nbsp;
+                </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
+                <td class="entries_time">
+                    <c:choose>
+                    <c:when test="${event.startListPrepared}">
+                        ${entry.heat.number} ${entry.lane}
+                    </c:when>
+                    <c:otherwise>
+                        &nbsp;
+                    </c:otherwise>
+                    </c:choose>
+                </td>
             </tr>
         </c:forEach>
         <tr><td colspan="2" class="entries_event_delimiter">&nbsp;</td></tr>

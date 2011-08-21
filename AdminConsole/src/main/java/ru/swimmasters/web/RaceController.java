@@ -38,7 +38,7 @@ public class RaceController {
             @Override
             public String getAsText() {
                 if (getValue() == null) {
-                    return "";
+                    return "0";
                 }
                 return String.valueOf(((ReadableDuration) getValue()).getMillis());
             }
@@ -46,9 +46,6 @@ public class RaceController {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
                 Duration value = new Duration(Long.valueOf(text));
-                if (value.getMillis() <= 0) {
-                    throw new IllegalArgumentException(text);
-                }
                 setValue(value);
             }
         });
