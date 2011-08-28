@@ -34,6 +34,16 @@ public class StartListController {
                 .addObject("event", event);
     }
 
+    @RequestMapping("/showAgeRankings.html")
+    public ModelAndView ageRankings(@RequestParam("event") Long eventId) {
+        SwimMastersEvent event = entityManager.find(SwimMastersEvent.class, eventId);
+        if (event == null) {
+            throw new IllegalStateException("no such event: " + eventId);
+        }
+        return new ModelAndView("ageRankings")
+                .addObject("event", event);
+    }
+
     @Transactional
     @RequestMapping("/prepareAgeRankings.html")
     public ModelAndView prepareAgeRankings(@RequestParam("event") Long eventId) {
