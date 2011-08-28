@@ -21,7 +21,7 @@
     (<c:out value="${event.eventGender}, ${event.swimStyle.relayCount} x ${event.swimStyle.distance} m, ${event.swimStyle.stroke}" />)
 </h3>
 <div>
-    <p><a href="listEvents.html?meet=${event.meet.id}">Назад к другим стартовым протоколам</a></p>
+    <p><a href="listEvents.html?meet=${event.meet.id}">К другим стартовым протоколам</a></p>
     <c:choose>
     <c:when test="${event.rankingsTimestamp != null}">
         <p>Результаты по группам сформированы ${event.rankingsTimestamp}, версия: TODO</p>
@@ -29,6 +29,14 @@
     </c:when>
     <c:otherwise>
         <p>Результаты по группам не сформированы</p>
+    </c:otherwise>
+    </c:choose>
+    <c:choose>
+    <c:when test="${event.rankingsTimestamp != null}">
+        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам повторно</a></p>
+    </c:when>
+    <c:otherwise>
+        <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам</a></p>
     </c:otherwise>
     </c:choose>
 </div>
@@ -98,14 +106,6 @@
         <tr><td colspan="6" class="entries_event_delimiter">&nbsp;</td></tr>
     </c:forEach>
 </table>
-<c:choose>
-<c:when test="${event.rankingsTimestamp != null}">
-    <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам повторно</a></p>
-</c:when>
-<c:otherwise>
-    <p><a href="prepareAgeRankings.html?event=${event.id}">Сформировать результаты по группам</a></p>
-</c:otherwise>
-</c:choose>
 <p>
     Всего участников: <c:out value="${fn:length(event.startListEntries.all)}" />
 </p>

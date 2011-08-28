@@ -15,6 +15,7 @@
 <h1>Стартовые протоколы</h1>
 <div>
     <p><a href="listAthletes.html?meet=${meet.id}">Вернуться к мандатной комиссии</a></p>
+    <p><a href="prepareAllStartLists.html?meet=${meet.id}">Сформировать все стартовые протоколы</a></p>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
     <c:forEach items="${meet.sessions.all}" var="session">
@@ -85,6 +86,5 @@
     </c:forEach>
     </c:forEach>
 </table>
-<p><a href="prepareAllStartLists.html?meet=${meet.id}">Сформировать все стартовые протоколы</a></p>
 </body>
 </html>
