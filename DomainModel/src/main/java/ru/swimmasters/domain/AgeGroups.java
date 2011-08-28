@@ -15,4 +15,6 @@ public interface AgeGroups {
      * Finds appropriate group for Athlete or throws IllegalArgumentException.
      */
     AgeGroup getFor(Athlete athlete);
+
+    boolean canParticipate(Athlete athlete);
 }

@@ -1,5 +1,7 @@
 package ru.swimmasters.domain;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -61,6 +63,19 @@ public class SwimMastersAgeGroups implements AgeGroups {
 
     @Override
     public AgeGroup getFor(Athlete athlete) {
+        AgeGroup result = getAgeGroup(athlete);
+
+        if (result != null) {
+            return result;
+        }
+
+        throw new IllegalArgumentException(
+                "we have no age group for athlete " + athlete.getFullName() + " with age " + event.getAge(athlete)
+                        + " who was born at " + athlete.getBirthYear());
+    }
+
+    @Nullable
+    private AgeGroup getAgeGroup(Athlete athlete) {
         int age = athlete.getAge(event.getDate());
         for (AgeGroup group : getAllOrderedByAge()) {
             if (group.containsAge(age)) {
@@ -68,14 +83,17 @@ public class SwimMastersAgeGroups implements AgeGroups {
             }
         }
 
-        if (attachYoungstersToLowestGroup && age < getLowestGroup().getMin()) {
+        if (attachYoungstersToLowestGroup && !groups.isEmpty() && age < getLowestGroup().getMin()) {
             // TODO: FIXME: is it a correct logic??
             return getLowestGroup();
         }
 
-        throw new IllegalArgumentException(
-                "we have no age group for athlete " + athlete.getFullName() + " with age " + age
-                        + " who was born at " + athlete.getBirthYear());
+        return null;
+    }
+
+    @Override
+    public boolean canParticipate(Athlete athlete) {
+        return getAgeGroup(athlete) != null;
     }
 
     private AgeGroup getLowestGroup() {

@@ -15,6 +15,8 @@ public interface StartListBuilder {
      *
      * Event MUST have at least one entry, otherwise IllegalArgumentException is thrown.
      *
+     * TODO: not confuse the previous heats with return value, use method of the event
+     *
      * @return previous heats of the event (useful for cleanup)
      */
     List<Heat> buildHeats(Event event);

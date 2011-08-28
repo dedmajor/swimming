@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Implementation or Results interface which ensures
+ * that all results belong to the same athlete.
+ *
  * User: dedmajor
  * Date: 5/15/11
  */

@@ -28,4 +28,6 @@ public interface Result {
     boolean isTimeAvailable();
 
     ResultStatus getStatus();
+
+    int getPoints();
 }

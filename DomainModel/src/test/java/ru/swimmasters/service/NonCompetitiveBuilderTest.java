@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * User: dedmajor
@@ -41,17 +39,18 @@ public class NonCompetitiveBuilderTest {
     public void testNonCompetitive(StartListBuilder service) {
         Event singleEntryEvent = singleTestEntry();
         service.buildHeats(singleEntryEvent);
+        assertEquals("there should be the only heat",
+                1, singleEntryEvent.getStartListHeats().getHeatsOrderedByNumber().size());
         assertFalse("the only heat cannot be competitive",
                 singleEntryEvent.getStartListHeats().isAllHeatsCompetitive());
     }
 
     private static Event singleTestEntry() {
         List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
-        SwimMastersEvent event = new SwimMastersEvent();
         SwimMastersPool pool = new SwimMastersPool(2, 2);
         SwimMastersMeet meet = new SwimMastersMeet(pool);
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2010-11-04"));
-        event.setSession(session);
+        SwimMastersEvent event = new SwimMastersEvent(session);
         List<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
         ageGroups.add(new SwimMastersAgeGroup(0, 0));
         event.setAgeGroups(ageGroups);

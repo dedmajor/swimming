@@ -62,6 +62,11 @@ public interface Event {
     @NotNull
     StartListHeats getStartListHeats();
 
+    /**
+     * Age groups allowed to enter event.
+     *
+     * TODO: rename to getAllowedAgeGroups()
+     */
     AgeGroups getAgeGroups();
 
     /**
@@ -70,8 +75,13 @@ public interface Event {
     boolean isAllHeatsFinished();
 
     /**
-     * @return the date when the latest start list have been prepared
+     * @return the date when rankings have been prepared
      */
     @Nullable
     DateTime getRankingsTimestamp();
+
+    @NotNull
+    AgeRankings getAgeRankings();
+
+    int getAge(Athlete athlete);
 }

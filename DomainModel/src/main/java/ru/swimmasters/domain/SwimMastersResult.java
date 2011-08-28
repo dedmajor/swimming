@@ -114,6 +114,11 @@ public class SwimMastersResult implements Result {
         return status;
     }
 
+    @Override
+    public int getPoints() {
+        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
     public void setSwimTime(Duration swimTime) {
         this.swimTime = swimTime;
     }

@@ -38,7 +38,7 @@ public class SwimMastersHeat implements Heat {
      */
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
     @Column(nullable = false)
     private Integer number;
@@ -60,6 +60,16 @@ public class SwimMastersHeat implements Heat {
     @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime finishTimestamp;
 
+    @ManyToOne(optional = false)
+    private SwimMastersEvent event;
+
+    SwimMastersHeat() {
+    }
+
+    public SwimMastersHeat(SwimMastersEvent event) {
+        this.event = event;
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -67,8 +77,7 @@ public class SwimMastersHeat implements Heat {
 
     @Override
     public Event getEvent() {
-        // TODO: FIXME: store event
-        return entries.get(0).getEvent();
+        return event;
     }
 
     @Override
@@ -100,7 +109,7 @@ public class SwimMastersHeat implements Heat {
 
     @Override
     public Entries getEntries() {
-        return new CheckedEventEntries(entries);
+        return new CheckedEventEntries(event, entries);
     }
 
     @Override

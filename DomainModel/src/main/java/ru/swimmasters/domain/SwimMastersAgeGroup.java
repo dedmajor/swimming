@@ -1,16 +1,15 @@
 package ru.swimmasters.domain;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * User: dedmajor
  * Date: 4/3/11
  */
-//@Entity
+@Entity
 public class SwimMastersAgeGroup implements AgeGroup {
     // LEN
     /*
@@ -45,6 +44,10 @@ public class SwimMastersAgeGroup implements AgeGroup {
                run according to the FINA rules.
               * MASTERS: Master results to be used for master rankings/records.
      */
+
+    @Id
+    @GeneratedValue
+    Integer id;
 
     @Column(nullable = false)
     private final Integer min;

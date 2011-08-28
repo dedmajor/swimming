@@ -22,7 +22,6 @@ public interface Meet {
      */
     Events getEvents();
 
-    EventEntries getAllEntries();
     MeetAthletes getMeetAthletes();
 
 

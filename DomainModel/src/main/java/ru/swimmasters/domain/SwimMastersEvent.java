@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -73,16 +74,15 @@ public class SwimMastersEvent implements Event {
              * MANUAL1: Timing was done with one manual time per lane.
      */
 
-    //@ManyToMany
-    @Transient
-    List<SwimMastersAgeGroup> ageGroups = SwimMastersAgeGroups.createDefaultGroups();
+    @ManyToMany
+    private final List<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
 
     @Column(nullable = false)
     EventGender eventGender = EventGender.ALL;
 
     // TODO: Len: HEATS
     @OneToMany(mappedBy = "event")
-    private List<SwimMastersEntry> entries;
+    private final List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
 
     // maxentries
 
@@ -122,6 +122,16 @@ public class SwimMastersEvent implements Event {
     @Type(type="org.joda.time.contrib.hibernate.PersistentDateTime")
     private DateTime rankingsTimestamp;
 
+    @OneToMany(mappedBy = "event")
+    private final List<SwimMastersAgeRanking> ageRankings = new ArrayList<SwimMastersAgeRanking>();
+
+    SwimMastersEvent() {
+        // hibernate shall pass
+    }
+
+    public SwimMastersEvent(SwimMastersSession session) {
+        this.session = session;
+    }
 
     @Override
     public Long getId() {
@@ -158,14 +168,10 @@ public class SwimMastersEvent implements Event {
         return number;
     }
 
-    public void setSession(SwimMastersSession session) {
-        this.session = session;
-    }
-
     @NotNull
     @Override
     public EventEntries getEntries() {
-        return new CheckedEventEntries(entries);
+        return new CheckedEventEntries(this, entries);
     }
 
     @NotNull
@@ -177,13 +183,13 @@ public class SwimMastersEvent implements Event {
                 result.add(entry);
             }
         }
-        return new CheckedEventEntries(result);
+        return new CheckedEventEntries(this, result);
     }
 
     @NotNull
     @Override
     public StartListHeats getStartListHeats() {
-        return new CheckedStartListHeats((CheckedEventEntries) getStartListEntries());
+        return new CheckedStartListHeats(this, (CheckedEventEntries) getStartListEntries());
     }
 
     @Override
@@ -203,9 +209,6 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public AgeGroups getAgeGroups() {
-        if (ageGroups == null) {
-            throw new IllegalStateException("age groups haven't been built yet");
-        }
         return new SwimMastersAgeGroups(this, ageGroups);
     }
 
@@ -224,14 +227,25 @@ public class SwimMastersEvent implements Event {
         return rankingsTimestamp;
     }
 
+    @NotNull
+    @Override
+    public AgeRankings getAgeRankings() {
+        return new AgeRankings() {
+            @Override
+            public List<AgeRanking> getAll() {
+                return Collections.<AgeRanking>unmodifiableList(ageRankings);
+            }
+        };
+    }
+
+    @Override
+    public int getAge(Athlete athlete) {
+        return athlete.getAge(session.getDate());
+    }
+
     @Override
     public Pool getPool() {
         return session.getMeet().getPool();
-    }
-
-    public void setAgeGroups(List<SwimMastersAgeGroup> ageGroups) {
-        // TODO: check intersection
-        this.ageGroups = ageGroups;
     }
 
     public void setStartListTimestamp(DateTime startListTimestamp) {
@@ -239,10 +253,27 @@ public class SwimMastersEvent implements Event {
     }
 
     public void setEntries(List<SwimMastersEntry> entries) {
-        this.entries = entries;
+        this.entries.clear();
+        this.entries.addAll(entries);
     }
 
     public void setRankingsTimestamp(DateTime rankingsTimestamp) {
         this.rankingsTimestamp = rankingsTimestamp;
+    }
+
+    public void setAgeRankings(List<SwimMastersAgeRanking> ageRankings) {
+        this.ageRankings.clear();
+        this.ageRankings.addAll(ageRankings);
+    }
+
+    public SwimMastersEvent addEntry(SwimMastersEntry entry) {
+        entries.add(entry);
+        return this;
+    }
+
+    public void setAgeGroups(List<SwimMastersAgeGroup> ageGroups) {
+        // TODO: check intersection?
+        this.ageGroups.clear();
+        this.ageGroups.addAll(ageGroups);
     }
 }

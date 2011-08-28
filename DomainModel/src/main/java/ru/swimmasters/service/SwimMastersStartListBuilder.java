@@ -33,6 +33,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
     @Override
     public List<Heat> buildHeats(Event event) {
+        // TODO: FIXME: check that it's alreay empty, don't return a value
         List<Heat> result = event.isStartListPrepared()
                 ? event.getStartListHeats().getHeatsOrderedByNumber()
                 : Collections.<Heat>emptyList();
@@ -69,7 +70,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
                 if (currentHeat == null || !hasMoreSpace(event, currentHeat, queue.nextBrickSize())) {
                     assert currentHeat == null || currentHeat.isCompetitive();
                     number++;
-                    currentHeat = new SwimMastersHeat();
+                    currentHeat = new SwimMastersHeat((SwimMastersEvent) event);
                     currentHeat.setNumber(number);
                 }
 

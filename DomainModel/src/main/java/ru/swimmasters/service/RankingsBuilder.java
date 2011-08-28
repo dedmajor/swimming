@@ -1,5 +1,6 @@
 package ru.swimmasters.service;
 
+import ru.swimmasters.domain.AgeRankings;
 import ru.swimmasters.domain.Event;
 
 /**
@@ -13,5 +14,5 @@ public interface RankingsBuilder {
      *
      * @see Event#isAllHeatsFinished
      */
-    void buildEventAgeRankings(Event event);
+    AgeRankings buildEventAgeRankings(Event event);
 }

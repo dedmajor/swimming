@@ -91,6 +91,10 @@ public class SwimMastersEntry implements Entry {
             throw new IllegalArgumentException("athlete " + athlete.getAthlete()
                     + " didn't register at meet " + event.getMeet());
         }
+        if (!event.getAgeGroups().canParticipate(athlete.getAthlete())) {
+            throw new IllegalArgumentException(
+                    "athlete " + athlete.getAthlete() + " cannot participate in event " + event + " due to his age");
+        }
         this.entryTime = entryTime;
         this.event = event;
         this.athlete = athlete;
@@ -140,7 +144,7 @@ public class SwimMastersEntry implements Entry {
     }
 
     @Override
-    public Result getResult() {
+    public SwimMastersResult getResult() {
         return result;
     }
 

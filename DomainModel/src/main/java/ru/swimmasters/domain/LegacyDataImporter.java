@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -27,6 +28,7 @@ public class LegacyDataImporter {
     private final Connection legacyConnection;
 
     private SwimMastersMeet meet;
+    private List<SwimMastersAgeGroup> groups;
 
     public LegacyDataImporter(EntityManager entityManager, Connection legacyConnection) {
         this.entityManager = entityManager;
@@ -60,6 +62,8 @@ public class LegacyDataImporter {
     public void runImport() {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
+        System.out.println("Creating age groups");
+        createAgeGroups();
         System.out.println("Converting venues");
         convertVenues();
         System.out.println("Converting meet");
@@ -77,6 +81,13 @@ public class LegacyDataImporter {
         System.out.println("Converting entries (heats)");
         convertEntries();
         transaction.commit();
+    }
+
+    private void createAgeGroups() {
+        groups = SwimMastersAgeGroups.createDefaultGroups();
+        for (SwimMastersAgeGroup group : groups) {
+            entityManager.persist(group);
+        }
     }
 
     private void convertVenues() {
@@ -151,21 +162,22 @@ public class LegacyDataImporter {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-                    SwimMastersEvent event = new SwimMastersEvent();
-                    event.id = resultSet.getLong("id");
-                    event.eventGender = EventGender.ALL; // TODO: FIXME
                     String dateString = resultSet.getString("date");
+                    SwimMastersSession session = null;
                     if (dateString != null) {
                         LocalDate date = new LocalDate(dateString);
-                        SwimMastersSession session = (SwimMastersSession) meet.getSessions().findByDate(date);
+                        session = (SwimMastersSession) meet.getSessions().findByDate(date);
                         if (session == null) {
                             session = new SwimMastersSession(meet, date);
                             meet.addSession(session);
                             entityManager.persist(session);
                         }
-                        event.setSession(session);
                     }
+                    SwimMastersEvent event = new SwimMastersEvent(session);
+                    event.id = resultSet.getLong("id");
+                    event.eventGender = EventGender.ALL; // TODO: FIXME
                     event.number = resultSet.getInt("number");
+                    event.setAgeGroups(groups);
 
                     SwimMastersSwimStyle style = new SwimMastersSwimStyle();
                     style.name = resultSet.getString("name");

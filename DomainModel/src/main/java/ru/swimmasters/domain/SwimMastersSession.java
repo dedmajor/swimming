@@ -12,6 +12,8 @@ import java.util.List;
  * Date: 5/9/11
  */
 @Entity
+// TODO: unique:
+//@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"meet", "number"}))
 public class SwimMastersSession implements Session {
     /*
         Len:
@@ -43,7 +45,6 @@ public class SwimMastersSession implements Session {
     @ManyToOne(optional = false)
     SwimMastersMeet meet;
 
-    // TODO: check the date for uniquiness within meet
     @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
     @Column(nullable = false)
     LocalDate date;

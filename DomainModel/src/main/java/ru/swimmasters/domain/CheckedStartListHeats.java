@@ -10,9 +10,11 @@ import java.util.*;
  * Date: 5/9/11
  */
 public class CheckedStartListHeats implements StartListHeats {
+    private final Event event;
     private final CheckedEventEntries entries;
 
-    public CheckedStartListHeats(CheckedEventEntries entries) {
+    public CheckedStartListHeats(Event event, CheckedEventEntries entries) {
+        this.event = event;
         this.entries = entries;
     }
 
@@ -30,14 +32,14 @@ public class CheckedStartListHeats implements StartListHeats {
     }
 
     private void checkStartListPrepared() {
-        if (!getEvent().isStartListPrepared()) {
+        if (!event.isStartListPrepared()) {
             throw new IllegalStateException("heats are not prepared");
         }
     }
 
     @Override
     public Event getEvent() {
-        return entries.getEvent();
+        return event;
     }
 
     @Override

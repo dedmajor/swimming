@@ -5,12 +5,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ru.swimmasters.domain.SwimMastersEvent;
+import ru.swimmasters.domain.*;
 import ru.swimmasters.service.RankingsBuilder;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 
 /**
  * User: dedmajor
@@ -37,8 +38,42 @@ public class StartListController {
     @RequestMapping("/prepareAgeRankings.html")
     public ModelAndView prepareAgeRankings(@RequestParam("event") Long eventId) {
         SwimMastersEvent event = entityManager.find(SwimMastersEvent.class, eventId);
-        rankingsBuilder.buildEventAgeRankings(event);
+
+        clearAgeRankings(event);
+        entityManager.flush();
+
+        AgeRankings rankings = rankingsBuilder.buildEventAgeRankings(event);
+        persistAgeRankings(rankings);
+
         return new ModelAndView("redirect:/startList.html")
                 .addObject("event", event.getId());
+    }
+
+    private void persistAgeRankings(AgeRankings ageRankings) {
+        for (AgeRanking ranking : ageRankings.getAll()) {
+            entityManager.persist(ranking);
+            persistGroupRankings(ranking.getGroupRankings());
+        }
+    }
+
+    private void persistGroupRankings(GroupRankings groupRankings) {
+        for (GroupRanking groupRanking : groupRankings.getAll()) {
+            entityManager.persist(groupRanking);
+        }
+    }
+
+    private void clearAgeRankings(SwimMastersEvent event) {
+        for (AgeRanking ageRanking : event.getAgeRankings().getAll()) {
+            clearGroupRankings(ageRanking);
+            entityManager.remove(ageRanking);
+        }
+        event.setAgeRankings(Collections.<SwimMastersAgeRanking>emptyList());
+    }
+
+    private void clearGroupRankings(AgeRanking ageRanking) {
+        for (GroupRanking groupRanking : ageRanking.getGroupRankings().getAll()) {
+            entityManager.remove(groupRanking);
+        }
+        ((SwimMastersAgeRanking) ageRanking).setGroupRankings(Collections.<SwimMastersGroupRanking>emptyList());
     }
 }

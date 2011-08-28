@@ -5,18 +5,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 /**
- * Default implementation of {@link EventEntries} interface which checks elements
+ * Default implementation of {@link EventEntries} interface which ensures elements
  * to be of the same event.
  *
  * User: dedmajor
  * Date: 4/2/11
  */
 public class CheckedEventEntries implements EventEntries {
+    private final Event event;
     private final List<Entry> entries;
     private static final Comparator<Entry> ENTRIES_COMPARATOR = new EntryAthleteNameComparator();
 
-    public CheckedEventEntries(List<? extends Entry> entries) {
+    public CheckedEventEntries(Event event, List<? extends Entry> entries) {
+        for (Entry entry : entries) {
+            if (!entry.getEvent().equals(event)) {
+                throw new IllegalArgumentException("entry " + entry + " doesn't belong to event " + event);
+            }
+        }
         this.entries = new ArrayList<Entry>(entries);
+        this.event = event;
     }
 
     @NotNull
@@ -27,8 +34,7 @@ public class CheckedEventEntries implements EventEntries {
 
     @Override
     public Event getEvent() {
-        checkTheSameEvent();
-        return entries.get(0).getEvent();
+        return event;
     }
 
     @Override
@@ -49,7 +55,6 @@ public class CheckedEventEntries implements EventEntries {
 
     @Override
     public Map<AgeGroup, Entries> getGroupedByAge() {
-        checkTheSameEvent();
         Map<AgeGroup, Entries> result = new TreeMap<AgeGroup, Entries>();
         Map<AgeGroup, ArrayList<Entry>> map = new HashMap<AgeGroup, ArrayList<Entry>>();
         for (Entry entry : entries) {
@@ -69,28 +74,5 @@ public class CheckedEventEntries implements EventEntries {
             }
         }
         return result;
-    }
-
-    private boolean isOfTheSameEvent() {
-        if (entries.isEmpty()) {
-            throw new IllegalStateException("entries list is empty, so cannot determine event from it");
-        }
-        Event event = null;
-        for (Entry entry : entries) {
-            if (event == null) {
-                event = entry.getEvent();
-            } else {
-                if (!entry.getEvent().equals(event)) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void checkTheSameEvent() {
-        if (!isOfTheSameEvent()) {
-            throw new IllegalStateException("all heats must be of the same event");
-        }
     }
 }

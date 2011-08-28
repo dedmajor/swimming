@@ -113,11 +113,10 @@ public class SwimMastersBuilderTest {
     }
 
     private static SwimMastersEvent createEvent() {
-        SwimMastersEvent event = new SwimMastersEvent();
         SwimMastersPool pool = new SwimMastersPool(2, 6);
         SwimMastersMeet meet = new SwimMastersMeet(pool);
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate(2010, 4, 25));
-        event.setSession(session);
+        SwimMastersEvent event = new SwimMastersEvent(session);
         event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
         return event;
     }

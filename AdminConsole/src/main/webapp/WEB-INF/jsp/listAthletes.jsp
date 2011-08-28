@@ -7,8 +7,6 @@
 
 <jsp:useBean id="meet" scope="request" type="ru.swimmasters.domain.Meet"/>
 
-<%-- TODO: let IDE autocomplete css filename --%>
-
 <html>
 <head>
     <title>Заявки на участие в соревновании - Мандатная комиссия</title>

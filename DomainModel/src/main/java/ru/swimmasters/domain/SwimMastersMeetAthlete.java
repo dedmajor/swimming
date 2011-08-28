@@ -77,7 +77,7 @@ public class SwimMastersMeetAthlete implements MeetAthlete {
         // hibernate shall pass
     }
 
-    SwimMastersMeetAthlete(SwimMastersMeet meet, SwimMastersAthlete athlete) {
+    public SwimMastersMeetAthlete(SwimMastersMeet meet, SwimMastersAthlete athlete) {
         this.meet = meet;
         this.athlete = athlete;
     }

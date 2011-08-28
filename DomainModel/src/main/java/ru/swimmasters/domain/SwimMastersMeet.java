@@ -1,6 +1,5 @@
 package ru.swimmasters.domain;
 
-import net.sf.cglib.core.MethodWrapper;
 import org.joda.time.LocalDate;
 
 import javax.persistence.*;
@@ -186,15 +185,6 @@ public class SwimMastersMeet implements Meet {
                 return result;
             }
         };
-    }
-
-    @Override
-    public EventEntries getAllEntries() {
-        List<Entry> result = new ArrayList<Entry>();
-        for (Event event: getEvents().getAll()) {
-            result.addAll(event.getEntries().getAll());
-        }
-        return new CheckedEventEntries(result);
     }
 
     @Override
