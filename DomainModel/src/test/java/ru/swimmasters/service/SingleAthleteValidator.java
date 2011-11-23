@@ -12,7 +12,7 @@ import static junit.framework.Assert.assertTrue;
 public class SingleAthleteValidator implements StartListValidator {
     @Override
     public void validateEntries(StartListHeats heats) {
-        for (Heat heat : heats.getHeatsOrderedByNumber()) {
+        for (Heat heat : heats.getAllSortedByNumber()) {
             assertTrue("all heats MUST contain at least two athletes", heat.isCompetitive());
         }
     }

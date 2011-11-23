@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -87,7 +88,7 @@ public class SwimMastersHeat implements Heat {
 
     @Override
     public int getTotalHeatsInEvent() {
-        return getEvent().getStartListHeats().getHeatsOrderedByNumber().size();
+        return getEvent().getStartListHeats().getAllSortedByNumber().size();
     }
 
     @Override
@@ -108,8 +109,20 @@ public class SwimMastersHeat implements Heat {
     }
 
     @Override
-    public Entries getEntries() {
-        return new CheckedEventEntries(event, entries);
+    public HeatEntries getEntries() {
+        return new HeatEntries() {
+            @Override
+            public Heat getHeat() {
+                return SwimMastersHeat.this;
+            }
+
+            @Override
+            public List<Entry> getAllSortedByLane() {
+                List<Entry> result = new ArrayList<Entry>(entries);
+                Collections.sort(result, new EntryLaneNumberComparator());
+                return result;
+            }
+        };
     }
 
     @Override

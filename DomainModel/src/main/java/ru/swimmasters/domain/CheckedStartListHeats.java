@@ -19,7 +19,7 @@ public class CheckedStartListHeats implements StartListHeats {
     }
 
     @Override
-    public List<Heat> getHeatsOrderedByNumber() {
+    public List<Heat> getAllSortedByNumber() {
         checkStartListPrepared();
         List<Heat> sortedHeats = new ArrayList<Heat>(entries.getHeats());
         Collections.sort(sortedHeats, new Comparator<Heat>() {
@@ -45,7 +45,7 @@ public class CheckedStartListHeats implements StartListHeats {
     @Override
     public boolean isAllHeatsCompetitive() {
         checkStartListPrepared();
-        for (Entry entry : entries.getAll()) {
+        for (Entry entry : entries.getAllSortedByAthleteName()) {
             Heat heat = entry.getHeat();
             assert heat != null;
             if (!heat.isCompetitive()) {

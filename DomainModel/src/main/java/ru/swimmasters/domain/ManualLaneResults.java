@@ -15,8 +15,8 @@ public class ManualLaneResults implements LaneResults {
     }
 
     public ManualLaneResults(Heat heat) {
-        results = new ArrayList<ManualLaneResult>(heat.getEntries().getAll().size());
-        for (Entry entry : heat.getEntries().getAll()) {
+        results = new ArrayList<ManualLaneResult>(heat.getEntries().getAllSortedByLane().size());
+        for (Entry entry : heat.getEntries().getAllSortedByLane()) {
             results.add(new ManualLaneResult(entry));
         }
     }

@@ -41,7 +41,7 @@
     </c:choose>
 </div>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <c:forEach items="${event.startListHeats.heatsOrderedByNumber}" var="heat">
+    <c:forEach items="${event.startListHeats.allSortedByNumber}" var="heat">
         <tr>
             <td colspan="4" class="entries_athlete_header" style="border-right:0;">
             Заплыв # ${heat.absoluteNumber}
@@ -84,7 +84,7 @@
                 </c:choose>
             </td>
         </tr>
-        <c:forEach items="${heat.entries.all}" var="entry">
+        <c:forEach items="${heat.entries.allSortedByLane}" var="entry">
             <tr class="entries_athlete_time">
                 <td class="entries_event">${entry.lane}</td>
                 <td class="entries_event">${entry.athlete.athlete.fullName}</td>
@@ -107,7 +107,7 @@
     </c:forEach>
 </table>
 <p>
-    Всего участников: <c:out value="${fn:length(event.startListEntries.all)}" />
+    Всего участников: <c:out value="${fn:length(event.startListEntries.allSortedByAthleteName)}" />
 </p>
 <p>
     Стартовый протокол сформирован <c:out value="${event.startListTimestamp}" />, версия: TODO

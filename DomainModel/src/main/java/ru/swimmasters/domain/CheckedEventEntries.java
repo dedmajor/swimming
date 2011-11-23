@@ -26,12 +26,6 @@ public class CheckedEventEntries implements EventEntries {
         this.event = event;
     }
 
-    @NotNull
-    @Override
-    public List<Entry> getAll() {
-        return entries;
-    }
-
     @Override
     public Event getEvent() {
         return event;
@@ -54,23 +48,17 @@ public class CheckedEventEntries implements EventEntries {
     }
 
     @Override
-    public Map<AgeGroup, Entries> getGroupedByAge() {
-        Map<AgeGroup, Entries> result = new TreeMap<AgeGroup, Entries>();
+    public Map<AgeGroup, List<Entry>> getGroupedByAge() {
+        Map<AgeGroup, List<Entry>> result = new TreeMap<AgeGroup, List<Entry>>();
         Map<AgeGroup, ArrayList<Entry>> map = new HashMap<AgeGroup, ArrayList<Entry>>();
         for (Entry entry : entries) {
             if (map.containsKey(entry.getAgeGroup())) {
                 map.get(entry.getAgeGroup()).add(entry);
             } else {
-                final ArrayList<Entry> entries = new ArrayList<Entry>();
+                ArrayList<Entry> entries = new ArrayList<Entry>();
                 entries.add(entry);
                 map.put(entry.getAgeGroup(), entries);
-                result.put(entry.getAgeGroup(), new Entries() {
-                    @NotNull
-                    @Override
-                    public List<Entry> getAll() {
-                        return Collections.unmodifiableList(entries);
-                    }
-                });
+                result.put(entry.getAgeGroup(), Collections.<Entry>unmodifiableList(entries));
             }
         }
         return result;

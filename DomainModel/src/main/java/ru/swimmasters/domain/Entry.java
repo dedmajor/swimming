@@ -22,6 +22,7 @@ public interface Entry {
 
     Duration getEntryTime();
 
+    // TODO: PreparedHeat, not null
     @Nullable
     Heat getHeat();
     @Nullable
@@ -34,6 +35,7 @@ public interface Entry {
 
     AgeGroup getAgeGroup();
 
+    // TODO: not null, throw exception
     @Nullable
     Result getResult();
 }

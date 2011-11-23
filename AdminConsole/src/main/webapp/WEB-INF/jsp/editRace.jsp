@@ -22,7 +22,7 @@
 <p>Время старта: ${heat.startTimestamp}</p>
 <form:form>
 <table class="entries_table" cellpadding="0" cellspacing="0">
-    <c:forEach items="${heat.entries.all}" var="entry" varStatus="status">
+    <c:forEach items="${heat.entries.allSortedByLane}" var="entry" varStatus="status">
         <tr class="entries_athlete_time">
             <td class="entries_event">${entry.lane}</td>
             <td class="entries_event">${entry.athlete.athlete.fullName}</td>

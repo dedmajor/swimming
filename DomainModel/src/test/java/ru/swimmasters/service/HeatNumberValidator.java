@@ -1,6 +1,5 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.EventEntries;
 import ru.swimmasters.domain.Heat;
 import ru.swimmasters.domain.StartListHeats;
 
@@ -17,7 +16,7 @@ import static junit.framework.Assert.assertEquals;
 public class HeatNumberValidator implements StartListValidator {
     @Override
     public void validateEntries(StartListHeats heats) {
-        List<Heat> heatsList = heats.getHeatsOrderedByNumber();
+        List<Heat> heatsList = heats.getAllSortedByNumber();
         for (int i = 0; i < heatsList.size(); i++) {
             assertEquals("heat numbers must be a sequence",
                     i + 1, heatsList.get(i).getNumber());

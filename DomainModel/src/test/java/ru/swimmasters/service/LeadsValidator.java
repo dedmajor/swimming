@@ -22,7 +22,7 @@ public class LeadsValidator implements StartListValidator {
     public void validateEntries(StartListHeats heats) {
         Collection<AgeGroup> checkedGroups = new ArrayList<AgeGroup>();
 
-        List<Heat> reverseHeats = reverseHeats(heats.getHeatsOrderedByNumber());
+        List<Heat> reverseHeats = reverseHeats(heats.getAllSortedByNumber());
 
         Map<AgeGroup, Integer> totalAthletes = calculateTotalAthletes(reverseHeats);
 
@@ -47,7 +47,7 @@ public class LeadsValidator implements StartListValidator {
     private static Map<AgeGroup, Integer> calculateGroupedAthletes(Heat heat) {
         HashMap<AgeGroup, Integer> groupedHeatAthletes
             = new HashMap<AgeGroup, Integer>();
-        for (Entry entry : heat.getEntries().getAll()) {
+        for (Entry entry : heat.getEntries().getAllSortedByLane()) {
             AgeGroup group = entry.getAgeGroup();
                 groupedHeatAthletes.put(group,
                         groupedHeatAthletes.get(group) == null
@@ -62,7 +62,7 @@ public class LeadsValidator implements StartListValidator {
                 = new HashMap<AgeGroup, Integer>();
 
         for (Heat heat : heats) {
-            for (Entry entry : heat.getEntries().getAll()) {
+            for (Entry entry : heat.getEntries().getAllSortedByLane()) {
                 AgeGroup group = entry.getAgeGroup();
                 totalAthletes.put(group,
                         totalAthletes.get(group) == null

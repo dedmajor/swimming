@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public interface MeetAthlete {
     Athlete getAthlete();
     Meet getMeet();
-    Entries getEntries();
+    AthleteEntries getEntries();
 
     @NotNull
     ApprovalStatus getApprovalStatus();

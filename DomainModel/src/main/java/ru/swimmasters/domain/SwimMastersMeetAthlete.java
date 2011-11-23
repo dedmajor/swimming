@@ -97,12 +97,22 @@ public class SwimMastersMeetAthlete implements MeetAthlete {
     }
 
     @Override
-    public Entries getEntries() {
-        return new Entries() {
+    public AthleteEntries getEntries() {
+        return new AthleteEntries() {
+            @Override
+            public MeetAthlete getAthlete() {
+                return SwimMastersMeetAthlete.this;
+            }
+
+            @Override
+            public Meet getMeet() {
+                return meet;
+            }
+
             @NotNull
             @Override
-            public List<Entry> getAll() {
-                return Collections.<Entry>unmodifiableList(entries);
+            public Iterable<Entry> getAll() {
+                return Collections.<Entry>unmodifiableCollection(entries);
             }
         };
     }

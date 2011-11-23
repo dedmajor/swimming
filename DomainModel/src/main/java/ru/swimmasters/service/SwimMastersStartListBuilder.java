@@ -35,12 +35,12 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
     public List<Heat> buildHeats(Event event) {
         // TODO: FIXME: check that it's alreay empty, don't return a value
         List<Heat> result = event.isStartListPrepared()
-                ? event.getStartListHeats().getHeatsOrderedByNumber()
+                ? event.getStartListHeats().getAllSortedByNumber()
                 : Collections.<Heat>emptyList();
 
         EventEntries entries = event.getStartListEntries();
 
-        if (entries.getAll().isEmpty()) {
+        if (entries.getAllSortedByAthleteName().isEmpty()) {
             throw new IllegalArgumentException("event contain no regular entries");
         }
 
@@ -50,7 +50,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
         Map<AgeGroup, AgeQueue> queues = buildAgeQueues(entries);
 
-        List<AgeGroup> groups = new ArrayList<AgeGroup>(event.getAgeGroups().getAllOrderedByAge());
+        List<AgeGroup> groups = new ArrayList<AgeGroup>(event.getAgeGroups().getAllSortedByAge());
         Collections.reverse(groups);
 
         SwimMastersHeat currentHeat = null;
@@ -89,7 +89,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
         List<Heat> result = new ArrayList<Heat>();
         int absoluteNumber = 0;
         for (Event event : meet.getEvents().getAll()) {
-            if (event.getStartListEntries().getAll().isEmpty()) {
+            if (event.getStartListEntries().getAllSortedByAthleteName().isEmpty()) {
                 continue;
             }
             List<Heat> eventResult = buildHeats(event);
@@ -101,7 +101,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
 
     private static int setAbsoluteNumber(int absoluteNumber, Event event) {
         int result = absoluteNumber;
-        for (Heat heat : event.getStartListHeats().getHeatsOrderedByNumber()) {
+        for (Heat heat : event.getStartListHeats().getAllSortedByNumber()) {
             ++result;
             ((SwimMastersHeat) heat).setAbsoluteNumber(result);
         }
@@ -109,7 +109,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
     }
 
     private static void linkHeatToBrick(Event event, SwimMastersHeat currentHeat, List<SwimMastersEntry> nextBrick) {
-        int lane = event.getPool().getLaneMin() + currentHeat.getEntries().getAll().size();
+        int lane = event.getPool().getLaneMin() + currentHeat.getEntries().getAllSortedByLane().size();
         for (SwimMastersEntry brickEntry : nextBrick) {
             brickEntry.setHeat(currentHeat);
             brickEntry.setLane(lane);
@@ -119,7 +119,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
     }
 
     private static boolean hasMoreSpace(Event event, Heat currentHeat, int size) {
-        return currentHeat.getEntries().getAll().size() + size
+        return currentHeat.getEntries().getAllSortedByLane().size() + size
                 <= event.getPool().getMeetLanesCount();
     }
 
@@ -129,7 +129,7 @@ public class SwimMastersStartListBuilder implements StartListBuilder {
     private Map<AgeGroup, AgeQueue> buildAgeQueues(EventEntries entries) {
         Map<AgeGroup, AgeQueue> result = new TreeMap<AgeGroup, AgeQueue>();
 
-        for (Entry entry : entries.getAll()) {
+        for (Entry entry : entries.getAllSortedByAthleteName()) {
             AgeQueue queue = result.get(entry.getAgeGroup());
             if (queue == null) {
                 queue = new AgeQueue(entry.getAgeGroup(), leadsInAgeGroup);

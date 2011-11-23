@@ -10,12 +10,12 @@ import java.util.Set;
  * User: dedmajor
  * Date: 4/2/11
  */
-public interface EventEntries extends Entries {
+public interface EventEntries {
     Event getEvent();
 
     List<Entry> getAllSortedByAthleteName();
 
     Set<Heat> getHeats();
 
-    Map<AgeGroup, Entries> getGroupedByAge();
+    Map<AgeGroup, List<Entry>> getGroupedByAge();
 }

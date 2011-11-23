@@ -22,11 +22,11 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
         EventEntries entries = event.getEntries();
 
         List<Heat> result = event.isStartListPrepared()
-                ? event.getStartListHeats().getHeatsOrderedByNumber()
+                ? event.getStartListHeats().getAllSortedByNumber()
                 : Collections.<Heat>emptyList();
 
-        Map<AgeGroup, Entries> groupedByAge = entries.getGroupedByAge();
-        List<AgeGroup> allowedGroups = event.getAgeGroups().getAllOrderedByAge();
+        Map<AgeGroup, List<Entry>> groupedByAge = entries.getGroupedByAge();
+        List<AgeGroup> allowedGroups = event.getAgeGroups().getAllSortedByAge();
         Collections.reverse(allowedGroups);
         int heatNumber = 1;
         SwimMastersEvent ourEvent = (SwimMastersEvent) event;
@@ -36,7 +36,7 @@ public class PrimitiveStartListBuilder implements StartListBuilder {
             if (groupedByAge.get(group) == null) {
                 continue;
             }
-            List<Entry> groupEntries = new ArrayList<Entry>(groupedByAge.get(group).getAll());
+            List<Entry> groupEntries = new ArrayList<Entry>(groupedByAge.get(group));
             Collections.sort(groupEntries, SwimMastersEntry.heatEntryComparator());
             Collections.reverse(groupEntries);
             if (heat.hasNumber()) {

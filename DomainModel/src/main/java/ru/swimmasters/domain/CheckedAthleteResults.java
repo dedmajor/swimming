@@ -35,7 +35,8 @@ public class CheckedAthleteResults implements Results {
         Map<Event,Result> result = new HashMap<Event, Result>(results.size());
         for (Result athleteResult : results) {
             if (result.get(athleteResult.getEvent()) != null) {
-                throw new IllegalStateException("results cannot contain more that entry for each event");
+                throw new IllegalStateException(
+                        "results cannot contain more than one entry for each event");
             }
             result.put(athleteResult.getEvent(), athleteResult);
         }

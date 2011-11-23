@@ -26,10 +26,7 @@ public interface Heat {
      */
     int getAbsoluteNumber();
 
-    /**
-     * All entries of this heat (i. e. {@link Entry#getHeat() equals this heat)}.
-     */
-    Entries getEntries();
+    HeatEntries getEntries();
     Entry getEntryByLane(int lane);
 
     /**

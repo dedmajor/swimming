@@ -77,7 +77,7 @@ public class SwimMastersAgeGroups implements AgeGroups {
     @Nullable
     private AgeGroup getAgeGroup(Athlete athlete) {
         int age = athlete.getAge(event.getDate());
-        for (AgeGroup group : getAllOrderedByAge()) {
+        for (AgeGroup group : getAllSortedByAge()) {
             if (group.containsAge(age)) {
                 return group;
             }
@@ -97,7 +97,7 @@ public class SwimMastersAgeGroups implements AgeGroups {
     }
 
     private AgeGroup getLowestGroup() {
-        return getAllOrderedByAge().get(0);
+        return getAllSortedByAge().get(0);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class SwimMastersAgeGroups implements AgeGroups {
     }
 
     @Override
-    public List<AgeGroup> getAllOrderedByAge() {
+    public List<AgeGroup> getAllSortedByAge() {
         ArrayList<AgeGroup> result = new ArrayList<AgeGroup>(groups);
         Collections.sort(result);
         return result;

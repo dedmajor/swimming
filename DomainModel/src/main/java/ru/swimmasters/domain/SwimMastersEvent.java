@@ -194,7 +194,7 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public boolean isStartListPrepared() {
-        for (Entry entry : getStartListEntries().getAll()) {
+        for (Entry entry : getStartListEntries().getAllSortedByAthleteName()) {
             if (!entry.isHeatPrepared()) {
                 return false;
             }
@@ -214,7 +214,7 @@ public class SwimMastersEvent implements Event {
 
     @Override
     public boolean isAllHeatsFinished() {
-        for (Heat heat : getStartListHeats().getHeatsOrderedByNumber()) {
+        for (Heat heat : getStartListHeats().getAllSortedByNumber()) {
             if (!heat.isRaceFinished()) {
                return false;
             }

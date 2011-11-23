@@ -106,7 +106,7 @@ public class SwimMastersBuilderTest {
         ));
 
         for (Event event : EVENTS) {
-            for (Entry entry : event.getEntries().getAll()) {
+            for (Entry entry : event.getEntries().getAllSortedByAthleteName()) {
                 ((SwimMastersMeetAthlete) entry.getAthlete()).setApprovalStatus(ApprovalStatus.APPROVED);
             }
         }

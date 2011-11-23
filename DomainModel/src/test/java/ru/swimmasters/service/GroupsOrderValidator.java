@@ -1,10 +1,7 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.EventEntries;
 import ru.swimmasters.domain.Heat;
 import ru.swimmasters.domain.StartListHeats;
-
-import java.util.List;
 
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.junit.Assert.assertThat;
@@ -20,7 +17,7 @@ public class GroupsOrderValidator implements StartListValidator {
     @Override
     public void validateEntries(StartListHeats heats) {
         Heat previousHeat = null;
-        for (Heat heat : heats.getHeatsOrderedByNumber()) {
+        for (Heat heat : heats.getAllSortedByNumber()) {
             if (previousHeat != null) {
                 assertThat("heat number " + heat.getNumber() + " must have younger groups",
                         heat.getOldestAgeGroup(),

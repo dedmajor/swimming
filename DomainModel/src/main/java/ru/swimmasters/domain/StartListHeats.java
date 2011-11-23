@@ -9,7 +9,7 @@ import java.util.List;
 public interface StartListHeats {
     Event getEvent();
 
-    List<Heat> getHeatsOrderedByNumber();
+    List<Heat> getAllSortedByNumber();
 
     /**
      * Check that each prepared heat is competitive.

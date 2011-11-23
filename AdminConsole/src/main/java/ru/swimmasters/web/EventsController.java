@@ -43,7 +43,7 @@ public class EventsController {
             entityManager.remove(heat);
         }
         for (Event event : meet.getEvents().getAll()) {
-            for (Entry entry : event.getStartListEntries().getAll()) {
+            for (Entry entry : event.getStartListEntries().getAllSortedByAthleteName()) {
                 entityManager.persist(entry.getHeat());
                 entityManager.persist(entry);
             }

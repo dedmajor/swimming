@@ -27,7 +27,7 @@ public class SwimMastersGroupRanking implements GroupRanking {
     }
 
     public SwimMastersGroupRanking(SwimMastersAgeRanking ageRanking, SwimMastersEntry entry) {
-        if (!ageRanking.getEvent().getEntries().getAll().contains(entry)) {
+        if (!ageRanking.getEvent().getEntries().getAllSortedByAthleteName().contains(entry)) {
             throw new IllegalArgumentException(
                     "event of age ranking " + ageRanking + " doesn't contain entry " + entry);
         }

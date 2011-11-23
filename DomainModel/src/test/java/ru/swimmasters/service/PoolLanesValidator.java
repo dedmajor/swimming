@@ -3,7 +3,6 @@ package ru.swimmasters.service;
 import ru.swimmasters.domain.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -21,9 +20,9 @@ public class PoolLanesValidator implements StartListValidator {
     public void validateEntries(StartListHeats heats) {
         Pool pool = heats.getEvent().getPool();
         boolean[] busyLane = new boolean[pool.getLaneMax()];
-        for (Heat heat : heats.getHeatsOrderedByNumber()) {
+        for (Heat heat : heats.getAllSortedByNumber()) {
             Arrays.fill(busyLane, false);
-            for (Entry entry : heat.getEntries().getAll()) {
+            for (Entry entry : heat.getEntries().getAllSortedByLane()) {
                 Integer lane = entry.getLane();
                 assertNotNull("lane must be set", lane);
                 assertTrue("heats must be only on the allowed meet lanes, but given: " + lane,
