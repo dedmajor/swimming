@@ -1,6 +1,5 @@
 package ru.swimmasters.barcode;
 
-import com.sun.xml.internal.ws.api.pipe.Engine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
