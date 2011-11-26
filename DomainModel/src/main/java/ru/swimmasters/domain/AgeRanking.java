@@ -6,6 +6,11 @@ package ru.swimmasters.domain;
  */
 public interface AgeRanking {
     Event getEvent();
+
+    /**
+     * @return age group from the event age groups collections
+     * @see Event#getAgeGroups()
+     */
     AgeGroup getAgeGroup();
     GroupRankings getGroupRankings();
 }

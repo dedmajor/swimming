@@ -7,5 +7,6 @@ import java.util.List;
  * Date: 5/9/11
  */
 public interface Events {
+    // TODO: either collection or sorting criteria (by number)?
     List<Event> getAll();
 }

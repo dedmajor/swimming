@@ -9,6 +9,7 @@ import java.util.List;
  * Date: 4/3/11
  */
 public interface AgeGroups {
+    // TODO: we need root references to clarify contract on all containing elements?
     Event getEvent();
 
     List<AgeGroup> getAllSortedByAge();

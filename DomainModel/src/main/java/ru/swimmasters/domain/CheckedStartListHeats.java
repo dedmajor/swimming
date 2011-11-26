@@ -22,6 +22,7 @@ public class CheckedStartListHeats implements StartListHeats {
     public List<Heat> getAllSortedByNumber() {
         checkStartListPrepared();
         List<Heat> sortedHeats = new ArrayList<Heat>(entries.getHeats());
+        // TODO: extract comparator for heats
         Collections.sort(sortedHeats, new Comparator<Heat>() {
             @Override
             public int compare(Heat o1, Heat o2) {

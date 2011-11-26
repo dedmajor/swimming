@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
  * Date: 11/20/11
  */
 public interface AthleteEntries {
+    // TODO: we need root references to clarify contract on all containing elements?
     MeetAthlete getAthlete();
     Meet getMeet();
 

@@ -11,10 +11,12 @@ import java.util.Set;
  * Date: 4/2/11
  */
 public interface EventEntries {
+    // TODO: do we need collection know about its parent?
     Event getEvent();
 
     List<Entry> getAllSortedByAthleteName();
 
+    // TODO: keep heats only in the start list?
     Set<Heat> getHeats();
 
     Map<AgeGroup, List<Entry>> getGroupedByAge();
