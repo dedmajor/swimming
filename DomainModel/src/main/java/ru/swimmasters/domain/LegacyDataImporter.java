@@ -26,16 +26,21 @@ import java.util.Properties;
 public class LegacyDataImporter {
     private final EntityManager entityManager;
     private final Connection legacyConnection;
+    private final String meetId;
 
     private SwimMastersMeet meet;
     private List<SwimMastersAgeGroup> groups;
 
-    public LegacyDataImporter(EntityManager entityManager, Connection legacyConnection) {
+    public LegacyDataImporter(EntityManager entityManager, Connection legacyConnection, String meetId) {
         this.entityManager = entityManager;
         this.legacyConnection = legacyConnection;
+        this.meetId = meetId;
     }
 
     public static void main(String[] args) throws SQLException, IOException {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("first argument must be meet id (e. g. bsvc-dubna-2011)");
+        }
         Properties properties = new Properties();
         properties.load(LegacyDataImporter.class.getResourceAsStream("/META-INF/database.properties"));
 
@@ -51,7 +56,7 @@ public class LegacyDataImporter {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("persistenceUnit", properties);
         EntityManager persistenceUnit = factory.createEntityManager();
         try {
-            new LegacyDataImporter(persistenceUnit, legacyConnection).runImport();
+            new LegacyDataImporter(persistenceUnit, legacyConnection, args[0]).runImport();
         } finally {
             legacyConnection.close();
             persistenceUnit.close();
@@ -62,12 +67,8 @@ public class LegacyDataImporter {
     public void runImport() {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        System.out.println("Creating age groups");
-        createAgeGroups();
         System.out.println("Converting venues");
         convertVenues();
-        System.out.println("Converting meet");
-        convertMeet();
         System.out.println("Converting clubs");
         convertClub();
         System.out.println("Converting athletes");
@@ -76,6 +77,10 @@ public class LegacyDataImporter {
         convertSwimStyles();
 
 
+        System.out.println("Converting meet");
+        convertMeet();
+        System.out.println("Creating age groups");
+        createAgeGroups();
         System.out.println("Converting events");
         convertEvents();
         System.out.println("Converting entries (heats)");
@@ -91,33 +96,43 @@ public class LegacyDataImporter {
     }
 
     private void convertVenues() {
-        // TODO: FIXME: remove hardcode
-        if (entityManager.find(SwimMastersPool.class, 32) == null) {
-            // 32 |    1781 | Бассейн ЦСК ВВС | Самара, Волжский проспект, 10 |
-            // 50 |     8 | http://maps.yandex.ru/-/CZDtjzS
-            SwimMastersPool pool;
-            pool = new SwimMastersPool();
-            pool.setId(32);
-            // todo: Meet.setCity
-            // todo: Meet.setAddress
-            // todo: Meet.setCourse(50)
-            pool.setName("Бассейн ЦСК ВВС");
-            pool.setLaneMin(1);
-            pool.setLaneMax(8);
-            entityManager.persist(pool);
-        }
+        new LegacyQueryTemplate("select *, city.name as city_name from venue left join city on city.id=city_id") {
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    SwimMastersPool pool = new SwimMastersPool(resultSet.getInt("lanes"));
+                    pool.setId(resultSet.getInt("id"));
+                    pool.setName(resultSet.getString("name"));
+                    pool.setAddress(resultSet.getString("address"));
+                    pool.setCourse(resultSet.getInt("course"));
+                    pool.setCity(resultSet.getString("city_name"));
+                    entityManager.persist(pool);
+                }
+            }
+        }.run();
     }
 
     private void convertMeet() {
-        // TODO: FIXME: remove hardcode
-        meet = entityManager.find(SwimMastersMeet.class, "bsvc-samara-2011");
+        meet = entityManager.find(SwimMastersMeet.class, meetId);
         if (meet == null) {
-            meet = new SwimMastersMeet(entityManager.find(SwimMastersPool.class, 32));
-            meet.setId("bsvc-samara-2011");
-            meet.setSmId(137);
-            meet.setName("I Открытый лично-командный турнир «Black Sepia Volga Cup» по плаванию в категории «Мастерс»");
-            entityManager.persist(meet);
+            createMeet();
         }
+    }
+
+    private void createMeet() {
+        // TODO: FIXME: sql injections
+        new LegacyQueryTemplate("select * from meet where short_name='" + meetId + "'") {
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+                    meet = new SwimMastersMeet(entityManager.find(SwimMastersPool.class, resultSet.getInt("venue_id")));
+                    meet.setId(meetId);
+                    meet.setSmId(resultSet.getInt("id"));
+                    meet.setName(resultSet.getString("name"));
+                    entityManager.persist(meet);
+                }
+            }
+        }.run();
     }
 
     private void convertEntries() {

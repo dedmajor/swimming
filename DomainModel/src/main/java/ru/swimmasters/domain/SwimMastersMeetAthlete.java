@@ -82,6 +82,11 @@ public class SwimMastersMeetAthlete implements MeetAthlete {
         this.athlete = athlete;
     }
 
+    public SwimMastersMeetAthlete(SwimMastersMeet meet, SwimMastersAthlete athlete, ApprovalStatus approvalStatus) {
+        this(meet, athlete);
+        this.approvalStatus = approvalStatus;
+    }
+
     public Long getId() {
         return id;
     }

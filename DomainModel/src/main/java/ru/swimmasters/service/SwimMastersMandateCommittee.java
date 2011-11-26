@@ -1,8 +1,6 @@
 package ru.swimmasters.service;
 
-import ru.swimmasters.domain.ApprovalStatus;
-import ru.swimmasters.domain.MeetAthlete;
-import ru.swimmasters.domain.SwimMastersMeetAthlete;
+import ru.swimmasters.domain.*;
 import ru.swimmasters.time.Clock;
 
 /**
@@ -28,7 +26,20 @@ public class SwimMastersMandateCommittee implements MandateCommittee {
 
     @Override
     public void setAthleteStatus(MeetAthlete athlete, ApprovalStatus status) {
+        if (status == ApprovalStatus.APPROVED) {
+            validateAthleteAge(athlete);
+        }
         ((SwimMastersMeetAthlete) athlete).setApprovalTimestamp(clock.now());
         ((SwimMastersMeetAthlete) athlete).setApprovalStatus(status);
+    }
+
+    private static void validateAthleteAge(MeetAthlete athlete) {
+        for (Entry entry : athlete.getEntries().getAll()) {
+            // TODO: extract to interface?
+            if (!((SwimMastersEntry) entry).isValidAge()) {
+                throw new IllegalArgumentException("athlete " + athlete
+                        + " cannot participate in event " + entry.getEvent());
+            }
+        }
     }
 }

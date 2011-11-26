@@ -20,4 +20,9 @@ public interface Pool {
      * @return true if lane number between min and max lane inclusive, false otherwise
      */
     boolean isMeetLane(int laneNumber);
+
+    /**
+     * @return course length in meters
+     */
+    int getCourse();
 }

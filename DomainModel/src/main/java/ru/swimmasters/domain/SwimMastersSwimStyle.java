@@ -66,6 +66,7 @@ public class SwimMastersSwimStyle implements SwimStyle {
 
     @Override
     public int getDistance() {
+        // TODO: check that distance matches pool course
         return distance;
     }
 

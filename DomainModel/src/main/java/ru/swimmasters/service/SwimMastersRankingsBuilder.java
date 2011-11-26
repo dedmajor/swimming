@@ -32,7 +32,7 @@ public class SwimMastersRankingsBuilder implements RankingsBuilder {
 
         List<SwimMastersAgeRanking> ageRankings = new ArrayList<SwimMastersAgeRanking>();
 
-        for (Map.Entry<AgeGroup, List<Entry>> entries : event.getEntries().getGroupedByAge().entrySet()) {
+        for (Map.Entry<AgeGroup, List<Entry>> entries : event.getStartListEntries().getGroupedByAge().entrySet()) {
             SwimMastersAgeRanking ageRanking
                     = new SwimMastersAgeRanking((SwimMastersEvent) event, (SwimMastersAgeGroup) entries.getKey());
 

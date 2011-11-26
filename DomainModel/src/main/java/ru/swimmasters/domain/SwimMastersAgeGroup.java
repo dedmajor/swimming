@@ -65,6 +65,11 @@ public class SwimMastersAgeGroup implements AgeGroup {
     }
 
     @Override
+    public Event getEvent() {
+        throw new UnsupportedOperationException("not implemented");
+    }
+
+    @Override
     public int getMin() {
         return min;
     }

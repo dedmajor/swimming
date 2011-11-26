@@ -11,6 +11,8 @@ public interface AgeGroup extends Comparable<AgeGroup> {
     int NO_LOWER_BOUND = -1;
     int NO_UPPER_BOUND = -1;
 
+    Event getEvent();
+
     int getMin();
     int getMax();
 

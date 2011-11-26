@@ -15,7 +15,7 @@ public class SwimMastersAgeGroups implements AgeGroups {
     private final List<AgeGroup> groups;
 
     // TODO: FIXME: is it against rules???
-    private final boolean attachYoungstersToLowestGroup = true;
+    private final boolean attachYoungstersToLowestGroup = false;
 
     protected SwimMastersAgeGroups(Event event, List<? extends AgeGroup> groups) {
         this.event = event;

@@ -25,7 +25,11 @@ public class RankingsBuilderTest {
         event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
         SwimMastersAthlete athlete = new SwimMastersAthlete(new LocalDate("1984-10-19"));
         SwimMastersEntry entry = new SwimMastersEntry(event,
-                new SwimMastersMeetAthlete(meet, athlete), Duration.ZERO);
+                new SwimMastersMeetAthlete(meet, athlete, ApprovalStatus.APPROVED), Duration.ZERO);
+        SwimMastersHeat heat = new SwimMastersHeat(event);
+        heat.setRaceStatus(RaceStatus.FINISHED);
+        entry.setHeat(heat);
+        entry.setLane(1);
         event.addEntry(entry);
 
         entry.setResult(new SwimMastersResult(entry));

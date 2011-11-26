@@ -47,6 +47,15 @@ public class SwimMastersPool implements Pool {
 
     String name;
 
+    String city;
+    String address;
+
+    private static final int LONG_COURSE = 50;
+    private static final int SHORT_COURSE = 25;
+
+    private int course = LONG_COURSE;
+
+
     SwimMastersPool() {
     }
 
@@ -56,6 +65,11 @@ public class SwimMastersPool implements Pool {
 
     public String getName() {
         return name;
+    }
+
+    public SwimMastersPool(int lanesCount) {
+        laneMin = 1;
+        laneMax = lanesCount;
     }
 
     public SwimMastersPool(int laneMin, int laneMax) {
@@ -97,5 +111,30 @@ public class SwimMastersPool implements Pool {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    @Override
+    public int getCourse() {
+        return course;
     }
 }

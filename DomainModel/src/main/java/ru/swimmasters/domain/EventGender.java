@@ -8,5 +8,5 @@ public enum EventGender {
     ALL,
     MALE,
     FEMALE,
-    MIXED
+    MIXED // TODO: "Mixed is only used for relays."
 }

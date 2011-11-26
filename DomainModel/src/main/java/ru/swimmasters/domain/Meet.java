@@ -15,6 +15,14 @@ public interface Meet {
     String getName();
 
     Pool getPool();
+
+    /**
+     * @return city of the pool
+     */
+    String getCity();
+    // TODO: enum
+    int getCourse();
+
     Sessions getSessions();
 
     /**

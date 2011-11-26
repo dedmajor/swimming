@@ -15,10 +15,8 @@
 <body>
 <h1>Мандатная комиссия</h1>
 <div>
-    <p>Соревнования: ${meet.name} (${meet.startDate} - ${meet.endDate})</p>
-    <p>Место проведения: ${meet.pool.name}</p>
-    <!-- TODO: FIXME: remove hardcode -->
-    <p>Время работы мандатной комиссии: 20 мая, с 13.30 до 18.00, холл бассейна «ЦСК ВВС» (Волжский пр., д. 10)</p>
+    <p>Соревнования: ${meet.name} (${meet.city}, ${meet.course}, ${meet.startDate} - ${meet.endDate})</p>
+    <p>Место проведения: ${meet.pool.name} (${meet.pool.address})</p>
     <p>Текущее время: <c:out value="<%=new RealTimeClock().now()%>" /></p>
     <p><a href="approveAllAthletes.html?meet=${meet.id}">Подтвердить всех участников</a></p>
     <p><a href="listEvents.html?meet=${meet.id}">Перейти к стартовым протоколам</a></p>
@@ -60,7 +58,18 @@
         <c:forEach items="${athlete.entries.all}" var="entry">
             <tr class="entries_athlete_time">
                 <td class="entries_event">${entry.event.swimStyle.name}</td>
-                <td class="entries_time">${entry.ageGroup}</td>
+                <td class="entries_time">
+                    <c:choose>
+                    <c:when test="${entry.validAge}">
+                        ${entry.ageGroup}
+                    </c:when>
+                    <c:otherwise>
+                        <span class="approval_rejected_status">
+                            ${entry.athlete.athlete.birthYear}
+                        </span>
+                    </c:otherwise>
+                    </c:choose>
+                </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
             </tr>
         </c:forEach>

@@ -117,6 +117,16 @@ public class SwimMastersMeet implements Meet {
     }
 
     @Override
+    public String getCity() {
+        return pool.getCity();
+    }
+
+    @Override
+    public int getCourse() {
+        return pool.getCourse();
+    }
+
+    @Override
     public Sessions getSessions() {
         return new Sessions() {
             @Override

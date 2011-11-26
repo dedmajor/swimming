@@ -143,6 +143,10 @@ public class SwimMastersEntry implements Entry {
         return event.getAgeGroups().getFor(athlete.getAthlete());
     }
 
+    public boolean isValidAge() {
+        return event.getAgeGroups().canParticipate(athlete.getAthlete());
+    }
+
     @Override
     public SwimMastersResult getResult() {
         return result;

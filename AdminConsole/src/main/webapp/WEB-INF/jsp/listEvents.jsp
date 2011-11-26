@@ -67,7 +67,17 @@
                 ${entry.athlete.athlete.club.name} &nbsp;
                 </td>
                 <td class="entries_time">
-                ${entry.ageGroup} &nbsp;
+                    <c:choose>
+                    <c:when test="${entry.validAge}">
+                        ${entry.ageGroup}
+                    </c:when>
+                    <c:otherwise>
+                        <span class="approval_rejected_status">
+                            ${entry.athlete.athlete.birthYear}
+                        </span>
+                    </c:otherwise>
+                    </c:choose>
+                    &nbsp;
                 </td>
                 <td class="entries_time">${entry.entryTime != null ? entry.entryTime : 'NA'}</td>
                 <td class="entries_time">
