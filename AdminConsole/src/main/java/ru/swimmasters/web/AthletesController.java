@@ -13,6 +13,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
+ *  /meets/bsvc-dubna-2011/athletes/
+ *  /meets/bsvc-dubna-2011/athletes/1024/approve
+ *  /meets/bsvc-dubna-2011/athletes/1024/reject
+ *  /meets/bsvc-dubna-2011/approve-all-athletes
+ *
  * User: dedmajor
  * Date: 3/12/11
  */

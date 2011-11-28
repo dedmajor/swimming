@@ -3,6 +3,8 @@ package ru.swimmasters.domain;
 import org.joda.time.LocalDate;
 
 /**
+ * TODO: rename to Sportsperson
+ *
  * User: dedmajor
  * Date: 3/12/11
  */

@@ -14,6 +14,10 @@ import javax.persistence.PersistenceContext;
 import java.util.Collections;
 
 /**
+ * /meets/bsvc-dubna-2011/events/1-female-1x200-breast/heats/
+ * /meets/bsvc-dubna-2011/events/1-female-1x200-breast/new-age-rankings
+ * /meets/bsvc-dubna-2011/events/1-female-1x200-breast/age-rankings/
+ *
  * User: dedmajor
  * Date: 4/3/11
  */

@@ -3,6 +3,8 @@ package ru.swimmasters.domain;
 import org.joda.time.Duration;
 
 /**
+ * TODO: merge with LaneResult
+ *
  * User: dedmajor
  * Date: 5/14/11
  */

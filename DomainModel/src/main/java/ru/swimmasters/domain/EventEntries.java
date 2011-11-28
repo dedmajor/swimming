@@ -16,6 +16,7 @@ public interface EventEntries {
 
     List<Entry> getAllSortedByAthleteName();
 
+    // TODO: only in StartListEntries??
     // TODO: keep heats only in the start list?
     Set<Heat> getHeats();
 

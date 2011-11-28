@@ -41,6 +41,8 @@ public interface Event {
      */
     boolean isStartListPrepared();
 
+    // TODO: extract StartList object
+
     /**
      * @return the date when the latest start list have been prepared
      */
@@ -48,12 +50,16 @@ public interface Event {
     DateTime getStartListTimestamp();
 
     /**
+     * TODO: StartListEntries with EntryStatus getStartListStatus() ?
+     *
      * @return entries with the regular status
      */
     @NotNull
     EventEntries getStartListEntries();
 
     /**
+     * TODO: rename to StartlistEntries?
+     *
      * Method does not check that start list is prepared. Use {@link #isStartListPrepared()}
      * beforehand to do this check.
      *

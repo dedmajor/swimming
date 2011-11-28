@@ -14,6 +14,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
+ * /meets/bsvc-dubna-2011/events/
+ * /meets/bsvc-dubna-2011/new-event-heats
+ *
  * User: dedmajor
  * Date: 4/2/11
  */

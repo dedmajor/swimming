@@ -22,6 +22,8 @@ public interface Entry {
 
     Duration getEntryTime();
 
+    // TODO: qualifying time?
+
     // TODO: PreparedHeat, not null
     @Nullable
     Heat getHeat();

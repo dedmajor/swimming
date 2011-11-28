@@ -3,6 +3,7 @@ package ru.swimmasters.domain;
 import org.joda.time.Duration;
 
 /**
+ * TODO: merge with Result
  * User: dedmajor
  * Date: 5/15/11
  */

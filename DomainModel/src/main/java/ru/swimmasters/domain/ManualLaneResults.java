@@ -9,12 +9,14 @@ import java.util.List;
  */
 public class ManualLaneResults implements LaneResults {
     private List<ManualLaneResult> results;
+    private Heat heat;
 
     ManualLaneResults() {
         // spring mvc shall pass
     }
 
     public ManualLaneResults(Heat heat) {
+        this.heat = heat;
         results = new ArrayList<ManualLaneResult>(heat.getEntries().getAllSortedByLane().size());
         for (Entry entry : heat.getEntries().getAllSortedByLane()) {
             results.add(new ManualLaneResult(entry));
@@ -23,6 +25,11 @@ public class ManualLaneResults implements LaneResults {
 
     public ManualLaneResults(List<ManualLaneResult> results) {
         this.results = results;
+    }
+
+    @Override
+    public Heat getHeat() {
+        return heat;
     }
 
     @Override

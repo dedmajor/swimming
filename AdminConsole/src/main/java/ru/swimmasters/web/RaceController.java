@@ -22,6 +22,9 @@ import java.beans.PropertyEditorSupport;
 import java.util.List;
 
 /**
+ * /meets/bsvc-dubna-2011/events/1-female-1x200-breast/heats/1/start
+ * /meets/bsvc-dubna-2011/events/1-female-1x200-breast/heats/1/new-lane-results
+ *
  * User: dedmajor
  * Date: 5/15/11
  */

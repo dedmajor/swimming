@@ -69,4 +69,6 @@ public interface Heat {
      */
     @Nullable
     DateTime getFinishTimestamp();
+
+    // TODO: getLaneResults()?
 }
