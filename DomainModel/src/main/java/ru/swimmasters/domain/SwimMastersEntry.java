@@ -75,7 +75,7 @@ public class SwimMastersEntry implements Entry {
     @ManyToOne(optional = true)
     SwimMastersMeetAthlete athlete;
     @ManyToOne(optional = true)
-    private SwimMastersRelayTeam relayTeam;
+    SwimMastersRelayTeam relayTeam;
 
     @OneToOne(optional = true)
     private SwimMastersResult result;
@@ -132,8 +132,8 @@ public class SwimMastersEntry implements Entry {
 
     @Override
     public RelayTeam getRelayTeam() {
-        if (!event.isIndividualEvent()) {
-            throw new IllegalStateException("relay team cannot participate in the individual event");
+        if (event.isIndividualEvent()) {
+            throw new IllegalStateException("relay cannot participate in the individual event");
         }
         return relayTeam;
     }
@@ -150,6 +150,9 @@ public class SwimMastersEntry implements Entry {
 
     @Override
     public EntryStatus getStatus() {
+        if (!event.isIndividualEvent()) {
+            return EntryStatus.REJECTED;
+        }
         if (athlete.getApprovalStatus() == ApprovalStatus.APPROVED) {
             return EntryStatus.REGULAR;
         }
@@ -182,7 +185,11 @@ public class SwimMastersEntry implements Entry {
     }
 
     public boolean isValidAge() {
-        return event.getAgeGroups().canParticipate(athlete.getAthlete());
+        if (event.isIndividualEvent()) {
+            return event.getAgeGroups().canParticipate(athlete.getAthlete());
+        } else {
+            return event.getAgeGroups().canParticipate(relayTeam.getRelayPositions());
+        }
     }
 
     @Override

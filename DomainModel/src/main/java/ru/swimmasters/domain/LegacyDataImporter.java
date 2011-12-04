@@ -137,7 +137,7 @@ public class LegacyDataImporter {
 
     private void convertEntries() {
         new LegacyQueryTemplate("select heat.id, event_id, " +
-                "extract(milliseconds from entry_time) as entry_time, athlete_id " +
+                "extract(milliseconds from entry_time) as entry_time, athlete_id, relay_team_id " +
                 "from heat " +
                 "left join event on event_id = event.id where meet_id='" + meet.getSMId() + "';") {
             @Override
@@ -152,22 +152,49 @@ public class LegacyDataImporter {
                         entry.entryTime = new Duration(entryTimeMs);
                     }
 
-                    SwimMastersAthlete athlete = entityManager.find(SwimMastersAthlete.class, resultSet.getLong("athlete_id"));
-                    if (athlete == null) {
-                        throw new IllegalStateException("athlete cannot be null for entry " + entry.id);
+                    long athleteId = resultSet.getLong("athlete_id");
+                    if (athleteId != 0) {
+                        appendAthlete(entry, athleteId);
                     }
-                    SwimMastersMeetAthlete meetAthlete = (SwimMastersMeetAthlete) meet.getMeetAthletes().getByAthlete(athlete);
-                    if (meetAthlete == null) {
-                        meetAthlete = meet.addAthlete(athlete);
-                        entityManager.persist(meetAthlete);
+                    long relayId = resultSet.getLong("relay_team_id");
+                    if (relayId != 0) {
+                        appendRelay(entry, relayId);
                     }
 
-                    entry.athlete = meetAthlete;
 
                     entityManager.persist(entry);
                 }
             }
+
+
         }.run();
+    }
+
+    private void appendRelay(SwimMastersEntry entry, long relayId) {
+        SwimMastersRelayTeam team = entityManager.find(SwimMastersRelayTeam.class, relayId);
+        if (team == null) {
+            team = convertRelayTeam(relayId);
+            entityManager.persist(team);
+            for (RelayPosition position : team.getRelayPositions().getAll()) {
+                entityManager.persist(position);
+            }
+
+        }
+        entry.relayTeam = team;
+    }
+
+    private void appendAthlete(SwimMastersEntry entry, long athleteId) {
+        SwimMastersAthlete athlete = entityManager.find(SwimMastersAthlete.class, athleteId);
+        if (athlete == null) {
+            throw new IllegalStateException("athlete cannot be null for entry " + entry.id);
+        }
+        SwimMastersMeetAthlete meetAthlete = (SwimMastersMeetAthlete) meet.getMeetAthletes().getByAthlete(athlete);
+        if (meetAthlete == null) {
+            meetAthlete = meet.addAthlete(athlete);
+            entityManager.persist(meetAthlete);
+        }
+
+        entry.athlete = meetAthlete;
     }
 
     private void convertEvents() {
@@ -303,15 +330,35 @@ public class LegacyDataImporter {
         }.run();
     }
 
-    private void convertRelayTeam(int id) {
+    private SwimMastersRelayTeam convertRelayTeam(final long id) {
+        final SwimMastersRelayTeam result = new SwimMastersRelayTeam();
         new LegacyQueryTemplate("select * from relay_team where id=" + id) {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-
+                    result.meet = meet;
+                    result.id = id;
+                    result.newRelayPosition(getRelayAthlete(resultSet.getLong("stage1")), 1);
+                    result.newRelayPosition(getRelayAthlete(resultSet.getLong("stage2")), 2);
+                    result.newRelayPosition(getRelayAthlete(resultSet.getLong("stage3")), 3);
+                    result.newRelayPosition(getRelayAthlete(resultSet.getLong("stage4")), 42);
+                    result.name = resultSet.getString("team_name");
                 }
+
             }
         }.run();
+        if (result.id > 0) {
+            return result;
+        }
+        throw new IllegalArgumentException("cannot find relay relayTeam with id = " + id);
+    }
+
+    private SwimMastersAthlete getRelayAthlete(long stageAthleteId) {
+        SwimMastersAthlete result = entityManager.find(SwimMastersAthlete.class, stageAthleteId);
+        if (result == null) {
+            throw new IllegalStateException("athlete " + stageAthleteId + " not found");
+        }
+        return result;
     }
 
     private void convertSwimStyles() {

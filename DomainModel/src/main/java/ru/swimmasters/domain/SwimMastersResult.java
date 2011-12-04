@@ -9,7 +9,7 @@ import javax.persistence.*;
  * LEN:
  *
  * Element RESULT
- * This element is used to describe one result of a swimmer or relay team.
+ * This element is used to describe one result of a swimmer or relay relayTeam.
  * Element/Attribute Type
  * Remarks
  * comment s - Additional comment e.g. for new records or reasons for

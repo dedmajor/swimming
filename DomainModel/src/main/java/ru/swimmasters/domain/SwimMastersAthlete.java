@@ -19,7 +19,7 @@ import java.util.*;
 @Entity
 public class SwimMastersAthlete implements Athlete {
     /**
-     * The club or team for the athlete, when he swam the record.
+     * The club or relayTeam for the athlete, when he swam the record.
      * (These elements/objects are allowed in a record list sub tree only.)
      * SwimMasters: required field.
      */

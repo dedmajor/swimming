@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class SwimMastersClub implements Club {
     // LEN (14 fields):
 
-    //String type; // club, national team, regional team, unattached
+    //String type; // club, national relayTeam, regional relayTeam, unattached
 
     /**
      *  The official club code given by the national federation.
@@ -26,7 +26,7 @@ public class SwimMastersClub implements Club {
     //String code;
 
     /**
-     *  The full name of the club or the team.
+     *  The full name of the club or the relayTeam.
      *  Required field.
      */
     String name;

@@ -6,7 +6,7 @@ package ru.swimmasters.domain;
  */
 public interface RelayTeam {
     Meet getMeet();
-    Club getClub();
+    String getName();
 
     RelayPositions getRelayPositions();
     int getSize();

@@ -60,12 +60,29 @@
         </tr>
         <c:forEach items="${event.entries.allSortedByAthleteName}" var="entry"  varStatus="entryStatus">
             <tr class="entries_athlete_time">
-                <td class="entries_event ${entry.athlete.approvalStatus == 'APPROVED' ? '' : 'entries_athlete_not_approved'}">
-                ${entryStatus.index + 1}. ${entry.athlete.athlete.fullName}
-                </td>
-                <td class="entries_time">
-                ${entry.athlete.athlete.club.name} &nbsp;
-                </td>
+                <c:choose>
+                <c:when test="${event.individualEvent}">
+                    <td class="entries_event ${entry.status == 'REGULAR' ? '' : 'entries_athlete_not_approved'}">
+                    ${entryStatus.index + 1}. ${entry.athlete.athlete.fullName}
+                    </td>
+                    <td class="entries_time">
+                    ${entry.athlete.athlete.club.name} &nbsp;
+                   </td>
+                </c:when>
+                <c:otherwise>
+                    <td class="entries_event ${entry.status == 'REGULAR' ? '' : 'entries_athlete_not_approved'}">
+                    ${entryStatus.index + 1}.
+                    <c:forEach items="${entry.relayTeam.relayPositions.all}" var="relayPosition"  varStatus="positionStatus">
+                        ${positionStatus.index + 1} ${relayPosition.athlete.fullName}
+                        (${relayPosition.athlete.club.name})
+                    </c:forEach>
+                    </td>
+                    <td class="entries_time">
+                    ${entry.relayTeam.name} &nbsp;
+                   </td>
+                </c:otherwise>
+                </c:choose>
+
                 <td class="entries_time">
                     <c:choose>
                     <c:when test="${entry.validAge}">
@@ -73,7 +90,7 @@
                     </c:when>
                     <c:otherwise>
                         <span class="approval_rejected_status">
-                            ${entry.athlete.athlete.birthYear}
+                            REJECTED
                         </span>
                     </c:otherwise>
                     </c:choose>

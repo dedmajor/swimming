@@ -15,6 +15,13 @@ public class EntryAthleteNameComparator implements Comparator<Entry>, Serializab
 
     @Override
     public int compare(Entry o1, Entry o2) {
+        if (!o1.getEvent().equals(o2.getEvent())) {
+            throw new IllegalArgumentException("events must be the same for " + o1 + " and " + o2);
+        }
+        if (!o1.getEvent().isIndividualEvent()) {
+            // TODO: FIXME: relays ordering and rename comparator
+            return 0;
+        }
         return ATHLETE_COMPARATOR.compare(o1.getAthlete().getAthlete(), o2.getAthlete().getAthlete());
     }
 }

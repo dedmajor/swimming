@@ -3,6 +3,7 @@ package ru.swimmasters.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,9 +15,12 @@ import java.util.List;
 @Entity
 public class SwimMastersRelayTeam implements RelayTeam {
     @ManyToOne
-    private SwimMastersMeet meet;
+    SwimMastersMeet meet;
     @Id
-    private Long id;
+    Long id;
+    String name;
+
+    @OneToMany(mappedBy = "relayTeam")
     List<SwimMastersRelayPosition> positions = new ArrayList<SwimMastersRelayPosition>();
     // TODO: match index and number?
 
@@ -37,8 +41,8 @@ public class SwimMastersRelayTeam implements RelayTeam {
     }
 
     @Override
-    public Club getClub() {
-        throw new UnsupportedOperationException();
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -51,7 +55,7 @@ public class SwimMastersRelayTeam implements RelayTeam {
 
             @Override
             public List<RelayPosition> getAll() {
-                return Collections.<RelayPosition>unmodifiableList(positions);
+                return Collections.unmodifiableList((List<? extends RelayPosition>) positions);
             }
         };
     }

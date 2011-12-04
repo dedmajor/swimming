@@ -244,7 +244,7 @@ public class SwimMastersMeet implements Meet {
         return new RelayTeams() {
             @Override
             public Collection<RelayTeam> getAll() {
-                return null;  //To change body of implemented methods use File | Settings | File Templates.
+                return Collections.<RelayTeam>unmodifiableCollection(relayTeams);
             }
         };
     }

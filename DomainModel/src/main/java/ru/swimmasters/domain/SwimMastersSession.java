@@ -34,7 +34,7 @@ public class SwimMastersSession implements Session {
         officialmeeting t - The daytime when the officials meeting starts.
         POOL o - The details about the pool, if they are different per session. Otherwise
                 use the element in MEET.
-        teamleadermeeting t - The daytime when the team leaders meeting starts.
+        teamleadermeeting t - The daytime when the relayTeam leaders meeting starts.
         warmupfrom t - The daytime when the warmup starts.
         warmupuntil t - The daytime when the warmup ends.
      */
