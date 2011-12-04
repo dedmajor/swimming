@@ -14,5 +14,7 @@ import java.util.Map;
  * Date: 5/15/11
  */
 public interface Results {
+    // TODO: renate to AthleteResults
+    // TODO: MeetAthlete getAthlete()
     Map<Event, Result> getAll();
 }

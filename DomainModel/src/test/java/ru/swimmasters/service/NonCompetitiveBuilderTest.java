@@ -50,7 +50,7 @@ public class NonCompetitiveBuilderTest {
         SwimMastersPool pool = new SwimMastersPool(2, 2);
         SwimMastersMeet meet = new SwimMastersMeet(pool);
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2010-11-04"));
-        SwimMastersEvent event = new SwimMastersEvent(session);
+        SwimMastersEvent event = new SwimMastersEvent(session, new SwimMastersSwimStyle(1));
         List<SwimMastersAgeGroup> ageGroups = new ArrayList<SwimMastersAgeGroup>();
         ageGroups.add(new SwimMastersAgeGroup(0, 0));
         event.setAgeGroups(ageGroups);

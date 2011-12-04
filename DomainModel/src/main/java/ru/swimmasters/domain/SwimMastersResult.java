@@ -77,6 +77,16 @@ public class SwimMastersResult implements Result {
     }
 
     @Override
+    public RelayTeam getRelayTeam() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Club getClub() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public Event getEvent() {
         return entry.getEvent();
     }

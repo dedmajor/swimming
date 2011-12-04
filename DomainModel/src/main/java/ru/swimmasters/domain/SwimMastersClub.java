@@ -58,7 +58,7 @@ public class SwimMastersClub implements Club {
     //Athletes athletes;
     //Contact contact;
     //Officials officials;
-    //Relays relays;
+    //RelayTeams relays;
     //Long swrid;
 
     // SwimMasters (5 fields):

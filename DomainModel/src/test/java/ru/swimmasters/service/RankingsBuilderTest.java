@@ -21,7 +21,7 @@ public class RankingsBuilderTest {
     public void smokeTest() {
         SwimMastersMeet meet = new SwimMastersMeet(new SwimMastersPool(1, 8));
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2011-08-01"));
-        SwimMastersEvent event = new SwimMastersEvent(session);
+        SwimMastersEvent event = new SwimMastersEvent(session, new SwimMastersSwimStyle(1));
         event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
         SwimMastersAthlete athlete = new SwimMastersAthlete(new LocalDate("1984-10-19"));
         SwimMastersEntry entry = new SwimMastersEntry(event,

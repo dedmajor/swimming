@@ -9,7 +9,11 @@ import org.joda.time.Duration;
  * Date: 5/14/11
  */
 public interface Result {
+    // TODO: constraint, depends on event.isRelayEvent / isIndividualEvent
     MeetAthlete getAthlete();
+    RelayTeam getRelayTeam();
+
+    Club getClub();
 
     Event getEvent();
 

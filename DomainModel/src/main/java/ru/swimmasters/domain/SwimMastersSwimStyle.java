@@ -59,6 +59,13 @@ public class SwimMastersSwimStyle implements SwimStyle {
     // sex_id - replaced with event.eventGender
     String nameAbbr;
 
+    public SwimMastersSwimStyle() {
+    }
+
+    public SwimMastersSwimStyle(Integer relayCount) {
+        this.relayCount = relayCount;
+    }
+
     @Override
     public String getName() {
         return name;

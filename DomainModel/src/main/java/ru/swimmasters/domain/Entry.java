@@ -10,10 +10,16 @@ import javax.validation.constraints.NotNull;
  * Date: 4/2/11
  */
 public interface Entry {
+    // TODO: constraint, depends on event.isRelayEvent / isIndividualEvent
     @NotNull
     MeetAthlete getAthlete();
+    RelayTeam getRelayTeam();
+
+    Club getClub();
+
     @NotNull
     Event getEvent();
+    // TODO: if relay event, constraint: event.swimstyle.relayscount = relayteam.getSize()
 
     /**
      * This is used for the entry status information.

@@ -90,6 +90,11 @@ public class SwimMastersAgeGroup implements AgeGroup {
         return age >= min && age <= max;
     }
 
+    @Override
+    public boolean isSingle() {
+        return true;
+    }
+
     /**
      * Compares groups by min age in increasing order.
      */

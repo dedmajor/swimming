@@ -17,4 +17,7 @@ public interface AgeGroup extends Comparable<AgeGroup> {
     int getMax();
 
     boolean containsAge(int age);
+
+    boolean isSingle();
+    // LENEX: enum Calculate
 }

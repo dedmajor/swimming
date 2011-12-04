@@ -9,15 +9,19 @@ import java.util.List;
  * Date: 4/3/11
  */
 public interface AgeGroups {
-    // TODO: we need root references to clarify contract on all containing elements?
     Event getEvent();
 
     List<AgeGroup> getAllSortedByAge();
 
     /**
-     * Finds appropriate group for Athlete or throws IllegalArgumentException.
+     * Finds appropriate single group for an athlete or throws IllegalArgumentException.
      */
     AgeGroup getFor(Athlete athlete);
+    /**
+     * Finds appropriate calculated group for a relay or throws IllegalArgumentException.
+     */
+    AgeGroup getFor(RelayPositions relayTeam);
 
     boolean canParticipate(Athlete athlete);
+    boolean canParticipate(RelayPositions relayTeam);
 }

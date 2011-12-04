@@ -129,8 +129,9 @@ public class SwimMastersEvent implements Event {
         // hibernate shall pass
     }
 
-    public SwimMastersEvent(SwimMastersSession session) {
+    public SwimMastersEvent(SwimMastersSession session, SwimMastersSwimStyle swimStyle) {
         this.session = session;
+        this.swimStyle = swimStyle;
     }
 
     @Override
@@ -146,6 +147,11 @@ public class SwimMastersEvent implements Event {
     @Override
     public SwimStyle getSwimStyle() {
         return swimStyle;
+    }
+
+    @Override
+    public boolean isIndividualEvent() {
+        return swimStyle.getRelayCount() == 1;
     }
 
     @Override

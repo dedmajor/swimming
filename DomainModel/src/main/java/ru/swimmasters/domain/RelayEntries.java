@@ -4,15 +4,12 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * User: dedmajor
- * Date: 11/20/11
+ * Date: 11/30/11
  */
-public interface AthleteEntries {
-    MeetAthlete getAthlete();
+public interface RelayEntries {
     Meet getMeet();
-
-    /**
-     * @return all individual entries of the athlete in the meet.
-     */
+    Club getClub();
+    RelayTeam getRelayTeam();
     @NotNull
     Iterable<Entry> getAll();
 }

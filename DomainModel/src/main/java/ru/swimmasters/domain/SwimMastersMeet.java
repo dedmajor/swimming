@@ -94,6 +94,9 @@ public class SwimMastersMeet implements Meet {
     @OneToMany(mappedBy = "meet")
     List<SwimMastersMeetAthlete> athletes = new ArrayList<SwimMastersMeetAthlete>();
 
+    @OneToMany(mappedBy = "meet")
+    List<SwimMastersRelayTeam> relayTeams = new ArrayList<SwimMastersRelayTeam>();
+
     SwimMastersMeet() {
     }
 
@@ -232,6 +235,16 @@ public class SwimMastersMeet implements Meet {
                     }
                 }
                 return null;
+            }
+        };
+    }
+
+    @Override
+    public RelayTeams getRelayTeams() {
+        return new RelayTeams() {
+            @Override
+            public Collection<RelayTeam> getAll() {
+                return null;  //To change body of implemented methods use File | Settings | File Templates.
             }
         };
     }

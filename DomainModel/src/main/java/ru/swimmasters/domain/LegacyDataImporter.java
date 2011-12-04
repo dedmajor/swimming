@@ -188,19 +188,19 @@ public class LegacyDataImporter {
                             entityManager.persist(session);
                         }
                     }
-                    SwimMastersEvent event = new SwimMastersEvent(session);
+                    SwimMastersSwimStyle style = new SwimMastersSwimStyle();
+                    style.name = resultSet.getString("name");
+                    normalizeStyleName(style);
+                    SwimMastersSwimStyle styleByNormalizedName = findStyleByNormalizedName(style);
+                    if (styleByNormalizedName == null) {
+                        throw new IllegalStateException("cannot find discipline, style " + style);
+                    }
+                    SwimMastersEvent event = new SwimMastersEvent(session, styleByNormalizedName);
                     event.id = resultSet.getLong("id");
                     event.eventGender = EventGender.ALL; // TODO: FIXME
                     event.number = resultSet.getInt("number");
                     event.setAgeGroups(groups);
 
-                    SwimMastersSwimStyle style = new SwimMastersSwimStyle();
-                    style.name = resultSet.getString("name");
-                    normalizeStyleName(style);
-                    event.swimStyle = findStyleByNormalizedName(style);
-                    if (event.swimStyle == null) {
-                        throw new IllegalStateException("cannot find discipline, event " + event.id);
-                    }
 
                     int sexId = resultSet.getInt("sex_id");
                     switch (sexId) {
@@ -298,6 +298,17 @@ public class LegacyDataImporter {
 
                     System.out.println(athlete);
                     entityManager.persist(athlete);
+                }
+            }
+        }.run();
+    }
+
+    private void convertRelayTeam(int id) {
+        new LegacyQueryTemplate("select * from relay_team where id=" + id) {
+            @Override
+            protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                while (resultSet.next()) {
+
                 }
             }
         }.run();

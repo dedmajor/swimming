@@ -31,6 +31,8 @@ public interface Meet {
     Events getEvents();
 
     MeetAthletes getMeetAthletes();
+    RelayTeams getRelayTeams();
+    // TODO: MeetClubs getClubs()
 
 
     /**

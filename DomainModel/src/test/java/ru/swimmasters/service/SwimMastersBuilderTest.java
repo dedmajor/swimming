@@ -116,7 +116,7 @@ public class SwimMastersBuilderTest {
         SwimMastersPool pool = new SwimMastersPool(2, 6);
         SwimMastersMeet meet = new SwimMastersMeet(pool);
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate(2010, 4, 25));
-        SwimMastersEvent event = new SwimMastersEvent(session);
+        SwimMastersEvent event = new SwimMastersEvent(session, new SwimMastersSwimStyle(1));
         event.setAgeGroups(SwimMastersAgeGroups.createDefaultGroups());
         return event;
     }

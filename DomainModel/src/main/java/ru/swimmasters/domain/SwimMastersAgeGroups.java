@@ -74,6 +74,11 @@ public class SwimMastersAgeGroups implements AgeGroups {
                         + " who was born at " + athlete.getBirthYear());
     }
 
+    @Override
+    public AgeGroup getFor(RelayPositions relayTeam) {
+        throw new UnsupportedOperationException();
+    }
+
     @Nullable
     private AgeGroup getAgeGroup(Athlete athlete) {
         int age = athlete.getAge(event.getDate());
@@ -94,6 +99,11 @@ public class SwimMastersAgeGroups implements AgeGroups {
     @Override
     public boolean canParticipate(Athlete athlete) {
         return getAgeGroup(athlete) != null;
+    }
+
+    @Override
+    public boolean canParticipate(RelayPositions relayTeam) {
+        return false;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     private AgeGroup getLowestGroup() {

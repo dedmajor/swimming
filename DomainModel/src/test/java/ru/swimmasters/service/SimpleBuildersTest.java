@@ -77,7 +77,7 @@ public class SimpleBuildersTest {
         SwimMastersPool pool = new SwimMastersPool(2, 3);
         SwimMastersMeet meet = new SwimMastersMeet(pool);
         SwimMastersSession session = new SwimMastersSession(meet, new LocalDate("2010-11-04"));
-        SwimMastersEvent event = new SwimMastersEvent(session);
+        SwimMastersEvent event = new SwimMastersEvent(session, new SwimMastersSwimStyle(1));
 
         List<SwimMastersEntry> entries = new ArrayList<SwimMastersEntry>();
         event.setAgeGroups(Arrays.asList(

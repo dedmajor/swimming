@@ -72,8 +72,10 @@ public class SwimMastersEntry implements Entry {
     @Id
     Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     SwimMastersMeetAthlete athlete;
+    @ManyToOne(optional = true)
+    private SwimMastersRelayTeam relayTeam;
 
     @OneToOne(optional = true)
     private SwimMastersResult result;
@@ -87,6 +89,9 @@ public class SwimMastersEntry implements Entry {
     }
 
     public SwimMastersEntry(SwimMastersEvent event, SwimMastersMeetAthlete athlete, Duration entryTime) {
+        if (!event.isIndividualEvent()) {
+            throw new IllegalStateException("event " + event + " is a relay event");
+        }
         if (!event.getMeet().equals(athlete.getMeet())) {
             throw new IllegalArgumentException("athlete " + athlete.getAthlete()
                     + " didn't register at meet " + event.getMeet());
@@ -100,9 +105,42 @@ public class SwimMastersEntry implements Entry {
         this.athlete = athlete;
     }
 
+    public SwimMastersEntry(SwimMastersEvent event, SwimMastersRelayTeam relayTeam, Duration entryTime) {
+        if (event.isIndividualEvent()) {
+            throw new IllegalStateException("event " + event + " is an individual event");
+        }
+        if (!event.getMeet().equals(relayTeam.getMeet())) {
+            throw new IllegalArgumentException("relayTeam " + relayTeam
+                    + " didn't register at meet " + event.getMeet());
+        }
+        if (!event.getAgeGroups().canParticipate(relayTeam.getRelayPositions())) {
+            throw new IllegalArgumentException(
+                    "relayTeam " + relayTeam + " cannot participate in event " + event + " due to total age");
+        }
+        this.entryTime = entryTime;
+        this.event = event;
+        this.relayTeam = relayTeam;
+    }
+
     @Override
     public MeetAthlete getAthlete() {
+        if (!event.isIndividualEvent()) {
+            throw new IllegalStateException("individual athlete cannot participate in the relay event");
+        }
         return athlete;
+    }
+
+    @Override
+    public RelayTeam getRelayTeam() {
+        if (!event.isIndividualEvent()) {
+            throw new IllegalStateException("relay team cannot participate in the individual event");
+        }
+        return relayTeam;
+    }
+
+    @Override
+    public Club getClub() {
+        throw new UnsupportedOperationException();
     }
 
     @Override

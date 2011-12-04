@@ -15,6 +15,8 @@ public interface Event {
 
     EventGender getEventGender();
     SwimStyle getSwimStyle();
+    // ! relay event
+    boolean isIndividualEvent();
 
     Session getSession();
 
