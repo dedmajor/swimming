@@ -137,7 +137,7 @@ public class LegacyDataImporter {
 
     private void convertEntries() {
         new LegacyQueryTemplate("select heat.id, event_id, " +
-                "extract(milliseconds from entry_time) as entry_time, athlete_id, relay_team_id " +
+                "extract(epoch from entry_time) * 1000 as entry_time, athlete_id, relay_team_id " +
                 "from heat " +
                 "left join event on event_id = event.id where meet_id='" + meet.getSMId() + "';") {
             @Override
@@ -198,11 +198,13 @@ public class LegacyDataImporter {
     }
 
     private void convertEvents() {
+        // TODO: FIXME: order?2
         new LegacyQueryTemplate("select event.id, discipline_id, discipline.name, sex_id, date, number from event " +
                 "left join discipline on discipline_id = discipline.id " +
-                "where meet_id = " + meet.getSMId()){
+                "where meet_id = " + meet.getSMId()) {
             @Override
             protected void handleResultSet(ResultSet resultSet) throws SQLException {
+                int number = 1;
                 while (resultSet.next()) {
                     String dateString = resultSet.getString("date");
                     SwimMastersSession session = null;
@@ -225,7 +227,8 @@ public class LegacyDataImporter {
                     SwimMastersEvent event = new SwimMastersEvent(session, styleByNormalizedName);
                     event.id = resultSet.getLong("id");
                     event.eventGender = EventGender.ALL; // TODO: FIXME
-                    event.number = resultSet.getInt("number");
+                    event.number = resultSet.getInt("number") > 0 ? resultSet.getInt("number") : number;
+                    number++;
                     event.setAgeGroups(groups);
 
 
