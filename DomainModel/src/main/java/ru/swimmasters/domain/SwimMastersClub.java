@@ -18,6 +18,7 @@ public class SwimMastersClub implements Club {
     // LEN (14 fields):
 
     //String type; // club, national relayTeam, regional relayTeam, unattached
+    ClubType type = ClubType.CLUB;
 
     /**
      *  The official club code given by the national federation.
