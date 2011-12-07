@@ -51,7 +51,8 @@ public class SwimMastersAgeGroups implements AgeGroups {
     public static List<SwimMastersAgeGroup> createDefaultGroups() {
         List<SwimMastersAgeGroup> defaultGroups = new ArrayList<SwimMastersAgeGroup>();
         //defaultGroups.add(new SwimMastersAgeGroup(AgeGroup.NO_LOWER_BOUND, 19));
-        int i = 25;
+        //int i = 25;
+        int i = 15;
         while (i <= 90) {
             defaultGroups.add(new SwimMastersAgeGroup(i, i + 4));
             i += 5;
